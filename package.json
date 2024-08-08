@@ -28,13 +28,93 @@
     "commands": [
       {
         "command": "playwright-helpers.helloWorld",
-        "category": "Playwright Helpers",
+        "category": "PW Helpers",
         "title": "Hello World"
       },
       {
-        "command": "playwright-helpers.checkVersion",
-        "category": "Playwright Helpers",
-        "title": "Check Version"
+        "command": "playwright-helpers.initNewProject",
+        "category": "PW Helpers",
+        "title": "Initiate New Playwright Project"
+      },
+      {
+        "command": "playwright-helpers.initNewProjectQuick",
+        "category": "PW Helpers",
+        "title": "Initiate New Playwright Project (with defaults)"
+      },
+      {
+        "command": "playwright-helpers.checkPlaywrightVersion",
+        "category": "PW Helpers",
+        "title": "Check Playwright Version"
+      },
+      {
+        "command": "playwright-helpers.runCodegen",
+        "category": "PW Helpers",
+        "title": "Run Playwright Codegen"
+      },
+      {
+        "command": "playwright-helpers.runShowReport",
+        "category": "PW Helpers",
+        "title": "Run Playwright Show Report"
+      },
+      {
+        "command": "playwright-helpers.checkPlaywrightTestVersion",
+        "category": "PW Helpers",
+        "title": "Check Playwright Test Version"
+      },
+      {
+        "command": "playwright-helpers.installLatestPlaywrightTest",
+        "category": "PW Helpers",
+        "title": "Install Latest Playwright Test"
+      },
+      {
+        "command": "playwright-helpers.updateLatestPlaywrightTest",
+        "category": "PW Helpers",
+        "title": "Update Latest Playwright Test"
+      },
+      {
+        "command": "playwright-helpers.installNextPlaywrightTest",
+        "category": "PW Helpers",
+        "title": "Install Next Playwright Test"
+      },
+      {
+        "command": "playwright-helpers.checkForPlaywrightTestUpdates",
+        "category": "PW Helpers",
+        "title": "Check Playwright Test Updates"
+      },
+      {
+        "command": "playwright-helpers.listInstalledPlaywrightPackages",
+        "category": "PW Helpers",
+        "title": "List Installed Playwright Packages"
+      },
+      {
+        "command": "playwright-helpers.uninstallPlaywrightBrowsers",
+        "category": "PW Helpers",
+        "title": "Uninstall Playwright Browsers (only from current project)"
+      },
+      {
+        "command": "playwright-helpers.installChromiumPlaywrightBrowser",
+        "category": "PW Helpers",
+        "title": "Install Chromium Playwright Browser"
+      },
+      {
+        "command": "playwright-helpers.installWebkitPlaywrightBrowser",
+        "category": "PW Helpers",
+        "title": "Install Webkit Playwright Browser"
+      },
+      {
+        "command": "playwright-helpers.installFirefoxPlaywrightBrowser",
+        "category": "PW Helpers",
+        "title": "Install Firefox Playwright Browser"
+      },
+      {
+        "command": "playwright-helpers.installAllPlaywrightBrowsers",
+        "category": "PW Helpers",
+        "title": "Install All Playwright Browsers"
+      },
+      {
+        "command": "playwright-helpers.uninstallAllPlaywrightBrowsers",
+        "category": "PW Helpers",
+        "title": "Uninstall All Playwright Browsers"
       }
     ]
   },
