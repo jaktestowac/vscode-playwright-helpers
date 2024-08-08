@@ -276,7 +276,7 @@ async function installNextPlaywrightTest() {
   });
 }
 
-function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
+function executeCommandInNewTerminal(parameters: ExecuteInTerminalParameters) {
   let additionalName = "";
   if (parameters.terminalName !== undefined) {
     additionalName = `: ${parameters.terminalName}`;
@@ -284,6 +284,24 @@ function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
   const terminal = vscode.window.createTerminal(`PW Helpers${additionalName}`);
   terminal.show(false);
   terminal.sendText(parameters.command, parameters.execute);
+}
+
+function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
+  const baseTerminalName = `PW Helpers`;
+
+  const existingTerminal = vscode.window.terminals.find(
+    (terminal) => terminal.name === baseTerminalName
+  );
+
+  if (existingTerminal !== undefined) {
+    existingTerminal.show();
+    existingTerminal.sendText(parameters.command, parameters.execute);
+    return;
+  } else {
+    const terminal = vscode.window.createTerminal(baseTerminalName);
+    terminal.show();
+    terminal.sendText(parameters.command, parameters.execute);
+  }
 }
 
 const execCommandInProjectDir = async (cmd: string) => {
