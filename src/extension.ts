@@ -40,13 +40,13 @@ export function activate(context: vscode.ExtensionContext) {
     {
       key: "uninstallAllPlaywrightBrowsers",
       func: uninstallAllPlaywrightBrowsers,
-      prettyName: "Uninstall All Playwright Browsers",
+      prettyName: "Uninstall All Playwright Browsers (confirm required)",
       type: PlaywrightCommandsTypes.browsers,
     },
     {
       key: "uninstallPlaywrightBrowsers",
       func: uninstallPlaywrightBrowsers,
-      prettyName: "Uninstall Playwright Browsers",
+      prettyName: "Uninstall Playwright Browsers (confirm required)",
       type: PlaywrightCommandsTypes.browsers,
     },
     {
@@ -94,19 +94,19 @@ export function activate(context: vscode.ExtensionContext) {
     {
       key: "runCodegen",
       func: runCodegen,
-      prettyName: "Run Codegen",
+      prettyName: "Run Codegen (confirm required)",
       type: PlaywrightCommandsTypes.testing,
     },
     {
       key: "runShowReport",
       func: runShowReport,
-      prettyName: "Run Show Report",
+      prettyName: "Run Show Report (confirm required)",
       type: PlaywrightCommandsTypes.testing,
     },
     {
       key: "installNextPlaywrightTest",
       func: installNextPlaywrightTest,
-      prettyName: "Install Next @playwright/test",
+      prettyName: "Install Next @playwright/test (confirm required)",
       type: PlaywrightCommandsTypes.playwright,
     },
     {
