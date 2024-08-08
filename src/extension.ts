@@ -1,35 +1,138 @@
 import * as vscode from "vscode";
 import * as cp from "child_process";
+import { CommandsViewProvider } from "./CommandsViewProvider";
+import { PwCommand, ExecuteInTerminalParameters, PlaywrightCommandsTypes } from "./types";
 
 const extensionName = "playwright-helpers";
 
 export function activate(context: vscode.ExtensionContext) {
-  const commandsList = {
-    checkPlaywrightVersion: checkPlaywrightVersion,
-    checkPlaywrightTestVersion: checkPlaywrightTestVersion,
-    installLatestPlaywrightTest: installLatestPlaywrightTest,
-    checkForPlaywrightTestUpdates: checkForPlaywrightTestUpdates,
-    listInstalledPlaywrightPackages: listInstalledPlaywrightPackages,
-    uninstallAllPlaywrightBrowsers: uninstallAllPlaywrightBrowsers,
-    uninstallPlaywrightBrowsers: uninstallPlaywrightBrowsers,
-    installAllPlaywrightBrowsers: installAllPlaywrightBrowsers,
-    installChromiumPlaywrightBrowser: installChromiumPlaywrightBrowser,
-    installWebkitPlaywrightBrowser: installWebkitPlaywrightBrowser,
-    installFirefoxPlaywrightBrowser: installFirefoxPlaywrightBrowser,
-    updateLatestPlaywrightTest: updateLatestPlaywrightTest,
-    initNewProject: initNewProject,
-    initNewProjectQuick: initNewProjectQuick,
-    runCodegen: runCodegen,
-    runShowReport: runShowReport,
-    installNextPlaywrightTest: installNextPlaywrightTest,
-  };
+  const commandsList: PwCommand[] = [
+    {
+      key: "checkPlaywrightVersion",
+      func: checkPlaywrightVersion,
+      prettyName: "Check Playwright Version",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "checkPlaywrightTestVersion",
+      func: checkPlaywrightTestVersion,
+      prettyName: "Check @playwright/test Version",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "installLatestPlaywrightTest",
+      func: installLatestPlaywrightTest,
+      prettyName: "Install Latest @playwright/test",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "checkForPlaywrightTestUpdates",
+      func: checkForPlaywrightTestUpdates,
+      prettyName: "Check for @playwright/test Updates",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "listInstalledPlaywrightPackages",
+      func: listInstalledPlaywrightPackages,
+      prettyName: "List Installed Playwright Packages",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "uninstallAllPlaywrightBrowsers",
+      func: uninstallAllPlaywrightBrowsers,
+      prettyName: "Uninstall All Playwright Browsers",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "uninstallPlaywrightBrowsers",
+      func: uninstallPlaywrightBrowsers,
+      prettyName: "Uninstall Playwright Browsers",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "installAllPlaywrightBrowsers",
+      func: installAllPlaywrightBrowsers,
+      prettyName: "Install All Playwright Browsers",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "installChromiumPlaywrightBrowser",
+      func: installChromiumPlaywrightBrowser,
+      prettyName: "Install Chromium Playwright Browser",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "installWebkitPlaywrightBrowser",
+      func: installWebkitPlaywrightBrowser,
+      prettyName: "Install Webkit Playwright Browser",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "installFirefoxPlaywrightBrowser",
+      func: installFirefoxPlaywrightBrowser,
+      prettyName: "Install Firefox Playwright Browser",
+      type: PlaywrightCommandsTypes.browsers,
+    },
+    {
+      key: "updateLatestPlaywrightTest",
+      func: updateLatestPlaywrightTest,
+      prettyName: "Update Latest @playwright/test",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "initNewProject",
+      func: initNewProject,
+      prettyName: "Init New Project",
+      type: PlaywrightCommandsTypes.project,
+    },
+    {
+      key: "initNewProjectQuick",
+      func: initNewProjectQuick,
+      prettyName: "Init New Project Quick",
+      type: PlaywrightCommandsTypes.project,
+    },
+    {
+      key: "runCodegen",
+      func: runCodegen,
+      prettyName: "Run Codegen",
+      type: PlaywrightCommandsTypes.testing,
+    },
+    {
+      key: "runShowReport",
+      func: runShowReport,
+      prettyName: "Run Show Report",
+      type: PlaywrightCommandsTypes.testing,
+    },
+    {
+      key: "installNextPlaywrightTest",
+      func: installNextPlaywrightTest,
+      prettyName: "Install Next @playwright/test",
+      type: PlaywrightCommandsTypes.playwright,
+    },
+    {
+      key: "helloWorld",
+      func: sayHello,
+      prettyName: "Hello World",
+      type: PlaywrightCommandsTypes.mics,
+    },
+  ];
 
-  for (const [key, value] of Object.entries(commandsList)) {
-    registerCommand(context, `${extensionName}.${key}`, value);
+  for (const { key, func } of commandsList) {
+    registerCommand(context, `${extensionName}.${key}`, func);
   }
+
+  // Register the Sidebar Panel
+  const commandsViewProvider = new CommandsViewProvider(context.extensionUri, commandsList);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewType, commandsViewProvider)
+  );
 }
 
-function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
+function registerCommand(
+  context: vscode.ExtensionContext,
+  id: string,
+  callback: (...args: any[]) => any
+) {
   let disposable = vscode.commands.registerCommand(id, callback);
   context.subscriptions.push(disposable);
 }
@@ -55,15 +158,27 @@ async function checkPlaywrightTestVersion() {
 }
 
 async function updateLatestPlaywrightTest() {
-  executeCommandInTerminal({ command: "npm i @playwright/test@latest", execute: true, terminalName: "Update Latest" });
+  executeCommandInTerminal({
+    command: "npm i @playwright/test@latest",
+    execute: true,
+    terminalName: "Update Latest",
+  });
 }
 
 async function installLatestPlaywrightTest() {
-  executeCommandInTerminal({ command: "npm i @playwright/test@latest", execute: true, terminalName: "Install Latest" });
+  executeCommandInTerminal({
+    command: "npm i @playwright/test@latest",
+    execute: true,
+    terminalName: "Install Latest",
+  });
 }
 
 async function checkForPlaywrightTestUpdates() {
-  executeCommandInTerminal({ command: "npm outdated @playwright/test", execute: true, terminalName: "Check Updates" });
+  executeCommandInTerminal({
+    command: "npm outdated @playwright/test",
+    execute: true,
+    terminalName: "Check Updates",
+  });
 }
 
 async function listInstalledPlaywrightPackages() {
@@ -83,11 +198,19 @@ async function uninstallAllPlaywrightBrowsers() {
 }
 
 async function uninstallPlaywrightBrowsers() {
-  executeCommandInTerminal({ command: "npx playwright uninstall", execute: false, terminalName: "Uninstall Browsers" });
+  executeCommandInTerminal({
+    command: "npx playwright uninstall",
+    execute: false,
+    terminalName: "Uninstall Browsers",
+  });
 }
 
 async function installAllPlaywrightBrowsers() {
-  executeCommandInTerminal({ command: "npx playwright install", execute: true, terminalName: "Install All Browsers" });
+  executeCommandInTerminal({
+    command: "npx playwright install",
+    execute: true,
+    terminalName: "Install All Browsers",
+  });
 }
 async function installChromiumPlaywrightBrowser() {
   executeCommandInTerminal({
@@ -98,7 +221,11 @@ async function installChromiumPlaywrightBrowser() {
 }
 
 async function installWebkitPlaywrightBrowser() {
-  executeCommandInTerminal({ command: "npx playwright install webkit", execute: true, terminalName: "Install Webkit" });
+  executeCommandInTerminal({
+    command: "npx playwright install webkit",
+    execute: true,
+    terminalName: "Install Webkit",
+  });
 }
 
 async function installFirefoxPlaywrightBrowser() {
@@ -110,7 +237,11 @@ async function installFirefoxPlaywrightBrowser() {
 }
 
 async function initNewProject() {
-  executeCommandInTerminal({ command: "npm init playwright@latest", execute: true, terminalName: "Init" });
+  executeCommandInTerminal({
+    command: "npm init playwright@latest",
+    execute: true,
+    terminalName: "Init",
+  });
 }
 
 async function initNewProjectQuick() {
@@ -122,24 +253,30 @@ async function initNewProjectQuick() {
 }
 
 async function runCodegen() {
-  executeCommandInTerminal({ command: "npx playwright codegen", execute: false, terminalName: "Codegen" });
+  executeCommandInTerminal({
+    command: "npx playwright codegen",
+    execute: false,
+    terminalName: "Codegen",
+  });
 }
 
 async function runShowReport() {
-  executeCommandInTerminal({ command: "npx playwright show-report", execute: false, terminalName: "Show Report" });
+  executeCommandInTerminal({
+    command: "npx playwright show-report",
+    execute: false,
+    terminalName: "Show Report",
+  });
 }
 
 async function installNextPlaywrightTest() {
-  executeCommandInTerminal({ command: "npm i @playwright/test@next", execute: false, terminalName: "Install Next" });
+  executeCommandInTerminal({
+    command: "npm i @playwright/test@next",
+    execute: false,
+    terminalName: "Install Next",
+  });
 }
 
-interface executeInTerminalParameters {
-  command: string;
-  execute?: boolean;
-  terminalName?: string | undefined;
-}
-
-function executeCommandInTerminal(parameters: executeInTerminalParameters) {
+function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
   let additionalName = "";
   if (parameters.terminalName !== undefined) {
     additionalName = `: ${parameters.terminalName}`;

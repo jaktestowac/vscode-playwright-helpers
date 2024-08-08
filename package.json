@@ -25,6 +25,24 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "playwright-helpers",
+          "title": "Playwright Helpers",
+          "icon": "./resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "playwright-helpers": [
+        {
+          "type": "webview",
+          "id": "playwright-helpers.commands",
+          "name": "Commands"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "playwright-helpers.helloWorld",
