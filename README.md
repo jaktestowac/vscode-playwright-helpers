@@ -1,69 +1,75 @@
-# playwright-helpers README
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/playwright-logo.png?raw=true" width="200px" alt="Playwright Logo">
+</p>
 
-This is the README for your extension "playwright-helpers". After writing up a brief description, we recommend including the following sections.
+<h1 align="center">VS Code - Playwright Helpers</h1>
 
-## Features
+# Description
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This Visual Studio Code extension adds predefined commands for **Node.js Playwright**.
 
-For example if there is an image subfolder under your extension project workspace:
+# How to Use This Extension in VS Code
 
-\!\[feature X\]\(images/feature-x.png\)
+Commands are available at:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Command Palette
 
-## Requirements
+The Command Palette is a feature in Visual Studio Code that provides a convenient way to access various commands and features within the editor.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
+2. Type the name of the command you wish to execute and select it from the list.
+3. All commands from this extensions are grouped under category **PW Helpers**, e.g.:
 
-## Extension Settings
+```
+PW Helpers: Initiate New Playwright Project
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Side View
 
-For example:
+In addition to accessing the commands through the Command Palette, you can also find them in the Side View of Visual Studio Code.
 
-This extension contributes the following settings:
+Under the **Playwright Helpers** section you will see a list of available commands categorized. Simply click on a command to execute it.
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
 
-## Known Issues
+# Commands List
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Below you can find a list of all supported snippets.
 
-## Release Notes
+| Command                                               | Description                                               |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| `playwright-helpers.helloWorld`                       | Hello World                                               |
+| `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
+| `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
+| `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
+| `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
+| `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
+| `playwright-helpers.checkPlaywrightTestVersion`       | Check Playwright Test Version                             |
+| `playwright-helpers.installLatestPlaywrightTest`      | Install Latest Playwright Test                            |
+| `playwright-helpers.updateLatestPlaywrightTest`       | Update Latest Playwright Test                             |
+| `playwright-helpers.installNextPlaywrightTest`        | Install Next Playwright Test                              |
+| `playwright-helpers.checkForPlaywrightTestUpdates`    | Check Playwright Test Updates                             |
+| `playwright-helpers.listInstalledPlaywrightPackages`  | List Installed Playwright Packages                        |
+| `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (only from current project) |
+| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser                       |
+| `playwright-helpers.installWebkitPlaywrightBrowser`   | Install Webkit Playwright Browser                         |
+| `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                        |
+| `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
+| `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
 
-Users appreciate release notes as you update your extension.
+# Contributing
 
-### 1.0.0
+This project is open source and we welcome contributions from the community. If you would like to contribute, please follow these steps:
 
-Initial release of ...
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them to your branch.
+4. Push your branch to your forked repository.
+5. Open a pull request to merge your changes into the main repository.
 
-### 1.0.1
+Please ensure that your code follows our coding guidelines and includes appropriate tests. We appreciate your contributions and look forward to reviewing your pull requests!
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
+# For more information
 
 - [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
 - [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)

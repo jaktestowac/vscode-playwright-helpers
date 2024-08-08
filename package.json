@@ -17,7 +17,10 @@
     "theme": "dark"
   },
   "keywords": [
-    "Playwright"
+    "Playwright",
+    "node.js",
+    "testing",
+    "automation"
   ],
   "categories": [
     "Other"
