@@ -1,12 +1,14 @@
 import * as vscode from "vscode";
-import { PwCommand, PwCommandMap } from "./types";
+import { getNonce } from "../helpers";
+import { PwSettings, PwSettingsMap } from "../types";
+import MyExtensionContext from "../context";
 
-export class CommandsViewProvider implements vscode.WebviewViewProvider {
-  public static readonly viewType = "playwright-helpers.commands";
+export class SettingsViewProvider implements vscode.WebviewViewProvider {
+  public static readonly viewType = "playwright-helpers.settings";
 
   private _view?: vscode.WebviewView;
 
-  constructor(private readonly _extensionUri: vscode.Uri, private _commandList: PwCommand[]) {}
+  constructor(private readonly _extensionUri: vscode.Uri, private _settingsList: PwSettings[]) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -26,24 +28,22 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
-        case "invokeCommand": {
-          this.invokeCommand(data.key);
+        case "updateSetting": {
+          this.invokeToggle(data.key, data.value);
           break;
         }
       }
     });
   }
 
-  private invokeCommand(commandName: string) {
-    const commandFunc = this._commandList.find((command) => command.key === commandName)?.func;
-    if (commandFunc !== undefined) {
-      commandFunc();
-    }
+  private invokeToggle(key: string, value: boolean) {
+    console.log("Toggling setting: ", key, value);
+    MyExtensionContext.instance.setWorkspaceState(key, value);
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "commands.js")
+      vscode.Uri.joinPath(this._extensionUri, "resources", "settings.js")
     );
     const styleVSCodeUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css")
@@ -52,20 +52,28 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       vscode.Uri.joinPath(this._extensionUri, "resources", "main.css")
     );
 
-    let buttonHTMLList = "";
+    let controlsHTMLList = "";
 
-    const tempList: PwCommandMap = {};
-    for (const command of this._commandList) {
-      if (!(command.type in tempList)) {
-        tempList[command.type] = [];
+    const tempList: PwSettingsMap = {};
+    for (const setting of this._settingsList) {
+      if (!(setting.category in tempList)) {
+        tempList[setting.category] = [];
       }
-      tempList[command.type].push(command);
+      tempList[setting.category].push(setting);
     }
 
-    for (const [type, commands] of Object.entries(tempList)) {
-      buttonHTMLList += `<h4 style="text-align: center !important;">${type}</h4>`;
-      for (const { key, prettyName } of commands) {
-        buttonHTMLList += `<button class="button" key="${key}" onclick="invokeCommand('${key}')">${prettyName}</button><br/>`;
+    for (const [category, settings] of Object.entries(tempList)) {
+      controlsHTMLList += `<h4 style="text-align: center !important;">${category}</h4>`;
+      for (const { key, prettyName, type } of settings) {
+        if (type === "checkbox") {
+          const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
+          controlsHTMLList += `
+          <input class="checkbox" type="checkbox" id="${key}" key="${key}" ${
+            isChecked ? "checked" : ""
+          } onclick="toggleCheckbox('${key}', this.checked)"/>
+          <label for="${key}">${prettyName}</label>
+          `;
+        }
       }
     }
 
@@ -85,19 +93,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               </head>
               <body>
   
-                 ${buttonHTMLList}
+                 ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>
               </body>
               </html>`;
   }
-}
-
-function getNonce() {
-  let text = "";
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 32; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
 }

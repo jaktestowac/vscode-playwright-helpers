@@ -10,6 +10,12 @@
     button.addEventListener("click", () => {
       const attributeKey = button.getAttribute("key");
       vscode.postMessage({ type: "invokeCommand", key: attributeKey });
+      button.disabled = true;
+      button.classList.add("loading");
+      setTimeout(() => {
+        button.disabled = false;
+        button.classList.remove("loading");
+      }, 1000);
     });
   }
 })();

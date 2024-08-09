@@ -55,9 +55,19 @@ button {
   background: var(--vscode-button-background);
 }
 
+button.loading {
+  cursor: not-allowed;
+  background: var(--vscode-button-disabledBackground);
+}
+
 button:hover {
   cursor: pointer;
   background: var(--vscode-button-hoverBackground);
+}
+
+button.loading:hover {
+  cursor: not-allowed;
+  background: var(--vscode-button-disabledBackground);
 }
 
 button:focus {

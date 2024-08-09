@@ -43,6 +43,11 @@
           "type": "webview",
           "id": "playwright-helpers.commands",
           "name": "Commands"
+        },
+        {
+          "type": "webview",
+          "id": "playwright-helpers.settings",
+          "name": "Settings"
         }
       ]
     },
@@ -136,6 +141,11 @@
         "command": "playwright-helpers.uninstallAllPlaywrightBrowsers",
         "category": "PW Helpers",
         "title": "Uninstall All Playwright Browsers"
+      },
+      {
+        "command": "playwright-helpers.closeAllTerminals",
+        "category": "PW Helpers",
+        "title": "Close All Terminals"
       }
     ]
   },

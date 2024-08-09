@@ -1,6 +1,8 @@
-export function compareEnums<T extends Record<string, string | number>>(
-  a: T | undefined,
-  b: T | undefined
-): boolean {
-  return a === b;
+export function getNonce() {
+  let text = "";
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 32; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
 }
