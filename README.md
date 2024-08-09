@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/playwright-logo.png?raw=true" width="200px" alt="Playwright Logo">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/playwright-logo.png?raw=true" width="200px" alt="Playwright Logo">
 </p>
 
 <h1 align="center">VS Code - Playwright Helpers</h1>
@@ -16,6 +16,10 @@ Commands are available at:
 
 The Command Palette is a feature in Visual Studio Code that provides a convenient way to access various commands and features within the editor.
 
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/preview-2.gif?raw=true" alt="Preview">
+</p>
+
 1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
 2. Type the name of the command you wish to execute and select it from the list.
 3. All commands from this extensions are grouped under category **PW Helpers**, e.g.:
@@ -30,6 +34,10 @@ In addition to accessing the commands through the Command Palette, you can also 
 
 Under the **Playwright Helpers** section you will see a list of available commands categorized. Simply click on a command to execute it.
 
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/preview-1.gif?raw=true" alt="Preview">
+</p>
+
 The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
 
 # Commands List
@@ -38,7 +46,6 @@ Below you can find a list of all supported snippets.
 
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
-| `playwright-helpers.helloWorld`                       | Hello World                                               |
 | `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
 | `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
@@ -56,6 +63,7 @@ Below you can find a list of all supported snippets.
 | `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                        |
 | `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
 | `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
+| `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
 
 # Contributing
 

@@ -1,12 +1,18 @@
 import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "./types";
-import * as vscode from "vscode";
 
 export function getSettingsList(): PwSettings[] {
   const commandsList: PwSettings[] = [
     {
       key: "reuseTerminal",
-      func: (context: vscode.ExtensionContext) => reuseTerminal(context),
+      func: reuseTerminal,
       prettyName: "Reuse Existing Terminal",
+      category: PlaywrightSettingsCategory.general,
+      type: PlaywrightSettingsType.checkbox,
+    },
+    {
+      key: "instantExecute",
+      func: instantExecute,
+      prettyName: "Instantly Execute Commands With ⌛",
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
@@ -15,7 +21,6 @@ export function getSettingsList(): PwSettings[] {
   return commandsList;
 }
 
-function reuseTerminal(context: vscode.ExtensionContext) {
-  const currentState = context.workspaceState.get("reuseTerminal", false);
-  context.workspaceState.update("reuseTerminal", !currentState);
-}
+function reuseTerminal() {}
+
+function instantExecute() {}

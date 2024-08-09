@@ -4,7 +4,7 @@ import { CommandsViewProvider } from "./providers/CommandsViewProvider";
 import { SettingsViewProvider } from "./providers/SettingsViewProvider";
 import { getCommandList } from "./commands";
 import { getSettingsList } from "./settings";
-import MyExtensionContext from "./context";
+import MyExtensionContext from "./MyExtensionContext";
 
 const extensionName = "playwright-helpers";
 
@@ -36,11 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-function registerCommand(
-  context: vscode.ExtensionContext,
-  id: string,
-  callback: (...args: any[]) => any
-) {
+function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
   let disposable = vscode.commands.registerCommand(id, callback, context);
   context.subscriptions.push(disposable);
 }

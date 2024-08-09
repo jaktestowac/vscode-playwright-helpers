@@ -33,7 +33,7 @@
         {
           "id": "playwright-helpers",
           "title": "Playwright Helpers",
-          "icon": "./resources/icon.svg"
+          "icon": "./media/icon.svg"
         }
       ]
     },

@@ -24,4 +24,8 @@ export default class MyExtensionContext {
   getWorkspaceValue(key: string): any {
     return this.context.workspaceState.get(key);
   }
+
+  getWorkspaceBoolValue(key: string): boolean {
+    return this.context.workspaceState.get(key) ?? false;
+  }
 }

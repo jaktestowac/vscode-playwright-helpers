@@ -1,4 +1,4 @@
-import MyExtensionContext from "./context";
+import MyExtensionContext from "./MyExtensionContext";
 import { ExecuteInTerminalParameters, PlaywrightCommandsCategory, PwCommand } from "./types";
 import * as vscode from "vscode";
 const baseTerminalName = `PW Helpers`;
@@ -38,13 +38,13 @@ export function getCommandList(): PwCommand[] {
     {
       key: "uninstallAllPlaywrightBrowsers",
       func: uninstallAllPlaywrightBrowsers,
-      prettyName: "Uninstall All Playwright Browsers (confirm required)",
+      prettyName: "Uninstall All Playwright Browsers ⌛",
       category: PlaywrightCommandsCategory.browsers,
     },
     {
       key: "uninstallPlaywrightBrowsers",
       func: uninstallPlaywrightBrowsers,
-      prettyName: "Uninstall Playwright Browsers (confirm required)",
+      prettyName: "Uninstall Playwright Browsers ⌛",
       category: PlaywrightCommandsCategory.browsers,
     },
     {
@@ -80,31 +80,31 @@ export function getCommandList(): PwCommand[] {
     {
       key: "initNewProject",
       func: initNewProject,
-      prettyName: "Init New Project",
+      prettyName: "Init New Project ⌛",
       category: PlaywrightCommandsCategory.project,
     },
     {
       key: "initNewProjectQuick",
       func: initNewProjectQuick,
-      prettyName: "Init New Project Quick",
+      prettyName: "Init New Project Quick ⌛",
       category: PlaywrightCommandsCategory.project,
     },
     {
       key: "runCodegen",
       func: runCodegen,
-      prettyName: "Run Codegen (confirm required)",
+      prettyName: "Run Codegen ⌛",
       category: PlaywrightCommandsCategory.testing,
     },
     {
       key: "runShowReport",
       func: runShowReport,
-      prettyName: "Run Show Report (confirm required)",
+      prettyName: "Run Show Report ⌛",
       category: PlaywrightCommandsCategory.testing,
     },
     {
       key: "installNextPlaywrightTest",
       func: installNextPlaywrightTest,
-      prettyName: "Install Next @playwright/test (confirm required)",
+      prettyName: "Install Next @playwright/test ⌛",
       category: PlaywrightCommandsCategory.playwright,
     },
     {
@@ -185,17 +185,19 @@ export async function listInstalledPlaywrightPackages() {
 }
 
 export async function uninstallAllPlaywrightBrowsers() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall --all",
-    execute: false,
+    execute: instantExecute,
     terminalName: "Uninstall All Browsers",
   });
 }
 
 export async function uninstallPlaywrightBrowsers() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall",
-    execute: false,
+    execute: instantExecute,
     terminalName: "Uninstall Browsers",
   });
 }
@@ -233,41 +235,46 @@ export async function installFirefoxPlaywrightBrowser() {
 }
 
 export async function initNewProject() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npm init playwright@latest",
-    execute: true,
+    execute: instantExecute,
     terminalName: "Init",
   });
 }
 
 export async function initNewProjectQuick() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npm init playwright@latest --yes -- --quiet --browser=chromium",
-    execute: true,
+    execute: instantExecute,
     terminalName: "Quick Init",
   });
 }
 
 export async function runCodegen() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright codegen",
-    execute: false,
+    execute: instantExecute,
     terminalName: "Codegen",
   });
 }
 
 export async function runShowReport() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright show-report",
-    execute: false,
+    execute: instantExecute,
     terminalName: "Show Report",
   });
 }
 
 export async function installNextPlaywrightTest() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npm i @playwright/test@next",
-    execute: false,
+    execute: instantExecute,
     terminalName: "Install Next",
   });
 }
@@ -292,9 +299,7 @@ export function executeCommandInNewTerminal(parameters: ExecuteInTerminalParamet
 }
 
 export function executeCommandInExistingTerminal(parameters: ExecuteInTerminalParameters) {
-  const existingTerminal = vscode.window.terminals.find(
-    (terminal) => terminal.name === baseTerminalName
-  );
+  const existingTerminal = vscode.window.terminals.find((terminal) => terminal.name === baseTerminalName);
 
   if (existingTerminal !== undefined) {
     existingTerminal.show();

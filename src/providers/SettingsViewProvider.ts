@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "../helpers";
 import { PwSettings, PwSettingsMap } from "../types";
-import MyExtensionContext from "../context";
+import MyExtensionContext from "../MyExtensionContext";
 
 export class SettingsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.settings";
@@ -41,15 +41,9 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "settings.js")
-    );
-    const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css")
-    );
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "main.css")
-    );
+    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "settings.js"));
+    const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
+    const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
     let controlsHTMLList = "";
 
@@ -70,7 +64,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
           <input class="checkbox" type="checkbox" id="${key}" key="${key}" ${
             isChecked ? "checked" : ""
           } onclick="toggleCheckbox('${key}', this.checked)"/>
-          <label for="${key}">${prettyName}</label>
+          <label for="${key}">${prettyName}</label><br />
           `;
         }
       }
