@@ -90,6 +90,12 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.project,
     },
     {
+      key: "openUiMode",
+      func: openUiMode,
+      prettyName: "Open UI Mode",
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
       key: "runCodegen",
       func: runCodegen,
       prettyName: "Run Codegen ⌛",
@@ -127,6 +133,14 @@ export function closeAllTerminals() {
     if (terminal.name.includes(baseTerminalName)) {
       terminal.dispose();
     }
+  });
+}
+
+export async function openUiMode() {
+  executeCommandInTerminal({
+    command: "npx playwright test --ui",
+    execute: true,
+    terminalName: "Open UI Mode",
   });
 }
 

@@ -83,6 +83,11 @@
         "title": "Run Playwright Show Report"
       },
       {
+        "command": "playwright-helpers.openUiMode",
+        "category": "PW Helpers",
+        "title": "Open Playwright UI Mode"
+      },
+      {
         "command": "playwright-helpers.checkPlaywrightTestVersion",
         "category": "PW Helpers",
         "title": "Check Playwright Test Version"
