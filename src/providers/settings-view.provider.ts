@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import { getNonce } from "../helpers";
-import { PwSettings, PwSettingsMap } from "../types";
-import MyExtensionContext from "../MyExtensionContext";
+import MyExtensionContext from "../helpers/my-extension.context";
+import { getNonce } from "../helpers/helpers";
+import { PwSettings, PwSettingsMap } from "../helpers/types";
 
 export class SettingsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.settings";

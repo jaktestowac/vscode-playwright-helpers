@@ -1,4 +1,4 @@
-import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "./types";
+import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "../helpers/types";
 
 export function getSettingsList(): PwSettings[] {
   const commandsList: PwSettings[] = [

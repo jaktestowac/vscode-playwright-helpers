@@ -1,6 +1,6 @@
-import MyExtensionContext from "./MyExtensionContext";
-import { ExecuteInTerminalParameters, PlaywrightCommandsCategory, PwCommand } from "./types";
 import * as vscode from "vscode";
+import { ExecuteInTerminalParameters, PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
+import MyExtensionContext from "../helpers/my-extension.context";
 const baseTerminalName = `PW Helpers`;
 
 export function getCommandList(): PwCommand[] {

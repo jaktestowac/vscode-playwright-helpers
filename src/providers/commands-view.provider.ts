@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { PwCommand, PwCommandMap } from "../types";
-import { getNonce } from "../helpers";
+import { PwCommand, PwCommandMap } from "../helpers/types";
+import { getNonce } from "../helpers/helpers";
 
 export class CommandsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.commands";
@@ -43,15 +43,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "commands.js")
-    );
-    const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css")
-    );
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "resources", "main.css")
-    );
+    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "commands.js"));
+    const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
+    const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
     let buttonHTMLList = "";
 
