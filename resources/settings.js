@@ -6,7 +6,6 @@
   const vscode = acquireVsCodeApi();
 
   const checkboxes = document.querySelectorAll(".checkbox");
-  console.log(checkboxes);
   for (const checkbox of checkboxes) {
     checkbox.addEventListener("change", () => {
       const attributeKey = checkbox.getAttribute("key");

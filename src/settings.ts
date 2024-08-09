@@ -17,6 +17,5 @@ export function getSettingsList(): PwSettings[] {
 
 function reuseTerminal(context: vscode.ExtensionContext) {
   const currentState = context.workspaceState.get("reuseTerminal", false);
-  console.log("Current state: ", currentState);
   context.workspaceState.update("reuseTerminal", !currentState);
 }
