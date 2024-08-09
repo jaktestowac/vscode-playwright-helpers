@@ -46,15 +46,15 @@ Below you can find a list of all supported snippets.
 
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
+| `playwright-helpers.helloWorld`                       | Hello World                                               |
 | `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
 | `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
 | `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
 | `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
 | `playwright-helpers.checkPlaywrightTestVersion`       | Check Playwright Test Version                             |
-| `playwright-helpers.installLatestPlaywrightTest`      | Install Latest Playwright Test                            |
-| `playwright-helpers.updateLatestPlaywrightTest`       | Update Latest Playwright Test                             |
-| `playwright-helpers.installNextPlaywrightTest`        | Install Next Playwright Test                              |
+| `playwright-helpers.installLatestPlaywrightTest`      | Install/Update Latest Playwright Test                     |
+| `playwright-helpers.installNextPlaywrightTest`        | Install/Update Next Playwright Test                       |
 | `playwright-helpers.checkForPlaywrightTestUpdates`    | Check Playwright Test Updates                             |
 | `playwright-helpers.listInstalledPlaywrightPackages`  | List Installed Playwright Packages                        |
 | `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (only from current project) |

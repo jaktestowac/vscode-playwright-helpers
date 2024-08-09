@@ -90,17 +90,12 @@
       {
         "command": "playwright-helpers.installLatestPlaywrightTest",
         "category": "PW Helpers",
-        "title": "Install Latest Playwright Test"
-      },
-      {
-        "command": "playwright-helpers.updateLatestPlaywrightTest",
-        "category": "PW Helpers",
-        "title": "Update Latest Playwright Test"
+        "title": "Install/Update Latest Playwright Test"
       },
       {
         "command": "playwright-helpers.installNextPlaywrightTest",
         "category": "PW Helpers",
-        "title": "Install Next Playwright Test"
+        "title": "Install/Update Next Playwright Test"
       },
       {
         "command": "playwright-helpers.checkForPlaywrightTestUpdates",

@@ -18,9 +18,9 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.playwright,
     },
     {
-      key: "installLatestPlaywrightTest",
-      func: installLatestPlaywrightTest,
-      prettyName: "Install Latest @playwright/test",
+      key: "listInstalledPackages",
+      func: listInstalledPackages,
+      prettyName: "List Installed Packages",
       category: PlaywrightCommandsCategory.playwright,
     },
     {
@@ -30,22 +30,10 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.playwright,
     },
     {
-      key: "listInstalledPlaywrightPackages",
-      func: listInstalledPlaywrightPackages,
-      prettyName: "List Installed Playwright Packages",
+      key: "installLatestPlaywrightTest",
+      func: installLatestPlaywrightTest,
+      prettyName: "Install/Update to Latest @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
-    },
-    {
-      key: "uninstallAllPlaywrightBrowsers",
-      func: uninstallAllPlaywrightBrowsers,
-      prettyName: "Uninstall All Playwright Browsers ⌛",
-      category: PlaywrightCommandsCategory.browsers,
-    },
-    {
-      key: "uninstallPlaywrightBrowsers",
-      func: uninstallPlaywrightBrowsers,
-      prettyName: "Uninstall Playwright Browsers ⌛",
-      category: PlaywrightCommandsCategory.browsers,
     },
     {
       key: "installAllPlaywrightBrowsers",
@@ -72,9 +60,21 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.browsers,
     },
     {
-      key: "updateLatestPlaywrightTest",
-      func: updateLatestPlaywrightTest,
-      prettyName: "Update Latest @playwright/test",
+      key: "uninstallAllPlaywrightBrowsers",
+      func: uninstallAllPlaywrightBrowsers,
+      prettyName: "Uninstall All Playwright Browsers ⌛",
+      category: PlaywrightCommandsCategory.browsers,
+    },
+    {
+      key: "uninstallPlaywrightBrowsers",
+      func: uninstallPlaywrightBrowsers,
+      prettyName: "Uninstall Playwright Browsers ⌛",
+      category: PlaywrightCommandsCategory.browsers,
+    },
+    {
+      key: "installNextPlaywrightTest",
+      func: installNextPlaywrightTest,
+      prettyName: "Install/Update to Next @playwright/test ⌛",
       category: PlaywrightCommandsCategory.playwright,
     },
     {
@@ -100,12 +100,6 @@ export function getCommandList(): PwCommand[] {
       func: runShowReport,
       prettyName: "Run Show Report ⌛",
       category: PlaywrightCommandsCategory.testing,
-    },
-    {
-      key: "installNextPlaywrightTest",
-      func: installNextPlaywrightTest,
-      prettyName: "Install Next @playwright/test ⌛",
-      category: PlaywrightCommandsCategory.playwright,
     },
     {
       key: "closeAllTerminals",
@@ -152,19 +146,20 @@ export async function checkPlaywrightTestVersion() {
   });
 }
 
-export async function updateLatestPlaywrightTest() {
-  executeCommandInTerminal({
-    command: "npm i @playwright/test@latest",
-    execute: true,
-    terminalName: "Update Latest",
-  });
-}
-
 export async function installLatestPlaywrightTest() {
   executeCommandInTerminal({
     command: "npm i @playwright/test@latest",
     execute: true,
     terminalName: "Install Latest",
+  });
+}
+
+export async function installNextPlaywrightTest() {
+  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+  executeCommandInTerminal({
+    command: "npm i @playwright/test@next",
+    execute: instantExecute,
+    terminalName: "Install Next",
   });
 }
 
@@ -176,11 +171,11 @@ export async function checkForPlaywrightTestUpdates() {
   });
 }
 
-export async function listInstalledPlaywrightPackages() {
+export async function listInstalledPackages() {
   executeCommandInTerminal({
-    command: "npm list | grep playwright",
+    command: "npm list",
     execute: true,
-    terminalName: "List Playwright Packages",
+    terminalName: "List Installed Packages",
   });
 }
 
@@ -267,15 +262,6 @@ export async function runShowReport() {
     command: "npx playwright show-report",
     execute: instantExecute,
     terminalName: "Show Report",
-  });
-}
-
-export async function installNextPlaywrightTest() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
-  executeCommandInTerminal({
-    command: "npm i @playwright/test@next",
-    execute: instantExecute,
-    terminalName: "Install Next",
   });
 }
 
