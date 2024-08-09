@@ -17,7 +17,7 @@ Commands are available at:
 The Command Palette is a feature in Visual Studio Code that provides a convenient way to access various commands and features within the editor.
 
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/preview-2.gif?raw=true" alt="Preview">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-2.gif?raw=true" alt="Preview">
 </p>
 
 1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
@@ -35,7 +35,7 @@ In addition to accessing the commands through the Command Palette, you can also 
 Under the **Playwright Helpers** section you will see a list of available commands categorized. Simply click on a command to execute it.
 
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/imgs/preview-1.gif?raw=true" alt="Preview">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-1.gif?raw=true" alt="Preview">
 </p>
 
 The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
