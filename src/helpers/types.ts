@@ -31,6 +31,11 @@ export interface PwSettingsMap {
   [key: string]: PwSettings[];
 }
 
+export interface PwCheckResult {
+  success: boolean;
+  message: string;
+}
+
 export enum PlaywrightCommandsCategory {
   playwright = "Playwright",
   browsers = "Browsers",

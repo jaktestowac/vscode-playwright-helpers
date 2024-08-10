@@ -9,6 +9,7 @@ const extensionName = "playwright-helpers";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
+  MyExtensionContext.instance.setWorkspaceState("workspaceFolders", vscode.workspace.workspaceFolders);
 
   const commandsList = getCommandList();
 

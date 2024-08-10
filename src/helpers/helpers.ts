@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as cp from "child_process";
+import * as fs from "fs";
 
 export function getNonce() {
   let text = "";
@@ -29,3 +30,8 @@ const execShell = async (cmd: string, directory: string) =>
       return resolve(out);
     });
   });
+
+export function isDirectoryEmpty(directory: string): boolean {
+  const files = fs.readdirSync(directory);
+  return files.length === 0;
+}

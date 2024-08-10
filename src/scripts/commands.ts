@@ -1,6 +1,8 @@
 import * as vscode from "vscode";
 import { ExecuteInTerminalParameters, PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
+import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions";
+import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
 const baseTerminalName = `PW Helpers`;
 
 export function getCommandList(): PwCommand[] {
@@ -125,7 +127,7 @@ export function getCommandList(): PwCommand[] {
 }
 
 export function sayHello() {
-  vscode.window.showInformationMessage("Hello World from jaktestowac.pl Team! 👋");
+  showInformationMessage("Hello World from jaktestowac.pl Team! 👋");
 }
 
 export function closeAllTerminals() {
@@ -245,6 +247,15 @@ export async function installFirefoxPlaywrightBrowser() {
 
 export async function initNewProject() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
+
+  if (!checkResult.success) {
+    showErrorMessage(checkResult.message);
+    return;
+  }
+
   executeCommandInTerminal({
     command: "npm init playwright@latest",
     execute: instantExecute,
@@ -254,6 +265,15 @@ export async function initNewProject() {
 
 export async function initNewProjectQuick() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
+
+  if (!checkResult.success) {
+    showErrorMessage(checkResult.message);
+    return;
+  }
+
   executeCommandInTerminal({
     command: "npm init playwright@latest --yes -- --quiet --browser=chromium",
     execute: instantExecute,
