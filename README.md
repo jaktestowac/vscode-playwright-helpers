@@ -42,8 +42,6 @@ The Side View provides a convenient way to access and execute commands without h
 
 # Commands List
 
-Below you can find a list of all supported snippets.
-
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
 | `playwright-helpers.helloWorld`                       | Hello World                                               |
@@ -52,6 +50,7 @@ Below you can find a list of all supported snippets.
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
 | `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
 | `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
+| `playwright-helpers.openUiMode`                       | Open Playwright UI Mode                                   |
 | `playwright-helpers.checkPlaywrightTestVersion`       | Check Playwright Test Version                             |
 | `playwright-helpers.installLatestPlaywrightTest`      | Install/Update Latest Playwright Test                     |
 | `playwright-helpers.installNextPlaywrightTest`        | Install/Update Next Playwright Test                       |

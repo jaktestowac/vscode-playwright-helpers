@@ -1,7 +1,7 @@
 {
   "name": "playwright-helpers",
-  "displayName": "Playwright Helpers",
-  "description": "",
+  "displayName": "Playwright Helpers for VS Code",
+  "description": "Playwright Helpers for VS Code",
   "author": "jaktestowac.pl",
   "publisher": "jaktestowac-pl",
   "version": "0.0.1",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaktestowac/TBD"
+    "url": "https://github.com/jaktestowac/vscode-playwright-helpers"
   },
   "galleryBanner": {
     "color": "#2b3137",
@@ -155,10 +155,13 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "publish:patch": "vsce publish patch",
+    "publish:minor": "vsce publish minor",
+    "publish:major": "vsce publish major"
   },
   "devDependencies": {
-    "@types/vscode": "^1.92.0",
+    "@types/vscode": "^1.60.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
