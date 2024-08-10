@@ -7,3 +7,7 @@ export function showErrorMessage(message: string): void {
 export function showInformationMessage(message: string): void {
   vscode.window.showInformationMessage(`PW Helper: ${message}`);
 }
+
+export function showWarningMessage(message: string): void {
+  vscode.window.showWarningMessage(`PW Helper: ${message}`);
+}

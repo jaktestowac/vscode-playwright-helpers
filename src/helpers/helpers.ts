@@ -3,7 +3,7 @@ import * as cp from "child_process";
 import * as fs from "fs";
 import MyExtensionContext from "./my-extension.context";
 import { areWorkspaceFoldersSingle } from "./assertions";
-import { showErrorMessage } from "./window-messages";
+import { showErrorMessage, showWarningMessage } from "./window-messages";
 import path from "path";
 import { PwScripts } from "./types";
 
@@ -46,12 +46,18 @@ export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
-    showErrorMessage(checkResult.message);
+    showWarningMessage(checkResult.message);
     return [];
   }
 
   const workspacePath = workspaceFolders[0].uri.fsPath;
   const packageJsonPath = path.join(workspacePath, "package.json");
+
+  if (!fs.existsSync(packageJsonPath)) {
+    showWarningMessage("No package.json found in the workspace");
+    return [];
+  }
+
   const packageJsonContent = await vscode.workspace.fs.readFile(vscode.Uri.file(packageJsonPath));
   const packageJson = JSON.parse(packageJsonContent.toString());
   const foundKeys = Object.keys(packageJson.scripts).filter(
