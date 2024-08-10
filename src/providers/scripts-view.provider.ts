@@ -1,6 +1,8 @@
 import * as vscode from "vscode";
 import { getNonce } from "../helpers/helpers";
-import { PwScripts, PwScriptsMap } from "../helpers/types";
+import { PwScripts } from "../helpers/types";
+import { executeCommandInTerminal } from "../helpers/terminal";
+import { svgPlayIcon } from "../helpers/icons";
 
 export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.scripts";
@@ -8,7 +10,9 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
   private _scriptsList?: PwScripts[];
 
-  constructor(private readonly _extensionUri: vscode.Uri) {}
+  constructor(private readonly _extensionUri: vscode.Uri, scripts: PwScripts[] = []) {
+    this._scriptsList = scripts;
+  }
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -29,11 +33,22 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "invokeScript": {
-          // TODO: Implement
+          this.invokeScript(data.key);
           break;
         }
       }
     });
+  }
+
+  private invokeScript(scriptName: string) {
+    const script = this._scriptsList?.find((command) => command.key === scriptName);
+    if (script !== undefined) {
+      executeCommandInTerminal({
+        command: script.script,
+        terminalName: script.key,
+        execute: true,
+      });
+    }
   }
 
   public refresh(scripts: PwScripts[]) {
@@ -52,7 +67,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     if (this._scriptsList) {
       controlsHTMLList += '<div id="actions" class="list">';
       for (const script of this._scriptsList) {
-        controlsHTMLList += `<div><label role="button" class="action" key="${script.key}" onclick="invokeScript('${script.key}')"><svg xmlns="http://www.w3.org/2000/svg" height="20px" width="40px"><path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path></svg>${script.key}</label></div>`;
+        controlsHTMLList += `<div><label role="button" class="action label" title="${script.script}" key="${script.key}" onclick="invokeScript('${script.key}')">${svgPlayIcon}${script.key}</label></div>`;
       }
       controlsHTMLList += "</div>";
     }
@@ -76,7 +91,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-                 <h4>All Playwright Scripts:</h4>
+                 <h4>Playwright Scripts from package.json:</h4>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

@@ -47,6 +47,10 @@ export function activate(context: vscode.ExtensionContext) {
       scriptsViewProvider.refresh(scripts);
     });
   });
+
+  getPlaywrightScriptsFromPackageJson().then((scripts) => {
+    scriptsViewProvider.refresh(scripts);
+  });
 }
 
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
