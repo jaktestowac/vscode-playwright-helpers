@@ -1,6 +1,11 @@
 import * as vscode from "vscode";
 import * as cp from "child_process";
 import * as fs from "fs";
+import MyExtensionContext from "./my-extension.context";
+import { areWorkspaceFoldersSingle } from "./assertions";
+import { showErrorMessage } from "./window-messages";
+import path from "path";
+import { PwScripts } from "./types";
 
 export function getNonce() {
   let text = "";
@@ -34,4 +39,33 @@ const execShell = async (cmd: string, directory: string) =>
 export function isDirectoryEmpty(directory: string): boolean {
   const files = fs.readdirSync(directory);
   return files.length === 0;
+}
+
+export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]> {
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
+  if (!checkResult.success) {
+    showErrorMessage(checkResult.message);
+    return [];
+  }
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const packageJsonPath = path.join(workspacePath, "package.json");
+  const packageJsonContent = await vscode.workspace.fs.readFile(vscode.Uri.file(packageJsonPath));
+  const packageJson = JSON.parse(packageJsonContent.toString());
+  const foundKeys = Object.keys(packageJson.scripts).filter(
+    (key) => key.includes("playwright") || packageJson.scripts[key].includes("playwright")
+  );
+
+  if (!foundKeys || foundKeys.length === 0) {
+    showErrorMessage("No Playwright scripts found in package.json");
+    return [];
+  }
+
+  const pwScripts: PwScripts[] = foundKeys.map((key) => {
+    return { key, script: packageJson.scripts[key] };
+  });
+
+  return pwScripts;
 }

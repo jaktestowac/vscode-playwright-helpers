@@ -4,8 +4,9 @@ import { SettingsViewProvider } from "./providers/settings-view.provider";
 import { getCommandList } from "./scripts/commands";
 import { getSettingsList } from "./scripts/settings";
 import MyExtensionContext from "./helpers/my-extension.context";
-
-const extensionName = "playwright-helpers";
+import { ScriptsViewProvider } from "./providers/scripts-view.provider";
+import { EXTENSION_NAME } from "./helpers/consts";
+import { getPlaywrightScriptsFromPackageJson } from "./helpers/helpers";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -14,13 +15,13 @@ export function activate(context: vscode.ExtensionContext) {
   const commandsList = getCommandList();
 
   for (const { key, func } of commandsList) {
-    registerCommand(context, `${extensionName}.${key}`, func);
+    registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
   }
 
   const settingsList = getSettingsList();
 
   for (const { key, func } of settingsList) {
-    registerCommand(context, `${extensionName}.${key}`, func);
+    registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
   }
 
   // Register the Sidebar Panel - Commands
@@ -34,6 +35,18 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(SettingsViewProvider.viewType, settingsViewProvider)
   );
+
+  // Register the Sidebar Panel - Scripts
+  const scriptsViewProvider = new ScriptsViewProvider(context.extensionUri);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(ScriptsViewProvider.viewType, scriptsViewProvider)
+  );
+
+  registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {
+    getPlaywrightScriptsFromPackageJson().then((scripts) => {
+      scriptsViewProvider.refresh(scripts);
+    });
+  });
 }
 
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {

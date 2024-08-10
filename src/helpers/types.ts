@@ -19,6 +19,12 @@ export interface PwSettings {
   type: string;
 }
 
+export interface PwScripts {
+  key: string;
+  script: string;
+  prettyName?: string;
+}
+
 export interface Map {
   [key: string]: string | undefined | Map | PwCommand | PwCommand[];
 }
@@ -29,6 +35,10 @@ export interface PwCommandMap {
 
 export interface PwSettingsMap {
   [key: string]: PwSettings[];
+}
+
+export interface PwScriptsMap {
+  [key: string]: PwScripts[];
 }
 
 export interface PwCheckResult {

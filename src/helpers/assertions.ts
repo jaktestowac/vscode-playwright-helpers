@@ -19,3 +19,14 @@ export function areWorkspaceFoldersSingleAndEmpty(workspaceFolders: vscode.Works
 
   return { success: true, message: "" };
 }
+
+export function areWorkspaceFoldersSingle(workspaceFolders: vscode.WorkspaceFolder[]): PwCheckResult {
+  if (workspaceFolders === undefined || workspaceFolders.length === 0) {
+    return { success: false, message: "No workspace folder opened." };
+  }
+  if (workspaceFolders.length > 1) {
+    return { success: false, message: "More than one workspace folder opened." };
+  }
+
+  return { success: true, message: "" };
+}

@@ -3,7 +3,7 @@ import { ExecuteInTerminalParameters, PlaywrightCommandsCategory, PwCommand } fr
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions";
 import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
-const baseTerminalName = `PW Helpers`;
+import { BASE_TERMINAL_NAME } from "../helpers/consts";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
@@ -121,24 +121,30 @@ export function getCommandList(): PwCommand[] {
       prettyName: "Hello World",
       category: PlaywrightCommandsCategory.mics,
     },
+    // {
+    //   key: "refreshPlaywrightScripts",
+    //   func: refreshPlaywrightScripts,
+    //   prettyName: "Refresh Playwright Scripts",
+    //   category: PlaywrightCommandsCategory.mics,
+    // },
   ];
 
   return commandsList;
 }
 
-export function sayHello() {
+function sayHello() {
   showInformationMessage("Hello World from jaktestowac.pl Team! 👋");
 }
 
-export function closeAllTerminals() {
+function closeAllTerminals() {
   vscode.window.terminals.forEach((terminal) => {
-    if (terminal.name.includes(baseTerminalName)) {
+    if (terminal.name.includes(BASE_TERMINAL_NAME)) {
       terminal.dispose();
     }
   });
 }
 
-export async function openUiMode() {
+async function openUiMode() {
   executeCommandInTerminal({
     command: "npx playwright test --ui",
     execute: true,
@@ -146,7 +152,7 @@ export async function openUiMode() {
   });
 }
 
-export async function checkPlaywrightVersion() {
+async function checkPlaywrightVersion() {
   executeCommandInTerminal({
     command: "npx playwright --version",
     execute: true,
@@ -154,7 +160,7 @@ export async function checkPlaywrightVersion() {
   });
 }
 
-export async function checkPlaywrightTestVersion() {
+async function checkPlaywrightTestVersion() {
   executeCommandInTerminal({
     command: "npx @playwright/test --version",
     execute: true,
@@ -162,7 +168,7 @@ export async function checkPlaywrightTestVersion() {
   });
 }
 
-export async function installLatestPlaywrightTest() {
+async function installLatestPlaywrightTest() {
   executeCommandInTerminal({
     command: "npm i @playwright/test@latest",
     execute: true,
@@ -170,7 +176,7 @@ export async function installLatestPlaywrightTest() {
   });
 }
 
-export async function installNextPlaywrightTest() {
+async function installNextPlaywrightTest() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npm i @playwright/test@next",
@@ -179,7 +185,7 @@ export async function installNextPlaywrightTest() {
   });
 }
 
-export async function checkForPlaywrightTestUpdates() {
+async function checkForPlaywrightTestUpdates() {
   executeCommandInTerminal({
     command: "npm outdated @playwright/test",
     execute: true,
@@ -187,7 +193,7 @@ export async function checkForPlaywrightTestUpdates() {
   });
 }
 
-export async function listInstalledPackages() {
+async function listInstalledPackages() {
   executeCommandInTerminal({
     command: "npm list",
     execute: true,
@@ -195,7 +201,7 @@ export async function listInstalledPackages() {
   });
 }
 
-export async function uninstallAllPlaywrightBrowsers() {
+async function uninstallAllPlaywrightBrowsers() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall --all",
@@ -204,7 +210,7 @@ export async function uninstallAllPlaywrightBrowsers() {
   });
 }
 
-export async function uninstallPlaywrightBrowsers() {
+async function uninstallPlaywrightBrowsers() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall",
@@ -213,7 +219,7 @@ export async function uninstallPlaywrightBrowsers() {
   });
 }
 
-export async function installAllPlaywrightBrowsers() {
+async function installAllPlaywrightBrowsers() {
   executeCommandInTerminal({
     command: "npx playwright install",
     execute: true,
@@ -221,7 +227,7 @@ export async function installAllPlaywrightBrowsers() {
   });
 }
 
-export async function installChromiumPlaywrightBrowser() {
+async function installChromiumPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install chromium",
     execute: true,
@@ -229,7 +235,7 @@ export async function installChromiumPlaywrightBrowser() {
   });
 }
 
-export async function installWebkitPlaywrightBrowser() {
+async function installWebkitPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install webkit",
     execute: true,
@@ -237,7 +243,7 @@ export async function installWebkitPlaywrightBrowser() {
   });
 }
 
-export async function installFirefoxPlaywrightBrowser() {
+async function installFirefoxPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install firefox",
     execute: true,
@@ -245,7 +251,7 @@ export async function installFirefoxPlaywrightBrowser() {
   });
 }
 
-export async function initNewProject() {
+async function initNewProject() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
@@ -263,7 +269,7 @@ export async function initNewProject() {
   });
 }
 
-export async function initNewProjectQuick() {
+async function initNewProjectQuick() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
@@ -281,7 +287,7 @@ export async function initNewProjectQuick() {
   });
 }
 
-export async function runCodegen() {
+async function runCodegen() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright codegen",
@@ -290,7 +296,7 @@ export async function runCodegen() {
   });
 }
 
-export async function runShowReport() {
+async function runShowReport() {
   const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright show-report",
@@ -299,7 +305,7 @@ export async function runShowReport() {
   });
 }
 
-export function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
+function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
   const reuseTerminal = MyExtensionContext.instance.getWorkspaceValue("reuseTerminal");
   if (reuseTerminal) {
     executeCommandInExistingTerminal(parameters);
@@ -308,25 +314,25 @@ export function executeCommandInTerminal(parameters: ExecuteInTerminalParameters
   }
 }
 
-export function executeCommandInNewTerminal(parameters: ExecuteInTerminalParameters) {
+function executeCommandInNewTerminal(parameters: ExecuteInTerminalParameters) {
   let additionalName = "";
   if (parameters.terminalName !== undefined) {
     additionalName = `: ${parameters.terminalName}`;
   }
-  const terminal = vscode.window.createTerminal(`${baseTerminalName}${additionalName}`);
+  const terminal = vscode.window.createTerminal(`${BASE_TERMINAL_NAME}${additionalName}`);
   terminal.show(false);
   terminal.sendText(parameters.command, parameters.execute);
 }
 
-export function executeCommandInExistingTerminal(parameters: ExecuteInTerminalParameters) {
-  const existingTerminal = vscode.window.terminals.find((terminal) => terminal.name === baseTerminalName);
+function executeCommandInExistingTerminal(parameters: ExecuteInTerminalParameters) {
+  const existingTerminal = vscode.window.terminals.find((terminal) => terminal.name === BASE_TERMINAL_NAME);
 
   if (existingTerminal !== undefined) {
     existingTerminal.show();
     existingTerminal.sendText(parameters.command, parameters.execute);
     return;
   } else {
-    const terminal = vscode.window.createTerminal(baseTerminalName);
+    const terminal = vscode.window.createTerminal(BASE_TERMINAL_NAME);
     terminal.show();
     terminal.sendText(parameters.command, parameters.execute);
   }

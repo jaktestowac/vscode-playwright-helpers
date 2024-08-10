@@ -9,7 +9,7 @@
   for (const button of buttons) {
     button.addEventListener("click", () => {
       const attributeKey = button.getAttribute("key");
-      vscode.postMessage({ type: "invokeCommand", key: attributeKey });
+      vscode.postMessage({ type: "invokeScript", key: attributeKey });
 
       // Disable the button and show a loading indicator
       // for a second to let the user know the command is running

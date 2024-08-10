@@ -26,7 +26,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:playwright-helpers"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -47,16 +49,34 @@
         },
         {
           "type": "webview",
+          "id": "playwright-helpers.scripts",
+          "name": "Playwright Scripts"
+        },
+        {
+          "type": "webview",
           "id": "playwright-helpers.settings",
           "name": "Settings"
         }
       ]
     },
+    "menus": {
+      "view/title": [
+        {
+          "command": "playwright-helpers.refreshPlaywrightScripts",
+          "when": "view == playwright-helpers.scripts",
+          "group": "navigation"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "playwright-helpers.helloWorld",
+        "command": "playwright-helpers.refreshPlaywrightScripts",
         "category": "PW Helpers",
-        "title": "Hello World"
+        "title": "Refresh Playwright Scripts",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
       },
       {
         "command": "playwright-helpers.initNewProject",
@@ -163,7 +183,6 @@
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",
-    "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.11.0",
