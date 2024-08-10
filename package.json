@@ -24,7 +24,7 @@
     "automation"
   ],
   "categories": [
-    "Other"
+    "Testing"
   ],
   "activationEvents": [
     "onView:playwright-helpers"
