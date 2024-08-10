@@ -64,7 +64,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
     let controlsHTMLList = ``;
 
-    if (this._scriptsList) {
+    if (this._scriptsList !== undefined && this._scriptsList.length > 0) {
       controlsHTMLList += '<div id="actions" class="list">';
       for (const script of this._scriptsList) {
         controlsHTMLList += `<div><label role="button" class="action label" title="${script.script}" key="${script.key}" onclick="invokeScript('${script.key}')">${svgPlayIcon}${script.key}</label></div>`;
@@ -72,8 +72,9 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
       controlsHTMLList += "</div>";
     }
 
-    if (controlsHTMLList === "") {
-      controlsHTMLList = "No Playwright scripts found";
+    if (this._scriptsList === undefined || this._scriptsList.length === 0) {
+      controlsHTMLList = `<br />No Playwright scripts found in package.json.<br />
+         Please add some scripts and hit refresh button.`;
     }
 
     const nonce = getNonce();
