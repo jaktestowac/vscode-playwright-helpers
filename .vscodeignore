@@ -11,4 +11,4 @@ vsc-extension-quickstart.md
 **/.vscode-test.*
 node_modules/**
 test/**
-imgs/*.gif
+media/*.gif
