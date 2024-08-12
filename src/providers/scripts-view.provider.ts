@@ -65,9 +65,18 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     let controlsHTMLList = ``;
 
     if (this._scriptsList !== undefined && this._scriptsList.length > 0) {
-      controlsHTMLList += '<div id="actions" class="list">';
+      controlsHTMLList += '<nav class="nav-list">';
       for (const script of this._scriptsList) {
-        controlsHTMLList += `<div><label role="button" class="action label" title="${script.script}" key="${script.key}" onclick="invokeScript('${script.key}')">${svgPlayIcon}${script.key}</label></div>`;
+        controlsHTMLList += `
+          <div class="nav-list__item">
+            <a class="nav-list__link" aria-label="${script.key}" key="${script.key}" >
+              <code-icon class="nav-list__icon" modifier="">
+              </code-icon>
+              <tooltip class="nav-list__label" content="${script.key}" >
+                ${svgPlayIcon}<span>${script.key}</span>
+              </tooltip>
+            </a>
+          </div>`;
       }
       controlsHTMLList += "</div>";
     }
@@ -92,7 +101,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-                 <h4>Playwright Scripts from package.json:</h4>
+                <h4 style="text-align: center !important;" class="nav-list__title">Playwright Scripts from package.json:</h4>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { PwCommand, PwCommandMap } from "../helpers/types";
 import { getNonce } from "../helpers/helpers";
+import { svgPlayIcon } from "../helpers/icons";
 
 export class CommandsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.commands";
@@ -58,10 +59,21 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, commands] of Object.entries(tempList)) {
-      buttonHTMLList += `<h4 style="text-align: center !important;">${category}</h4>`;
+      buttonHTMLList += `<h4 style="text-align: center !important;" class="nav-list__title">${category}</h4>`;
+      buttonHTMLList += '<nav class="nav-list">';
       for (const { key, prettyName } of commands) {
-        buttonHTMLList += `<button class="button" key="${key}" onclick="invokeCommand('${key}')">${prettyName}</button><br/>`;
+        buttonHTMLList += `
+          <div class="nav-list__item">
+            <a class="nav-list__link" aria-label="${prettyName}" key="${key}">
+              <code-icon class="nav-list__icon" modifier="">
+              </code-icon>
+              <tooltip class="nav-list__label" content="${prettyName}" >
+                ${svgPlayIcon}<span>${prettyName}</span>
+              </tooltip>
+            </a>
+          </div>`;
       }
+      buttonHTMLList += "</div>";
     }
 
     const nonce = getNonce();
@@ -79,7 +91,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-  
+
                  ${buttonHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

@@ -6,7 +6,7 @@
   // @ts-ignore
   const vscode = acquireVsCodeApi();
 
-  const buttons = document.querySelectorAll(".label");
+  const buttons = document.querySelectorAll(".nav-list__link");
   for (const button of buttons) {
     button.addEventListener("click", () => {
       const attributeKey = button.getAttribute("key");

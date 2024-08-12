@@ -29,6 +29,10 @@ svg {
   margin: -18px;
   width: 56px;
   pointer-events: none;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: -20px;
+  margin-bottom: -10px;
 }
 
 .list {

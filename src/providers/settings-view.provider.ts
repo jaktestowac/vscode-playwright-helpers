@@ -56,7 +56,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, settings] of Object.entries(tempList)) {
-      controlsHTMLList += `<h4 style="text-align: center !important;">${category}</h4>`;
+      controlsHTMLList += `<h4 style="text-align: center !important;" class="nav-list__title">${category}</h4>`;
       for (const { key, prettyName, type } of settings) {
         if (type === "checkbox") {
           const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;

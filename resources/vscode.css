@@ -113,3 +113,68 @@ input::placeholder,
 textarea::placeholder {
   color: var(--vscode-input-placeholderForeground);
 }
+
+a.nav-list__link {
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+.nav-list__item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  padding: 0.2rem 0rem;
+  cursor: pointer;
+}
+
+.nav-list__item:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  color: var(--vscode-list-hoverForeground);
+}
+
+.nav-list__link.loading {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.nav-list__link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 0rem;
+  user-select: none;
+}
+
+.nav-list__icon {
+  flex: none;
+  opacity: 0.5;
+}
+
+.nav-list__label {
+  user-select: none;
+  flex: 1;
+  font-weight: 400;
+}
+
+.nav-list__title {
+  user-select: none;
+  padding: 0 2rem;
+  font-size: 0.7rem !important;
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 1.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: -32px;
+  margin-inline-end: 0px;
+
+  color: var(--color-foreground);
+  opacity: 0.75;
+}
