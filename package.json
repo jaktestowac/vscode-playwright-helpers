@@ -72,7 +72,7 @@
       {
         "command": "playwright-helpers.refreshPlaywrightScripts",
         "category": "PW Helpers",
-        "title": "Refresh Playwright Scripts",
+        "title": "Refresh Playwright Scripts View",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"

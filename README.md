@@ -44,7 +44,7 @@ The Side View provides a convenient way to access and execute commands without h
 
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
-| `playwright-helpers.helloWorld`                       | Hello World                                               |
+| `playwright-helpers.refreshPlaywrightScripts`         | Refresh Playwright Scripts View                           |
 | `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
 | `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
