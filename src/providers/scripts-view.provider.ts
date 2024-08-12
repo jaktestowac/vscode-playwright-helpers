@@ -69,7 +69,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
       for (const script of this._scriptsList) {
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link" aria-label="${script.key}" key="${script.key}" >
+            <a class="nav-list__link has-tooltip" aria-label="${script.key}" key="${script.key}" tooltip-text="${script.script}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${script.key}" >
@@ -101,7 +101,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-                <h4 style="text-align: center !important;" class="nav-list__title">Playwright Scripts from package.json:</h4>
+                <h4 style="text-align: center !important;" aria-label="Playwright Scripts from package.json" class="nav-list__title">Playwright Scripts from package.json:</h4>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

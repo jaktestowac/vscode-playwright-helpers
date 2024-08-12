@@ -59,12 +59,12 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, commands] of Object.entries(tempList)) {
-      buttonHTMLList += `<h4 style="text-align: center !important;" class="nav-list__title">${category}</h4>`;
+      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += '<nav class="nav-list">';
       for (const { key, prettyName } of commands) {
         buttonHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link" aria-label="${prettyName}" key="${key}">
+            <a class="nav-list__link" aria-label="${prettyName}" title="${prettyName}" key="${key}" tooltip-text="${prettyName}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${prettyName}" >

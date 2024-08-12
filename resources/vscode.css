@@ -178,3 +178,32 @@ a.nav-list__link {
   color: var(--color-foreground);
   opacity: 0.75;
 }
+
+.has-tooltip {
+  position: relative;
+}
+
+.has-tooltip:before {
+  content: attr(tooltip-text);
+  min-width: 54px;
+  background-color: var(--vscode-editor-background);
+  border: 1px solid !important;
+  border-color: var(--vscode-editorWidget-border) !important;
+  color: var(--color-foreground);
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 6px 8px;
+  position: absolute;
+  top: -42px;
+  left: 10%;
+  margin-left: -27px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.has-tooltip:hover:before,
+.has-tooltip:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
