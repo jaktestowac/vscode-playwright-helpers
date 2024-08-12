@@ -194,6 +194,7 @@ a.nav-list__link {
   border-radius: 2px;
   padding: 6px 8px;
   position: absolute;
+  z-index: 1000;
   top: 42px;
   left: 10%;
   margin-left: -27px;
