@@ -194,7 +194,7 @@ a.nav-list__link {
   border-radius: 2px;
   padding: 6px 8px;
   position: absolute;
-  top: -42px;
+  top: 42px;
   left: 10%;
   margin-left: -27px;
   visibility: hidden;

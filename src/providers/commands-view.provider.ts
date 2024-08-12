@@ -64,7 +64,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       for (const { key, prettyName } of commands) {
         buttonHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link" aria-label="${prettyName}" title="${prettyName}" key="${key}" tooltip-text="${prettyName}">
+            <a class="nav-list__link" aria-label="${prettyName}"  key="${key}" tooltip-text="${prettyName}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${prettyName}" >
