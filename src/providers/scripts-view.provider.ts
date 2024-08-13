@@ -1,8 +1,9 @@
 import * as vscode from "vscode";
-import { getNonce } from "../helpers/helpers";
+import { getNonce, getPlaywrightScriptsFromPackageJson } from "../helpers/helpers";
 import { PwScripts } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
 import { svgPlayIcon } from "../helpers/icons";
+import { showErrorMessage } from "../helpers/window-messages";
 
 export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.scripts";
@@ -41,14 +42,19 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private invokeScript(scriptName: string) {
-    const script = this._scriptsList?.find((command) => command.key === scriptName);
-    if (script !== undefined) {
-      executeCommandInTerminal({
-        command: script.script,
-        terminalName: script.key,
-        execute: true,
-      });
-    }
+    getPlaywrightScriptsFromPackageJson().then((scripts) => {
+      const script = scripts?.find((command) => command.key === scriptName);
+      if (script !== undefined) {
+        executeCommandInTerminal({
+          command: script.script,
+          terminalName: script.key,
+          execute: true,
+        });
+      } else {
+        showErrorMessage(`Script ${scriptName} not found. Refreshing...`);
+        this.refresh(scripts);
+      }
+    });
   }
 
   public refresh(scripts: PwScripts[]) {

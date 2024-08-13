@@ -94,6 +94,16 @@
         "title": "Check Playwright Version"
       },
       {
+        "command": "playwright-helpers.listInstalledPackages",
+        "category": "PW Helpers",
+        "title": "List Installed Packages"
+      },
+      {
+        "command": "playwright-helpers.listInstalledGlobalPackages",
+        "category": "PW Helpers",
+        "title": "List Installed Global Packages"
+      },
+      {
         "command": "playwright-helpers.runCodegen",
         "category": "PW Helpers",
         "title": "Run Playwright Codegen"

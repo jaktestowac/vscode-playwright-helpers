@@ -21,12 +21,6 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.playwright,
     },
     {
-      key: "listInstalledPackages",
-      func: listInstalledPackages,
-      prettyName: "List Installed Packages",
-      category: PlaywrightCommandsCategory.playwright,
-    },
-    {
       key: "checkForPlaywrightTestUpdates",
       func: checkForPlaywrightTestUpdates,
       prettyName: "Check for @playwright/test Updates",
@@ -117,11 +111,23 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.mics,
     },
     {
-      key: "helloWorld",
-      func: sayHello,
-      prettyName: "Hello World",
+      key: "listInstalledPackages",
+      func: listInstalledPackages,
+      prettyName: "List Installed Packages",
       category: PlaywrightCommandsCategory.mics,
     },
+    {
+      key: "listInstalledGlobalPackages",
+      func: listInstalledGlobalPackages,
+      prettyName: "List Installed Global Packages",
+      category: PlaywrightCommandsCategory.mics,
+    },
+    // {
+    //   key: "helloWorld",
+    //   func: sayHello,
+    //   prettyName: "Hello World",
+    //   category: PlaywrightCommandsCategory.mics,
+    // },
     // {
     //   key: "refreshPlaywrightScripts",
     //   func: refreshPlaywrightScripts,
@@ -199,6 +205,14 @@ async function listInstalledPackages() {
     command: "npm list",
     execute: true,
     terminalName: "List Installed Packages",
+  });
+}
+
+async function listInstalledGlobalPackages() {
+  executeCommandInTerminal({
+    command: "npm list -g --depth=0",
+    execute: true,
+    terminalName: "List Installed Global Packages",
   });
 }
 

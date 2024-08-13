@@ -25,6 +25,13 @@ export interface PwScripts {
   prettyName?: string;
 }
 
+export interface PwPlaywrightProjects {
+  key: string;
+  testMatch: string;
+  wholeProject: any;
+  prettyName?: string;
+}
+
 export interface Map {
   [key: string]: string | undefined | Map | PwCommand | PwCommand[];
 }
