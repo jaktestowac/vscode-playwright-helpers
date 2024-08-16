@@ -170,7 +170,7 @@ a.nav-list__link {
 
   display: block;
   font-size: 1.5em;
-  margin-block-start: 1.5em;
+  margin-block-start: 1em;
   margin-block-end: 0.5em;
   margin-inline-start: -32px;
   margin-inline-end: 0px;
@@ -207,4 +207,38 @@ a.nav-list__link {
 .has-tooltip:hover:after {
   visibility: visible;
   opacity: 1;
+}
+
+.collapsible {
+  text-align: left;
+  cursor: pointer;
+  touch-action: none;
+  /* padding: 0rem 0rem; */
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+
+.collapsible:before {
+  content: "> ";
+}
+
+.active.collapsible:before {
+  content: "v ";
+}
+
+.active:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  color: var(--vscode-list-hoverForeground);
+}
+
+.collapsible:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  color: var(--vscode-list-hoverForeground);
+}
+
+.collapsible-content {
+  padding: 0 4px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }

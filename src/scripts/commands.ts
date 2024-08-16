@@ -122,6 +122,12 @@ export function getCommandList(): PwCommand[] {
       prettyName: "List Installed Global Packages",
       category: PlaywrightCommandsCategory.mics,
     },
+    {
+      key: "listSystemInfo",
+      func: listSystemInfo,
+      prettyName: "List System Info (using envinfo)",
+      category: PlaywrightCommandsCategory.mics,
+    },
     // {
     //   key: "helloWorld",
     //   func: sayHello,
@@ -213,6 +219,14 @@ async function listInstalledGlobalPackages() {
     command: "npm list -g --depth=0",
     execute: true,
     terminalName: "List Installed Global Packages",
+  });
+}
+
+async function listSystemInfo() {
+  executeCommandInTerminal({
+    command: "npx envinfo",
+    execute: true,
+    terminalName: "List System Info (using envinfo)",
   });
 }
 

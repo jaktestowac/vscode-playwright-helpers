@@ -25,7 +25,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
-
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "invokeCommand": {
@@ -59,7 +58,12 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, commands] of Object.entries(tempList)) {
-      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
+      // buttonHTMLList += `<button class="collapsible">${category}</button>`;
+      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class=" collapsible nav-list__title">${category}</h4>`;
+
+      buttonHTMLList += `<div class="collapsible-content">`;
+
+      // buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += '<nav class="nav-list">';
       for (const { key, prettyName } of commands) {
         buttonHTMLList += `
@@ -73,6 +77,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
             </a>
           </div>`;
       }
+      buttonHTMLList += "</div>";
       buttonHTMLList += "</div>";
     }
 

@@ -48,6 +48,8 @@ export function activate(context: vscode.ExtensionContext) {
     });
   });
 
+  registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
+
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
     scriptsViewProvider.refresh(scripts);
   });

@@ -65,6 +65,11 @@
           "command": "playwright-helpers.refreshPlaywrightScripts",
           "when": "view == playwright-helpers.scripts",
           "group": "navigation"
+        },
+        {
+          "command": "playwright-helpers.toggleHideShowCommands",
+          "when": "view == playwright-helpers.commands",
+          "group": "navigation"
         }
       ]
     },
@@ -177,6 +182,20 @@
         "command": "playwright-helpers.closeAllTerminals",
         "category": "PW Helpers",
         "title": "Close All Terminals"
+      },
+      {
+        "command": "playwright-helpers.listSystemInfo",
+        "category": "PW Helpers",
+        "title": "List System Info (using envinfo)"
+      },
+      {
+        "command": "playwright-helpers.toggleHideShowCommands",
+        "category": "PW Helpers",
+        "title": "Toggle Hide/Show Commands",
+        "icon": {
+          "light": "resources/dark/expand-all.svg",
+          "dark": "resources/light/expand-all.svg"
+        }
       }
     ]
   },
