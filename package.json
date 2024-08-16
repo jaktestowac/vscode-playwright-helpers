@@ -47,6 +47,7 @@
           "id": "playwright-helpers.commands",
           "name": "Commands"
         },
+        
         {
           "type": "webview",
           "id": "playwright-helpers.scripts",
@@ -68,7 +69,7 @@
         },
         {
           "command": "playwright-helpers.toggleHideShowCommands",
-          "when": "view == playwright-helpers.commands",
+          "when": "view == playwright-helpers.commandsTreeView",
           "group": "navigation"
         }
       ]

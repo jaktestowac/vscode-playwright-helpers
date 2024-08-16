@@ -7,6 +7,7 @@ import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
 import { EXTENSION_NAME } from "./helpers/consts";
 import { getPlaywrightScriptsFromPackageJson } from "./helpers/helpers";
+import { CommandsTreeViewProvider } from "./providers/commands-treeview.provider";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -53,6 +54,18 @@ export function activate(context: vscode.ExtensionContext) {
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
     scriptsViewProvider.refresh(scripts);
   });
+
+  // // Register the CommandsTreeViewProvider
+  // const commandsTreeViewProvider = new CommandsTreeViewProvider(context.extensionUri, commandsList);
+  // context.subscriptions.push(
+  //   vscode.window.registerTreeDataProvider(`${EXTENSION_NAME}.commandsTreeView`, commandsTreeViewProvider)
+  // );
+
+  // {
+  //   "type": "tree",
+  //   "id": "playwright-helpers.commandsTreeView",
+  //   "name": "Commands Tree View"
+  // },
 }
 
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
