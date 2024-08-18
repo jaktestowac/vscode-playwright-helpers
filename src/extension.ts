@@ -7,6 +7,7 @@ import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
 import { EXTENSION_NAME } from "./helpers/consts";
 import { getPlaywrightScriptsFromPackageJson } from "./helpers/helpers";
+import { showInformationMessage } from "./helpers/window-messages";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -45,6 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {
     getPlaywrightScriptsFromPackageJson().then((scripts) => {
       scriptsViewProvider.refresh(scripts);
+      showInformationMessage("Playwright scripts from package.json refreshed");
     });
   });
 
