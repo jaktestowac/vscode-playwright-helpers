@@ -47,7 +47,6 @@
           "id": "playwright-helpers.commands",
           "name": "Commands"
         },
-        
         {
           "type": "webview",
           "id": "playwright-helpers.scripts",

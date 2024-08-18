@@ -27,15 +27,44 @@
 
   const collapsible = document.getElementsByClassName("collapsible");
 
+  const state = vscode.getState();
+  const collapsibleState = state?.collapsibleState ? state.collapsibleState : {};
+  console.log("collapsibleState", collapsibleState);
+
   for (let i = 0; i < collapsible.length; i++) {
+    const collapsibleId = collapsible[i].getAttribute("id");
+
+    updateCollapsibleState(collapsible[i], collapsibleState);
+
     collapsible[i].addEventListener("click", function () {
       this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
+
+      collapsibleState[collapsibleId] = this.classList.contains("active");
+      console.log("collapsibleState", collapsibleState);
+      vscode.setState({ collapsibleState });
+
+      updateCollapsibleContent(this);
     });
+  }
+
+  function updateCollapsibleContent(collapsibleElement) {
+    const content = collapsibleElement.nextElementSibling;
+    if (collapsibleElement.classList.contains("active")) {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+      content.style.maxHeight = null;
+    }
+  }
+
+  function updateCollapsibleState(collapsibleElement, collapsibleState) {
+    const collapsibleId = collapsibleElement.getAttribute("id");
+
+    if (collapsibleState[collapsibleId] === true) {
+      collapsibleElement.classList.add("active");
+    } else {
+      collapsibleElement.classList.remove("active");
+    }
+
+    updateCollapsibleContent(collapsibleElement);
   }
 })();

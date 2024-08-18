@@ -59,7 +59,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
     for (const [category, commands] of Object.entries(tempList)) {
       // buttonHTMLList += `<button class="collapsible">${category}</button>`;
-      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class=" collapsible nav-list__title">${category}</h4>`;
+      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" class="collapsible nav-list__title">${category}</h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
 

@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import * as path from "path";
 import { EXTENSION_NAME } from "../helpers/consts";
 import { PwCommand } from "../helpers/types";
+import { ActionItemDecorationProvider } from "./action-item-decoration.provider";
 
 export class CommandsTreeViewProvider implements vscode.TreeDataProvider<Dependency> {
   private _onDidChangeTreeData: vscode.EventEmitter<Dependency | undefined | void> = new vscode.EventEmitter<
@@ -13,6 +13,7 @@ export class CommandsTreeViewProvider implements vscode.TreeDataProvider<Depende
   >();
   treeData: Dependency[] = [];
   _commandList: PwCommand[] = [];
+  public actionItemDecorationProvider: ActionItemDecorationProvider;
 
   constructor(private readonly _extensionUri: vscode.Uri, commandList: PwCommand[]) {
     vscode.commands.registerCommand(`${EXTENSION_NAME}.itemClicked`, (r) => this.itemClicked(r));
@@ -20,6 +21,7 @@ export class CommandsTreeViewProvider implements vscode.TreeDataProvider<Depende
     vscode.commands.registerCommand(`${EXTENSION_NAME}.refresh`, () => this.refresh());
     this._commandList = commandList;
     this.populateTreeData(commandList);
+    this.actionItemDecorationProvider = new ActionItemDecorationProvider();
   }
 
   populateTreeData(commandList: PwCommand[]) {
@@ -62,6 +64,7 @@ export class CommandsTreeViewProvider implements vscode.TreeDataProvider<Depende
 
     this.invokeCommand(item.key);
     item.alreadyClicked = true;
+    this.actionItemDecorationProvider.updateActiveItem(item);
 
     setTimeout(() => {
       item.alreadyClicked = false;
@@ -103,7 +106,7 @@ export class Dependency extends vscode.TreeItem {
     public readonly command?: vscode.Command
   ) {
     super(label, collapsibleState);
-
+    this.resourceUri = vscode.Uri.parse(`pwhelpers:action/${key}`, true); // <- this line
     this.tooltip = `${this.label}`;
   }
 
