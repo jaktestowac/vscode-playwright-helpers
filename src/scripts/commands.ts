@@ -59,31 +59,35 @@ export function getCommandList(): PwCommand[] {
     {
       key: "uninstallAllPlaywrightBrowsers",
       func: uninstallAllPlaywrightBrowsers,
-      prettyName: "Uninstall All Playwright Browsers ⌛",
+      prettyName: "Uninstall All Playwright Browsers",
       category: PlaywrightCommandsCategory.browsers,
+      askForExecute: true,
     },
     {
       key: "uninstallPlaywrightBrowsers",
       func: uninstallPlaywrightBrowsers,
-      prettyName: "Uninstall Playwright Browsers ⌛",
+      prettyName: "Uninstall Playwright Browsers",
       category: PlaywrightCommandsCategory.browsers,
+      askForExecute: true,
     },
     {
       key: "installNextPlaywrightTest",
       func: installNextPlaywrightTest,
-      prettyName: "Install/Update to Next @playwright/test ⌛",
+      prettyName: "Install/Update to Next @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
+      askForExecute: true,
     },
     {
       key: "initNewProject",
       func: initNewProject,
-      prettyName: "Init New Project ⌛",
+      prettyName: "Init New Project",
       category: PlaywrightCommandsCategory.project,
+      askForExecute: true,
     },
     {
       key: "initNewProjectQuick",
       func: initNewProjectQuick,
-      prettyName: "Init New Project Quick ⌛",
+      prettyName: "Init New Project Quick",
       category: PlaywrightCommandsCategory.project,
     },
     {
@@ -95,14 +99,58 @@ export function getCommandList(): PwCommand[] {
     {
       key: "runCodegen",
       func: runCodegen,
-      prettyName: "Run Codegen ⌛",
+      prettyName: "Run Codegen",
       category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
     },
     {
       key: "runShowReport",
       func: runShowReport,
-      prettyName: "Run Show Report ⌛",
+      prettyName: "Run Show Report",
       category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runDefaultTests",
+      func: runDefaultTests,
+      prettyName: "Run Tests",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runDefaultTestsMultipleTimes",
+      func: runDefaultTestsMultipleTimes,
+      prettyName: "Run Tests Multiple Times",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runTestsFiles",
+      func: runTestsFiles,
+      prettyName: "Run Test File",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runTestsWithDebug",
+      func: runTestsWithDebug,
+      prettyName: "Run Tests with Debug",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runTestsWithHeadedBrowser",
+      func: runTestsWithHeadedBrowser,
+      prettyName: "Run Tests with Headed Browser",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+    },
+    {
+      key: "runTestsWithTitle",
+      func: runTestsWithTitle,
+      prettyName: "Run Tests with Title",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
     },
     {
       key: "closeAllTerminals",
@@ -145,6 +193,32 @@ export function getCommandList(): PwCommand[] {
   return commandsList;
 }
 
+function findCommandByKey(key: string): PwCommand | undefined {
+  return getCommandList().find((command) => command.key === key);
+}
+
+function isCommandExecutedWithoutAsking(key: string): boolean {
+  const command = findCommandByKey(key);
+  const askForExecute = command?.askForExecute ?? false;
+  if (askForExecute === true) {
+    // Check if the user has set the instantExecute setting to true
+    const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+    return instantExecute;
+  }
+  return false;
+}
+
+function isCommandExecutedInstantly(key: string): boolean {
+  const command = findCommandByKey(key);
+  const askForExecute = command?.askForExecute ?? false;
+  if (askForExecute === true) {
+    // Check if the user has set the instantExecute setting to true
+    const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+    return instantExecute;
+  }
+  return true;
+}
+
 function sayHello() {
   showInformationMessage("Hello World from jaktestowac.pl Team! 👋");
 }
@@ -160,7 +234,7 @@ function closeAllTerminals() {
 async function openUiMode() {
   executeCommandInTerminal({
     command: "npx playwright test --ui",
-    execute: true,
+    execute: isCommandExecutedInstantly("openUiMode"),
     terminalName: "Open UI Mode",
   });
 }
@@ -168,7 +242,7 @@ async function openUiMode() {
 async function checkPlaywrightVersion() {
   executeCommandInTerminal({
     command: "npx playwright --version",
-    execute: true,
+    execute: isCommandExecutedInstantly("checkPlaywrightVersion"),
     terminalName: "Check Playwright Version",
   });
 }
@@ -176,7 +250,7 @@ async function checkPlaywrightVersion() {
 async function checkPlaywrightTestVersion() {
   executeCommandInTerminal({
     command: "npx @playwright/test --version",
-    execute: true,
+    execute: isCommandExecutedInstantly("checkPlaywrightTestVersion"),
     terminalName: "Check @playwright/test Version",
   });
 }
@@ -190,10 +264,9 @@ async function installLatestPlaywrightTest() {
 }
 
 async function installNextPlaywrightTest() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npm i @playwright/test@next",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("installNextPlaywrightTest"),
     terminalName: "Install Next",
   });
 }
@@ -201,7 +274,7 @@ async function installNextPlaywrightTest() {
 async function checkForPlaywrightTestUpdates() {
   executeCommandInTerminal({
     command: "npm outdated @playwright/test",
-    execute: true,
+    execute: isCommandExecutedInstantly("checkForPlaywrightTestUpdates"),
     terminalName: "Check Updates",
   });
 }
@@ -209,7 +282,7 @@ async function checkForPlaywrightTestUpdates() {
 async function listInstalledPackages() {
   executeCommandInTerminal({
     command: "npm list",
-    execute: true,
+    execute: isCommandExecutedInstantly("listInstalledPackages"),
     terminalName: "List Installed Packages",
   });
 }
@@ -217,7 +290,7 @@ async function listInstalledPackages() {
 async function listInstalledGlobalPackages() {
   executeCommandInTerminal({
     command: "npm list -g --depth=0",
-    execute: true,
+    execute: isCommandExecutedInstantly("listInstalledGlobalPackages"),
     terminalName: "List Installed Global Packages",
   });
 }
@@ -225,25 +298,23 @@ async function listInstalledGlobalPackages() {
 async function listSystemInfo() {
   executeCommandInTerminal({
     command: "npx envinfo",
-    execute: true,
+    execute: isCommandExecutedInstantly("listSystemInfo"),
     terminalName: "List System Info (using envinfo)",
   });
 }
 
 async function uninstallAllPlaywrightBrowsers() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall --all",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("uninstallAllPlaywrightBrowsers"),
     terminalName: "Uninstall All Browsers",
   });
 }
 
 async function uninstallPlaywrightBrowsers() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright uninstall",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("uninstallPlaywrightBrowsers"),
     terminalName: "Uninstall Browsers",
   });
 }
@@ -251,7 +322,7 @@ async function uninstallPlaywrightBrowsers() {
 async function installAllPlaywrightBrowsers() {
   executeCommandInTerminal({
     command: "npx playwright install",
-    execute: true,
+    execute: isCommandExecutedInstantly("installAllPlaywrightBrowsers"),
     terminalName: "Install All Browsers",
   });
 }
@@ -259,7 +330,7 @@ async function installAllPlaywrightBrowsers() {
 async function installChromiumPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install chromium",
-    execute: true,
+    execute: isCommandExecutedInstantly("installChromiumPlaywrightBrowser"),
     terminalName: "Install Chromium",
   });
 }
@@ -267,7 +338,7 @@ async function installChromiumPlaywrightBrowser() {
 async function installWebkitPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install webkit",
-    execute: true,
+    execute: isCommandExecutedInstantly("installWebkitPlaywrightBrowser"),
     terminalName: "Install Webkit",
   });
 }
@@ -275,15 +346,13 @@ async function installWebkitPlaywrightBrowser() {
 async function installFirefoxPlaywrightBrowser() {
   executeCommandInTerminal({
     command: "npx playwright install firefox",
-    execute: true,
+    execute: isCommandExecutedInstantly("installFirefoxPlaywrightBrowser"),
     terminalName: "Install Firefox",
   });
 }
 
 async function initNewProject() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
-
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 
   if (!checkResult.success) {
@@ -293,13 +362,12 @@ async function initNewProject() {
 
   executeCommandInTerminal({
     command: "npm init playwright@latest",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("initNewProject"),
     terminalName: "Init",
   });
 }
 
 async function initNewProjectQuick() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
@@ -311,25 +379,71 @@ async function initNewProjectQuick() {
 
   executeCommandInTerminal({
     command: "npm init playwright@latest --yes -- --quiet --browser=chromium",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("initNewProjectQuick"),
     terminalName: "Quick Init",
   });
 }
 
 async function runCodegen() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright codegen",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("runCodegen"),
     terminalName: "Codegen",
   });
 }
 
 async function runShowReport() {
-  const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
   executeCommandInTerminal({
     command: "npx playwright show-report",
-    execute: instantExecute,
+    execute: isCommandExecutedInstantly("runShowReport"),
     terminalName: "Show Report",
+  });
+}
+
+async function runDefaultTests() {
+  executeCommandInTerminal({
+    command: "npx playwright test",
+    execute: isCommandExecutedInstantly("runDefaultTests"),
+    terminalName: "Run Default Tests",
+  });
+}
+
+async function runDefaultTestsMultipleTimes(times = 3) {
+  executeCommandInTerminal({
+    command: `npx playwright test --repeat-each ${times}`,
+    execute: isCommandExecutedInstantly("runDefaultTestsMultipleTimes"),
+    terminalName: "Run Default Tests",
+  });
+}
+
+async function runTestsWithDebug() {
+  executeCommandInTerminal({
+    command: `npx playwright test --debug`,
+    execute: isCommandExecutedInstantly("runTestsWithDebug"),
+    terminalName: "Run Tests with Debug",
+  });
+}
+
+async function runTestsWithHeadedBrowser() {
+  executeCommandInTerminal({
+    command: `npx playwright test --headed`,
+    execute: isCommandExecutedInstantly("runTestsWithHeadedBrowser"),
+    terminalName: "Run Tests with Headed Browser",
+  });
+}
+
+async function runTestsWithTitle(title = "Login") {
+  executeCommandInTerminal({
+    command: `npx playwright test -g "${title}"`,
+    execute: isCommandExecutedInstantly("runTestsWithTitle"),
+    terminalName: "Run Tests with Title",
+  });
+}
+
+async function runTestsFiles(testFile = "tests/login.spec.ts") {
+  executeCommandInTerminal({
+    command: `npx playwright test ${testFile}`,
+    execute: isCommandExecutedInstantly("runTestsFiles"),
+    terminalName: `Run Tests from: ${testFile}`,
   });
 }

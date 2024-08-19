@@ -1,3 +1,4 @@
+import { svgWaitContinueIcon } from "../helpers/icons";
 import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "../helpers/types";
 
 export function getSettingsList(): PwSettings[] {
@@ -12,7 +13,8 @@ export function getSettingsList(): PwSettings[] {
     {
       key: "instantExecute",
       func: instantExecute,
-      prettyName: "Instantly Execute Commands With ⌛",
+      prettyName: `Instantly Execute Commands marked &nbsp; ${svgWaitContinueIcon}`,
+      prettyNameAriaLabel: `Instantly Execute Commands marked with Play Icon`,
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },

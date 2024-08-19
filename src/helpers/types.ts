@@ -9,12 +9,14 @@ export interface PwCommand {
   func: (...args: any[]) => any;
   prettyName?: string;
   category: string;
+  askForExecute?: boolean;
 }
 
 export interface PwSettings {
   key: string;
   func: (...args: any[]) => any;
   prettyName?: string;
+  prettyNameAriaLabel?: string;
   category: string;
   type: string;
 }
