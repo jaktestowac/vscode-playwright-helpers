@@ -219,11 +219,11 @@ a.nav-list__link {
 }
 
 .collapsible:before {
-  content: "> ";
+  content: "+ ";
 }
 
 .active.collapsible:before {
-  content: "v ";
+  content: "- ";
 }
 
 .active:hover {
