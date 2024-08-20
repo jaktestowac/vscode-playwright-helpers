@@ -48,6 +48,8 @@ The Side View provides a convenient way to access and execute commands without h
 | `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
 | `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
+| `playwright-helpers.listInstalledPackages`            | List Installed Packages                                   |
+| `playwright-helpers.listInstalledGlobalPackages`      | List Installed Global Packages                            |
 | `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
 | `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
 | `playwright-helpers.openUiMode`                       | Open Playwright UI Mode                                   |
@@ -63,6 +65,8 @@ The Side View provides a convenient way to access and execute commands without h
 | `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
 | `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
 | `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
+| `playwright-helpers.listSystemInfo`                   | List System Info (using envinfo)                          |
+| `playwright-helpers.toggleHideShowCommands`           | Toggle Hide/Show Commands                                 |
 
 # Contributing
 

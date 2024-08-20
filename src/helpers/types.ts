@@ -8,6 +8,7 @@ export interface PwCommand {
   key: string;
   func: (...args: any[]) => any;
   prettyName?: string;
+  terminalName?: string;
   category: string;
   askForExecute?: boolean;
 }
