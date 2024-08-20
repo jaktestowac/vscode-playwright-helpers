@@ -195,7 +195,7 @@ a.nav-list__link {
   padding: 6px 8px;
   position: absolute;
   z-index: 1000;
-  top: 42px;
+  top: -3.5em;
   left: 10%;
   margin-left: -27px;
   visibility: hidden;
@@ -241,4 +241,21 @@ a.nav-list__link {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.1s ease-out;
+}
+
+.composer-input {
+  width: auto !important;
+  display: inline-block !important;
+  border: none;
+  font-family: var(--vscode-font-family);
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  color: var(--vscode-input-foreground);
+  outline-color: var(--vscode-input-border);
+  background-color: var(--vscode-input-background);
+  height: 1em;
+}
+
+.composer-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

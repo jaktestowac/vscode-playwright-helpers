@@ -28,6 +28,15 @@ export interface PwScripts {
   prettyName?: string;
 }
 
+export interface PwCommandComposer {
+  key: string;
+  option: string;
+  category: string;
+  valueType?: "string" | "number";
+  defaultValue?: string | number;
+  prettyName?: string;
+}
+
 export interface PwPlaywrightProjects {
   key: string;
   testMatch: string;
@@ -51,6 +60,10 @@ export interface PwScriptsMap {
   [key: string]: PwScripts[];
 }
 
+export interface PwCommandComposerMap {
+  [key: string]: PwCommandComposer[];
+}
+
 export interface PwCheckResult {
   success: boolean;
   message: string;
@@ -71,4 +84,8 @@ export enum PlaywrightSettingsCategory {
 
 export enum PlaywrightSettingsType {
   checkbox = "checkbox",
+}
+
+export enum CommandComposerCategory {
+  general = "General",
 }

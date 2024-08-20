@@ -16,6 +16,15 @@ export function getNonce() {
   return text;
 }
 
+export function getRandomString(length = 16) {
+  let text = "";
+  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
 const execCommandInProjectDir = async (cmd: string) => {
   const currentDir = getWorkspaceFolder() ?? [];
   const directory = currentDir[0];

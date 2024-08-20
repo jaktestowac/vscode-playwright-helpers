@@ -56,6 +56,11 @@
           "type": "webview",
           "id": "playwright-helpers.settings",
           "name": "Settings"
+        },
+        {
+          "type": "webview",
+          "id": "playwright-helpers.command-composer",
+          "name": "Command Composer (Experimental)"
         }
       ]
     },

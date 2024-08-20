@@ -1,13 +1,15 @@
 import * as vscode from "vscode";
 import { CommandsViewProvider } from "./providers/commands-view.provider";
 import { SettingsViewProvider } from "./providers/settings-view.provider";
-import { getCommandList } from "./scripts/commands";
+import { getCommandList, runTestWithParameters } from "./scripts/commands";
 import { getSettingsList } from "./scripts/settings";
 import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
 import { EXTENSION_NAME } from "./helpers/consts";
 import { getPlaywrightScriptsFromPackageJson } from "./helpers/helpers";
 import { showInformationMessage } from "./helpers/window-messages";
+import { CommandComposerViewProvider } from "./providers/command-composer-view.provider";
+import { getCommandComposerData } from "./scripts/command-composer";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -25,6 +27,8 @@ export function activate(context: vscode.ExtensionContext) {
     registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
   }
 
+  const commandComposerData = getCommandComposerData();
+
   // Register the Sidebar Panel - Commands
   const commandsViewProvider = new CommandsViewProvider(context.extensionUri, commandsList);
   context.subscriptions.push(
@@ -41,6 +45,16 @@ export function activate(context: vscode.ExtensionContext) {
   const scriptsViewProvider = new ScriptsViewProvider(context.extensionUri);
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(ScriptsViewProvider.viewType, scriptsViewProvider)
+  );
+
+  // Register the Sidebar Panel - Scripts
+  const commandComposerViewProvider = new CommandComposerViewProvider(
+    context.extensionUri,
+    commandComposerData,
+    runTestWithParameters
+  );
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(CommandComposerViewProvider.viewType, commandComposerViewProvider)
   );
 
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {

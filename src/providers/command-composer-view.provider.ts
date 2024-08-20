@@ -1,14 +1,18 @@
 import * as vscode from "vscode";
+import { getNonce, getRandomString } from "../helpers/helpers";
+import { PwCommandComposer, PwCommandComposerMap } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
-import { getNonce } from "../helpers/helpers";
-import { PwSettings, PwSettingsMap } from "../helpers/types";
 
-export class SettingsViewProvider implements vscode.WebviewViewProvider {
-  public static readonly viewType = "playwright-helpers.settings";
+export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
+  public static readonly viewType = "playwright-helpers.command-composer";
 
   private _view?: vscode.WebviewView;
 
-  constructor(private readonly _extensionUri: vscode.Uri, private _settingsList: PwSettings[]) {}
+  constructor(
+    private readonly _extensionUri: vscode.Uri,
+    private _commandComposerList: PwCommandComposer[],
+    private defaultCallback: (params: any) => {}
+  ) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -28,27 +32,23 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
-        case "updateSetting": {
-          this.invokeToggle(data.key, data.value);
+        case "prepareCommand": {
+          this.defaultCallback(data.params);
           break;
         }
       }
     });
   }
 
-  private invokeToggle(key: string, value: boolean) {
-    MyExtensionContext.instance.setWorkspaceState(key, value);
-  }
-
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "settings.js"));
+    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "command-composer.js"));
     const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
     const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
     let controlsHTMLList = "";
 
-    const tempList: PwSettingsMap = {};
-    for (const setting of this._settingsList) {
+    const tempList: PwCommandComposerMap = {};
+    for (const setting of this._commandComposerList) {
       if (!(setting.category in tempList)) {
         tempList[setting.category] = [];
       }
@@ -57,19 +57,31 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
 
     for (const [category, settings] of Object.entries(tempList)) {
       controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
-      for (const { key, prettyName, type, prettyNameAriaLabel } of settings) {
-        if (type === "checkbox") {
-          const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
-          const ariaLabel = prettyNameAriaLabel ?? prettyName;
-          controlsHTMLList += `
-          <input class="checkbox" type="checkbox" id="${key}" key="${key}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
-            isChecked ? "checked" : ""
-          } />
-          <label for="${key}">${prettyName}</label><br />
-          `;
+      for (const { key, prettyName, valueType, defaultValue } of settings) {
+        const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
+        const ariaLabel = prettyName;
+
+        let additionalControl = "";
+        const parentId = getRandomString();
+
+        if (valueType === "string") {
+          additionalControl = `<input class='composer-input' type="text" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" />`;
+        } else if (valueType === "number") {
+          additionalControl = `<input class='composer-input' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
         }
+
+        controlsHTMLList += `
+          <input class="checkbox" type="checkbox" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
+          isChecked ? "checked" : ""
+        } />
+          <label for="${key}">${prettyName}</label> ${additionalControl}<br />
+          `;
       }
     }
+
+    controlsHTMLList += `
+          <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
+        `;
 
     const nonce = getNonce();
 

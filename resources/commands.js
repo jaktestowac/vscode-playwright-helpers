@@ -29,7 +29,6 @@
 
   const state = vscode.getState();
   const collapsibleState = state?.collapsibleState ? state.collapsibleState : {};
-  console.log("collapsibleState", collapsibleState);
 
   for (let i = 0; i < collapsible.length; i++) {
     const collapsibleId = collapsible[i].getAttribute("id");
@@ -40,7 +39,6 @@
       this.classList.toggle("active");
 
       collapsibleState[collapsibleId] = this.classList.contains("active");
-      console.log("collapsibleState", collapsibleState);
       vscode.setState({ collapsibleState });
 
       updateCollapsibleContent(this);

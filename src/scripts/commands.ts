@@ -89,6 +89,7 @@ export function getCommandList(): PwCommand[] {
       func: initNewProjectQuick,
       prettyName: "Init New Project Quick",
       category: PlaywrightCommandsCategory.project,
+      askForExecute: true,
     },
     {
       key: "openUiMode",
@@ -176,18 +177,60 @@ export function getCommandList(): PwCommand[] {
       prettyName: "List System Info (using envinfo)",
       category: PlaywrightCommandsCategory.mics,
     },
-    // {
-    //   key: "helloWorld",
-    //   func: sayHello,
-    //   prettyName: "Hello World",
-    //   category: PlaywrightCommandsCategory.mics,
-    // },
-    // {
-    //   key: "refreshPlaywrightScripts",
-    //   func: refreshPlaywrightScripts,
-    //   prettyName: "Refresh Playwright Scripts",
-    //   category: PlaywrightCommandsCategory.mics,
-    // },
+    {
+      key: "Run Only Changed Tests",
+      func: runOnlyChangedTests,
+      prettyName: "Run Only Changed Tests",
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Specific Test Project",
+      func: runSpecificTestProject,
+      prettyName: "Run Specific Test Project",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Tests with Workers",
+      func: runTestsWithWorkers,
+      prettyName: "Run Tests with Workers",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Prettier on All Files",
+      func: runPrettierOnAllFiles,
+      prettyName: "Run Prettier on All Files",
+      category: PlaywrightCommandsCategory.mics,
+    },
+    {
+      key: "Run Test with Update Snapshots",
+      func: runTestWithUpdateSnapshots,
+      prettyName: "Run Test with Update Snapshots",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Only Last Failed Tests",
+      func: runOnlyLastFailedTests,
+      prettyName: "Run Only Last Failed Tests",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Tests with Timeout",
+      func: runTestsWithTimeout,
+      prettyName: "Run Tests with Timeout",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
+    {
+      key: "Run Tests with Reporter",
+      func: runTestsWithReporter,
+      prettyName: "Run Tests with Reporter",
+      askForExecute: true,
+      category: PlaywrightCommandsCategory.testing,
+    },
   ];
 
   return commandsList;
@@ -217,10 +260,6 @@ function isCommandExecutedInstantly(key: string): boolean {
     return instantExecute;
   }
   return true;
-}
-
-function sayHello() {
-  showInformationMessage("Hello World from jaktestowac.pl Team! 👋");
 }
 
 function closeAllTerminals() {
@@ -300,6 +339,14 @@ async function listSystemInfo() {
     command: "npx envinfo",
     execute: isCommandExecutedInstantly("listSystemInfo"),
     terminalName: "List System Info (using envinfo)",
+  });
+}
+
+async function runPrettierOnAllFiles() {
+  executeCommandInTerminal({
+    command: "npx prettier --write .",
+    execute: isCommandExecutedInstantly("runPrettier"),
+    terminalName: "Run Prettier on All Files",
   });
 }
 
@@ -410,9 +457,9 @@ async function runDefaultTests() {
 
 async function runDefaultTestsMultipleTimes(times = 3) {
   executeCommandInTerminal({
-    command: `npx playwright test --repeat-each ${times}`,
+    command: `npx playwright test --repeat-each=${times}`,
     execute: isCommandExecutedInstantly("runDefaultTestsMultipleTimes"),
-    terminalName: "Run Default Tests",
+    terminalName: `Run Default Tests ${times} times`,
   });
 }
 
@@ -432,11 +479,67 @@ async function runTestsWithHeadedBrowser() {
   });
 }
 
+async function runOnlyChangedTests() {
+  executeCommandInTerminal({
+    command: `npx playwright test --only-changed`,
+    execute: isCommandExecutedInstantly("runOnlyChangedTests"),
+    terminalName: "Run Only Changed Tests",
+  });
+}
+
+async function runTestWithUpdateSnapshots() {
+  executeCommandInTerminal({
+    command: `npx playwright test --update-snapshots`,
+    execute: isCommandExecutedInstantly("runTestWithUpdateSnapshots"),
+    terminalName: "Run Test with Update Snapshots",
+  });
+}
+
+async function runOnlyLastFailedTests() {
+  executeCommandInTerminal({
+    command: `npx playwright test --last-failed`,
+    execute: isCommandExecutedInstantly("runOnlyLastFailedTests"),
+    terminalName: "Run Only Last Failed Tests",
+  });
+}
+
+async function runSpecificTestProject(project = "chromium") {
+  executeCommandInTerminal({
+    command: `npx playwright test --project=${project}`,
+    execute: isCommandExecutedInstantly("runSpecificTestProject"),
+    terminalName: `Run Tests for Project: ${project}`,
+  });
+}
+
+async function runTestsWithWorkers(workers = 1) {
+  executeCommandInTerminal({
+    command: `npx playwright test --workers=${workers}`,
+    execute: isCommandExecutedInstantly("runTestsWithWorkers"),
+    terminalName: `Run Tests with ${workers} workers`,
+  });
+}
+
+async function runTestsWithTimeout(timeoutInMiliSec = 180000) {
+  executeCommandInTerminal({
+    command: `npx playwright test --timeout=${timeoutInMiliSec}`,
+    execute: isCommandExecutedInstantly("runTestsWithTimeout"),
+    terminalName: `Run Tests with Timeout: ${timeoutInMiliSec} ms`,
+  });
+}
+
+async function runTestsWithReporter(reporter = "dot") {
+  executeCommandInTerminal({
+    command: `npx playwright test --reporter=${reporter}`,
+    execute: isCommandExecutedInstantly("runTestsWithReporter"),
+    terminalName: `Run Tests with Reporter: ${reporter}`,
+  });
+}
+
 async function runTestsWithTitle(title = "Login") {
   executeCommandInTerminal({
     command: `npx playwright test -g "${title}"`,
     execute: isCommandExecutedInstantly("runTestsWithTitle"),
-    terminalName: "Run Tests with Title",
+    terminalName: `Run Tests with Title: ${title}`,
   });
 }
 
@@ -445,5 +548,16 @@ async function runTestsFiles(testFile = "tests/login.spec.ts") {
     command: `npx playwright test ${testFile}`,
     execute: isCommandExecutedInstantly("runTestsFiles"),
     terminalName: `Run Tests from: ${testFile}`,
+  });
+}
+
+export async function runTestWithParameters(params = {}) {
+  const paramsConcat = Object.entries(params)
+    .map(([key, value]) => `${value}`)
+    .join(" ");
+  executeCommandInTerminal({
+    command: `npx playwright test ${paramsConcat}`,
+    execute: false,
+    terminalName: `Run Tests`,
   });
 }
