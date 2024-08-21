@@ -12,9 +12,9 @@
   const checkboxes = document.querySelectorAll(".checkbox");
   for (const checkbox of checkboxes) {
     const attributeKey = checkbox.getAttribute("key");
-    const isChecked = composerState[attributeKey] ? composerState[attributeKey] : false;
+    // const isChecked = composerState[attributeKey] ? composerState[attributeKey] : false;
     // @ts-ignore
-    checkbox.checked = isChecked;
+    const isChecked = checkbox.checked;
 
     const parentKey = checkbox.getAttribute("parent");
     if (parentKey !== undefined) {
@@ -43,12 +43,21 @@
         const attributeKey = checkbox.getAttribute("key");
         const parentKey = checkbox.getAttribute("parent");
         const value = getChildElementValue(parentKey);
+        const skipAsOption = checkbox.getAttribute("skipAsOption");
+        const overwriteBaseCommand = checkbox.getAttribute("overwriteBaseCommand");
         // @ts-ignore
         if (checkbox.checked) {
-          if (value !== "") {
-            params[attributeKey] = `${attributeKey}=${value}`;
-          } else {
-            params[attributeKey] = `${attributeKey}`;
+          // eslint-disable-next-line eqeqeq
+          if (skipAsOption === "false") {
+            if (value !== "") {
+              params[attributeKey] = `${attributeKey}=${value}`;
+            } else {
+              params[attributeKey] = `${attributeKey}`;
+            }
+          }
+          if (overwriteBaseCommand === "true") {
+            params["baseCommand"] = value;
+            params[attributeKey] = "";
           }
         }
       }

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { PwCommandComposer, PwCommandComposerMap } from "../helpers/types";
+import { Map, PwCommandComposer, PwCommandComposerMap, PwScripts } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
@@ -40,6 +40,23 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
     });
   }
 
+  public refreshScripts(scripts: PwScripts[]) {
+    scripts.unshift({
+      key: "npx playwright test",
+      script: "npx playwright test",
+      prettyName: "npx playwright test",
+    });
+
+    const element = this._commandComposerList.find((item) => item.key === "package.json script");
+    if (element) {
+      element.defaultValue = scripts;
+    }
+
+    if (this._view !== undefined) {
+      this._view.webview.html = this._getHtmlForWebview(this._view.webview);
+    }
+  }
+
   private _getHtmlForWebview(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "command-composer.js"));
     const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
@@ -57,9 +74,20 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
     for (const [category, settings] of Object.entries(tempList)) {
       controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
-      for (const { key, prettyName, valueType, defaultValue } of settings) {
-        const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
+      for (const {
+        key,
+        prettyName,
+        valueType,
+        defaultValue,
+        skipAsOption,
+        overwriteBaseCommand,
+        notCheckbox,
+      } of settings) {
+        let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const ariaLabel = prettyName;
+
+        const skipAsPwOption = skipAsOption ?? false;
+        const overwriteBasePwCommand = overwriteBaseCommand ?? false;
 
         let additionalControl = "";
         const parentId = getRandomString();
@@ -68,17 +96,40 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
           additionalControl = `<input class='composer-input' type="text" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" />`;
         } else if (valueType === "number") {
           additionalControl = `<input class='composer-input' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
+        } else if (valueType === "select") {
+          const values = defaultValue ? (defaultValue as PwScripts[]) : [];
+          additionalControl = `<select class='composer-select' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
+
+          for (const value of values) {
+            additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
+              values.indexOf(value) === 0 ? "selected" : ""
+            }>${value.key}</option>`;
+          }
+          additionalControl += `</select>`;
+        }
+
+        let checkboxClass = "checkbox";
+        let checkboxLabelClass = "checkbox";
+        if (notCheckbox) {
+          checkboxClass = "checkbox not-checkbox";
+          checkboxLabelClass = " not-checkbox-label";
+          isChecked = true;
         }
 
         controlsHTMLList += `
-          <input class="checkbox" type="checkbox" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
+          <input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
           isChecked ? "checked" : ""
         } />
-          <label for="${key}">${prettyName}</label> ${additionalControl}<br />
+          <label for="${key}" class="${checkboxLabelClass}">${prettyName}</label> ${additionalControl}<br />
           `;
       }
     }
 
+    // add 2 buttons:
+    controlsHTMLList =
+      `
+          <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
+        ` + controlsHTMLList;
     controlsHTMLList += `
           <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
         `;

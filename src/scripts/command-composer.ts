@@ -3,6 +3,17 @@ import { CommandComposerCategory, PwCommandComposer } from "../helpers/types";
 export function getCommandComposerData() {
   const commandsList: PwCommandComposer[] = [
     {
+      key: "package.json script",
+      option: "package.json script",
+      valueType: "select",
+      defaultValue: [],
+      prettyName: "Script",
+      category: CommandComposerCategory.general,
+      skipAsOption: true,
+      overwriteBaseCommand: true,
+      notCheckbox: true,
+    },
+    {
       key: "--config",
       option: "--config",
       valueType: "string",
@@ -55,7 +66,7 @@ export function getCommandComposerData() {
       option: "--grep",
       valueType: "string",
       defaultValue: '"Login"',
-      prettyName: "Grep",
+      prettyName: "grep",
       category: CommandComposerCategory.general,
     },
     {
@@ -86,7 +97,7 @@ export function getCommandComposerData() {
       key: "--timeout",
       option: "--timeout",
       valueType: "number",
-      defaultValue: 180000,
+      defaultValue: 60000,
       prettyName: "Timeout",
       category: CommandComposerCategory.general,
     },

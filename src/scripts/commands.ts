@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
+import { Map, PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions";
 import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
@@ -551,12 +551,20 @@ async function runTestsFiles(testFile = "tests/login.spec.ts") {
   });
 }
 
-export async function runTestWithParameters(params = {}) {
+export async function runTestWithParameters(params: Map = {}) {
+  let baseCommand = "npx playwright test";
+
+  if (params["baseCommand"]) {
+    baseCommand = params["baseCommand"] as string;
+    params["baseCommand"] = "";
+  }
+
   const paramsConcat = Object.entries(params)
     .map(([key, value]) => `${value}`)
     .join(" ");
+
   executeCommandInTerminal({
-    command: `npx playwright test ${paramsConcat}`,
+    command: `${baseCommand} ${paramsConcat}`,
     execute: false,
     terminalName: `Run Tests`,
   });

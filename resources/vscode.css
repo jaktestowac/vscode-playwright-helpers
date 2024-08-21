@@ -259,3 +259,23 @@ a.nav-list__link {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.composer-select {
+  width: auto !important;
+  display: inline-block !important;
+  border: none;
+  font-family: var(--vscode-font-family);
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  color: var(--vscode-input-foreground);
+  outline-color: var(--vscode-input-border);
+  background-color: var(--vscode-input-background);
+}
+
+.not-checkbox {
+  display: none;
+  pointer-events: none;
+}
+
+.not-checkbox-label {
+  pointer-events: none;
+}

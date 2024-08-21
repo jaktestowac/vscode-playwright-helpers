@@ -32,9 +32,12 @@ export interface PwCommandComposer {
   key: string;
   option: string;
   category: string;
-  valueType?: "string" | "number";
-  defaultValue?: string | number;
+  valueType?: "string" | "number" | "select";
+  defaultValue?: string | number | string[] | PwScripts[];
   prettyName?: string;
+  skipAsOption?: boolean;
+  overwriteBaseCommand?: boolean;
+  notCheckbox?: boolean;
 }
 
 export interface PwPlaywrightProjects {

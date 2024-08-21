@@ -60,6 +60,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {
     getPlaywrightScriptsFromPackageJson().then((scripts) => {
       scriptsViewProvider.refresh(scripts);
+      commandComposerViewProvider.refreshScripts(scripts);
       showInformationMessage("Playwright scripts from package.json refreshed");
     });
   });
@@ -68,6 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
     scriptsViewProvider.refresh(scripts);
+    commandComposerViewProvider.refreshScripts(scripts);
   });
 
   // // Register the CommandsTreeViewProvider
