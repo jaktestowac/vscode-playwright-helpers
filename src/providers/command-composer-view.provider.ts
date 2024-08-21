@@ -82,6 +82,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         skipAsOption,
         overwriteBaseCommand,
         notCheckbox,
+        optionType,
       } of settings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const ariaLabel = prettyName;
@@ -97,8 +98,6 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         } else if (valueType === "number") {
           additionalControl = `<input class='composer-input' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
         } else if (valueType === "select") {
-          const values = defaultValue ? (defaultValue as PwScripts[]) : [];
-
           let selectClass = "composer-select";
           if (prettyName === "") {
             selectClass += " composer-select-100";
@@ -106,11 +105,22 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
           additionalControl = `<select class='${selectClass}' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
 
-          for (const value of values) {
-            additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
-              values.indexOf(value) === 0 ? "selected" : ""
-            }>${value.key}</option>`;
+          if (optionType === "string") {
+            const values = defaultValue ? (defaultValue as string[]) : [];
+            for (const value of values) {
+              additionalControl += `<option value="${value}" key="${value}" ${
+                values.indexOf(value) === 0 ? "selected" : ""
+              }>${value}</option>`;
+            }
+          } else if (optionType === "PwScripts") {
+            const values = defaultValue ? (defaultValue as PwScripts[]) : [];
+            for (const value of values) {
+              additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
+                values.indexOf(value) === 0 ? "selected" : ""
+              }>${value.key}</option>`;
+            }
           }
+
           additionalControl += `</select>`;
         }
 

@@ -33,6 +33,7 @@ export interface PwCommandComposer {
   option: string;
   category: string;
   valueType?: "string" | "number" | "select";
+  optionType?: "string" | "PwScripts";
   defaultValue?: string | number | string[] | PwScripts[];
   prettyName?: string;
   skipAsOption?: boolean;

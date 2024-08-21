@@ -232,6 +232,12 @@ export function getCommandList(): PwCommand[] {
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
+    {
+      key: "openVSCodeSettingsFile",
+      func: openVSCodeSettingsFile,
+      prettyName: "Open VS Code Settings File",
+      category: PlaywrightCommandsCategory.mics,
+    },
   ];
 
   return commandsList;
@@ -552,6 +558,14 @@ async function runTestsFiles(testFile = "tests/login.spec.ts") {
     command: `npx playwright test ${testFile}`,
     execute: isCommandExecutedInstantly("runTestsFiles"),
     terminalName: `Run Tests from: ${testFile}`,
+  });
+}
+
+async function openVSCodeSettingsFile() {
+  executeCommandInTerminal({
+    command: `%APPDATA%\\Code\\User\\settings.json`,
+    execute: isCommandExecutedInstantly("openVSCodeSettingsFile"),
+    terminalName: "Open VS Code Settings File",
   });
 }
 
