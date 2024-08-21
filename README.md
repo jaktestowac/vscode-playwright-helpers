@@ -40,7 +40,15 @@ Under the **Playwright Helpers** section you will see a list of available comman
 
 The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
 
-# Commands List
+# Features
+
+This extension provides the following features:
+
+- Commands for Playwright
+- Running scripts from package.json
+- Command Composer - allows you to compose your own commands
+
+## Commands List
 
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
@@ -67,6 +75,14 @@ The Side View provides a convenient way to access and execute commands without h
 | `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
 | `playwright-helpers.listSystemInfo`                   | List System Info (using envinfo)                          |
 | `playwright-helpers.toggleHideShowCommands`           | Toggle Hide/Show Commands                                 |
+
+## Command Composer
+
+The Command Composer allows you to compose your own commands by selecting the desired options and parameters.
+
+From graphical user interface you can select options described in documentation and then execute the command:
+
+https://playwright.dev/docs/test-cli#reference
 
 # Contributing
 

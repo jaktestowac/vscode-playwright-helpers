@@ -15,7 +15,7 @@ const readmePath = "./README.md";
 const readmeContent = fs.readFileSync(readmePath, "utf8");
 
 // Replace the section ## Playwright with the generated table
-const updatedReadmeContent = readmeContent.replace(/# Commands List[\s\S]*?#/m, `# Commands List\n\n${table}\n#`);
+const updatedReadmeContent = readmeContent.replace(/## Commands List[\s\S]*?#/m, `## Commands List\n\n${table}\n#`);
 
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, updatedReadmeContent, "utf8");
