@@ -98,7 +98,13 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
           additionalControl = `<input class='composer-input' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
         } else if (valueType === "select") {
           const values = defaultValue ? (defaultValue as PwScripts[]) : [];
-          additionalControl = `<select class='composer-select' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
+
+          let selectClass = "composer-select";
+          if (prettyName === "") {
+            selectClass += " composer-select-100";
+          }
+
+          additionalControl = `<select class='${selectClass}' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
 
           for (const value of values) {
             additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${

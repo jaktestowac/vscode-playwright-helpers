@@ -7,7 +7,7 @@ export function getCommandComposerData() {
       option: "package.json script",
       valueType: "select",
       defaultValue: [],
-      prettyName: "Script",
+      prettyName: "",
       category: CommandComposerCategory.general,
       skipAsOption: true,
       overwriteBaseCommand: true,

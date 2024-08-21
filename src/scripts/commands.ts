@@ -96,6 +96,7 @@ export function getCommandList(): PwCommand[] {
       func: openUiMode,
       prettyName: "Open UI Mode",
       category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
     },
     {
       key: "runCodegen",
@@ -178,54 +179,54 @@ export function getCommandList(): PwCommand[] {
       category: PlaywrightCommandsCategory.mics,
     },
     {
-      key: "Run Only Changed Tests",
+      key: "runOnlyChangedTests",
       func: runOnlyChangedTests,
       prettyName: "Run Only Changed Tests",
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Specific Test Project",
+      key: "runSpecificTestProject",
       func: runSpecificTestProject,
       prettyName: "Run Specific Test Project",
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Tests with Workers",
+      key: "runTestsWithWorkers",
       func: runTestsWithWorkers,
       prettyName: "Run Tests with Workers",
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Prettier on All Files",
+      key: "runPrettierOnAllFiles",
       func: runPrettierOnAllFiles,
       prettyName: "Run Prettier on All Files",
       category: PlaywrightCommandsCategory.mics,
     },
     {
-      key: "Run Test with Update Snapshots",
+      key: "runTestWithUpdateSnapshots",
       func: runTestWithUpdateSnapshots,
       prettyName: "Run Test with Update Snapshots",
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Only Last Failed Tests",
+      key: "runOnlyLastFailedTests",
       func: runOnlyLastFailedTests,
       prettyName: "Run Only Last Failed Tests",
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Tests with Timeout",
+      key: "runTestsWithTimeout",
       func: runTestsWithTimeout,
       prettyName: "Run Tests with Timeout",
       askForExecute: true,
       category: PlaywrightCommandsCategory.testing,
     },
     {
-      key: "Run Tests with Reporter",
+      key: "runTestsWithReporter",
       func: runTestsWithReporter,
       prettyName: "Run Tests with Reporter",
       askForExecute: true,
@@ -254,9 +255,12 @@ function isCommandExecutedWithoutAsking(key: string): boolean {
 function isCommandExecutedInstantly(key: string): boolean {
   const command = findCommandByKey(key);
   const askForExecute = command?.askForExecute ?? false;
+  console.log("isCommandExecutedInstantly", key, command, askForExecute);
   if (askForExecute === true) {
     // Check if the user has set the instantExecute setting to true
     const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+    console.log("instantExecute", instantExecute, key);
+
     return instantExecute;
   }
   return true;
@@ -297,7 +301,7 @@ async function checkPlaywrightTestVersion() {
 async function installLatestPlaywrightTest() {
   executeCommandInTerminal({
     command: "npm i @playwright/test@latest",
-    execute: true,
+    execute: isCommandExecutedInstantly("installLatestPlaywrightTest"),
     terminalName: "Install Latest",
   });
 }
