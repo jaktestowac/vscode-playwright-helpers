@@ -4,7 +4,7 @@
   "description": "Playwright Helpers for VS Code",
   "author": "jaktestowac.pl",
   "publisher": "jaktestowac-pl",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "icon": "media/playwright-helpers-logo.png",
   "engines": {
     "vscode": "^1.60.0"
