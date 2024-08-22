@@ -133,10 +133,12 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         }
 
         controlsHTMLList += `
-          <input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
+          <div class="composer-control" aria-label="${
+            prettyName !== undefined && prettyName.length > 0 ? prettyName : key
+          }"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
           isChecked ? "checked" : ""
         } />
-          <label for="${key}" class="${checkboxLabelClass}">${prettyName}</label> ${additionalControl}<br />
+          <label for="${key}" class="${checkboxLabelClass}">${prettyName}</label> ${additionalControl}</div>
           `;
       }
     }
@@ -149,6 +151,10 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
     controlsHTMLList += `
           <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
         `;
+
+    const searchInputHtml = `
+        <input type="text" id="searchInput" class="search" placeholder="Search options..." />
+      `;
 
     const nonce = getNonce();
 
@@ -165,7 +171,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-  
+                ${searchInputHtml}
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

@@ -82,6 +82,10 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       buttonHTMLList += "</div>";
     }
 
+    const searchInputHtml = `
+      <input type="text" id="searchInput" class="search" placeholder="Search commands..." />
+    `;
+
     const nonce = getNonce();
 
     return `<!DOCTYPE html>
@@ -97,7 +101,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-
+                ${searchInputHtml}
                  ${buttonHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

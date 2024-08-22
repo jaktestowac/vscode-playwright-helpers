@@ -288,3 +288,13 @@ a.nav-list__link {
   pointer-events: none;
   display: none;
 }
+
+.search-result {
+  display: block;
+}
+
+.not-search-result {
+  display: none;
+  padding: 0px;
+  margin: 0px;
+}

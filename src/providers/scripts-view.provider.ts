@@ -93,6 +93,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     }
 
     const nonce = getNonce();
+    const nonce2 = getNonce();
 
     return `<!DOCTYPE html>
               <html lang="en">
