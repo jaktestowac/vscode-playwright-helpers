@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { PwCommand, PwCommandMap } from "../helpers/types";
 import { getNonce } from "../helpers/helpers";
-import { svgPlayIcon, svgWaitContinueIcon } from "../helpers/icons";
+import { svgPlayIcon, svgStarEmptyIcon, svgWaitContinueIcon } from "../helpers/icons";
 
 export class CommandsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.commands";
@@ -57,26 +57,31 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       tempList[command.category].push(command);
     }
 
+    buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="favorites" id="id-favorites" class="collapsible nav-list__title">Favorites</h4>`;
+    buttonHTMLList += `<div class="collapsible-content" aria-label="favorites-content" id="id-favorites-content"></div>`;
+
     for (const [category, commands] of Object.entries(tempList)) {
       // buttonHTMLList += `<button class="collapsible">${category}</button>`;
-      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" class="collapsible nav-list__title">${category}</h4>`;
+      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
 
       // buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
-      buttonHTMLList += '<nav class="nav-list">';
+      buttonHTMLList += `<nav class="nav-list" category="${category}">`;
+      let idx = 0;
       for (const { key, prettyName, askForExecute } of commands) {
         const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
         buttonHTMLList += `
-          <div class="nav-list__item">
-            <a class="nav-list__link" aria-label="${prettyName}"  key="${key}" tooltip-text="${prettyName}">
+          <div class="nav-list__item" category="${category}" index="${idx}" key="${key}">
+            <a class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" tooltip-text="${prettyName}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${prettyName}" >
                 ${icon}<span>${prettyName}</span>
               </tooltip>
-            </a>
+            </a><span class="star-icon" key="${key}">${svgStarEmptyIcon}</span>
           </div>`;
+        idx++;
       }
       buttonHTMLList += "</div>";
       buttonHTMLList += "</div>";

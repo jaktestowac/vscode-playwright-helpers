@@ -70,7 +70,6 @@
   }
 
   const searchInput = document.getElementById("searchInput");
-  console.log("searchInput", searchInput);
   searchInput?.addEventListener("keyup", () => {
     // @ts-ignore
     const searchText = searchInput.value;
@@ -91,6 +90,22 @@
     for (const item of notSearchResults) {
       item.classList.remove("search-result");
       item.classList.add("not-search-result");
+    }
+
+    const allSearchResults = document.getElementsByClassName("search-result");
+    if (allSearchResults.length === 0) {
+      let noResultsHeader = document.getElementById("noResultsHeader");
+      if (!noResultsHeader) {
+        noResultsHeader = document.createElement("h4");
+        noResultsHeader.textContent = "No search results found.";
+        noResultsHeader.setAttribute("id", "noResultsHeader");
+        searchInput.parentElement?.appendChild(noResultsHeader);
+      }
+    } else {
+      const noResultsHeader = document.getElementById("noResultsHeader");
+      if (noResultsHeader) {
+        noResultsHeader.remove();
+      }
     }
   });
 

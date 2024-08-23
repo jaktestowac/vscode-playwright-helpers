@@ -261,12 +261,9 @@ function isCommandExecutedWithoutAsking(key: string): boolean {
 function isCommandExecutedInstantly(key: string): boolean {
   const command = findCommandByKey(key);
   const askForExecute = command?.askForExecute ?? false;
-  console.log("isCommandExecutedInstantly", key, command, askForExecute);
   if (askForExecute === true) {
     // Check if the user has set the instantExecute setting to true
     const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
-    console.log("instantExecute", instantExecute, key);
-
     return instantExecute;
   }
   return true;
