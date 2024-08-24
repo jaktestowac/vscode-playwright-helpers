@@ -194,13 +194,14 @@
         "title": "List System Info (using envinfo)"
       },
       {
-        "command": "playwright-helpers.toggleHideShowCommands",
+        "command": "playwright-helpers.runPrettierOnAllFiles",
         "category": "PW Helpers",
-        "title": "Toggle Hide/Show Commands",
-        "icon": {
-          "light": "resources/dark/expand-all.svg",
-          "dark": "resources/light/expand-all.svg"
-        }
+        "title": "Run Prettier on All Files"
+      },
+      {
+        "command": "playwright-helpers.showTrace",
+        "category": "PW Helpers",
+        "title": "Show Trace"
       }
     ]
   },

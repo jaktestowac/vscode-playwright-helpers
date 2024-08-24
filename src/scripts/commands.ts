@@ -238,6 +238,12 @@ export function getCommandList(): PwCommand[] {
       prettyName: "Open VS Code Settings File",
       category: PlaywrightCommandsCategory.mics,
     },
+    {
+      key: "showTrace",
+      func: showTrace,
+      prettyName: "Show Trace",
+      category: PlaywrightCommandsCategory.testing,
+    },
   ];
 
   return commandsList;
@@ -402,6 +408,14 @@ async function installFirefoxPlaywrightBrowser() {
     command: "npx playwright install firefox",
     execute: isCommandExecutedInstantly("installFirefoxPlaywrightBrowser"),
     terminalName: "Install Firefox",
+  });
+}
+
+async function showTrace() {
+  executeCommandInTerminal({
+    command: "npx playwright show-trace",
+    execute: isCommandExecutedInstantly("showTrace"),
+    terminalName: "Show Trace",
   });
 }
 
