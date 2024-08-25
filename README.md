@@ -104,6 +104,14 @@ From graphical user interface you can select options described in documentation 
 Currently available commands to compose:
 https://playwright.dev/docs/test-cli#reference
 
+## Trace Viewer
+
+The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run trace-viewer to display selected trace.
+
+## Playwright Scripts Runner
+
+The extension provides an easy way to run Playwright scripts from package.json. You can run scripts from the package.json file by selecting the script from the list.
+
 # Contributing
 
 This project is open source and we welcome contributions from the community. If you would like to contribute, please follow these steps:
