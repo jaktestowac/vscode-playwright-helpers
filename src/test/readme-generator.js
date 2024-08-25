@@ -19,3 +19,5 @@ const updatedReadmeContent = readmeContent.replace(/## Commands List[\s\S]*?#/m,
 
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, updatedReadmeContent, "utf8");
+
+console.log("README.md file updated successfully!");

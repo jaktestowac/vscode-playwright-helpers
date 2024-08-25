@@ -202,6 +202,15 @@
         "command": "playwright-helpers.showTrace",
         "category": "PW Helpers",
         "title": "Show Trace"
+      },
+      {
+        "command": "playwright-helpers.toggleHideShowCommands",
+        "category": "PW Helpers",
+        "title": "Toggle Hide/Show Commands",
+        "icon": {
+          "light": "resources/dark/expand-all.svg",
+          "dark": "resources/light/expand-all.svg"
+        }
       }
     ]
   },
@@ -211,10 +220,12 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test",
     "publish:patch": "vsce publish patch",
     "publish:minor": "vsce publish minor",
-    "publish:major": "vsce publish major"
+    "publish:major": "vsce publish major",
+    "patch": "npm run test && npm run update && npm run publish:patch",
+    "update": "node src/test/readme-generator.js",
+    "test": ""
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",

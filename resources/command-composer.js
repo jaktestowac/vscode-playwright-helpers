@@ -91,15 +91,15 @@
       item.classList.remove("search-result");
       item.classList.add("not-search-result");
     }
-
     const allSearchResults = document.getElementsByClassName("search-result");
     if (allSearchResults.length === 0) {
+      let messagesContainer = document.getElementById("messages");
       let noResultsHeader = document.getElementById("noResultsHeader");
       if (!noResultsHeader) {
         noResultsHeader = document.createElement("h4");
         noResultsHeader.textContent = "No search results found.";
         noResultsHeader.setAttribute("id", "noResultsHeader");
-        searchInput.parentElement?.appendChild(noResultsHeader);
+        messagesContainer?.appendChild(noResultsHeader);
       }
     } else {
       const noResultsHeader = document.getElementById("noResultsHeader");
@@ -107,6 +107,7 @@
         noResultsHeader.remove();
       }
     }
+    hideEmptySections();
   });
 
   function getChildElementValue(parentKey) {
@@ -129,6 +130,19 @@
         childElement.classList.add("hidden");
         // @ts-ignore
         childElement.disabled = true;
+      }
+    }
+  }
+
+  function hideEmptySections() {
+    const titleElement = document.getElementsByClassName("nav-list__title");
+    for (let i = 0; i < titleElement.length; i++) {
+      const nextElement = titleElement[i].nextElementSibling;
+      const visibleSearchResult = nextElement?.getElementsByClassName("search-result");
+      if (visibleSearchResult?.length === 0) {
+        titleElement[i].classList.add("not-search-result");
+      } else {
+        titleElement[i].classList.remove("not-search-result");
       }
     }
   }

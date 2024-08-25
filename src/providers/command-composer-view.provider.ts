@@ -74,6 +74,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
     for (const [category, settings] of Object.entries(tempList)) {
       controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
+      controlsHTMLList += `<div class="nav-list" category="${category}">`;
       for (const {
         key,
         prettyName,
@@ -141,6 +142,9 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
           <label for="${key}" class="${checkboxLabelClass}">${prettyName}</label> ${additionalControl}</div>
           `;
       }
+
+      controlsHTMLList += `</nav>`;
+      controlsHTMLList += `<div id="messages"></div>`;
     }
 
     // add 2 buttons:

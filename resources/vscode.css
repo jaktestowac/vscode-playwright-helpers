@@ -302,3 +302,8 @@ a.nav-list__link {
 .star-icon {
   margin-bottom: 0px;
 }
+
+.composer-control {
+  gap: 0.2rem;
+  padding: 0.2rem 0rem;
+}

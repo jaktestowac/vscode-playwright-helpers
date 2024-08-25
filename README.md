@@ -74,6 +74,8 @@ This extension provides the following features:
 | `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
 | `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
 | `playwright-helpers.listSystemInfo`                   | List System Info (using envinfo)                          |
+| `playwright-helpers.runPrettierOnAllFiles`            | Run Prettier on All Files                                 |
+| `playwright-helpers.showTrace`                        | Show Trace                                                |
 | `playwright-helpers.toggleHideShowCommands`           | Toggle Hide/Show Commands                                 |
 
 ## Command Composer
@@ -81,6 +83,10 @@ This extension provides the following features:
 The Command Composer allows you to compose your own commands by selecting the desired options and parameters.
 
 From graphical user interface you can select options described in documentation and then execute the command:
+
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-3.gif?raw=true" alt="Preview">
+</p>
 
 https://playwright.dev/docs/test-cli#reference
 
