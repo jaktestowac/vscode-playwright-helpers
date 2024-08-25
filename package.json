@@ -223,7 +223,7 @@
     "publish:patch": "vsce publish patch",
     "publish:minor": "vsce publish minor",
     "publish:major": "vsce publish major",
-    "patch": "npm run test && npm run update && npm run publish:patch",
+    "publish": "npm run test && npm run update && npm run publish:patch",
     "update": "node src/test/readme-generator.js",
     "test": ""
   },
