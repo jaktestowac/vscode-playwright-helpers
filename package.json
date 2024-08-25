@@ -54,13 +54,18 @@
         },
         {
           "type": "webview",
-          "id": "playwright-helpers.settings",
-          "name": "Settings"
+          "id": "playwright-helpers.traces",
+          "name": "Show Trace"
         },
         {
           "type": "webview",
           "id": "playwright-helpers.command-composer",
-          "name": "Command Composer (Experimental)"
+          "name": "Command Composer"
+        },
+        {
+          "type": "webview",
+          "id": "playwright-helpers.settings",
+          "name": "Settings"
         }
       ]
     },
@@ -69,6 +74,11 @@
         {
           "command": "playwright-helpers.refreshPlaywrightScripts",
           "when": "view == playwright-helpers.scripts",
+          "group": "navigation"
+        },
+        {
+          "command": "playwright-helpers.refreshTraces",
+          "when": "view == playwright-helpers.traces",
           "group": "navigation"
         },
         {
@@ -83,6 +93,15 @@
         "command": "playwright-helpers.refreshPlaywrightScripts",
         "category": "PW Helpers",
         "title": "Refresh Playwright Scripts View",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "playwright-helpers.refreshTraces",
+        "category": "PW Helpers",
+        "title": "Refresh Playwright Traces",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"

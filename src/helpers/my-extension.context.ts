@@ -17,7 +17,7 @@ export default class MyExtensionContext {
     return this.context.workspaceState;
   }
 
-  setWorkspaceState(key: string, value: any): Thenable<void> {
+  setWorkspaceValue(key: string, value: any): Thenable<void> {
     return this.context.workspaceState.update(key, value);
   }
 

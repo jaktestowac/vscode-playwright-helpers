@@ -28,6 +28,12 @@ export interface PwScripts {
   prettyName?: string;
 }
 
+export interface PwTraces {
+  key: string;
+  path: string;
+  prettyName?: string;
+}
+
 export interface PwCommandComposer {
   key: string;
   option: string;

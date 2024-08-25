@@ -119,6 +119,15 @@ a.nav-list__link {
   color: var(--color-foreground);
 }
 
+.nav-list__item_decorator {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  padding: 0.2rem 0rem;
+  cursor: pointer;
+}
+
 .nav-list__item {
   align-items: center;
   display: flex;
@@ -126,6 +135,7 @@ a.nav-list__link {
   gap: 0.2rem;
   padding: 0.2rem 0rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .nav-list__item:hover {
@@ -185,7 +195,7 @@ a.nav-list__link {
 
 .has-tooltip:before {
   content: attr(tooltip-text);
-  min-width: 54px;
+  min-width: 100px;
   background-color: var(--vscode-editor-background);
   border: 1px solid !important;
   border-color: var(--vscode-editorWidget-border) !important;
@@ -195,9 +205,9 @@ a.nav-list__link {
   padding: 6px 8px;
   position: absolute;
   z-index: 1000;
-  top: -3.5em;
-  left: 10%;
-  margin-left: -27px;
+  top: -3.3em;
+  left: 3%;
+  margin-left: -20px;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s;
@@ -306,4 +316,9 @@ a.nav-list__link {
 .composer-control {
   gap: 0.2rem;
   padding: 0.2rem 0rem;
+}
+
+.clear-icon {
+  cursor: pointer;
+  padding-left: 10px;
 }

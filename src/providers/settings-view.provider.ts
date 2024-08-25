@@ -37,7 +37,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private invokeToggle(key: string, value: boolean) {
-    MyExtensionContext.instance.setWorkspaceState(key, value);
+    MyExtensionContext.instance.setWorkspaceValue(key, value);
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {

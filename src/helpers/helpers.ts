@@ -5,7 +5,7 @@ import MyExtensionContext from "./my-extension.context";
 import { areWorkspaceFoldersSingle } from "./assertions";
 import { showErrorMessage, showWarningMessage } from "./window-messages";
 import path from "path";
-import { PwScripts } from "./types";
+import { PwScripts, PwTraces } from "./types";
 
 export function getNonce() {
   let text = "";
@@ -48,6 +48,38 @@ const execShell = async (cmd: string, directory: string) =>
 export function isDirectoryEmpty(directory: string): boolean {
   const files = fs.readdirSync(directory);
   return files.length === 0;
+}
+
+export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTraces[]> {
+  testResultsDir = testResultsDir ?? "test-results";
+  let tracesPath = testResultsDir;
+
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
+  if (!checkResult.success) {
+    showWarningMessage(checkResult.message);
+    return [];
+  }
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  tracesPath = path.join(workspacePath, testResultsDir);
+
+  if (!fs.existsSync(tracesPath)) {
+    showWarningMessage(`No traces directory found at: "${tracesPath}"`);
+    return [];
+  }
+
+  const files = fs.readdirSync(tracesPath, { recursive: true });
+  const traces = (files as string[]).filter((file) => file.endsWith("trace.zip"));
+
+  const pwTraces: PwTraces[] = traces.map((tracePath) => {
+    const parentDirname = path.dirname(tracePath);
+    const parentDirnameParts = parentDirname.split(path.sep);
+    const parentDirnameLastPart = parentDirnameParts[parentDirnameParts.length - 1];
+    return { key: tracePath, path: path.join(testResultsDir, tracePath), prettyName: parentDirnameLastPart };
+  });
+  return pwTraces;
 }
 
 export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]> {

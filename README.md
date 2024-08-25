@@ -65,6 +65,7 @@ This extension provides the following features:
 | Command                                               | Description                                               |
 | ----------------------------------------------------- | --------------------------------------------------------- |
 | `playwright-helpers.refreshPlaywrightScripts`         | Refresh Playwright Scripts View                           |
+| `playwright-helpers.refreshTraces`                    | Refresh Playwright Traces                                 |
 | `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
 | `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
 | `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |

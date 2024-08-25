@@ -6,14 +6,15 @@ import { getSettingsList } from "./scripts/settings";
 import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
 import { EXTENSION_NAME } from "./helpers/consts";
-import { getPlaywrightScriptsFromPackageJson } from "./helpers/helpers";
+import { getPlaywrightScriptsFromPackageJson, getPlaywrightTraces } from "./helpers/helpers";
 import { showInformationMessage } from "./helpers/window-messages";
 import { CommandComposerViewProvider } from "./providers/command-composer-view.provider";
 import { getCommandComposerData } from "./scripts/command-composer";
+import { TraceViewProvider } from "./providers/trace-view.provider";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
-  MyExtensionContext.instance.setWorkspaceState("workspaceFolders", vscode.workspace.workspaceFolders);
+  MyExtensionContext.instance.setWorkspaceValue("workspaceFolders", vscode.workspace.workspaceFolders);
 
   const commandsList = getCommandList();
 
@@ -48,6 +49,10 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   // Register the Sidebar Panel - Scripts
+  const traceViewProvider = new TraceViewProvider(context.extensionUri);
+  context.subscriptions.push(vscode.window.registerWebviewViewProvider(TraceViewProvider.viewType, traceViewProvider));
+
+  // Register the Sidebar Panel - Scripts
   const commandComposerViewProvider = new CommandComposerViewProvider(
     context.extensionUri,
     commandComposerData,
@@ -65,11 +70,21 @@ export function activate(context: vscode.ExtensionContext) {
     });
   });
 
+  registerCommand(context, `${EXTENSION_NAME}.refreshTraces`, () => {
+    getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
+      traceViewProvider.refresh(traces);
+    });
+  });
+
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
     scriptsViewProvider.refresh(scripts);
     commandComposerViewProvider.refreshScripts(scripts);
+  });
+
+  getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
+    traceViewProvider.refresh(traces);
   });
 
   // // Register the CommandsTreeViewProvider
