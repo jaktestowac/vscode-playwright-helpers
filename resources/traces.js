@@ -42,4 +42,45 @@
       }, 1000);
     });
   }
+
+  const searchInput = document.getElementById("searchInput");
+  searchInput?.addEventListener("keyup", () => {
+    // @ts-ignore
+    const searchText = searchInput.value;
+    const allItems = Array.from(document.querySelectorAll(".nav-list__item.searchable"));
+
+    const searchResults = allItems.filter((item) => {
+      return item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+    });
+
+    for (const result of searchResults) {
+      result.classList.add("search-result");
+      result.classList.remove("not-search-result");
+    }
+
+    const notSearchResults = allItems.filter((item) => {
+      return !item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+    });
+    for (const item of notSearchResults) {
+      item.classList.remove("search-result");
+      item.classList.add("not-search-result");
+    }
+
+    const allSearchResults = document.getElementsByClassName("search-result");
+    if (allSearchResults.length === 0) {
+      let messagesContainer = document.getElementById("messages");
+      let noResultsHeader = document.getElementById("noResultsHeader");
+      if (!noResultsHeader) {
+        noResultsHeader = document.createElement("h4");
+        noResultsHeader.textContent = "No search results found.";
+        noResultsHeader.setAttribute("id", "noResultsHeader");
+        messagesContainer?.appendChild(noResultsHeader);
+      }
+    } else {
+      const noResultsHeader = document.getElementById("noResultsHeader");
+      if (noResultsHeader) {
+        noResultsHeader.remove();
+      }
+    }
+  });
 })();

@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { getNonce, getPlaywrightTraces } from "../helpers/helpers";
 import { PwTraces } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { svgClearAll, svgPlayIcon } from "../helpers/icons";
+import { svgClearAll, svgOpenPreview, svgPlayIcon } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_RESULTS_DIR } from "../helpers/consts";
@@ -101,8 +101,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
 
     controlsHTMLList += `
     <div class="nav-list__item_decorator">
-      <div class="nav-list__item">
-        <input class="nav-list__input" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
+      Dir:
+      <div class="nav-list__item nav-list__item_wide">
+        <input class="nav-list__input has-tooltip" tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
       <span class="clear-icon has-tooltip" tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
     </div>`;
@@ -112,23 +113,28 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
       for (const script of this._tracesList) {
         const displayName = script.prettyName ?? script.key;
         controlsHTMLList += `
-          <div class="nav-list__item">
+          <div class="nav-list__item searchable" aria-label="${script.key}">
             <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" tooltip-text="${script.path}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
-              <tooltip class="nav-list__label" content="${script.key}" >
-                ${svgPlayIcon}<span>${displayName}</span>
+              <tooltip class="nav-list__label ellipsis" content="${script.key}" >
+                ${svgOpenPreview}<span>${displayName}</span>
               </tooltip>
             </a>
           </div>`;
       }
       controlsHTMLList += "</div>";
+      controlsHTMLList += `<div id="messages"></div>`;
     }
 
     if (this._tracesList === undefined || this._tracesList.length === 0) {
       controlsHTMLList += `<br />No traces found in test-results dir.<br />
          Please run test to generate traces.`;
     }
+
+    const searchInputHtml = `
+      <input type="text" id="searchInput" class="search" placeholder="Search traces..." />
+    `;
 
     const nonce = getNonce();
 
@@ -145,8 +151,11 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
+                ${searchInputHtml}
+
                 <h4 style="text-align: center !important;" aria-label="Traces from test results dir:" class="nav-list__title">Traces from test results dir:</h4>
-                 ${controlsHTMLList}
+                 
+                ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>
               </body>

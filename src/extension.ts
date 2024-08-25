@@ -71,8 +71,10 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   registerCommand(context, `${EXTENSION_NAME}.refreshTraces`, () => {
-    getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
+    const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
+    getPlaywrightTraces(testResultsDir).then((traces) => {
       traceViewProvider.refresh(traces);
+      showInformationMessage(`Playwright traces refreshed (from ${testResultsDir})`);
     });
   });
 

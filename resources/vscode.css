@@ -135,6 +135,10 @@ a.nav-list__link {
   gap: 0.2rem;
   padding: 0.2rem 0rem;
   cursor: pointer;
+  /* width: 100%; */
+}
+
+.nav-list__item_wide {
   width: 100%;
 }
 
@@ -322,3 +326,11 @@ a.nav-list__link {
   cursor: pointer;
   padding-left: 10px;
 }
+/* 
+.ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+} */
