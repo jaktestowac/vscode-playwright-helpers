@@ -17,6 +17,8 @@ This Visual Studio Code extension adds predefined commands for **Node.js Playwri
 - [Features](#features)
   - [Commands List](#commands-list)
   - [Command Composer](#command-composer)
+  - [Trace Viewer](#trace-viewer)
+  - [Playwright Scripts Runner](#playwright-scripts-runner)
 - [Contributing](#contributing)
 - [For more information](#for-more-information)
 
