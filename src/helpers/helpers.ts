@@ -5,7 +5,7 @@ import MyExtensionContext from "./my-extension.context";
 import { areWorkspaceFoldersSingle } from "./assertions";
 import { showErrorMessage, showWarningMessage } from "./window-messages";
 import path from "path";
-import { PwScripts, PwTraces } from "./types";
+import { PwReports, PwScripts, PwTraces } from "./types";
 
 export function getNonce() {
   let text = "";
@@ -50,9 +50,61 @@ export function isDirectoryEmpty(directory: string): boolean {
   return files.length === 0;
 }
 
+export async function getPlaywrightReports(testReportsDir?: string): Promise<PwReports[]> {
+  testReportsDir = testReportsDir ?? MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
+  let reportsPath = testReportsDir;
+
+  if (!testReportsDir) {
+    showWarningMessage("No testReportsDir provided");
+    return [];
+  }
+
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
+  if (!checkResult.success) {
+    showWarningMessage(checkResult.message);
+    return [];
+  }
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  reportsPath = path.join(workspacePath, testReportsDir);
+
+  if (!fs.existsSync(reportsPath)) {
+    showWarningMessage(`No reports directory found at: "${reportsPath}"`);
+    return [];
+  }
+
+  const files = fs.readdirSync(reportsPath, { recursive: true });
+  const reports = (files as string[]).filter((file) => file.endsWith("index.html"));
+
+  const pwReports: PwReports[] = reports
+    .filter((reportPath) => !reportPath.includes("trace"))
+    .map((reportPath) => {
+      const fullPath = path.join(testReportsDir, reportPath);
+
+      const parentDirname = path.dirname(fullPath);
+      const parentDirnameParts = parentDirname.split(path.sep);
+      const parentDirnameLastPart = parentDirnameParts[parentDirnameParts.length - 1];
+
+      return {
+        key: parentDirname,
+        path: parentDirname,
+        prettyName: parentDirnameLastPart,
+      };
+    });
+
+  return pwReports;
+}
+
 export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTraces[]> {
-  testResultsDir = testResultsDir ?? "test-results";
+  testResultsDir = testResultsDir ?? MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
   let tracesPath = testResultsDir;
+
+  if (!testResultsDir) {
+    showWarningMessage("No testResultsDir provided");
+    return [];
+  }
 
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 

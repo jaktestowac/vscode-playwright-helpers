@@ -5,16 +5,24 @@ import { getCommandList, runTestWithParameters } from "./scripts/commands";
 import { getSettingsList } from "./scripts/settings";
 import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
-import { EXTENSION_NAME } from "./helpers/consts";
-import { getPlaywrightScriptsFromPackageJson, getPlaywrightTraces } from "./helpers/helpers";
+import { DEFAULT_TEST_REPORTS_DIR, DEFAULT_TEST_RESULTS_DIR, EXTENSION_NAME } from "./helpers/consts";
+import { getPlaywrightReports, getPlaywrightScriptsFromPackageJson, getPlaywrightTraces } from "./helpers/helpers";
 import { showInformationMessage } from "./helpers/window-messages";
 import { CommandComposerViewProvider } from "./providers/command-composer-view.provider";
 import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
+import { ReportViewProvider } from "./providers/report-view.provider";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
   MyExtensionContext.instance.setWorkspaceValue("workspaceFolders", vscode.workspace.workspaceFolders);
+
+  if (MyExtensionContext.instance.getWorkspaceValue("testResultsDir") === undefined) {
+    MyExtensionContext.instance.setWorkspaceValue("testResultsDir", DEFAULT_TEST_RESULTS_DIR);
+  }
+  if (MyExtensionContext.instance.getWorkspaceValue("testReportsDir") === undefined) {
+    MyExtensionContext.instance.setWorkspaceValue("testReportsDir", DEFAULT_TEST_REPORTS_DIR);
+  }
 
   const commandsList = getCommandList();
 
@@ -48,9 +56,15 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.registerWebviewViewProvider(ScriptsViewProvider.viewType, scriptsViewProvider)
   );
 
-  // Register the Sidebar Panel - Scripts
+  // Register the Sidebar Panel - Trace
   const traceViewProvider = new TraceViewProvider(context.extensionUri);
   context.subscriptions.push(vscode.window.registerWebviewViewProvider(TraceViewProvider.viewType, traceViewProvider));
+
+  // Register the Sidebar Panel - Trace
+  const reportViewProvider = new ReportViewProvider(context.extensionUri);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(ReportViewProvider.viewType, reportViewProvider)
+  );
 
   // Register the Sidebar Panel - Scripts
   const commandComposerViewProvider = new CommandComposerViewProvider(
@@ -78,6 +92,14 @@ export function activate(context: vscode.ExtensionContext) {
     });
   });
 
+  registerCommand(context, `${EXTENSION_NAME}.refreshReports`, () => {
+    const testReportsDir = MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
+    getPlaywrightReports(testReportsDir).then((reports) => {
+      reportViewProvider.refresh(reports);
+      showInformationMessage(`Playwright reports refreshed (from ${testReportsDir})`);
+    });
+  });
+
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
@@ -87,6 +109,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
     traceViewProvider.refresh(traces);
+  });
+
+  getPlaywrightReports(MyExtensionContext.instance.getWorkspaceValue("testReportsDir")).then((reports) => {
+    reportViewProvider.refresh(reports);
   });
 
   // // Register the CommandsTreeViewProvider

@@ -59,6 +59,11 @@
         },
         {
           "type": "webview",
+          "id": "playwright-helpers.reports",
+          "name": "Show Report"
+        },
+        {
+          "type": "webview",
           "id": "playwright-helpers.command-composer",
           "name": "Command Composer"
         },
@@ -82,6 +87,11 @@
           "group": "navigation"
         },
         {
+          "command": "playwright-helpers.refreshReports",
+          "when": "view == playwright-helpers.reports",
+          "group": "navigation"
+        },
+        {
           "command": "playwright-helpers.toggleHideShowCommands",
           "when": "view == playwright-helpers.commandsTreeView",
           "group": "navigation"
@@ -102,6 +112,15 @@
         "command": "playwright-helpers.refreshTraces",
         "category": "PW Helpers",
         "title": "Refresh Playwright Traces",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "playwright-helpers.refreshReports",
+        "category": "PW Helpers",
+        "title": "Refresh Playwright Reports",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"

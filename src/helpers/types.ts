@@ -34,6 +34,12 @@ export interface PwTraces {
   prettyName?: string;
 }
 
+export interface PwReports {
+  key: string;
+  path: string;
+  prettyName?: string;
+}
+
 export interface PwCommandComposer {
   key: string;
   option: string;
