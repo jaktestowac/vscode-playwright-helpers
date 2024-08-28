@@ -103,9 +103,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
     <div class="nav-list__item_decorator">
       Dir:
       <div class="nav-list__item nav-list__item_wide">
-        <input class="nav-list__input has-tooltip" tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
+        <input class="nav-list__input " tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
-      <span class="clear-icon has-tooltip" tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
+      <span class="clear-icon " tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
     </div>`;
 
     if (this._tracesList !== undefined && this._tracesList.length > 0) {

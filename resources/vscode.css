@@ -176,7 +176,7 @@ a.nav-list__link {
 
 .nav-list__title {
   user-select: none;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
   font-size: 0.7rem !important;
   font-weight: 500;
   margin: 0;
@@ -186,7 +186,7 @@ a.nav-list__link {
   font-size: 1.5em;
   margin-block-start: 1em;
   margin-block-end: 0.5em;
-  margin-inline-start: -32px;
+  /* margin-inline-start: -32px; */
   margin-inline-end: 0px;
 
   color: var(--color-foreground);

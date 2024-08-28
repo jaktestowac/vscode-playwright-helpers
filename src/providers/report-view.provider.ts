@@ -103,9 +103,9 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
     <div class="nav-list__item_decorator">
       Dir:
       <div class="nav-list__item nav-list__item_wide">
-        <input class="nav-list__input has-tooltip" tooltip-text="Test reports dir" id="test-reports-dir" type="text" value="${defaultTestReportsDir}" /> 
+        <input class="nav-list__input " tooltip-text="Test reports dir" id="test-reports-dir" type="text" value="${defaultTestReportsDir}" /> 
         </div>
-      <span class="clear-icon has-tooltip" tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-reports-dir">${svgClearAll}</span>
+      <span class="clear-icon " tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-reports-dir">${svgClearAll}</span>
     </div>`;
 
     if (this._reportsList !== undefined && this._reportsList.length > 0) {
