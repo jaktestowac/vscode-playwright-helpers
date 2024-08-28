@@ -57,16 +57,16 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       tempList[command.category].push(command);
     }
 
-    buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="favorites" id="id-favorites" class="collapsible nav-list__title">Favorites</h4>`;
+    buttonHTMLList += `<h4 aria-label="favorites" id="id-favorites" class="collapsible nav-list__title">Favorites</h4>`;
     buttonHTMLList += `<div class="collapsible-content" aria-label="favorites-content" id="id-favorites-content"></div>`;
 
     for (const [category, commands] of Object.entries(tempList)) {
       // buttonHTMLList += `<button class="collapsible">${category}</button>`;
-      buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
+      buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
 
-      // buttonHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
+      // buttonHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += `<nav class="nav-list" category="${category}">`;
       let idx = 0;
       for (const { key, prettyName, askForExecute } of commands) {

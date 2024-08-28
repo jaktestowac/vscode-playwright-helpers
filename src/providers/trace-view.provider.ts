@@ -153,7 +153,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
               <body>
                 ${searchInputHtml}
 
-                <h4 style="text-align: center !important;" aria-label="Traces from test results dir:" class="nav-list__title">Traces from test results dir:</h4>
+                <h4  aria-label="Traces from test results dir:" class="nav-list__title">Traces from test results dir:</h4>
                  
                 ${controlsHTMLList}
 

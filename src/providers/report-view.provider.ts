@@ -153,7 +153,7 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
               <body>
                 ${searchInputHtml}
 
-                <h4 style="text-align: center !important;" aria-label="Reports from test results dir:" class="nav-list__title">Reports from test results dir:</h4>
+                <h4 aria-label="Reports from test results dir:" class="nav-list__title">Reports from test results dir:</h4>
                  
                 ${controlsHTMLList}
 

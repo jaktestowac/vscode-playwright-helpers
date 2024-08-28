@@ -51,6 +51,7 @@ export interface PwCommandComposer {
   skipAsOption?: boolean;
   overwriteBaseCommand?: boolean;
   notCheckbox?: boolean;
+  maxControlLengthClass?: number;
 }
 
 export interface PwPlaywrightProjects {

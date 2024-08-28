@@ -107,7 +107,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-                <h4 style="text-align: center !important;" aria-label="Playwright Scripts from package.json" class="nav-list__title">Playwright Scripts from package.json:</h4>
+                <h4 aria-label="Playwright Scripts from package.json" class="nav-list__title">Playwright Scripts from package.json:</h4>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

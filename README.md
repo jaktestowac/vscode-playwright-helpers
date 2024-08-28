@@ -18,6 +18,7 @@ This Visual Studio Code extension adds predefined commands for **Node.js Playwri
   - [Commands List](#commands-list)
   - [Command Composer](#command-composer)
   - [Trace Viewer](#trace-viewer)
+  - [Report Viewer](#report-viewer)
   - [Playwright Scripts Runner](#playwright-scripts-runner)
 - [Contributing](#contributing)
 - [For more information](#for-more-information)
@@ -64,35 +65,35 @@ This extension provides the following features:
 
 ## Commands List
 
-| Command   | Description                          |
-| --------- | ------------------------------------ |
-| `playwright-helpers.refreshPlaywrightScripts` | Refresh Playwright Scripts View |
-| `playwright-helpers.refreshTraces` | Refresh Playwright Traces |
-| `playwright-helpers.refreshReports` | Refresh Playwright Reports |
-| `playwright-helpers.initNewProject` | Initiate New Playwright Project |
-| `playwright-helpers.initNewProjectQuick` | Initiate New Playwright Project (with defaults) |
-| `playwright-helpers.checkPlaywrightVersion` | Check Playwright Version |
-| `playwright-helpers.listInstalledPackages` | List Installed Packages |
-| `playwright-helpers.listInstalledGlobalPackages` | List Installed Global Packages |
-| `playwright-helpers.runCodegen` | Run Playwright Codegen |
-| `playwright-helpers.runShowReport` | Run Playwright Show Report |
-| `playwright-helpers.openUiMode` | Open Playwright UI Mode |
-| `playwright-helpers.checkPlaywrightTestVersion` | Check Playwright Test Version |
-| `playwright-helpers.installLatestPlaywrightTest` | Install/Update Latest Playwright Test |
-| `playwright-helpers.installNextPlaywrightTest` | Install/Update Next Playwright Test |
-| `playwright-helpers.checkForPlaywrightTestUpdates` | Check Playwright Test Updates |
-| `playwright-helpers.listInstalledPlaywrightPackages` | List Installed Playwright Packages |
-| `playwright-helpers.uninstallPlaywrightBrowsers` | Uninstall Playwright Browsers (only from current project) |
-| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser |
-| `playwright-helpers.installWebkitPlaywrightBrowser` | Install Webkit Playwright Browser |
-| `playwright-helpers.installFirefoxPlaywrightBrowser` | Install Firefox Playwright Browser |
-| `playwright-helpers.installAllPlaywrightBrowsers` | Install All Playwright Browsers |
-| `playwright-helpers.uninstallAllPlaywrightBrowsers` | Uninstall All Playwright Browsers |
-| `playwright-helpers.closeAllTerminals` | Close All Terminals |
-| `playwright-helpers.listSystemInfo` | List System Info (using envinfo) |
-| `playwright-helpers.runPrettierOnAllFiles` | Run Prettier on All Files |
-| `playwright-helpers.showTrace` | Show Trace |
-| `playwright-helpers.toggleHideShowCommands` | Toggle Hide/Show Commands |
+| Command                                               | Description                                               |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| `playwright-helpers.refreshPlaywrightScripts`         | Refresh Playwright Scripts View                           |
+| `playwright-helpers.refreshTraces`                    | Refresh Playwright Traces                                 |
+| `playwright-helpers.refreshReports`                   | Refresh Playwright Reports                                |
+| `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
+| `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
+| `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
+| `playwright-helpers.listInstalledPackages`            | List Installed Packages                                   |
+| `playwright-helpers.listInstalledGlobalPackages`      | List Installed Global Packages                            |
+| `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
+| `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
+| `playwright-helpers.openUiMode`                       | Open Playwright UI Mode                                   |
+| `playwright-helpers.checkPlaywrightTestVersion`       | Check Playwright Test Version                             |
+| `playwright-helpers.installLatestPlaywrightTest`      | Install/Update Latest Playwright Test                     |
+| `playwright-helpers.installNextPlaywrightTest`        | Install/Update Next Playwright Test                       |
+| `playwright-helpers.checkForPlaywrightTestUpdates`    | Check Playwright Test Updates                             |
+| `playwright-helpers.listInstalledPlaywrightPackages`  | List Installed Playwright Packages                        |
+| `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (only from current project) |
+| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser                       |
+| `playwright-helpers.installWebkitPlaywrightBrowser`   | Install Webkit Playwright Browser                         |
+| `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                        |
+| `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
+| `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
+| `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
+| `playwright-helpers.listSystemInfo`                   | List System Info (using envinfo)                          |
+| `playwright-helpers.runPrettierOnAllFiles`            | Run Prettier on All Files                                 |
+| `playwright-helpers.showTrace`                        | Show Trace                                                |
+| `playwright-helpers.toggleHideShowCommands`           | Toggle Hide/Show Commands                                 |
 
 ## Command Composer
 
@@ -109,7 +110,11 @@ https://playwright.dev/docs/test-cli#reference
 
 ## Trace Viewer
 
-The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run trace-viewer to display selected trace.
+The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run `trace-viewer` to display selected trace.
+
+## Report Viewer
+
+The extension provides an easy way to view Playwright reports in a graphical user interface. You can view the reports in a tree view and quickly run `view-report` to display selected report.
 
 ## Playwright Scripts Runner
 

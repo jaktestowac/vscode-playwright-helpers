@@ -67,7 +67,7 @@ export function getCommandComposerData() {
       option: "--grep",
       valueType: "string",
       defaultValue: '"Login"',
-      prettyName: "grep",
+      prettyName: "Grep",
       category: CommandComposerCategory.general,
     },
     {
@@ -182,6 +182,7 @@ export function getCommandComposerData() {
       defaultValue: "1/1",
       prettyName: "Execute only selected shard",
       category: CommandComposerCategory.general,
+      maxControlLengthClass: 50,
     },
     {
       key: "--trace",

@@ -73,7 +73,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, settings] of Object.entries(tempList)) {
-      controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" class="nav-list__title">${category}</h4>`;
+      controlsHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       controlsHTMLList += `<div class="nav-list" category="${category}">`;
       for (const {
         key,
@@ -84,6 +84,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         overwriteBaseCommand,
         notCheckbox,
         optionType,
+        maxControlLengthClass,
       } of settings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const ariaLabel = prettyName;
@@ -94,17 +95,22 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         let additionalControl = "";
         const parentId = getRandomString();
 
+        let additionalControlClasses = "";
+        if (maxControlLengthClass !== undefined) {
+          additionalControlClasses = ` max-width-${maxControlLengthClass} `;
+        }
+
         if (valueType === "string") {
-          additionalControl = `<input class='composer-input' type="text" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" />`;
+          additionalControl = `<input class='composer-input ${additionalControlClasses}' type="text" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" />`;
         } else if (valueType === "number") {
-          additionalControl = `<input class='composer-input' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
+          additionalControl = `<input class='composer-input  ${additionalControlClasses}' type="number" id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" value="${defaultValue}" min="1" max="99" />`;
         } else if (valueType === "select") {
           let selectClass = "composer-select";
           if (prettyName === "") {
             selectClass += " composer-select-100";
           }
 
-          additionalControl = `<select class='${selectClass}' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
+          additionalControl = `<select class='${selectClass} ${additionalControlClasses}' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
 
           if (optionType === "string") {
             const values = defaultValue ? (defaultValue as string[]) : [];
