@@ -146,10 +146,10 @@ a.nav-list__link {
   width: 100%;
 }
 
-/* .nav-list__item:hover {
+.nav-list__item:hover {
   background-color: var(--vscode-list-hoverBackground);
   color: var(--vscode-list-hoverForeground);
-} */
+}
 
 .nav-list__link.loading {
   cursor: not-allowed;

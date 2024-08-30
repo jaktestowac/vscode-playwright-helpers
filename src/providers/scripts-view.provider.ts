@@ -75,7 +75,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
       for (const script of this._scriptsList) {
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link has-tooltip" aria-label="${script.key}" key="${script.key}" tooltip-text="${script.script}">
+            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.script}" tooltip-text="${script.script}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${script.key}" >

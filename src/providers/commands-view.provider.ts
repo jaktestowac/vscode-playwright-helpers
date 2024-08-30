@@ -79,10 +79,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
                 <span>${prettyName}</span>
               </tooltip>
-            </div><span class="run-icon" key="${key}">${svgPlayIcon}</span><span class="pause-run-icon" key="${key}">${svgWaitContinueIcon}</span><span class="star-icon" key="${key}">${svgStarEmptyIcon}</span>
+            </div><span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${key}">${svgPlayIcon}</span><span class="pause-run-icon" title="Paste" tooltip-text="Paste" key="${key}">${svgWaitContinueIcon}</span><span class="star-icon" title="Add to favorites" key="${key}">${svgStarEmptyIcon}</span>
           </div>`;
         idx++;
       }
+
       buttonHTMLList += "</div>";
       buttonHTMLList += "</div>";
     }

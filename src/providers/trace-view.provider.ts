@@ -114,7 +114,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
         const displayName = script.prettyName ?? script.key;
         controlsHTMLList += `
           <div class="nav-list__item searchable" aria-label="${script.key}">
-            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" tooltip-text="${script.path}">
+            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.path}" tooltip-text="${script.path}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label ellipsis" content="${script.key}" >
