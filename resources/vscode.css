@@ -8,6 +8,7 @@
 
 body {
   padding: 0 var(--container-paddding);
+  padding-right: 10px;
   color: var(--vscode-foreground);
   font-size: var(--vscode-font-size);
   font-weight: var(--vscode-font-weight);

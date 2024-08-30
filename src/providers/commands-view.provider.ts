@@ -36,8 +36,17 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private invokeCommand(commandName: string, instantExecute: boolean) {
-    const commandFunc = this._commandList.find((command) => command.key === commandName)?.func;
-    if (commandFunc !== undefined) {
+    const command = this._commandList.find((command) => command.key === commandName);
+    const commandFunc = command?.func;
+    const commandParams = command?.params;
+    if (commandFunc === undefined) {
+      return;
+    }
+
+    if (commandParams !== undefined) {
+      commandParams.instantExecute = instantExecute;
+      commandFunc(commandParams);
+    } else {
       commandFunc((instantExecute = instantExecute));
     }
   }
@@ -69,11 +78,17 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       // buttonHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += `<nav class="nav-list" category="${category}">`;
       let idx = 0;
-      for (const { key, prettyName, askForExecute } of commands) {
-        const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
+      for (const { key, prettyName, askForExecute, params } of commands) {
+        // const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
+        let toolTipText = prettyName;
+
+        if (params !== undefined) {
+          toolTipText += `: \`${params.command}\``;
+        }
+
         buttonHTMLList += `
           <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
-            <div class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" tooltip-text="${prettyName}">
+            <div class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >

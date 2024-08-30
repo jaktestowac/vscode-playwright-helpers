@@ -4,13 +4,21 @@ export interface ExecuteInTerminalParameters {
   terminalName?: string | undefined;
 }
 
+export interface CommandParameters {
+  key: string;
+  command: string;
+  instantExecute?: boolean;
+  terminalName?: string;
+}
+
 export interface PwCommand {
   key: string;
   func: (...args: any[]) => any;
   prettyName?: string;
-  terminalName?: string;
   category: string;
   askForExecute?: boolean;
+  terminalName?: string;
+  params?: CommandParameters;
 }
 
 export interface PwSettings {
