@@ -128,6 +128,10 @@ a.nav-list__link {
   cursor: pointer;
 }
 
+.list__item_not_clickable {
+  cursor: default !important;
+}
+
 .nav-list__item {
   align-items: center;
   display: flex;
@@ -142,10 +146,10 @@ a.nav-list__link {
   width: 100%;
 }
 
-.nav-list__item:hover {
+/* .nav-list__item:hover {
   background-color: var(--vscode-list-hoverBackground);
   color: var(--vscode-list-hoverForeground);
-}
+} */
 
 .nav-list__link.loading {
   cursor: not-allowed;
@@ -344,3 +348,27 @@ a.nav-list__link {
   white-space: nowrap;
   width: 100px;
 } */
+
+.run-icon {
+  cursor: pointer;
+  opacity: 0.3;
+}
+.run-icon:hover {
+  opacity: 1;
+}
+
+.pause-run-icon {
+  cursor: pointer;
+  opacity: 0.3;
+}
+.pause-run-icon:hover {
+  opacity: 1;
+}
+
+.star-icon {
+  cursor: pointer;
+  opacity: 0.3;
+}
+.star-icon:hover {
+  opacity: 1;
+}

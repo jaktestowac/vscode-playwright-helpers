@@ -28,17 +28,17 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "invokeCommand": {
-          this.invokeCommand(data.key);
+          this.invokeCommand(data.key, data.instantExecute);
           break;
         }
       }
     });
   }
 
-  private invokeCommand(commandName: string) {
+  private invokeCommand(commandName: string, instantExecute: boolean) {
     const commandFunc = this._commandList.find((command) => command.key === commandName)?.func;
     if (commandFunc !== undefined) {
-      commandFunc();
+      commandFunc((instantExecute = instantExecute));
     }
   }
 
@@ -72,14 +72,14 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       for (const { key, prettyName, askForExecute } of commands) {
         const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
         buttonHTMLList += `
-          <div class="nav-list__item" category="${category}" index="${idx}" key="${key}">
-            <a class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" tooltip-text="${prettyName}">
+          <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
+            <div class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" tooltip-text="${prettyName}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
-              <tooltip class="nav-list__label" content="${prettyName}" >
-                ${icon}<span>${prettyName}</span>
+              <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
+                <span>${prettyName}</span>
               </tooltip>
-            </a><span class="star-icon" key="${key}">${svgStarEmptyIcon}</span>
+            </div><span class="run-icon" key="${key}">${svgPlayIcon}</span><span class="pause-run-icon" key="${key}">${svgWaitContinueIcon}</span><span class="star-icon" key="${key}">${svgStarEmptyIcon}</span>
           </div>`;
         idx++;
       }

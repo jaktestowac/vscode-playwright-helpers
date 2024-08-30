@@ -10,14 +10,14 @@ export function getSettingsList(): PwSettings[] {
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
-    {
-      key: "instantExecute",
-      func: instantExecute,
-      prettyName: `Instantly Execute Commands marked &nbsp; ${svgWaitContinueIcon}`,
-      prettyNameAriaLabel: `Instantly Execute Commands marked with Play Icon`,
-      category: PlaywrightSettingsCategory.general,
-      type: PlaywrightSettingsType.checkbox,
-    },
+    // {
+    //   key: "instantExecute",
+    //   func: instantExecute,
+    //   prettyName: `Instantly Execute Commands marked &nbsp; ${svgWaitContinueIcon}`,
+    //   prettyNameAriaLabel: `Instantly Execute Commands marked with Play Icon`,
+    //   category: PlaywrightSettingsCategory.general,
+    //   type: PlaywrightSettingsType.checkbox,
+    // },
   ];
 
   return commandsList;

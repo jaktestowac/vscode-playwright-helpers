@@ -283,143 +283,161 @@ function closeAllTerminals() {
   });
 }
 
-async function openUiMode() {
+async function openUiMode(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("openUiMode");
   executeCommandInTerminal({
     command: "npx playwright test --ui",
-    execute: isCommandExecutedInstantly("openUiMode"),
+    execute: execute,
     terminalName: "Open UI Mode",
   });
 }
 
-async function checkPlaywrightVersion() {
+async function checkPlaywrightVersion(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("checkPlaywrightVersion");
   executeCommandInTerminal({
     command: "npx playwright --version",
-    execute: isCommandExecutedInstantly("checkPlaywrightVersion"),
+    execute: execute,
     terminalName: "Check Playwright Version",
   });
 }
 
-async function checkPlaywrightTestVersion() {
+async function checkPlaywrightTestVersion(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("checkPlaywrightTestVersion");
   executeCommandInTerminal({
     command: "npx @playwright/test --version",
-    execute: isCommandExecutedInstantly("checkPlaywrightTestVersion"),
+    execute: execute,
     terminalName: "Check @playwright/test Version",
   });
 }
 
-async function installLatestPlaywrightTest() {
+async function installLatestPlaywrightTest(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installLatestPlaywrightTest");
   executeCommandInTerminal({
     command: "npm i @playwright/test@latest",
-    execute: isCommandExecutedInstantly("installLatestPlaywrightTest"),
+    execute: execute,
     terminalName: "Install Latest",
   });
 }
 
-async function installNextPlaywrightTest() {
+async function installNextPlaywrightTest(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installNextPlaywrightTest");
   executeCommandInTerminal({
     command: "npm i @playwright/test@next",
-    execute: isCommandExecutedInstantly("installNextPlaywrightTest"),
+    execute: execute,
     terminalName: "Install Next",
   });
 }
 
-async function checkForPlaywrightTestUpdates() {
+async function checkForPlaywrightTestUpdates(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("checkForPlaywrightTestUpdates");
   executeCommandInTerminal({
     command: "npm outdated @playwright/test",
-    execute: isCommandExecutedInstantly("checkForPlaywrightTestUpdates"),
+    execute: execute,
     terminalName: "Check Updates",
   });
 }
 
-async function listInstalledPackages() {
+async function listInstalledPackages(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("listInstalledPackages");
   executeCommandInTerminal({
     command: "npm list",
-    execute: isCommandExecutedInstantly("listInstalledPackages"),
+    execute: execute,
     terminalName: "List Installed Packages",
   });
 }
 
-async function listInstalledGlobalPackages() {
+async function listInstalledGlobalPackages(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("listInstalledGlobalPackages");
   executeCommandInTerminal({
     command: "npm list -g --depth=0",
-    execute: isCommandExecutedInstantly("listInstalledGlobalPackages"),
+    execute: execute,
     terminalName: "List Installed Global Packages",
   });
 }
 
-async function listSystemInfo() {
+async function listSystemInfo(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("listSystemInfo");
   executeCommandInTerminal({
     command: "npx envinfo",
-    execute: isCommandExecutedInstantly("listSystemInfo"),
+    execute: execute,
     terminalName: "List System Info (using envinfo)",
   });
 }
 
-async function runPrettierOnAllFiles() {
+async function runPrettierOnAllFiles(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runPrettierOnAllFiles");
   executeCommandInTerminal({
     command: "npx prettier --write .",
-    execute: isCommandExecutedInstantly("runPrettier"),
+    execute: execute,
     terminalName: "Run Prettier on All Files",
   });
 }
 
-async function uninstallAllPlaywrightBrowsers() {
+async function uninstallAllPlaywrightBrowsers(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("uninstallAllPlaywrightBrowsers");
   executeCommandInTerminal({
     command: "npx playwright uninstall --all",
-    execute: isCommandExecutedInstantly("uninstallAllPlaywrightBrowsers"),
+    execute: execute,
     terminalName: "Uninstall All Browsers",
   });
 }
 
-async function uninstallPlaywrightBrowsers() {
+async function uninstallPlaywrightBrowsers(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("uninstallPlaywrightBrowsers");
   executeCommandInTerminal({
     command: "npx playwright uninstall",
-    execute: isCommandExecutedInstantly("uninstallPlaywrightBrowsers"),
+    execute: execute,
     terminalName: "Uninstall Browsers",
   });
 }
 
-async function installAllPlaywrightBrowsers() {
+async function installAllPlaywrightBrowsers(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installAllPlaywrightBrowsers");
   executeCommandInTerminal({
     command: "npx playwright install",
-    execute: isCommandExecutedInstantly("installAllPlaywrightBrowsers"),
+    execute: execute,
     terminalName: "Install All Browsers",
   });
 }
 
-async function installChromiumPlaywrightBrowser() {
+async function installChromiumPlaywrightBrowser(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installChromiumPlaywrightBrowser");
   executeCommandInTerminal({
     command: "npx playwright install chromium",
-    execute: isCommandExecutedInstantly("installChromiumPlaywrightBrowser"),
+    execute: execute,
     terminalName: "Install Chromium",
   });
 }
 
-async function installWebkitPlaywrightBrowser() {
+async function installWebkitPlaywrightBrowser(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installWebkitPlaywrightBrowser");
   executeCommandInTerminal({
     command: "npx playwright install webkit",
-    execute: isCommandExecutedInstantly("installWebkitPlaywrightBrowser"),
+    execute: execute,
     terminalName: "Install Webkit",
   });
 }
 
-async function installFirefoxPlaywrightBrowser() {
+async function installFirefoxPlaywrightBrowser(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("installFirefoxPlaywrightBrowser");
   executeCommandInTerminal({
     command: "npx playwright install firefox",
-    execute: isCommandExecutedInstantly("installFirefoxPlaywrightBrowser"),
+    execute: execute,
     terminalName: "Install Firefox",
   });
 }
 
-async function showTrace() {
+async function showTrace(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("showTrace");
   executeCommandInTerminal({
     command: "npx playwright show-trace",
-    execute: isCommandExecutedInstantly("showTrace"),
+    execute: execute,
     terminalName: "Show Trace",
   });
 }
 
-async function initNewProject() {
+async function initNewProject(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("initNewProject");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 
@@ -430,12 +448,13 @@ async function initNewProject() {
 
   executeCommandInTerminal({
     command: "npm init playwright@latest",
-    execute: isCommandExecutedInstantly("initNewProject"),
+    execute: execute,
     terminalName: "Init",
   });
 }
 
-async function initNewProjectQuick() {
+async function initNewProjectQuick(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("initNewProjectQuick");
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
@@ -447,44 +466,49 @@ async function initNewProjectQuick() {
 
   executeCommandInTerminal({
     command: "npm init playwright@latest --yes -- --quiet --browser=chromium",
-    execute: isCommandExecutedInstantly("initNewProjectQuick"),
+    execute: execute,
     terminalName: "Quick Init",
   });
 }
 
-async function runCodegen() {
+async function runCodegen(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runCodegen");
   executeCommandInTerminal({
     command: "npx playwright codegen",
-    execute: isCommandExecutedInstantly("runCodegen"),
+    execute: execute,
     terminalName: "Codegen",
   });
 }
 
-async function runShowReport() {
+async function runShowReport(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runShowReport");
   executeCommandInTerminal({
     command: "npx playwright show-report",
-    execute: isCommandExecutedInstantly("runShowReport"),
+    execute: execute,
     terminalName: "Show Report",
   });
 }
 
-async function runDefaultTests() {
+async function runDefaultTests(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runDefaultTests");
   executeCommandInTerminal({
     command: "npx playwright test",
-    execute: isCommandExecutedInstantly("runDefaultTests"),
+    execute: execute,
     terminalName: "Run Default Tests",
   });
 }
 
-async function runDefaultTestsMultipleTimes(times = 3) {
+async function runDefaultTestsMultipleTimes(instantExecute: boolean, times = 3) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runDefaultTestsMultipleTimes");
   executeCommandInTerminal({
     command: `npx playwright test --repeat-each=${times}`,
-    execute: isCommandExecutedInstantly("runDefaultTestsMultipleTimes"),
+    execute: execute,
     terminalName: `Run Default Tests ${times} times`,
   });
 }
 
-async function runTestsWithDebug() {
+async function runTestsWithDebug(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runDefaultTestsMultipleTimes");
   executeCommandInTerminal({
     command: `npx playwright test --debug`,
     execute: isCommandExecutedInstantly("runTestsWithDebug"),
@@ -492,7 +516,8 @@ async function runTestsWithDebug() {
   });
 }
 
-async function runTestsWithHeadedBrowser() {
+async function runTestsWithHeadedBrowser(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runDefaultTestsMultipleTimes");
   executeCommandInTerminal({
     command: `npx playwright test --headed`,
     execute: isCommandExecutedInstantly("runTestsWithHeadedBrowser"),
@@ -500,82 +525,92 @@ async function runTestsWithHeadedBrowser() {
   });
 }
 
-async function runOnlyChangedTests() {
+async function runOnlyChangedTests(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runOnlyChangedTests");
   executeCommandInTerminal({
     command: `npx playwright test --only-changed`,
-    execute: isCommandExecutedInstantly("runOnlyChangedTests"),
+    execute: execute,
     terminalName: "Run Only Changed Tests",
   });
 }
 
-async function runTestWithUpdateSnapshots() {
+async function runTestWithUpdateSnapshots(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestWithUpdateSnapshots");
   executeCommandInTerminal({
     command: `npx playwright test --update-snapshots`,
-    execute: isCommandExecutedInstantly("runTestWithUpdateSnapshots"),
+    execute: execute,
     terminalName: "Run Test with Update Snapshots",
   });
 }
 
-async function runOnlyLastFailedTests() {
+async function runOnlyLastFailedTests(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runOnlyLastFailedTests");
   executeCommandInTerminal({
     command: `npx playwright test --last-failed`,
-    execute: isCommandExecutedInstantly("runOnlyLastFailedTests"),
+    execute: execute,
     terminalName: "Run Only Last Failed Tests",
   });
 }
 
-async function runSpecificTestProject(project = "chromium") {
+async function runSpecificTestProject(instantExecute: boolean, project = "chromium") {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runSpecificTestProject");
   executeCommandInTerminal({
     command: `npx playwright test --project=${project}`,
-    execute: isCommandExecutedInstantly("runSpecificTestProject"),
+    execute: execute,
     terminalName: `Run Tests for Project: ${project}`,
   });
 }
 
-async function runTestsWithWorkers(workers = 1) {
+async function runTestsWithWorkers(instantExecute: boolean, workers = 1) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestsWithWorkers");
   executeCommandInTerminal({
     command: `npx playwright test --workers=${workers}`,
-    execute: isCommandExecutedInstantly("runTestsWithWorkers"),
+    execute: execute,
     terminalName: `Run Tests with ${workers} workers`,
   });
 }
 
-async function runTestsWithTimeout(timeoutInMiliSec = 180000) {
+async function runTestsWithTimeout(instantExecute: boolean, timeoutInMiliSec = 180000) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestsWithTimeout");
   executeCommandInTerminal({
     command: `npx playwright test --timeout=${timeoutInMiliSec}`,
-    execute: isCommandExecutedInstantly("runTestsWithTimeout"),
+    execute: execute,
     terminalName: `Run Tests with Timeout: ${timeoutInMiliSec} ms`,
   });
 }
 
-async function runTestsWithReporter(reporter = "dot") {
+async function runTestsWithReporter(instantExecute: boolean, reporter = "dot") {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestsWithReporter");
   executeCommandInTerminal({
     command: `npx playwright test --reporter=${reporter}`,
-    execute: isCommandExecutedInstantly("runTestsWithReporter"),
+    execute: execute,
     terminalName: `Run Tests with Reporter: ${reporter}`,
   });
 }
 
-async function runTestsWithTitle(title = "Login") {
+async function runTestsWithTitle(instantExecute: boolean, title = "Login") {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestsWithTitle");
   executeCommandInTerminal({
     command: `npx playwright test -g "${title}"`,
-    execute: isCommandExecutedInstantly("runTestsWithTitle"),
+    execute: execute,
     terminalName: `Run Tests with Title: ${title}`,
   });
 }
 
-async function runTestsFiles(testFile = "tests/login.spec.ts") {
+async function runTestsFiles(instantExecute: boolean, testFile = "tests/login.spec.ts") {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("runTestsFiles");
   executeCommandInTerminal({
     command: `npx playwright test ${testFile}`,
-    execute: isCommandExecutedInstantly("runTestsFiles"),
+    execute: execute,
     terminalName: `Run Tests from: ${testFile}`,
   });
 }
 
-async function openVSCodeSettingsFile() {
+async function openVSCodeSettingsFile(instantExecute: boolean) {
+  const execute = instantExecute ?? isCommandExecutedWithoutAsking("openVSCodeSettingsFile");
   executeCommandInTerminal({
     command: `%APPDATA%\\Code\\User\\settings.json`,
-    execute: isCommandExecutedInstantly("openVSCodeSettingsFile"),
+    execute: execute,
     terminalName: "Open VS Code Settings File",
   });
 }
