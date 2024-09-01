@@ -32,7 +32,7 @@
     });
   }
 
-  const buttons = document.querySelectorAll(".nav-list__link");
+  const buttons = document.querySelectorAll(".preview-icon");
   for (const button of buttons) {
     button.addEventListener("click", () => {
       if (button.classList.contains("loading")) {
@@ -51,7 +51,7 @@
         // @ts-ignore
         button.disabled = false;
         button.classList.remove("loading");
-      }, 1000);
+      }, 1500);
     });
   }
 

@@ -24,7 +24,7 @@
         // @ts-ignore
         runIcon.disabled = false;
         runIcon.classList.remove("loading");
-      }, 1000);
+      }, 1500);
     });
   }
 
@@ -46,7 +46,7 @@
         // @ts-ignore
         runIcon.disabled = false;
         runIcon.classList.remove("loading");
-      }, 1000);
+      }, 1500);
     });
   }
 })();

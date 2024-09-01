@@ -27,7 +27,7 @@
   //       // @ts-ignore
   //       button.disabled = false;
   //       button.classList.remove("loading");
-  //     }, 1000);
+  //     }, 1500);
   //   });
   // }
   const runIcons = document.querySelectorAll(".run-icon");
@@ -50,7 +50,7 @@
         // @ts-ignore
         runIcon.disabled = false;
         runIcon.classList.remove("loading");
-      }, 1000);
+      }, 1500);
     });
   }
 
@@ -73,14 +73,13 @@
         // @ts-ignore
         runIcon.disabled = false;
         runIcon.classList.remove("loading");
-      }, 1000);
+      }, 1500);
     });
   }
 
   const stars = document.querySelectorAll(".star-icon");
   for (const star of stars) {
     star.addEventListener("click", () => {
-      
       const collapsible = document.getElementById("id-favorites");
       const favoritesContent = document.getElementById("id-favorites-content");
       const attributeKey = star.getAttribute("key");

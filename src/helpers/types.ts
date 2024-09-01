@@ -40,6 +40,7 @@ export interface PwScripts {
 export interface PwTraces {
   key: string;
   path: string;
+  onlyPath?: string;
   prettyName?: string;
 }
 

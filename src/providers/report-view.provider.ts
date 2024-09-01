@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { getNonce, getPlaywrightReports, openDirectory, openWorkSpaceDirectory } from "../helpers/helpers";
+import { getNonce, getPlaywrightReports, openDirectory } from "../helpers/helpers";
 import { PwReports } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { openedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
+import { svgOpenedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_REPORTS_DIR } from "../helpers/consts";
@@ -110,26 +110,29 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
     controlsHTMLList += `
     <div class="nav-list__item_decorator">
       Dir:
-      <div class="nav-list__item nav-list__item_wide">
+      <div class="nav-list__item nav-list__item_wide list__item_not_clickable">
         <input class="nav-list__input " tooltip-text="Test reports dir" id="test-reports-dir" type="text" value="${defaultTestReportsDir}" /> 
         </div>
-      <span class="clear-icon " tooltip-text="Reset directory" aria-label="Reset directory"  id="reset-test-reports-dir">${svgClearAll}</span>
-      <span class="open-dir-icon " tooltip-text="Open directory" aria-label="Open directory"  id="open-test-reports-dir">${openedDir}</span>
+      <span class="clear-icon  action-icon" tooltip-text="Reset directory" aria-label="Reset directory"  id="reset-test-reports-dir">${svgClearAll}</span>
+      <span class="open-dir-icon  action-icon" tooltip-text="Open directory" aria-label="Open directory"  id="open-test-reports-dir">${svgOpenedDir}</span>
     </div>`;
 
     if (this._reportsList !== undefined && this._reportsList.length > 0) {
       controlsHTMLList += '<nav class="nav-list">';
       for (const script of this._reportsList) {
         const displayName = script.prettyName ?? script.key;
+        let playButtons = "";
+        playButtons += `<span class="preview-icon action-icon" title="Preview" tooltip-text="Preview" key="${script.key}">${svgOpenPreview}</span>`;
+
         controlsHTMLList += `
-          <div class="nav-list__item searchable" aria-label="${script.key}">
-            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.path}" tooltip-text="${script.path}">
+          <div class="nav-list__item searchable list__item_not_clickable" aria-label="${script.key}">
+            <div class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.path}" tooltip-text="${script.path}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label ellipsis" content="${script.key}" >
-                ${svgOpenPreview}<span>${displayName}</span>
+                <span>${displayName}</span>
               </tooltip>
-            </a>
+            </div>${playButtons}
           </div>`;
       }
       controlsHTMLList += "</div>";

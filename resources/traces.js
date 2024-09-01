@@ -33,7 +33,7 @@
     });
   }
 
-  const buttons = document.querySelectorAll(".nav-list__link");
+  const buttons = document.querySelectorAll(".preview-icon");
   for (const button of buttons) {
     button.addEventListener("click", () => {
       if (button.classList.contains("loading")) {
@@ -52,7 +52,29 @@
         // @ts-ignore
         button.disabled = false;
         button.classList.remove("loading");
-      }, 1000);
+      }, 1500);
+    });
+  }
+
+  const openDirIcons = document.querySelectorAll(".open-trace-dir-icon");
+  for (const openDirIcon of openDirIcons) {
+    openDirIcon.addEventListener("click", () => {
+      if (openDirIcon.classList.contains("loading")) {
+        return;
+      }
+      const attributeKey = openDirIcon.getAttribute("key");
+      vscode.postMessage({ type: "openSingleTraceDir", key: attributeKey });
+
+      // Disable the button and show a loading indicator
+      // for a second to let the user know the command is running
+      // @ts-ignore
+      openDirIcon.disabled = true;
+      openDirIcon.classList.add("loading");
+      setTimeout(() => {
+        // @ts-ignore
+        openDirIcon.disabled = false;
+        openDirIcon.classList.remove("loading");
+      }, 1500);
     });
   }
 

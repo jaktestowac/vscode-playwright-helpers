@@ -65,6 +65,10 @@ export async function openDirectory(dir: string) {
   const workspacePath = workspaceFolders[0].uri.fsPath;
   const fullPath = path.join(workspacePath, dir);
   const folderUri = vscode.Uri.file(fullPath);
+
+  console.log("Opening directory: ", fullPath);
+  console.log("folderUri: ", folderUri);
+  console.log("workspacePath: ", workspacePath);
   await vscode.env.openExternal(folderUri);
 }
 
@@ -124,6 +128,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
 export async function getPlaywrightTraces(testResultsDir?: string, verbose = false): Promise<PwTraces[]> {
   testResultsDir = testResultsDir ?? MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
   let tracesPath = testResultsDir;
+  const defaultFileName = "trace.zip";
 
   if (!testResultsDir) {
     if (verbose) {
@@ -153,13 +158,15 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
   }
 
   const files = fs.readdirSync(tracesPath, { recursive: true });
-  const traces = (files as string[]).filter((file) => file.endsWith("trace.zip"));
+  const traces = (files as string[]).filter((file) => file.endsWith(defaultFileName));
 
   const pwTraces: PwTraces[] = traces.map((tracePath) => {
     const parentDirname = path.dirname(tracePath);
     const parentDirnameParts = parentDirname.split(path.sep);
     const parentDirnameLastPart = parentDirnameParts[parentDirnameParts.length - 1];
-    return { key: tracePath, path: path.join(testResultsDir, tracePath), prettyName: parentDirnameLastPart };
+    const fullPath = path.join(testResultsDir, tracePath);
+    const onlyPath = fullPath.replace(defaultFileName, "");
+    return { key: tracePath, path: fullPath, onlyPath, prettyName: parentDirnameLastPart };
   });
   return pwTraces;
 }

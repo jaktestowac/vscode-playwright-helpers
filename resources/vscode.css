@@ -400,3 +400,11 @@ a.nav-list__link {
 .star-icon:hover {
   opacity: 1;
 }
+
+.action-icon {
+  cursor: pointer;
+  opacity: 0.3;
+}
+.action-icon:hover {
+  opacity: 1;
+}

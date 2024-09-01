@@ -78,7 +78,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
         playButtons += `<span class="pause-run-icon" title="Paste" tooltip-text="Paste" key="${script.key}">${svgWaitContinueIcon}</span>`;
 
         controlsHTMLList += `
-          <div class="nav-list__item">
+          <div class="nav-list__item list__item_not_clickable">
             <div class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.script}" tooltip-text="${script.script}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>

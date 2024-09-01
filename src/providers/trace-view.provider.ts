@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { getNonce, getPlaywrightTraces, openDirectory } from "../helpers/helpers";
 import { PwTraces } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { openedDir, svgClearAll, svgOpenPreview, svgPlayIcon } from "../helpers/icons";
+import { svgOpenedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_RESULTS_DIR } from "../helpers/consts";
@@ -51,6 +51,10 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           this.openTestResultsDir(data.testResultsDir);
           break;
         }
+        case "openSingleTraceDir": {
+          this.openSingleTraceDir(data.key);
+          break;
+        }
       }
     });
   }
@@ -72,6 +76,18 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
 
     getPlaywrightTraces(testResultsDir).then((traces) => {
       this.refresh(traces);
+    });
+  }
+
+  private openSingleTraceDir(traceKey: string) {
+    getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
+      const script = traces?.find((trace) => trace.key === traceKey);
+      if (script !== undefined) {
+        openDirectory(script.onlyPath ?? "");
+      } else {
+        showErrorMessage(`Trace ${traceKey} not found. Refreshing...`);
+        this.refresh(traces);
+      }
     });
   }
 
@@ -110,26 +126,30 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
     controlsHTMLList += `
     <div class="nav-list__item_decorator">
       Dir:
-      <div class="nav-list__item nav-list__item_wide">
+      <div class="nav-list__item nav-list__item_wide list__item_not_clickable">
         <input class="nav-list__input " tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
-      <span class="clear-icon " tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
-      <span class="open-dir-icon " tooltip-text="Open directory" aria-label="Open directory"  id="open-test-results-dir">${openedDir}</span>
+      <span class="clear-icon  action-icon" tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
+      <span class="open-dir-icon  action-icon" tooltip-text="Open directory" aria-label="Open directory"  id="open-test-results-dir">${svgOpenedDir}</span>
     </div>`;
 
     if (this._tracesList !== undefined && this._tracesList.length > 0) {
       controlsHTMLList += '<nav class="nav-list">';
       for (const script of this._tracesList) {
         const displayName = script.prettyName ?? script.key;
+        let playButtons = "";
+        playButtons += `<span class="preview-icon action-icon" title="Preview" tooltip-text="Preview" key="${script.key}">${svgOpenPreview}</span>`;
+        playButtons += `<span class="open-trace-dir-icon action-icon" title="Open directory" tooltip-text="Open directory" key="${script.key}">${svgOpenedDir}</span>`;
+
         controlsHTMLList += `
-          <div class="nav-list__item searchable" aria-label="${script.key}">
-            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.path}" tooltip-text="${script.path}">
+          <div class="nav-list__item searchable  list__item_not_clickable" aria-label="${script.key}">
+            <div class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.path}" tooltip-text="${script.path}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label ellipsis" content="${script.key}" >
-                ${svgOpenPreview}<span>${displayName}</span>
+                <span>${displayName}</span>
               </tooltip>
-            </a>
+            </div>${playButtons}
           </div>`;
       }
       controlsHTMLList += "</div>";
