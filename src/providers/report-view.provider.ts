@@ -128,7 +128,7 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
     }
 
     if (this._reportsList === undefined || this._reportsList.length === 0) {
-      controlsHTMLList += `<br />No reports found in test-reports dir.<br />
+      controlsHTMLList += `No reports found in test-reports dir.<br />
          Please run test to generate reports.`;
     }
 

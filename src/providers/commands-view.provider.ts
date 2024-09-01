@@ -121,7 +121,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body class="commands-view">
                 ${searchInputHtml}
                  ${buttonHTMLList}
 

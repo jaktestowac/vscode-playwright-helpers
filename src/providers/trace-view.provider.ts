@@ -128,7 +128,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
     }
 
     if (this._tracesList === undefined || this._tracesList.length === 0) {
-      controlsHTMLList += `<br />No traces found in test-results dir.<br />
+      controlsHTMLList += `No traces found in test-results dir.<br />
          Please run test to generate traces.`;
     }
 

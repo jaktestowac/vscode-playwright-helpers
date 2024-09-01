@@ -8,7 +8,7 @@
 
 body {
   padding: 0 var(--container-paddding);
-  padding-right: 10px;
+  /* padding-right: 10px; */
   color: var(--vscode-foreground);
   font-size: var(--vscode-font-size);
   font-weight: var(--vscode-font-weight);
@@ -61,7 +61,7 @@ code {
 
 button {
   border: none;
-  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  /* padding: var(--input-padding-vertical) var(--input-padding-horizontal); */
   width: 100%;
   text-align: center;
   outline: 1px solid transparent;
@@ -119,7 +119,7 @@ textarea {
   width: 100%;
   border: none;
   font-family: var(--vscode-font-family);
-  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  /* padding: var(--input-padding-vertical) var(--input-padding-horizontal); */
   color: var(--vscode-input-foreground);
   outline-color: var(--vscode-input-border);
   background-color: var(--vscode-input-background);
@@ -282,7 +282,7 @@ a.nav-list__link {
   display: inline-block !important;
   border: none;
   font-family: var(--vscode-font-family);
-  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  /* padding: var(--input-padding-vertical) var(--input-padding-horizontal); */
   color: var(--vscode-input-foreground);
   outline-color: var(--vscode-input-border);
   background-color: var(--vscode-input-background);
@@ -299,7 +299,7 @@ a.nav-list__link {
   display: inline-block !important;
   border: none;
   font-family: var(--vscode-font-family);
-  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  /* padding: var(--input-padding-vertical) var(--input-padding-horizontal); */
   color: var(--vscode-input-foreground);
   outline-color: var(--vscode-input-border);
   background-color: var(--vscode-input-background);
@@ -338,8 +338,8 @@ a.nav-list__link {
 }
 
 .composer-control {
-  gap: 0.2rem;
-  padding: 0.2rem 0rem;
+  gap: 0.1rem;
+  padding: 0.1rem 0rem;
 }
 
 .clear-icon {

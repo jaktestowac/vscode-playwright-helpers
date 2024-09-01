@@ -160,7 +160,7 @@ export function getCommandComposerData() {
       option: "--output",
       valueType: "string",
       defaultValue: "test-results",
-      prettyName: "Directory for artifacts",
+      prettyName: "Artifacts directory",
       category: CommandComposerCategory.general,
     },
     {

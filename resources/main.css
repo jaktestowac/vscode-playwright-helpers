@@ -1,5 +1,10 @@
 body {
   background-color: transparent;
+  padding-left: 10px !important;
+}
+
+.commands-view {
+  padding-right: 5px !important;
 }
 
 #icons {
