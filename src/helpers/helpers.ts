@@ -50,6 +50,24 @@ export function isDirectoryEmpty(directory: string): boolean {
   return files.length === 0;
 }
 
+export async function openWorkSpaceDirectory(dir: string) {
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const fullPath = path.join(workspacePath, dir);
+  const folderUri = vscode.Uri.file(fullPath);
+  await vscode.commands.executeCommand("vscode.openFolder", folderUri, true);
+}
+
+export async function openDirectory(dir: string) {
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const fullPath = path.join(workspacePath, dir);
+  const folderUri = vscode.Uri.file(fullPath);
+  await vscode.env.openExternal(folderUri);
+}
+
 export async function getPlaywrightReports(testReportsDir?: string, verbose = false): Promise<PwReports[]> {
   testReportsDir = testReportsDir ?? MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
   let reportsPath = testReportsDir;

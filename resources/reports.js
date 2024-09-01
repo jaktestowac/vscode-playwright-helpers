@@ -16,10 +16,19 @@
   }
 
   const resetTestReportsDirButton = document.getElementById("reset-test-reports-dir");
-
   if (resetTestReportsDirButton) {
     resetTestReportsDirButton.addEventListener("click", () => {
       vscode.postMessage({ type: "resetTestReportsDir" });
+    });
+  }
+
+  const openTestReportsDirButton = document.getElementById("open-test-reports-dir");
+  if (openTestReportsDirButton) {
+    openTestReportsDirButton.addEventListener("click", () => {
+      const testReportsDirInput = document.getElementById("test-reports-dir");
+      // @ts-ignore
+      const testReportsDir = testReportsDirInput.value;
+      vscode.postMessage({ type: "openTestReportsDir", testReportsDir });
     });
   }
 

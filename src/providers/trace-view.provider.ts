@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { getNonce, getPlaywrightTraces } from "../helpers/helpers";
+import { getNonce, getPlaywrightTraces, openDirectory } from "../helpers/helpers";
 import { PwTraces } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { svgClearAll, svgOpenPreview, svgPlayIcon } from "../helpers/icons";
+import { openedDir, svgClearAll, svgOpenPreview, svgPlayIcon } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_RESULTS_DIR } from "../helpers/consts";
@@ -47,8 +47,16 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           this.resetTestResultsDir();
           break;
         }
+        case "openTestResultsDir": {
+          this.openTestResultsDir(data.testResultsDir);
+          break;
+        }
       }
     });
+  }
+
+  private openTestResultsDir(testResultsDir: string) {
+    openDirectory(testResultsDir);
   }
 
   private resetTestResultsDir() {
@@ -106,6 +114,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
         <input class="nav-list__input " tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
       <span class="clear-icon " tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
+      <span class="open-dir-icon " tooltip-text="Open directory" aria-label="Open directory"  id="open-test-results-dir">${openedDir}</span>
     </div>`;
 
     if (this._tracesList !== undefined && this._tracesList.length > 0) {

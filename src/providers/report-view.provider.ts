@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { getNonce, getPlaywrightReports } from "../helpers/helpers";
+import { getNonce, getPlaywrightReports, openDirectory, openWorkSpaceDirectory } from "../helpers/helpers";
 import { PwReports } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { svgClearAll, svgOpenPreview } from "../helpers/icons";
+import { openedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_REPORTS_DIR } from "../helpers/consts";
@@ -47,8 +47,16 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
           this.resetTestReportsDir();
           break;
         }
+        case "openTestReportsDir": {
+          this.openTestReportsDir(data.testReportsDir);
+          break;
+        }
       }
     });
+  }
+
+  private openTestReportsDir(testReportsDir: string) {
+    openDirectory(testReportsDir);
   }
 
   private resetTestReportsDir() {
@@ -105,7 +113,8 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
       <div class="nav-list__item nav-list__item_wide">
         <input class="nav-list__input " tooltip-text="Test reports dir" id="test-reports-dir" type="text" value="${defaultTestReportsDir}" /> 
         </div>
-      <span class="clear-icon " tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-reports-dir">${svgClearAll}</span>
+      <span class="clear-icon " tooltip-text="Reset directory" aria-label="Reset directory"  id="reset-test-reports-dir">${svgClearAll}</span>
+      <span class="open-dir-icon " tooltip-text="Open directory" aria-label="Open directory"  id="open-test-reports-dir">${openedDir}</span>
     </div>`;
 
     if (this._reportsList !== undefined && this._reportsList.length > 0) {

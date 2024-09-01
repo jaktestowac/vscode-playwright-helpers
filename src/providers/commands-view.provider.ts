@@ -71,7 +71,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
     for (const [category, commands] of Object.entries(tempList)) {
       // buttonHTMLList += `<button class="collapsible">${category}</button>`;
-      buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
+      buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title"><span>${category}</span></h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
 
@@ -122,7 +122,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               <html lang="en">
               <head>
                   <meta charset="UTF-8">
-                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+                  <meta http-equiv="Content-Security-Policy" content="default-src 'none';worker-src blob:; 
+      child-src blob: gap:;
+      img-src 'self' blob: data:; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
   
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   

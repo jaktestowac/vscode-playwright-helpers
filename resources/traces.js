@@ -23,6 +23,16 @@
     });
   }
 
+  const openTestResultsDirButton = document.getElementById("open-test-results-dir");
+  if (openTestResultsDirButton) {
+    openTestResultsDirButton.addEventListener("click", () => {
+      const testResultsDirInput = document.getElementById("test-results-dir");
+      // @ts-ignore
+      const testResultsDir = testResultsDirInput.value;
+      vscode.postMessage({ type: "openTestResultsDir", testResultsDir });
+    });
+  }
+
   const buttons = document.querySelectorAll(".nav-list__link");
   for (const button of buttons) {
     button.addEventListener("click", () => {
