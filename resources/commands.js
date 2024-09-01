@@ -33,6 +33,10 @@
   const runIcons = document.querySelectorAll(".run-icon");
   for (const runIcon of runIcons) {
     runIcon.addEventListener("click", () => {
+      if (runIcon.classList.contains("loading")) {
+        return;
+      }
+
       const attributeKey = runIcon.getAttribute("key");
       vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: true });
 
@@ -53,6 +57,9 @@
   const pauseRunIcons = document.querySelectorAll(".pause-run-icon");
   for (const runIcon of pauseRunIcons) {
     runIcon.addEventListener("click", () => {
+      if (runIcon.classList.contains("loading")) {
+        return;
+      }
       const attributeKey = runIcon.getAttribute("key");
       vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: false });
 
@@ -73,6 +80,7 @@
   const stars = document.querySelectorAll(".star-icon");
   for (const star of stars) {
     star.addEventListener("click", () => {
+      
       const collapsible = document.getElementById("id-favorites");
       const favoritesContent = document.getElementById("id-favorites-content");
       const attributeKey = star.getAttribute("key");

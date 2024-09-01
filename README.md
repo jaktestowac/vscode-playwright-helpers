@@ -8,6 +8,8 @@
 
 This Visual Studio Code extension adds predefined commands for **Node.js Playwright**.
 
+_Note:_ For now only Windows OS is fully supported.
+
 # Table of Contents
 
 - [Description](#description)

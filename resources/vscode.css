@@ -71,8 +71,23 @@ button {
 }
 
 button.loading {
-  cursor: not-allowed;
-  opacity: 0.5;
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.loading {
+  cursor: progress !important;
+  opacity: 0.6 !important;
+}
+
+.loading > svg {
+  color: orange !important;
+  fill: currentColor !important;
+}
+
+.loading:hover {
+  cursor: progress;
+  opacity: 0.6 !important;
 }
 
 button:hover {
@@ -81,7 +96,7 @@ button:hover {
 }
 
 button.loading:hover {
-  cursor: not-allowed;
+  cursor: progress;
   opacity: 0.5;
 }
 

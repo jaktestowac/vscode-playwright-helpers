@@ -50,12 +50,14 @@ export function isDirectoryEmpty(directory: string): boolean {
   return files.length === 0;
 }
 
-export async function getPlaywrightReports(testReportsDir?: string): Promise<PwReports[]> {
+export async function getPlaywrightReports(testReportsDir?: string, verbose = false): Promise<PwReports[]> {
   testReportsDir = testReportsDir ?? MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
   let reportsPath = testReportsDir;
 
   if (!testReportsDir) {
-    showWarningMessage("No testReportsDir provided");
+    if (verbose) {
+      showWarningMessage("No testReportsDir provided");
+    }
     return [];
   }
 
@@ -63,7 +65,9 @@ export async function getPlaywrightReports(testReportsDir?: string): Promise<PwR
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
-    showWarningMessage(checkResult.message);
+    if (verbose) {
+      showWarningMessage(checkResult.message);
+    }
     return [];
   }
 
@@ -71,7 +75,9 @@ export async function getPlaywrightReports(testReportsDir?: string): Promise<PwR
   reportsPath = path.join(workspacePath, testReportsDir);
 
   if (!fs.existsSync(reportsPath)) {
-    showWarningMessage(`No reports directory found at: "${reportsPath}"`);
+    if (verbose) {
+      showWarningMessage(`No reports directory found at: "${reportsPath}"`);
+    }
     return [];
   }
 
@@ -97,12 +103,14 @@ export async function getPlaywrightReports(testReportsDir?: string): Promise<PwR
   return pwReports;
 }
 
-export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTraces[]> {
+export async function getPlaywrightTraces(testResultsDir?: string, verbose = false): Promise<PwTraces[]> {
   testResultsDir = testResultsDir ?? MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
   let tracesPath = testResultsDir;
 
   if (!testResultsDir) {
-    showWarningMessage("No testResultsDir provided");
+    if (verbose) {
+      showWarningMessage("No testResultsDir provided");
+    }
     return [];
   }
 
@@ -110,7 +118,9 @@ export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTr
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
-    showWarningMessage(checkResult.message);
+    if (verbose) {
+      showWarningMessage(checkResult.message);
+    }
     return [];
   }
 
@@ -118,7 +128,9 @@ export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTr
   tracesPath = path.join(workspacePath, testResultsDir);
 
   if (!fs.existsSync(tracesPath)) {
-    showWarningMessage(`No traces directory found at: "${tracesPath}"`);
+    if (verbose) {
+      showWarningMessage(`No traces directory found at: "${tracesPath}"`);
+    }
     return [];
   }
 
@@ -134,12 +146,14 @@ export async function getPlaywrightTraces(testResultsDir?: string): Promise<PwTr
   return pwTraces;
 }
 
-export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]> {
+export async function getPlaywrightScriptsFromPackageJson(verbose = false): Promise<PwScripts[]> {
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
-    showWarningMessage(checkResult.message);
+    if (verbose) {
+      showWarningMessage(checkResult.message);
+    }
     return [];
   }
 
@@ -147,7 +161,9 @@ export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]
   const packageJsonPath = path.join(workspacePath, "package.json");
 
   if (!fs.existsSync(packageJsonPath)) {
-    showWarningMessage("No package.json found in the workspace");
+    if (verbose) {
+      showWarningMessage("No package.json found in the workspace");
+    }
     return [];
   }
 
@@ -158,7 +174,9 @@ export async function getPlaywrightScriptsFromPackageJson(): Promise<PwScripts[]
   );
 
   if (!foundKeys || foundKeys.length === 0) {
-    showErrorMessage("No Playwright scripts found in package.json");
+    if (verbose) {
+      showErrorMessage("No Playwright scripts found in package.json");
+    }
     return [];
   }
 

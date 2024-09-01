@@ -77,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {
-    getPlaywrightScriptsFromPackageJson().then((scripts) => {
+    getPlaywrightScriptsFromPackageJson(true).then((scripts) => {
       scriptsViewProvider.refresh(scripts);
       commandComposerViewProvider.refreshScripts(scripts);
       showInformationMessage("Playwright scripts from package.json refreshed");
@@ -86,7 +86,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   registerCommand(context, `${EXTENSION_NAME}.refreshTraces`, () => {
     const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
-    getPlaywrightTraces(testResultsDir).then((traces) => {
+    getPlaywrightTraces(testResultsDir, true).then((traces) => {
       traceViewProvider.refresh(traces);
       showInformationMessage(`Playwright traces refreshed (from ${testResultsDir})`);
     });
@@ -94,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   registerCommand(context, `${EXTENSION_NAME}.refreshReports`, () => {
     const testReportsDir = MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
-    getPlaywrightReports(testReportsDir).then((reports) => {
+    getPlaywrightReports(testReportsDir, true).then((reports) => {
       reportViewProvider.refresh(reports);
       showInformationMessage(`Playwright reports refreshed (from ${testReportsDir})`);
     });

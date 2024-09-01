@@ -26,6 +26,9 @@
   const buttons = document.querySelectorAll(".nav-list__link");
   for (const button of buttons) {
     button.addEventListener("click", () => {
+      if (button.classList.contains("loading")) {
+        return;
+      }
       const attributeKey = button.getAttribute("key");
 
       vscode.postMessage({ type: "invokeShowReport", key: attributeKey });
