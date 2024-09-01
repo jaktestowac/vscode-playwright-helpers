@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { getNonce, getPlaywrightScriptsFromPackageJson } from "../helpers/helpers";
 import { PwScripts } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal";
-import { svgPlayIcon } from "../helpers/icons";
+import { svgPlayIcon, svgWaitContinueIcon } from "../helpers/icons";
 import { showErrorMessage } from "../helpers/window-messages";
 
 export class ScriptsViewProvider implements vscode.WebviewViewProvider {
@@ -34,21 +34,21 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "invokeScript": {
-          this.invokeScript(data.key);
+          this.invokeScript(data.key, data.instantExecute);
           break;
         }
       }
     });
   }
 
-  private invokeScript(scriptName: string) {
+  private invokeScript(scriptName: string, instantExecute: boolean) {
     getPlaywrightScriptsFromPackageJson().then((scripts) => {
       const script = scripts?.find((command) => command.key === scriptName);
       if (script !== undefined) {
         executeCommandInTerminal({
           command: script.script,
           terminalName: script.key,
-          execute: true,
+          execute: instantExecute ?? true,
         });
       } else {
         showErrorMessage(`Script ${scriptName} not found. Refreshing...`);
@@ -73,15 +73,19 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     if (this._scriptsList !== undefined && this._scriptsList.length > 0) {
       controlsHTMLList += '<nav class="nav-list">';
       for (const script of this._scriptsList) {
+        let playButtons = "";
+        playButtons = `<span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${script.key}">${svgPlayIcon}</span>`;
+        playButtons += `<span class="pause-run-icon" title="Paste" tooltip-text="Paste" key="${script.key}">${svgWaitContinueIcon}</span>`;
+
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.script}" tooltip-text="${script.script}">
+            <div class="nav-list__link " aria-label="${script.key}" key="${script.key}" title="${script.script}" tooltip-text="${script.script}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${script.key}" >
-                ${svgPlayIcon}<span>${script.key}</span>
+                <span>${script.key}</span>
               </tooltip>
-            </a>
+            </div>${playButtons}
           </div>`;
       }
       controlsHTMLList += "</div>";

@@ -6,24 +6,46 @@
   // @ts-ignore
   const vscode = acquireVsCodeApi();
 
-  const buttons = document.querySelectorAll(".nav-list__link");
-  for (const button of buttons) {
-    button.addEventListener("click", () => {
-      if (button.classList.contains("loading")) {
+  const runIcons = document.querySelectorAll(".run-icon");
+  for (const runIcon of runIcons) {
+    runIcon.addEventListener("click", () => {
+      if (runIcon.classList.contains("loading")) {
         return;
       }
-      const attributeKey = button.getAttribute("key");
+      const attributeKey = runIcon.getAttribute("key");
       vscode.postMessage({ type: "invokeScript", key: attributeKey });
 
       // Disable the button and show a loading indicator
       // for a second to let the user know the command is running
       // @ts-ignore
-      button.disabled = true;
-      button.classList.add("loading");
+      runIcon.disabled = true;
+      runIcon.classList.add("loading");
       setTimeout(() => {
         // @ts-ignore
-        button.disabled = false;
-        button.classList.remove("loading");
+        runIcon.disabled = false;
+        runIcon.classList.remove("loading");
+      }, 1000);
+    });
+  }
+
+  const pauseRunIcons = document.querySelectorAll(".pause-run-icon");
+  for (const runIcon of pauseRunIcons) {
+    runIcon.addEventListener("click", () => {
+      if (runIcon.classList.contains("loading")) {
+        return;
+      }
+      const attributeKey = runIcon.getAttribute("key");
+      vscode.postMessage({ type: "invokeScript", key: attributeKey, instantExecute: false });
+
+      // Disable the button and show a loading indicator
+      // for a second to let the user know the command is running
+      // @ts-ignore
+      runIcon.disabled = true;
+      runIcon.classList.add("loading");
+      setTimeout(() => {
+        // @ts-ignore
+        runIcon.disabled = false;
+        runIcon.classList.remove("loading");
       }, 1000);
     });
   }
