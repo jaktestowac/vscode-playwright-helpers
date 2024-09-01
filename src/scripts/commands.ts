@@ -268,6 +268,7 @@ export function getCommandList(): PwCommand[] {
       func: closeAllTerminals,
       prettyName: "Close All PW Helpers Terminals",
       category: PlaywrightCommandsCategory.mics,
+      onlyPasteAndRun: true,
     },
     {
       key: "listInstalledPackages",

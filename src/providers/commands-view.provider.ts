@@ -78,13 +78,22 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       // buttonHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += `<nav class="nav-list" category="${category}">`;
       let idx = 0;
-      for (const { key, prettyName, askForExecute, params } of commands) {
+      for (const { key, prettyName, params, onlyPasteAndRun } of commands) {
         // const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
         let toolTipText = prettyName;
 
         if (params !== undefined) {
           toolTipText += `: \`${params.command}\``;
         }
+
+        let playButtons = "";
+        playButtons = `<span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${key}">${svgPlayIcon}</span>`;
+        if (onlyPasteAndRun === true) {
+          // do nothing
+        } else {
+          playButtons += `<span class="pause-run-icon" title="Paste" tooltip-text="Paste" key="${key}">${svgWaitContinueIcon}</span>`;
+        }
+        playButtons += `<span class="star-icon" title="Add to favorites" key="${key}">${svgStarEmptyIcon}</span>`;
 
         buttonHTMLList += `
           <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
@@ -94,7 +103,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
                 <span>${prettyName}</span>
               </tooltip>
-            </div><span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${key}">${svgPlayIcon}</span><span class="pause-run-icon" title="Paste" tooltip-text="Paste" key="${key}">${svgWaitContinueIcon}</span><span class="star-icon" title="Add to favorites" key="${key}">${svgStarEmptyIcon}</span>
+            </div>${playButtons}
           </div>`;
         idx++;
       }
