@@ -66,9 +66,6 @@ export async function openDirectory(dir: string) {
   const fullPath = path.join(workspacePath, dir);
   const folderUri = vscode.Uri.file(fullPath);
 
-  console.log("Opening directory: ", fullPath);
-  console.log("folderUri: ", folderUri);
-  console.log("workspacePath: ", workspacePath);
   await vscode.env.openExternal(folderUri);
 }
 
