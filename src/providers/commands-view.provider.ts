@@ -37,11 +37,16 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
   private invokeCommand(commandName: string, instantExecute: boolean) {
     const command = this._commandList.find((command) => command.key === commandName);
+    if (command === undefined) {
+      return;
+    }
+
     const commandFunc = command?.func;
-    const commandParams = command?.params;
     if (commandFunc === undefined) {
       return;
     }
+
+    const commandParams = command?.params;
 
     if (commandParams !== undefined) {
       commandParams.instantExecute = instantExecute;

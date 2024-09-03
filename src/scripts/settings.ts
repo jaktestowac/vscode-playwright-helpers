@@ -1,4 +1,3 @@
-import { svgWaitContinueIcon } from "../helpers/icons";
 import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "../helpers/types";
 
 export function getSettingsList(): PwSettings[] {
@@ -7,6 +6,13 @@ export function getSettingsList(): PwSettings[] {
       key: "reuseTerminal",
       func: reuseTerminal,
       prettyName: "Reuse Existing Terminal",
+      category: PlaywrightSettingsCategory.general,
+      type: PlaywrightSettingsType.checkbox,
+    },
+    {
+      key: "verboseApiLogs",
+      func: verboseApiLogs,
+      prettyName: "Playwright Verbose API logs",
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
@@ -25,4 +31,6 @@ export function getSettingsList(): PwSettings[] {
 
 function reuseTerminal() {}
 
-function instantExecute() {}
+function verboseApiLogs() {}
+
+// function instantExecute() {}

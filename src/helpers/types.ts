@@ -116,3 +116,25 @@ export enum PlaywrightSettingsType {
 export enum CommandComposerCategory {
   general = "General",
 }
+
+export enum TerminalType {
+  CMD = "cmd",
+  POWERSHELL = "powershell",
+  FISH = "fish",
+  BASH = "bash",
+  UNKNOWN = "unknown",
+}
+
+export interface TerminalCommands {
+  clear: TerminalCommand;
+  setVariable: TerminalCommand;
+  concatCommands: TerminalCommand;
+}
+
+export interface TerminalCommand {
+  cmd: (...args: string[]) => string;
+  powershell: (...args: string[]) => string;
+  fish: (...args: string[]) => string;
+  bash: (...args: string[]) => string;
+  unknown: (...args: string[]) => string;
+}
