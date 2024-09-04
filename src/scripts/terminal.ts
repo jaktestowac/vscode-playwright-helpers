@@ -16,7 +16,7 @@ export const terminalCommands: TerminalCommands = {
     unknown: (key: string, value: string) => `export ${key}=${value}`,
   },
   concatCommands: {
-    cmd: (...args: string[]) => args.join(" & "),
+    cmd: (...args: string[]) => args.join(" && "),
     powershell: (...args: string[]) => args.join("; "),
     fish: (...args: string[]) => args.join("; "),
     bash: (...args: string[]) => args.join("; "),

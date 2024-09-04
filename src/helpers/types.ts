@@ -87,6 +87,15 @@ export interface PwScriptsMap {
   [key: string]: PwScripts[];
 }
 
+export interface KeyValuePairs {
+  [key: string]: string;
+}
+
+export interface NameValuePair {
+  name: string;
+  value: string;
+}
+
 export interface PwCommandComposerMap {
   [key: string]: PwCommandComposer[];
 }

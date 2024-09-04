@@ -16,6 +16,7 @@ import { ReportViewProvider } from "./providers/report-view.provider";
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
   MyExtensionContext.instance.setWorkspaceValue("workspaceFolders", vscode.workspace.workspaceFolders);
+  MyExtensionContext.instance.setWorkspaceValue("environmentVariables", {});
 
   if (MyExtensionContext.instance.getWorkspaceValue("testResultsDir") === undefined) {
     MyExtensionContext.instance.setWorkspaceValue("testResultsDir", DEFAULT_TEST_RESULTS_DIR);

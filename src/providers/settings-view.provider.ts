@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { getNonce } from "../helpers/helpers";
-import { PwSettings, PwSettingsMap } from "../helpers/types";
+import { KeyValuePairs, NameValuePair, PwSettings, PwSettingsMap } from "../helpers/types";
 
 export class SettingsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.settings";
@@ -32,8 +32,22 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
           this.invokeToggle(data.key, data.value);
           break;
         }
+        case "updateEnvVariables": {
+          this.updateEnvVariables(data.vars);
+          break;
+        }
       }
     });
+  }
+
+  private updateEnvVariables(keyValuePairs: NameValuePair[]) {
+    const vars = {} as KeyValuePairs;
+
+    for (const { name, value } of keyValuePairs) {
+      vars[name] = value;
+    }
+
+    MyExtensionContext.instance.setWorkspaceValue("environmentVariables", vars);
   }
 
   private invokeToggle(key: string, value: boolean) {
@@ -71,6 +85,22 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
       }
     }
 
+    controlsHTMLList += `<h4 aria-label="Environment Variables" class="nav-list__title">Environment Variables</h4>`;
+    controlsHTMLList += `
+    <table id="envVariablesTable">
+      <tbody id="envVariablesTableBody">
+        <tr>
+          <td width="50%">Variable</td>
+          <td width="50%">Value</td>
+          <td width="20px"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div align="center">
+      <button width="auto" id="addEnvVariable">Prepare New Env Variable</button>
+    </div>
+    `;
+
     const nonce = getNonce();
 
     return `<!DOCTYPE html>
@@ -85,7 +115,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body class="settings-body">
   
                  ${controlsHTMLList}
 

@@ -408,3 +408,7 @@ a.nav-list__link {
 .action-icon:hover {
   opacity: 1;
 }
+
+.settings-table-input {
+  padding: 1px;
+}
