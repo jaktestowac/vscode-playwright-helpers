@@ -1,7 +1,7 @@
 import MyExtensionContext from "./my-extension.context";
 import { ExecuteInTerminalParameters } from "./types";
 import * as vscode from "vscode";
-import { getTerminalType } from "./terminal";
+import { getTerminalType } from "./terminal.helpers";
 import { terminalCommands } from "../scripts/terminal";
 
 export function decorateCommand(

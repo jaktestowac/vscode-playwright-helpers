@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { Map, PwCommandComposer, PwCommandComposerMap, PwScripts } from "../helpers/types";
+import { PwCommandComposer, PwCommandComposerMap, PwScripts } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {

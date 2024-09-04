@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
 import { getNonce, getPlaywrightReports, openDirectory } from "../helpers/helpers";
 import { PwReports } from "../helpers/types";
-import { executeCommandInTerminal } from "../helpers/terminal";
+import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 import { svgOpenedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
-import { showErrorMessage } from "../helpers/window-messages";
+import { showErrorMessage } from "../helpers/window-messages.helpers";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_REPORTS_DIR } from "../helpers/consts";
 

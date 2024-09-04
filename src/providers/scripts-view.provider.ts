@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
 import { getNonce, getPlaywrightScriptsFromPackageJson } from "../helpers/helpers";
 import { PwScripts } from "../helpers/types";
-import { executeCommandInTerminal } from "../helpers/terminal";
+import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 import { svgPlayIcon, svgWaitContinueIcon } from "../helpers/icons";
-import { showErrorMessage } from "../helpers/window-messages";
+import { showErrorMessage } from "../helpers/window-messages.helpers";
 
 export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.scripts";

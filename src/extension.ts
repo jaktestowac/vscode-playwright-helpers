@@ -7,7 +7,7 @@ import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
 import { DEFAULT_TEST_REPORTS_DIR, DEFAULT_TEST_RESULTS_DIR, EXTENSION_NAME } from "./helpers/consts";
 import { getPlaywrightReports, getPlaywrightScriptsFromPackageJson, getPlaywrightTraces } from "./helpers/helpers";
-import { showInformationMessage } from "./helpers/window-messages";
+import { showInformationMessage } from "./helpers/window-messages.helpers";
 import { CommandComposerViewProvider } from "./providers/command-composer-view.provider";
 import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";

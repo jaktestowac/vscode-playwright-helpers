@@ -2,8 +2,8 @@ import * as vscode from "vscode";
 import * as cp from "child_process";
 import * as fs from "fs";
 import MyExtensionContext from "./my-extension.context";
-import { areWorkspaceFoldersSingle } from "./assertions";
-import { showErrorMessage, showWarningMessage } from "./window-messages";
+import { areWorkspaceFoldersSingle } from "./assertions.helpers";
+import { showErrorMessage, showWarningMessage } from "./window-messages.helpers";
 import path from "path";
 import { PwReports, PwScripts, PwTraces } from "./types";
 

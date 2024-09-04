@@ -1,10 +1,10 @@
 import * as vscode from "vscode";
 import { CommandParameters, Map, PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
-import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions";
-import { showErrorMessage } from "../helpers/window-messages";
+import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers";
+import { showErrorMessage } from "../helpers/window-messages.helpers";
 import { BASE_TERMINAL_NAME } from "../helpers/consts";
-import { executeCommandInTerminal } from "../helpers/terminal";
+import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
