@@ -138,6 +138,7 @@ export interface TerminalCommands {
   clear: TerminalCommand;
   setVariable: TerminalCommand;
   concatCommands: TerminalCommand;
+  printAllEnvVariables: TerminalCommand;
 }
 
 export interface TerminalCommand {

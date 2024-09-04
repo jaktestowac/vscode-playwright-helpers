@@ -22,4 +22,11 @@ export const terminalCommands: TerminalCommands = {
     bash: (...args: string[]) => args.join("; "),
     unknown: (...args: string[]) => args.join("; "),
   },
+  printAllEnvVariables: {
+    cmd: () => `SET`,
+    powershell: () => `Get-ChildItem Env: | Format-Table -Wrap -AutoSize`,
+    fish: () => `printenv`,
+    bash: () => `printenv`,
+    unknown: () => `printenv`,
+  },
 };
