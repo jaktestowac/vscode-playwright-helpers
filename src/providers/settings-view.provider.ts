@@ -85,7 +85,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
       }
     }
 
-    controlsHTMLList += `<h4 aria-label="Environment Variables" class="nav-list__title">Environment Variables</h4>`;
+    controlsHTMLList += `<h4 aria-label="Environment Variables" class="nav-list__title" title="Environment Variables to be set before running scripts">Environment Variables</h4>`;
     controlsHTMLList += `
     <table id="envVariablesTable">
       <tbody id="envVariablesTableBody">

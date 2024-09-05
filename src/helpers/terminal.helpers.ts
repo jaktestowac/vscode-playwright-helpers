@@ -1,8 +1,7 @@
 import { terminalCommands } from "../scripts/terminal";
-import { decorateCommand } from "./commands.decorator";
 import { BASE_TERMINAL_NAME } from "./consts";
 import MyExtensionContext from "./my-extension.context";
-import { ExecuteInTerminalParameters, TerminalType } from "./types";
+import { ExecuteInTerminalParameters, TerminalCommand, TerminalCommandSet, TerminalType } from "./types";
 import * as vscode from "vscode";
 
 export function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
@@ -55,8 +54,6 @@ export function getTerminalType(terminal: vscode.Terminal): TerminalType {
     shellPath = vscode.env.shell;
   }
 
-  console.log(shellPath);
-
   if (name === "cmd" || shellPath.includes("cmd.exe")) {
     return TerminalType.CMD;
   } else if (["powershell", "pwsh"].includes(name) || shellPath.includes("powershell.exe")) {
@@ -69,14 +66,43 @@ export function getTerminalType(terminal: vscode.Terminal): TerminalType {
   return TerminalType.UNKNOWN;
 }
 
-export function setEnvVariableInTerminal(terminal: vscode.Terminal, key: string, value: string, execute = false) {
+export function getMethodForShell(terminal: vscode.Terminal, methodSet: TerminalCommandSet): TerminalCommand {
   const terminalType = getTerminalType(terminal);
-  const setVariable = terminalCommands.setVariable[terminalType];
+  return methodSet[terminalType];
+}
+
+export function setEnvVariableInTerminal(terminal: vscode.Terminal, key: string, value: string, execute = false) {
+  const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
   terminal.sendText(setVariable(key, value), execute);
 }
 
 export function clearTerminal(terminal: vscode.Terminal, execute = false) {
-  const terminalType = getTerminalType(terminal);
-  const clear = terminalCommands.clear[terminalType];
+  const clear = getMethodForShell(terminal, terminalCommands.clear);
   terminal.sendText(clear(), execute);
+}
+
+export function decorateCommand(
+  terminal: vscode.Terminal,
+  params: ExecuteInTerminalParameters
+): ExecuteInTerminalParameters {
+  const verboseApiLogs = MyExtensionContext.instance.getWorkspaceValue("verboseApiLogs");
+  if (verboseApiLogs) {
+    const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
+    const cmdToSetEnvVar = setVariable("DEBUG", "pw:api");
+    const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);
+    params.command = concatCommands(cmdToSetEnvVar, params.command);
+  }
+
+  const envVariables = MyExtensionContext.instance.getWorkspaceValue("environmentVariables");
+
+  if (envVariables !== undefined && Object.keys(envVariables).length > 0) {
+    const terminalType = getTerminalType(terminal);
+    const setVariable = terminalCommands.setVariable[terminalType];
+    for (const [key, value] of Object.entries(envVariables)) {
+      const cmdToSetEnvVar = setVariable(key, value as string);
+      const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);
+      params.command = concatCommands(cmdToSetEnvVar, params.command);
+    }
+  }
+  return params;
 }

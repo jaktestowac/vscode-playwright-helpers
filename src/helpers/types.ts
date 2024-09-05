@@ -135,16 +135,20 @@ export enum TerminalType {
 }
 
 export interface TerminalCommands {
-  clear: TerminalCommand;
-  setVariable: TerminalCommand;
-  concatCommands: TerminalCommand;
-  printAllEnvVariables: TerminalCommand;
+  clear: TerminalCommandSet;
+  setVariable: TerminalCommandSet;
+  concatCommands: TerminalCommandSet;
+  printAllEnvVariables: TerminalCommandSet;
+}
+
+export interface TerminalCommandSet {
+  cmd: TerminalCommand;
+  powershell: TerminalCommand;
+  fish: TerminalCommand;
+  bash: TerminalCommand;
+  unknown: TerminalCommand;
 }
 
 export interface TerminalCommand {
-  cmd: (...args: string[]) => string;
-  powershell: (...args: string[]) => string;
-  fish: (...args: string[]) => string;
-  bash: (...args: string[]) => string;
-  unknown: (...args: string[]) => string;
+  (...args: string[]): string;
 }

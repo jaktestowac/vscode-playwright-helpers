@@ -52,6 +52,7 @@
 
     const nameInput = document.createElement("input");
     nameInput.type = "text";
+    nameInput.setAttribute("placeholder", "Value");
     nameInput.setAttribute("id", "name");
     nameInput.classList.add("settings-table-input");
     nameInput.addEventListener("change", () => {
@@ -64,6 +65,7 @@
 
     const valueInput = document.createElement("input");
     valueInput.type = "text";
+    valueInput.setAttribute("placeholder", "Value");
     valueInput.setAttribute("id", "value");
     valueInput.classList.add("settings-table-input");
     valueInput.addEventListener("change", () => {
