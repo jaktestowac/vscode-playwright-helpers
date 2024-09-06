@@ -96,11 +96,10 @@ export function decorateCommand(
   const envVariables = MyExtensionContext.instance.getWorkspaceValue("environmentVariables");
 
   if (envVariables !== undefined && Object.keys(envVariables).length > 0) {
-    const terminalType = getTerminalType(terminal);
-    const setVariable = terminalCommands.setVariable[terminalType];
+    const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
+    const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);
     for (const [key, value] of Object.entries(envVariables)) {
       const cmdToSetEnvVar = setVariable(key, value as string);
-      const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);
       params.command = concatCommands(cmdToSetEnvVar, params.command);
     }
   }
