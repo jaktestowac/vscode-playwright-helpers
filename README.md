@@ -34,7 +34,7 @@ Commands are available at:
 The Command Palette is a feature in Visual Studio Code that provides a convenient way to access various commands and features within the editor.
 
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-2.gif?raw=true" alt="Preview">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-2.gif?raw=true" alt="Preview of Command Palette">
 </p>
 
 1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
@@ -52,7 +52,7 @@ In addition to accessing the commands through the Command Palette, you can also 
 Under the **Playwright Helpers** section you will see a list of available commands categorized. Simply click on a command to execute it.
 
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-1.gif?raw=true" alt="Preview">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-1.gif?raw=true" alt="Preview of Side View">
 </p>
 
 The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
@@ -104,7 +104,7 @@ The Command Composer allows you to compose your own commands by selecting the de
 From graphical user interface you can select options described in documentation and then execute the command:
 
 <p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-3.gif?raw=true" alt="Preview">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-3.gif?raw=true" alt="Preview of Command Composer">
 </p>
 
 Currently available commands to compose:
@@ -114,13 +114,25 @@ https://playwright.dev/docs/test-cli#reference
 
 The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run `trace-viewer` to display selected trace.
 
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-5-trace.gif?raw=true" alt="Preview of Trace Viewer">
+</p>
+
 ## Report Viewer
 
 The extension provides an easy way to view Playwright reports in a graphical user interface. You can view the reports in a tree view and quickly run `view-report` to display selected report.
 
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-6-reports.gif?raw=true" alt="Preview of Report Viewer">
+</p>
+
 ## Playwright Scripts Runner
 
 The extension provides an easy way to run Playwright scripts from package.json. You can run scripts from the package.json file by selecting the script from the list.
+
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-4-scripts.gif?raw=true" alt="Preview of Playwright Scripts Runner">
+</p>
 
 # Contributing
 
