@@ -11,7 +11,7 @@ export function getCommandList(): PwCommand[] {
     {
       key: "checkPlaywrightVersion",
       func: executeScript,
-      prettyName: "Check Playwright Version",
+      prettyName: "Check Version - Playwright ",
       category: PlaywrightCommandsCategory.playwright,
       params: {
         key: "checkPlaywrightVersion",
@@ -22,18 +22,18 @@ export function getCommandList(): PwCommand[] {
     {
       key: "checkPlaywrightTestVersion",
       func: executeScript,
-      prettyName: "Check @playwright/test Version",
+      prettyName: "Check Version - @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
       params: {
         key: "checkPlaywrightTestVersion",
         command: "npx @playwright/test --version",
-        terminalName: "Check @playwright/test Version",
+        terminalName: "Check Version - @playwright/test",
       },
     },
     {
       key: "checkForPlaywrightTestUpdates",
       func: executeScript,
-      prettyName: "Check for @playwright/test Updates",
+      prettyName: "Check Updates - @playwright/test ",
       category: PlaywrightCommandsCategory.playwright,
       params: {
         key: "checkForPlaywrightTestUpdates",

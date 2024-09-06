@@ -75,6 +75,9 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
     for (const [category, settings] of Object.entries(tempList)) {
       controlsHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       controlsHTMLList += `<div class="nav-list" category="${category}">`;
+
+      const sortedSettings = settings.sort((a, b) => a.prettyName.localeCompare(b.prettyName));
+
       for (const {
         key,
         prettyName,
@@ -85,7 +88,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         notCheckbox,
         optionType,
         maxControlLengthClass,
-      } of settings) {
+      } of sortedSettings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const ariaLabel = prettyName;
 

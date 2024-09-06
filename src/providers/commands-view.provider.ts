@@ -83,7 +83,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       // buttonHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += `<nav class="nav-list" category="${category}">`;
       let idx = 0;
-      for (const { key, prettyName, params, onlyPasteAndRun } of commands) {
+
+      const sortedCommands = commands.sort((a, b) => a.prettyName.localeCompare(b.prettyName));
+      for (const { key, prettyName, params, onlyPasteAndRun } of sortedCommands) {
         // const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
         let toolTipText = prettyName;
 

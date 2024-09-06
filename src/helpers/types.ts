@@ -14,7 +14,7 @@ export interface CommandParameters {
 export interface PwCommand {
   key: string;
   func: (...args: any[]) => any;
-  prettyName?: string;
+  prettyName: string;
   category: string;
   askForExecute?: boolean;
   terminalName?: string;
@@ -57,7 +57,7 @@ export interface PwCommandComposer {
   valueType?: "string" | "number" | "select";
   optionType?: "string" | "PwScripts";
   defaultValue?: string | number | string[] | PwScripts[];
-  prettyName?: string;
+  prettyName: string;
   skipAsOption?: boolean;
   overwriteBaseCommand?: boolean;
   notCheckbox?: boolean;
