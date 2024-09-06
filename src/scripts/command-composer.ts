@@ -19,7 +19,15 @@ export function getCommandComposerData() {
       option: "--config",
       valueType: "string",
       defaultValue: "playwright.config.ts",
-      prettyName: "Configuration file",
+      prettyName: "Config file",
+      category: CommandComposerCategory.general,
+    },
+    {
+      key: "--tsconfig",
+      option: "--tsconfig",
+      valueType: "string",
+      defaultValue: "tsconfig.test.json",
+      prettyName: "Config file - tsconfig",
       category: CommandComposerCategory.general,
     },
     {
