@@ -125,6 +125,7 @@ export function getCommandList(): PwCommand[] {
       prettyName: "Install/Update to Next @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
       askForExecute: true,
+      onlyPaste: true,
       params: {
         key: "installNextPlaywrightTest",
         command: "npm i @playwright/test@next",

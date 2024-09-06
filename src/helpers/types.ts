@@ -20,6 +20,7 @@ export interface PwCommand {
   terminalName?: string;
   params?: CommandParameters;
   onlyPasteAndRun?: boolean;
+  onlyPaste?: boolean;
 }
 
 export interface PwSettings {

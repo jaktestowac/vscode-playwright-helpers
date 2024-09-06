@@ -85,8 +85,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       let idx = 0;
 
       const sortedCommands = commands.sort((a, b) => a.prettyName.localeCompare(b.prettyName));
-      for (const { key, prettyName, params, onlyPasteAndRun } of sortedCommands) {
-        // const icon = askForExecute ? svgWaitContinueIcon : svgPlayIcon;
+      for (const { key, prettyName, params, onlyPasteAndRun, onlyPaste } of sortedCommands) {
         let toolTipText = prettyName;
 
         if (params !== undefined) {
@@ -94,7 +93,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         }
 
         let playButtons = "";
-        playButtons = `<span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${key}">${svgPlayIcon}</span>`;
+        if (onlyPaste === true) {
+          // do nothing
+        } else {
+          playButtons = `<span class="run-icon" title="Paste & run" tooltip-text="Paste & run" key="${key}">${svgPlayIcon}</span>`;
+        }
         if (onlyPasteAndRun === true) {
           // do nothing
         } else {
