@@ -101,7 +101,7 @@ export interface PwCommandComposerMap {
   [key: string]: PwCommandComposer[];
 }
 
-export interface PwCheckResult {
+export interface CheckResult {
   success: boolean;
   message: string;
 }

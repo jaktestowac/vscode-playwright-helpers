@@ -1,8 +1,8 @@
 import { isDirectoryEmpty } from "./helpers";
-import { PwCheckResult } from "./types";
+import { CheckResult } from "./types";
 import * as vscode from "vscode";
 
-export function areWorkspaceFoldersSingleAndEmpty(workspaceFolders: vscode.WorkspaceFolder[]): PwCheckResult {
+export function areWorkspaceFoldersSingleAndEmpty(workspaceFolders: vscode.WorkspaceFolder[]): CheckResult {
   if (workspaceFolders === undefined || workspaceFolders.length === 0) {
     return { success: false, message: "No workspace folder opened." };
   }
@@ -20,7 +20,7 @@ export function areWorkspaceFoldersSingleAndEmpty(workspaceFolders: vscode.Works
   return { success: true, message: "" };
 }
 
-export function areWorkspaceFoldersSingle(workspaceFolders: vscode.WorkspaceFolder[]): PwCheckResult {
+export function areWorkspaceFoldersSingle(workspaceFolders: vscode.WorkspaceFolder[]): CheckResult {
   if (workspaceFolders === undefined || workspaceFolders.length === 0) {
     return { success: false, message: "No workspace folder opened." };
   }

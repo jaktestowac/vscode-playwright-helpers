@@ -52,7 +52,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       commandParams.instantExecute = instantExecute;
       commandFunc(commandParams);
     } else {
-      commandFunc((instantExecute = instantExecute));
+      commandFunc({ instantExecute: instantExecute });
     }
   }
 
