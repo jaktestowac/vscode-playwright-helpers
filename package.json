@@ -96,6 +96,16 @@
           "when": "view == playwright-helpers.commandsTreeView",
           "group": "navigation"
         }
+      ],
+      "webview/context": [
+        {
+          "command": "playwright-helpers.runSelectedCommand",
+          "when": "webviewId == playwright-helpers.commands"
+        },
+        {
+          "command": "playwright-helpers.pasteSelectedCommand",
+          "when": "webviewId == playwright-helpers.commands"
+        }
       ]
     },
     "commands": [
@@ -107,6 +117,16 @@
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
         }
+      },
+      {
+        "command": "playwright-helpers.runSelectedCommand",
+        "category": "PW Helpers",
+        "title": "Paste & Run"
+      },
+      {
+        "command": "playwright-helpers.pasteSelectedCommand",
+        "category": "PW Helpers",
+        "title": "Paste"
       },
       {
         "command": "playwright-helpers.refreshTraces",

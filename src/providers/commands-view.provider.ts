@@ -34,18 +34,22 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "invokeCommand": {
-          this.invokeCommand(data.key, data.instantExecute);
+          this._invokeCommand(data.key, data.instantExecute);
           break;
         }
         case "invokeCommandWithAdditionalParams": {
-          this.invokeCommand(data.key, data.instantExecute, data.additionalParams);
+          this._invokeCommand(data.key, data.instantExecute, data.additionalParams);
           break;
         }
       }
     });
   }
 
-  private invokeCommand(commandName: string, instantExecute: boolean, additionalParams?: AdditionalParams[]) {
+  public invokeCommand(key: string, instantExecute: boolean) {
+    this._invokeCommand(key, instantExecute);
+  }
+
+  private _invokeCommand(commandName: string, instantExecute: boolean, additionalParams?: AdditionalParams[]) {
     const command = this._commandList.find((command) => command.key === commandName);
     if (command === undefined) {
       return;
@@ -148,8 +152,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         playButtons += `<span class="star-icon" title="Add to favorites" key="${key}">${svgStarEmptyIcon}</span>`;
 
         buttonHTMLList += `
-          <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
-            <div class="nav-list__link search-result" onlyPaste="${onlyPaste}" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}">
+          <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}" >
+            <div class="nav-list__link search-result" onlyPaste="${onlyPaste}" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}"
+              data-vscode-context='{"key": "${key}", "preventDefaultContextMenuItems": true}'>
 
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
@@ -185,7 +190,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body class="commands-view">
+              <body class="commands-view" data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 ${searchInputHtml}
                  ${buttonHTMLList}
 

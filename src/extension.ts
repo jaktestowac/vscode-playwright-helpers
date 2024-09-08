@@ -101,6 +101,24 @@ export function activate(context: vscode.ExtensionContext) {
     });
   });
 
+  registerCommand(context, `${EXTENSION_NAME}.runSelectedCommand`, (param) => {
+    if (param.key === undefined) {
+      showInformationMessage("Click on the command");
+      return;
+    }
+    commandsViewProvider.invokeCommand(param.key, true);
+  });
+  registerCommand(context, `${EXTENSION_NAME}.pasteSelectedCommand`, (param) => {
+    if (param.key === undefined) {
+      showInformationMessage("Click on the command");
+      return;
+    }
+    commandsViewProvider.invokeCommand(param.key, false);
+  });
+  // registerCommand(context, `${EXTENSION_NAME}.addToFavSelectedCommand`, (param) => {
+  //   console.log("Run Command", param);
+  // });
+
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
