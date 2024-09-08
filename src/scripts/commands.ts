@@ -199,6 +199,30 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "runCodegenWithSaveStorage",
+      func: executeScript,
+      prettyName: "Run Codegen with Save Storage",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+      params: {
+        key: "runCodegenWithSaveStorage",
+        command: "npx playwright codegen --save-storage playwright/.auth",
+        terminalName: "Codegen",
+      },
+    },
+    {
+      key: "runCodegenWithLoadStorage",
+      func: executeScript,
+      prettyName: "Run Codegen with Load Storage",
+      category: PlaywrightCommandsCategory.testing,
+      askForExecute: true,
+      params: {
+        key: "runCodegenWithLoadStorage",
+        command: "npx playwright codegen --load-storage playwright/.auth",
+        terminalName: "Codegen",
+      },
+    },
+    {
       key: "runShowReport",
       func: executeScript,
       prettyName: "Run Show Report",
