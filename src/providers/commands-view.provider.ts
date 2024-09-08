@@ -130,7 +130,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
             for (const param of additionalParams) {
               additionalParamsControls += `<input type="text" class="param-input" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />`;
             }
-            additionalParamsControls = "&nbsp; &nbsp;" + additionalParamsControls;
+            additionalParamsControls = "&nbsp; " + additionalParamsControls;
           }
         }
 
@@ -149,12 +149,12 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
         buttonHTMLList += `
           <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
-            <div class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}">
+            <div class="nav-list__link search-result" onlyPaste="${onlyPaste}" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}">
 
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
-                <span class="command-inline">${prettyName}${additionalParamsControls}</span>
+                <span class="command-inline"><span class="command-label">${prettyName}</span>${additionalParamsControls}</span>
               </tooltip>
             </div>${playButtons}
           </div>`;

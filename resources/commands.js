@@ -54,9 +54,47 @@
     return additionalParams;
   }
 
+  const commandLables = document.querySelectorAll(".nav-list__link");
+  for (const label of commandLables) {
+    label.addEventListener("dblclick", () => {
+      let instantExecute = true;
+      const attributeKey = label.getAttribute("key");
+      const attributeOnlyPaste = label.getAttribute("onlyPaste");
+
+      if (attributeOnlyPaste === "true") {
+        instantExecute = false;
+      }
+
+      const additionalParams = gatherAdditionalParams(attributeKey);
+
+      if (additionalParams.length > 0) {
+        vscode.postMessage({
+          type: "invokeCommandWithAdditionalParams",
+          key: attributeKey,
+          instantExecute,
+          additionalParams,
+        });
+      } else {
+        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute });
+      }
+
+      // Disable the button and show a loading indicator
+      // for a second to let the user know the command is running
+      // @ts-ignore
+      label.disabled = true;
+      label.classList.add("loading");
+      setTimeout(() => {
+        // @ts-ignore
+        label.disabled = false;
+        label.classList.remove("loading");
+      }, 1500);
+    });
+  }
+
   const runIcons = document.querySelectorAll(".run-icon");
   for (const runIcon of runIcons) {
     runIcon.addEventListener("click", () => {
+      const instantExecute = true;
       if (runIcon.classList.contains("loading")) {
         return;
       }
@@ -67,11 +105,11 @@
         vscode.postMessage({
           type: "invokeCommandWithAdditionalParams",
           key: attributeKey,
-          instantExecute: true,
+          instantExecute,
           additionalParams,
         });
       } else {
-        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: true });
+        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute });
       }
 
       // Disable the button and show a loading indicator
@@ -91,6 +129,7 @@
   const pauseRunIcons = document.querySelectorAll(".pause-run-icon");
   for (const runIcon of pauseRunIcons) {
     runIcon.addEventListener("click", () => {
+      const instantExecute = false;
       if (runIcon.classList.contains("loading")) {
         return;
       }
@@ -102,11 +141,11 @@
         vscode.postMessage({
           type: "invokeCommandWithAdditionalParams",
           key: attributeKey,
-          instantExecute: false,
+          instantExecute,
           additionalParams,
         });
       } else {
-        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: false });
+        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute });
       }
       // Disable the button and show a loading indicator
       // for a second to let the user know the command is running
