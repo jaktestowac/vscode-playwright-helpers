@@ -80,6 +80,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
       for (const {
         key,
+        option,
         prettyName,
         valueType,
         defaultValue,
@@ -148,7 +149,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
           }"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
           isChecked ? "checked" : ""
         } />
-          <label for="${key}" class="${checkboxLabelClass}">${prettyName}</label> ${additionalControl}</div>
+          <label for="${key}" class="${checkboxLabelClass}" title="${option}">${prettyName}</label> ${additionalControl}</div>
           `;
       }
 

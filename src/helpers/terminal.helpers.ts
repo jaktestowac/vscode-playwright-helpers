@@ -93,8 +93,15 @@ export function decorateCommand(
     params.command = concatCommands(cmdToSetEnvVar, params.command);
   }
 
-  const envVariables = MyExtensionContext.instance.getWorkspaceValue("environmentVariables");
+  const neverOpenHtmlReport = MyExtensionContext.instance.getWorkspaceValue("neverOpenHtmlReport");
+  if (neverOpenHtmlReport) {
+    const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
+    const cmdToSetEnvVar = setVariable("PLAYWRIGHT_HTML_OPEN", "never");
+    const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);
+    params.command = concatCommands(cmdToSetEnvVar, params.command);
+  }
 
+  const envVariables = MyExtensionContext.instance.getWorkspaceValue("environmentVariables");
   if (envVariables !== undefined && Object.keys(envVariables).length > 0) {
     const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
     const concatCommands = getMethodForShell(terminal, terminalCommands.concatCommands);

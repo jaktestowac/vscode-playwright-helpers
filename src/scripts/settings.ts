@@ -16,6 +16,13 @@ export function getSettingsList(): PwSettings[] {
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
+    {
+      key: "neverOpenHtmlReport",
+      func: neverOpenHtmlReport,
+      prettyName: "Never Open HTML Report",
+      category: PlaywrightSettingsCategory.general,
+      type: PlaywrightSettingsType.checkbox,
+    },
     // {
     //   key: "instantExecute",
     //   func: instantExecute,
@@ -32,5 +39,7 @@ export function getSettingsList(): PwSettings[] {
 function reuseTerminal() {}
 
 function verboseApiLogs() {}
+
+function neverOpenHtmlReport() {}
 
 // function instantExecute() {}
