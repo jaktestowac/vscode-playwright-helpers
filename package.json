@@ -56,22 +56,22 @@
         {
           "type": "webview",
           "id": "playwright-helpers.traces",
-          "name": "Show Trace"
+          "name": "%playwright-helpers.traces.name%"
         },
         {
           "type": "webview",
           "id": "playwright-helpers.reports",
-          "name": "Show Report"
+          "name": "%playwright-helpers.reports.name%"
         },
         {
           "type": "webview",
           "id": "playwright-helpers.command-composer",
-          "name": "Command Composer"
+          "name": "%playwright-helpers.command-composer.name%"
         },
         {
           "type": "webview",
           "id": "playwright-helpers.settings",
-          "name": "Settings"
+          "name": "%playwright-helpers.settings.name%"
         }
       ]
     },
@@ -122,17 +122,17 @@
       {
         "command": "playwright-helpers.runSelectedCommand",
         "category": "PW Helpers",
-        "title": "Paste & Run"
+        "title": "%playwright-helpers.runSelectedCommand.title%"
       },
       {
         "command": "playwright-helpers.pasteSelectedCommand",
         "category": "PW Helpers",
-        "title": "Paste"
+        "title": "%playwright-helpers.pasteSelectedCommand.title%"
       },
       {
         "command": "playwright-helpers.refreshTraces",
         "category": "PW Helpers",
-        "title": "Refresh Playwright Traces",
+        "title": "%playwright-helpers.refreshTraces.title%",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
@@ -141,7 +141,7 @@
       {
         "command": "playwright-helpers.refreshReports",
         "category": "PW Helpers",
-        "title": "Refresh Playwright Reports",
+        "title": "%playwright-helpers.refreshReports.title%",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
@@ -150,122 +150,122 @@
       {
         "command": "playwright-helpers.initNewProject",
         "category": "PW Helpers",
-        "title": "Initiate New Playwright Project"
+        "title": "%playwright-helpers.initNewProject.title%"
       },
       {
         "command": "playwright-helpers.initNewProjectQuick",
         "category": "PW Helpers",
-        "title": "Initiate New Playwright Project (with defaults)"
+        "title": "%playwright-helpers.initNewProjectQuick.title%"
       },
       {
         "command": "playwright-helpers.checkPlaywrightVersion",
         "category": "PW Helpers",
-        "title": "Check Playwright Version"
+        "title": "%playwright-helpers.checkPlaywrightVersion.title%"
       },
       {
         "command": "playwright-helpers.listInstalledPackages",
         "category": "PW Helpers",
-        "title": "List Installed Packages"
+        "title": "%playwright-helpers.listInstalledPackages.title%"
       },
       {
         "command": "playwright-helpers.listInstalledGlobalPackages",
         "category": "PW Helpers",
-        "title": "List Installed Global Packages"
+        "title": "%playwright-helpers.listInstalledGlobalPackages.title%"
       },
       {
         "command": "playwright-helpers.runCodegen",
         "category": "PW Helpers",
-        "title": "Run Playwright Codegen"
+        "title": "%playwright-helpers.runCodegen.title%"
       },
       {
         "command": "playwright-helpers.runShowReport",
         "category": "PW Helpers",
-        "title": "Run Playwright Show Report"
+        "title": "%playwright-helpers.runShowReport.title%"
       },
       {
         "command": "playwright-helpers.openUiMode",
         "category": "PW Helpers",
-        "title": "Open Playwright UI Mode"
+        "title": "%playwright-helpers.openUiMode.title%"
       },
       {
         "command": "playwright-helpers.checkPlaywrightTestVersion",
         "category": "PW Helpers",
-        "title": "Check Playwright Test Version"
+        "title": "%playwright-helpers.checkPlaywrightTestVersion.title%"
       },
       {
         "command": "playwright-helpers.installLatestPlaywrightTest",
         "category": "PW Helpers",
-        "title": "Install/Update Latest Playwright Test"
+        "title": "%playwright-helpers.installLatestPlaywrightTest.title%"
       },
       {
         "command": "playwright-helpers.installNextPlaywrightTest",
         "category": "PW Helpers",
-        "title": "Install/Update Next Playwright Test"
+        "title": "%playwright-helpers.installNextPlaywrightTest.title%"
       },
       {
         "command": "playwright-helpers.checkForPlaywrightTestUpdates",
         "category": "PW Helpers",
-        "title": "Check Playwright Test Updates"
+        "title": "%playwright-helpers.checkForPlaywrightTestUpdates.title%"
       },
       {
         "command": "playwright-helpers.listInstalledPlaywrightPackages",
         "category": "PW Helpers",
-        "title": "List Installed Playwright Packages"
+        "title": "%playwright-helpers.listInstalledPlaywrightPackages.title%"
       },
       {
         "command": "playwright-helpers.uninstallPlaywrightBrowsers",
         "category": "PW Helpers",
-        "title": "Uninstall Playwright Browsers (only from current project)"
+        "title": "%playwright-helpers.uninstallPlaywrightBrowsers.title%"
       },
       {
         "command": "playwright-helpers.installChromiumPlaywrightBrowser",
         "category": "PW Helpers",
-        "title": "Install Chromium Playwright Browser"
+        "title": "%playwright-helpers.installChromiumPlaywrightBrowser.title%"
       },
       {
         "command": "playwright-helpers.installWebkitPlaywrightBrowser",
         "category": "PW Helpers",
-        "title": "Install Webkit Playwright Browser"
+        "title": "%playwright-helpers.installWebkitPlaywrightBrowser.title%"
       },
       {
         "command": "playwright-helpers.installFirefoxPlaywrightBrowser",
         "category": "PW Helpers",
-        "title": "Install Firefox Playwright Browser"
+        "title": "%playwright-helpers.installFirefoxPlaywrightBrowser.title%"
       },
       {
         "command": "playwright-helpers.installAllPlaywrightBrowsers",
         "category": "PW Helpers",
-        "title": "Install All Playwright Browsers"
+        "title": "%playwright-helpers.installAllPlaywrightBrowsers.title%"
       },
       {
         "command": "playwright-helpers.uninstallAllPlaywrightBrowsers",
         "category": "PW Helpers",
-        "title": "Uninstall All Playwright Browsers"
+        "title": "%playwright-helpers.uninstallAllPlaywrightBrowsers.title%"
       },
       {
         "command": "playwright-helpers.closeAllTerminals",
         "category": "PW Helpers",
-        "title": "Close All Terminals"
+        "title": "%playwright-helpers.closeAllTerminals.title%"
       },
       {
         "command": "playwright-helpers.listSystemInfo",
         "category": "PW Helpers",
-        "title": "List System Info (using envinfo)"
+        "title": "%playwright-helpers.listSystemInfo.title%"
       },
       {
         "command": "playwright-helpers.runPrettierOnAllFiles",
         "category": "PW Helpers",
-        "title": "Run Prettier on All Files"
+        "title": "%playwright-helpers.runPrettierOnAllFiles.title%"
       },
       {
         "command": "playwright-helpers.showTrace",
         "category": "PW Helpers",
-        "title": "Show Trace"
+        "title": "%playwright-helpers.showTrace.title%"
       },
       {
         "command": "playwright-helpers.toggleHideShowCommands",
         "category": "PW Helpers",
-        "title": "Toggle Hide/Show Commands",
+        "title": "%playwright-helpers.toggleHideShowCommands.title%",
         "icon": {
           "light": "resources/dark/expand-all.svg",
           "dark": "resources/light/expand-all.svg"
