@@ -159,9 +159,9 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
-                <span class="command-inline"><span class="command-label">${prettyName}</span>${additionalParamsControls}</span>
+                <span class="command-inline"><span class="command-label">${prettyName}</span></span>
               </tooltip>
-            </div>${playButtons}
+            </div>${additionalParamsControls}${playButtons}
           </div>`;
         idx++;
       }
