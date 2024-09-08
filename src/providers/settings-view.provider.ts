@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { getNonce } from "../helpers/helpers";
 import { KeyValuePairs, NameValuePair, PwSettings, PwSettingsMap } from "../helpers/types";
+import { getHeaderName } from "../helpers/l10n.helpers";
 
 export class SettingsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.settings";
@@ -70,7 +71,9 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
     }
 
     for (const [category, settings] of Object.entries(tempList)) {
-      controlsHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
+      controlsHTMLList += `<h4 aria-label="${getHeaderName(category)}" class="nav-list__title">${getHeaderName(
+        category
+      )}</h4>`;
       for (const { key, prettyName, type, prettyNameAriaLabel } of settings) {
         if (type === "checkbox") {
           const isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
@@ -85,7 +88,9 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
       }
     }
 
-    controlsHTMLList += `<h4 aria-label="Environment Variables" class="nav-list__title" title="Environment Variables to be set before running scripts">Environment Variables</h4>`;
+    controlsHTMLList += `<h4 aria-label="Environment Variables" class="nav-list__title" title="${vscode.l10n.t(
+      "Environment Variables to be set before running scripts"
+    )}">${vscode.l10n.t("Environment Variables")}</h4>`;
     controlsHTMLList += `
     <table id="envVariablesTable">
       <tbody id="envVariablesTableBody">
@@ -97,7 +102,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
       </tbody>
     </table>
     <div align="center">
-      <button width="auto" id="addEnvVariable">Prepare New Env Variable</button>
+      <button width="auto" id="addEnvVariable">${vscode.l10n.t("Prepare New Env Variable")}</button>
     </div>
     `;
 

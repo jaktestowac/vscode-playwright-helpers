@@ -6,6 +6,8 @@
   "publisher": "jaktestowac-pl",
   "version": "1.0.5",
   "icon": "media/playwright-helpers-logo.png",
+  "main": "./out/extension.js",
+  "l10n": "./l10n",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -29,7 +31,6 @@
   "activationEvents": [
     "onView:playwright-helpers"
   ],
-  "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
@@ -45,12 +46,12 @@
         {
           "type": "webview",
           "id": "playwright-helpers.commands",
-          "name": "Commands"
+          "name": "%playwright-helpers.commands.name%"
         },
         {
           "type": "webview",
           "id": "playwright-helpers.scripts",
-          "name": "Playwright Scripts"
+          "name": "%playwright-helpers.scripts.name%"
         },
         {
           "type": "webview",
@@ -112,7 +113,7 @@
       {
         "command": "playwright-helpers.refreshPlaywrightScripts",
         "category": "PW Helpers",
-        "title": "Refresh Playwright Scripts View",
+        "title": "%playwright-helpers.refreshPlaywrightScripts.title%",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
@@ -283,7 +284,8 @@
     "publish:major": "vsce publish major",
     "publish": "npm run test && npm run update && npm run publish:patch",
     "update": "node src/test/readme-generator.js",
-    "test": ""
+    "test": "",
+    "export:localization": "npx @vscode/l10n-dev export -o ./l10n ./src"
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",

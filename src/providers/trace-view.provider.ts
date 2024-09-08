@@ -85,7 +85,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
       if (script !== undefined) {
         openDirectory(script.onlyPath ?? "");
       } else {
-        showErrorMessage(`Trace ${traceKey} not found. Refreshing...`);
+        showErrorMessage(vscode.l10n.t("Trace {0} not found. Refreshing...", traceKey));
         this.refresh(traces);
       }
     });
@@ -101,7 +101,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           execute: true,
         });
       } else {
-        showErrorMessage(`Trace ${traceKey} not found. Refreshing...`);
+        showErrorMessage(vscode.l10n.t("Trace {0} not found. Refreshing...", traceKey));
         this.refresh(traces);
       }
     });
@@ -125,12 +125,16 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
 
     controlsHTMLList += `
     <div class="nav-list__item_decorator">
-      Dir:
+     ${vscode.l10n.t("Dir:")}
       <div class="nav-list__item nav-list__item_wide list__item_not_clickable">
         <input class="nav-list__input " tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
-      <span class="clear-icon  action-icon" tooltip-text="Reset dir" aria-label="Reset dir"  id="reset-test-results-dir">${svgClearAll}</span>
-      <span class="open-dir-icon  action-icon" tooltip-text="Open directory" aria-label="Open directory"  id="open-test-results-dir">${svgOpenedDir}</span>
+      <span class="clear-icon  action-icon" tooltip-text="${vscode.l10n.t("Reset dir")}" aria-label="${vscode.l10n.t(
+      "Reset dir"
+    )}"  id="reset-test-results-dir">${svgClearAll}</span>
+      <span class="open-dir-icon  action-icon" tooltip-text=${vscode.l10n.t(
+        "Open directory"
+      )} aria-label=${vscode.l10n.t("Open directory")}  id="open-test-results-dir">${svgOpenedDir}</span>
     </div>`;
 
     if (this._tracesList !== undefined && this._tracesList.length > 0) {
@@ -139,7 +143,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
         const displayName = script.prettyName ?? script.key;
         let playButtons = "";
         playButtons += `<span class="preview-icon action-icon" title="Preview" tooltip-text="Preview" key="${script.key}">${svgOpenPreview}</span>`;
-        playButtons += `<span class="open-trace-dir-icon action-icon" title="Open directory" tooltip-text="Open directory" key="${script.key}">${svgOpenedDir}</span>`;
+        playButtons += `<span class="open-trace-dir-icon action-icon" title=${vscode.l10n.t(
+          "Open directory"
+        )} tooltip-text=${vscode.l10n.t("Open directory")} key="${script.key}">${svgOpenedDir}</span>`;
 
         controlsHTMLList += `
           <div class="nav-list__item searchable  list__item_not_clickable" aria-label="${script.key}">
@@ -153,16 +159,17 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           </div>`;
       }
       controlsHTMLList += "</div>";
-      controlsHTMLList += `<div id="messages"></div>`;
+      controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t("No search results found.")}</h4></div>`;
     }
 
     if (this._tracesList === undefined || this._tracesList.length === 0) {
-      controlsHTMLList += `No traces found in test-results dir.<br />
-         Please run test to generate traces.`;
+      controlsHTMLList += vscode.l10n.t("No traces found in test-results dir.");
+      controlsHTMLList += "<br />";
+      controlsHTMLList += vscode.l10n.t("Please run test to generate traces.");
     }
 
     const searchInputHtml = `
-      <input type="text" id="searchInput" class="search" placeholder="Search traces..." />
+      <input type="text" id="searchInput" class="search" placeholder="${vscode.l10n.t("Search traces...")}" />
     `;
 
     const nonce = getNonce();
@@ -171,7 +178,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
               <html lang="en">
               <head>
                   <meta charset="UTF-8">
-                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
+                    webview.cspSource
+                  }; script-src 'nonce-${nonce}';">
   
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -182,7 +191,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
               <body>
                 ${searchInputHtml}
 
-                <h4  aria-label="Traces from test results dir:" class="nav-list__title">Traces from test results dir:</h4>
+                <h4  aria-label="${vscode.l10n.t(
+                  "Traces from test results dir:"
+                )}" class="nav-list__title">${vscode.l10n.t("Traces from test results dir:")}</h4>
                  
                 ${controlsHTMLList}
 

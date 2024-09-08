@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 import { CommandComposerCategory, PwCommandComposer } from "../helpers/types";
 
 export function getCommandComposerData() {
@@ -7,7 +8,7 @@ export function getCommandComposerData() {
       option: "package.json script",
       valueType: "select",
       defaultValue: [],
-      prettyName: "",
+      prettyName: vscode.l10n.t(""),
       category: CommandComposerCategory.general,
       skipAsOption: true,
       overwriteBaseCommand: true,
@@ -19,7 +20,7 @@ export function getCommandComposerData() {
       option: "--config",
       valueType: "string",
       defaultValue: "playwright.config.ts",
-      prettyName: "Config file",
+      prettyName: vscode.l10n.t("Config file"),
       category: CommandComposerCategory.general,
     },
     {
@@ -27,19 +28,19 @@ export function getCommandComposerData() {
       option: "--tsconfig",
       valueType: "string",
       defaultValue: "tsconfig.test.json",
-      prettyName: "Config file - tsconfig",
+      prettyName: vscode.l10n.t("Config file - tsconfig"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--only-changed",
       option: "--only-changed",
-      prettyName: "Only run changed files",
+      prettyName: vscode.l10n.t("Only run changed files"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--debug",
       option: "--debug",
-      prettyName: "Run in debug mode",
+      prettyName: vscode.l10n.t("Run in debug mode"),
       category: CommandComposerCategory.general,
     },
     {
@@ -47,19 +48,19 @@ export function getCommandComposerData() {
       option: "--workers",
       valueType: "number",
       defaultValue: 1,
-      prettyName: "Number of workers",
+      prettyName: vscode.l10n.t("Number of workers"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--fail-on-flaky-tests",
       option: "--fail-on-flaky-tests",
-      prettyName: "Fail on flaky tests",
+      prettyName: vscode.l10n.t("Fail on flaky tests"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--forbid-only",
       option: "--forbid-only",
-      prettyName: "Forbid only",
+      prettyName: vscode.l10n.t("Forbid only"),
       category: CommandComposerCategory.general,
     },
     {
@@ -67,7 +68,7 @@ export function getCommandComposerData() {
       option: "--global-timeout",
       valueType: "number",
       defaultValue: 0,
-      prettyName: "Global timeout",
+      prettyName: vscode.l10n.t("Global timeout"),
       category: CommandComposerCategory.general,
     },
     {
@@ -75,7 +76,7 @@ export function getCommandComposerData() {
       option: "--grep",
       valueType: "string",
       defaultValue: '"Login"',
-      prettyName: "Grep",
+      prettyName: vscode.l10n.t("Grep"),
       category: CommandComposerCategory.general,
     },
     {
@@ -83,7 +84,7 @@ export function getCommandComposerData() {
       option: "--max-failures",
       valueType: "number",
       defaultValue: 0,
-      prettyName: "Max failures",
+      prettyName: vscode.l10n.t("Max failures"),
       category: CommandComposerCategory.general,
     },
     {
@@ -91,7 +92,7 @@ export function getCommandComposerData() {
       option: "--repeat-each",
       valueType: "number",
       defaultValue: 1,
-      prettyName: "Repeat each",
+      prettyName: vscode.l10n.t("Repeat each"),
       category: CommandComposerCategory.general,
     },
     {
@@ -99,7 +100,7 @@ export function getCommandComposerData() {
       option: "--retries",
       valueType: "number",
       defaultValue: 0,
-      prettyName: "Retries",
+      prettyName: vscode.l10n.t("Retries"),
       category: CommandComposerCategory.general,
     },
     {
@@ -107,13 +108,13 @@ export function getCommandComposerData() {
       option: "--timeout",
       valueType: "number",
       defaultValue: 60000,
-      prettyName: "Timeout",
+      prettyName: vscode.l10n.t("Timeout"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--update-snapshots",
       option: "--update-snapshots",
-      prettyName: "Update snapshots",
+      prettyName: vscode.l10n.t("Update snapshots"),
       category: CommandComposerCategory.general,
     },
     {
@@ -122,7 +123,7 @@ export function getCommandComposerData() {
       valueType: "select",
       defaultValue: ["dot", "line", "list", "json", "junit", "blob", "verbose", "github"],
       optionType: "string",
-      prettyName: "Reporter",
+      prettyName: vscode.l10n.t("Reporter"),
       category: CommandComposerCategory.general,
     },
     {
@@ -130,37 +131,37 @@ export function getCommandComposerData() {
       option: "--project",
       valueType: "string",
       defaultValue: "chromium",
-      prettyName: "Project",
+      prettyName: vscode.l10n.t("Project"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--headed",
       option: "--headed",
-      prettyName: "Run in headed mode",
+      prettyName: vscode.l10n.t("Run in headed mode"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--ignore-snapshots",
       option: "--ignore-snapshots",
-      prettyName: "Ignore snapshots",
+      prettyName: vscode.l10n.t("Ignore snapshots"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--last-failed",
       option: "--last-failed",
-      prettyName: "Only re-run the failures",
+      prettyName: vscode.l10n.t("Only re-run the failures"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--list",
       option: "--list",
-      prettyName: "List all the tests (not run)",
+      prettyName: vscode.l10n.t("List all the tests (not run)"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--no-deps",
       option: "--no-deps",
-      prettyName: "Ignore the dependencies between projects",
+      prettyName: vscode.l10n.t("Ignore the dependencies between projects"),
       category: CommandComposerCategory.general,
     },
     {
@@ -168,19 +169,19 @@ export function getCommandComposerData() {
       option: "--output",
       valueType: "string",
       defaultValue: "test-results",
-      prettyName: "Artifacts directory",
+      prettyName: vscode.l10n.t("Artifacts directory"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--pass-with-no-tests",
       option: "--pass-with-no-tests",
-      prettyName: "Allows tests to pass when no files are found",
+      prettyName: vscode.l10n.t("Allows tests to pass when no files are found"),
       category: CommandComposerCategory.general,
     },
     {
       key: "--quiet",
       option: "--quiet",
-      prettyName: "Suppress stdout and stderr",
+      prettyName: vscode.l10n.t("Suppress stdout and stderr"),
       category: CommandComposerCategory.general,
     },
     {
@@ -188,7 +189,7 @@ export function getCommandComposerData() {
       option: "--shard",
       valueType: "string",
       defaultValue: "1/1",
-      prettyName: "Execute only selected shard",
+      prettyName: vscode.l10n.t("Execute only selected shard"),
       category: CommandComposerCategory.general,
       maxControlLengthClass: 50,
     },
@@ -198,7 +199,7 @@ export function getCommandComposerData() {
       valueType: "select",
       optionType: "string",
       defaultValue: ["on", "off", "on-first-retry", "on-all-retries", "retain-on-failure"],
-      prettyName: "Force tracing mode",
+      prettyName: vscode.l10n.t("Force tracing mode"),
       category: CommandComposerCategory.general,
     },
   ];

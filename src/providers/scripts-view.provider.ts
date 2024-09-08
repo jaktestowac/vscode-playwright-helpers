@@ -51,7 +51,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
           execute: instantExecute ?? true,
         });
       } else {
-        showErrorMessage(`Script ${scriptName} not found. Refreshing...`);
+        showErrorMessage(vscode.l10n.t("Script {0} not found. Refreshing...", scriptName));
         this.refresh(scripts);
       }
     });
@@ -92,8 +92,9 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
     }
 
     if (this._scriptsList === undefined || this._scriptsList.length === 0) {
-      controlsHTMLList = `<br />No Playwright scripts found in package.json.<br />
-         Please add some scripts and hit refresh button.`;
+      controlsHTMLList += vscode.l10n.t("No Playwright scripts found in package.json.");
+      controlsHTMLList += "<br />";
+      controlsHTMLList += vscode.l10n.t("Please add some scripts and hit refresh button.");
     }
 
     const nonce = getNonce();
@@ -102,7 +103,9 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
               <html lang="en">
               <head>
                   <meta charset="UTF-8">
-                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
+                    webview.cspSource
+                  }; script-src 'nonce-${nonce}';">
   
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -111,7 +114,9 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
   
               </head>
               <body>
-                <h4 aria-label="Playwright Scripts from package.json" class="nav-list__title">Playwright Scripts from package.json:</h4>
+                <h4 aria-label="${vscode.l10n.t(
+                  "Playwright Scripts from package.json:"
+                )}" class="nav-list__title">${vscode.l10n.t("Playwright Scripts from package.json:")}</h4>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

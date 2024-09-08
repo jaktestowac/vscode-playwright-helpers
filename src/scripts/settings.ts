@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 import { PlaywrightSettingsCategory, PlaywrightSettingsType, PwSettings } from "../helpers/types";
 
 export function getSettingsList(): PwSettings[] {
@@ -5,21 +6,21 @@ export function getSettingsList(): PwSettings[] {
     {
       key: "reuseTerminal",
       func: reuseTerminal,
-      prettyName: "Reuse Existing Terminal",
+      prettyName: vscode.l10n.t("Reuse Existing Terminal"),
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
     {
       key: "verboseApiLogs",
       func: verboseApiLogs,
-      prettyName: "Playwright Verbose API logs",
+      prettyName: vscode.l10n.t("Playwright Verbose API logs"),
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
     {
       key: "neverOpenHtmlReport",
       func: neverOpenHtmlReport,
-      prettyName: "Never Open HTML Report",
+      prettyName: vscode.l10n.t("Never Open HTML Report"),
       category: PlaywrightSettingsCategory.general,
       type: PlaywrightSettingsType.checkbox,
     },
@@ -36,6 +37,7 @@ export function getSettingsList(): PwSettings[] {
   return commandsList;
 }
 
+// TODO: rethink if we need to keep these functions
 function reuseTerminal() {}
 
 function verboseApiLogs() {}

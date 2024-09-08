@@ -85,7 +85,7 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
           execute: true,
         });
       } else {
-        showErrorMessage(`Report ${reportKey} not found. Refreshing...`);
+        showErrorMessage(vscode.l10n.t("Report {0} not found. Refreshing...", reportKey));
         this.refresh(reports);
       }
     });
@@ -114,7 +114,9 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
         <input class="nav-list__input " tooltip-text="Test reports dir" id="test-reports-dir" type="text" value="${defaultTestReportsDir}" /> 
         </div>
       <span class="clear-icon  action-icon" tooltip-text="Reset directory" aria-label="Reset directory"  id="reset-test-reports-dir">${svgClearAll}</span>
-      <span class="open-dir-icon  action-icon" tooltip-text="Open directory" aria-label="Open directory"  id="open-test-reports-dir">${svgOpenedDir}</span>
+      <span class="open-dir-icon  action-icon" tooltip-text=${vscode.l10n.t(
+        "Open directory"
+      )} aria-label=${vscode.l10n.t("Open directory")}  id="open-test-reports-dir">${svgOpenedDir}</span>
     </div>`;
 
     if (this._reportsList !== undefined && this._reportsList.length > 0) {
@@ -136,16 +138,19 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
           </div>`;
       }
       controlsHTMLList += "</div>";
-      controlsHTMLList += `<div id="messages"></div>`;
+      controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t(
+        "No search results found."
+      )}</h4></div>`;
     }
 
     if (this._reportsList === undefined || this._reportsList.length === 0) {
-      controlsHTMLList += `No reports found in test-reports dir.<br />
-         Please run test to generate reports.`;
+      controlsHTMLList += vscode.l10n.t("No reports found in test-reports dir.");
+      controlsHTMLList += "<br />";
+      controlsHTMLList += vscode.l10n.t("Please run test to generate reports.");
     }
 
     const searchInputHtml = `
-      <input type="text" id="searchInput" class="search" placeholder="Search reports..." />
+      <input type="text" id="searchInput" class="search" placeholder="${vscode.l10n.t("Search reports...")}" />
     `;
 
     const nonce = getNonce();
@@ -154,7 +159,9 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
               <html lang="en">
               <head>
                   <meta charset="UTF-8">
-                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
+                    webview.cspSource
+                  }; script-src 'nonce-${nonce}';">
   
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -165,7 +172,9 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
               <body>
                 ${searchInputHtml}
 
-                <h4 aria-label="Reports from test results dir:" class="nav-list__title">Reports from test results dir:</h4>
+                <h4 aria-label="${vscode.l10n.t(
+                  "Reports from test results dir:"
+                )}" class="nav-list__title">${vscode.l10n.t("Reports from test results dir:")}</h4>
                  
                 ${controlsHTMLList}
 

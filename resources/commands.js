@@ -263,16 +263,13 @@
     const allSearchResults = document.getElementsByClassName("search-result");
     if (allSearchResults.length === 0) {
       let noResultsHeader = document.getElementById("noResultsHeader");
-      if (!noResultsHeader) {
-        noResultsHeader = document.createElement("h4");
-        noResultsHeader.textContent = "No search results found.";
-        noResultsHeader.setAttribute("id", "noResultsHeader");
-        searchInput.parentElement?.appendChild(noResultsHeader);
+      if (noResultsHeader) {
+        noResultsHeader.classList.toggle("hidden-by-default", false);
       }
     } else {
       const noResultsHeader = document.getElementById("noResultsHeader");
       if (noResultsHeader) {
-        noResultsHeader.remove();
+        noResultsHeader.classList.toggle("hidden-by-default", true);
       }
     }
 

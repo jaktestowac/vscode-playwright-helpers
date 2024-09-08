@@ -420,3 +420,7 @@ a.nav-list__link {
 .command-inline {
   display: flex;
 }
+
+.hidden-by-default {
+  display: none;
+}

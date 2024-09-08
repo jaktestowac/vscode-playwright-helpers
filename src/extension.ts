@@ -81,7 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
     getPlaywrightScriptsFromPackageJson(true).then((scripts) => {
       scriptsViewProvider.refresh(scripts);
       commandComposerViewProvider.refreshScripts(scripts);
-      showInformationMessage("Playwright scripts from package.json refreshed");
+      showInformationMessage(vscode.l10n.t("Playwright scripts from package.json refreshed"));
     });
   });
 
@@ -89,7 +89,7 @@ export function activate(context: vscode.ExtensionContext) {
     const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
     getPlaywrightTraces(testResultsDir, true).then((traces) => {
       traceViewProvider.refresh(traces);
-      showInformationMessage(`Playwright traces refreshed (from ${testResultsDir})`);
+      showInformationMessage(vscode.l10n.t("Playwright traces refreshed (from {0})", testResultsDir));
     });
   });
 
@@ -97,20 +97,20 @@ export function activate(context: vscode.ExtensionContext) {
     const testReportsDir = MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
     getPlaywrightReports(testReportsDir, true).then((reports) => {
       reportViewProvider.refresh(reports);
-      showInformationMessage(`Playwright reports refreshed (from ${testReportsDir})`);
+      showInformationMessage(vscode.l10n.t("Playwright reports refreshed (from {0})", testReportsDir));
     });
   });
 
   registerCommand(context, `${EXTENSION_NAME}.runSelectedCommand`, (param) => {
     if (param.key === undefined) {
-      showInformationMessage("Click on the command");
+      showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
     commandsViewProvider.invokeCommand(param.key, true);
   });
   registerCommand(context, `${EXTENSION_NAME}.pasteSelectedCommand`, (param) => {
     if (param.key === undefined) {
-      showInformationMessage("Click on the command");
+      showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
     commandsViewProvider.invokeCommand(param.key, false);

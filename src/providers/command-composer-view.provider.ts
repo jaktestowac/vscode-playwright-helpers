@@ -154,20 +154,26 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
       }
 
       controlsHTMLList += `</nav>`;
-      controlsHTMLList += `<div id="messages"></div>`;
+      controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t(
+        "No search results found."
+      )}</h4></div>`;
     }
 
     // add 2 buttons:
     controlsHTMLList =
       `
-          <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
+          <button id="prepareCommandButton" title="${vscode.l10n.t("Prepare Command")}">${vscode.l10n.t(
+        "Prepare Command"
+      )}</button>
         ` + controlsHTMLList;
     controlsHTMLList += `
-          <button id="prepareCommandButton" title="Prepare Command">Prepare Command</button>
+          <button id="prepareCommandButton" title="${vscode.l10n.t("Prepare Command")}">${vscode.l10n.t(
+      "Prepare Command"
+    )}</button>
         `;
 
     const searchInputHtml = `
-        <input type="text" id="searchInput" class="search" placeholder="Search options..." />
+        <input type="text" id="searchInput" class="search" placeholder="${vscode.l10n.t("Search options...")}" />
       `;
 
     const nonce = getNonce();

@@ -75,7 +75,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
 
   if (!testReportsDir) {
     if (verbose) {
-      showWarningMessage("No testReportsDir provided");
+      showWarningMessage(vscode.l10n.t("No testReportsDir provided"));
     }
     return [];
   }
@@ -95,7 +95,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
 
   if (!fs.existsSync(reportsPath)) {
     if (verbose) {
-      showWarningMessage(`No reports directory found at: "${reportsPath}"`);
+      showWarningMessage(vscode.l10n.t("No reports directory found at: {0}", reportsPath));
     }
     return [];
   }
@@ -129,7 +129,7 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
 
   if (!testResultsDir) {
     if (verbose) {
-      showWarningMessage("No testResultsDir provided");
+      showWarningMessage(vscode.l10n.t("No testResultsDir provided"));
     }
     return [];
   }
@@ -149,7 +149,7 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
 
   if (!fs.existsSync(tracesPath)) {
     if (verbose) {
-      showWarningMessage(`No traces directory found at: "${tracesPath}"`);
+      showWarningMessage(vscode.l10n.t("No traces directory found at: {0}", tracesPath));
     }
     return [];
   }
@@ -184,7 +184,7 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
 
   if (!fs.existsSync(packageJsonPath)) {
     if (verbose) {
-      showWarningMessage("No package.json found in the workspace");
+      showWarningMessage(vscode.l10n.t("No package.json found in the workspace"));
     }
     return [];
   }
@@ -197,7 +197,7 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
 
   if (!foundKeys || foundKeys.length === 0) {
     if (verbose) {
-      showErrorMessage("No Playwright scripts found in package.json");
+      showErrorMessage(vscode.l10n.t("No Playwright scripts found in package.json"));
     }
     return [];
   }

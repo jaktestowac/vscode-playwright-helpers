@@ -80,18 +80,14 @@
 
     const allSearchReports = document.getElementsByClassName("search-result");
     if (allSearchReports.length === 0) {
-      let messagesContainer = document.getElementById("messages");
-      let noReportsHeader = document.getElementById("noReportsHeader");
-      if (!noReportsHeader) {
-        noReportsHeader = document.createElement("h4");
-        noReportsHeader.textContent = "No search reports found.";
-        noReportsHeader.setAttribute("id", "noReportsHeader");
-        messagesContainer?.appendChild(noReportsHeader);
+      let noResultsHeader = document.getElementById("noResultsHeader");
+      if (noResultsHeader) {
+        noResultsHeader.classList.toggle("hidden-by-default", false);
       }
     } else {
-      const noReportsHeader = document.getElementById("noReportsHeader");
-      if (noReportsHeader) {
-        noReportsHeader.remove();
+      const noResultsHeader = document.getElementById("noResultsHeader");
+      if (noResultsHeader) {
+        noResultsHeader.classList.toggle("hidden-by-default", true);
       }
     }
   });
