@@ -412,3 +412,11 @@ a.nav-list__link {
 .settings-table-input {
   padding: 1px;
 }
+
+.param-input {
+  max-width: 50px;
+}
+
+.command-inline {
+  display: flex;
+}

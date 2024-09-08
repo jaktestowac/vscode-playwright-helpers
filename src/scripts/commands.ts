@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { CommandParameters, Map, PlaywrightCommandsCategory, PwCommand } from "../helpers/types";
+import { CommandParameters, Map, PlaywrightCommandsCategory, PlaywrightCommandType, PwCommand } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers";
 import { showErrorMessage } from "../helpers/window-messages.helpers";
@@ -11,7 +11,7 @@ export function getCommandList(): PwCommand[] {
     {
       key: "checkPlaywrightVersion",
       func: executeScript,
-      prettyName: "Check Version - Playwright ",
+      prettyName: "Check Version - Playwright",
       category: PlaywrightCommandsCategory.playwright,
       params: {
         key: "checkPlaywrightVersion",
@@ -42,9 +42,27 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "installPlaywrightTest",
+      func: executeScript,
+      prettyName: "Install @playwright/test",
+      category: PlaywrightCommandsCategory.playwright,
+      type: PlaywrightCommandType.commandWithParameter,
+      params: {
+        key: "installLatestPlaywrightTest",
+        command: `npm i @playwright/test@{{version}}`,
+        terminalName: "Install @playwright/test",
+      },
+      additionalParams: [
+        {
+          key: "version",
+          defaultValue: "latest",
+        },
+      ],
+    },
+    {
       key: "installLatestPlaywrightTest",
       func: executeScript,
-      prettyName: "Install/Update to Latest @playwright/test",
+      prettyName: "Install/Update Latest @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
       params: {
         key: "installLatestPlaywrightTest",
@@ -122,7 +140,7 @@ export function getCommandList(): PwCommand[] {
     {
       key: "installNextPlaywrightTest",
       func: executeScript,
-      prettyName: "Install/Update to Next @playwright/test",
+      prettyName: "Install/Update Next @playwright/test",
       category: PlaywrightCommandsCategory.playwright,
       askForExecute: true,
       onlyPaste: true,

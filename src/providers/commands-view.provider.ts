@@ -1,5 +1,11 @@
 import * as vscode from "vscode";
-import { PwCommand, PwCommandMap } from "../helpers/types";
+import {
+  AdditionalParams,
+  PlaywrightCommandType,
+  PwCommand,
+  PwCommandAdditionalParams,
+  PwCommandMap,
+} from "../helpers/types";
 import { getNonce } from "../helpers/helpers";
 import { svgPlayIcon, svgStarEmptyIcon, svgWaitContinueIcon } from "../helpers/icons";
 
@@ -31,11 +37,15 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
           this.invokeCommand(data.key, data.instantExecute);
           break;
         }
+        case "invokeCommandWithAdditionalParams": {
+          this.invokeCommand(data.key, data.instantExecute, data.additionalParams);
+          break;
+        }
       }
     });
   }
 
-  private invokeCommand(commandName: string, instantExecute: boolean) {
+  private invokeCommand(commandName: string, instantExecute: boolean, additionalParams?: AdditionalParams[]) {
     const command = this._commandList.find((command) => command.key === commandName);
     if (command === undefined) {
       return;
@@ -47,6 +57,24 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
 
     const commandParams = command?.params;
+
+    if (command.type === PlaywrightCommandType.commandWithParameter && additionalParams !== undefined) {
+      if (commandParams === undefined) {
+        return;
+      }
+
+      const command = commandParams.command;
+      let commandWithParameters = command;
+
+      for (const param of additionalParams) {
+        commandWithParameters = commandWithParameters.replace(`{{${param.key}}}`, param.value);
+      }
+
+      commandParams.instantExecute = instantExecute;
+      commandFunc({ ...commandParams, command: commandWithParameters });
+
+      return;
+    }
 
     if (commandParams !== undefined) {
       commandParams.instantExecute = instantExecute;
@@ -85,11 +113,25 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       let idx = 0;
 
       const sortedCommands = commands.sort((a, b) => a.prettyName.localeCompare(b.prettyName));
-      for (const { key, prettyName, params, onlyPasteAndRun, onlyPaste } of sortedCommands) {
+      for (const { key, prettyName, params, onlyPasteAndRun, onlyPaste, type, additionalParams } of sortedCommands) {
         let toolTipText = prettyName;
 
+        // if (params !== undefined) {
+        //   toolTipText += `: \`${params.command}\``;
+        // }
+
         if (params !== undefined) {
-          toolTipText += `: \`${params.command}\``;
+          toolTipText = `Command: \`${params.command}\``;
+        }
+
+        let additionalParamsControls = "";
+        if (type === PlaywrightCommandType.commandWithParameter) {
+          if (additionalParams !== undefined) {
+            for (const param of additionalParams) {
+              additionalParamsControls += `<input type="text" class="param-input" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />`;
+            }
+            additionalParamsControls = "&nbsp; &nbsp;" + additionalParamsControls;
+          }
         }
 
         let playButtons = "";
@@ -108,10 +150,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         buttonHTMLList += `
           <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}">
             <div class="nav-list__link search-result" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}">
+
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" itemKey="${key}" content="${prettyName}" >
-                <span>${prettyName}</span>
+                <span class="command-inline">${prettyName}${additionalParamsControls}</span>
               </tooltip>
             </div>${playButtons}
           </div>`;

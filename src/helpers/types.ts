@@ -21,6 +21,18 @@ export interface PwCommand {
   params?: CommandParameters;
   onlyPasteAndRun?: boolean;
   onlyPaste?: boolean;
+  type?: string;
+  additionalParams?: PwCommandAdditionalParams[];
+}
+
+export interface PwCommandAdditionalParams {
+  key: string;
+  defaultValue: string;
+}
+
+export interface AdditionalParams {
+  key: string;
+  value: string;
 }
 
 export interface PwSettings {
@@ -119,8 +131,14 @@ export enum PlaywrightSettingsCategory {
   mics = "Misc",
 }
 
+export enum PlaywrightCommandType {
+  command = "command",
+  commandWithParameter = "commandWithParameter",
+}
+
 export enum PlaywrightSettingsType {
   checkbox = "checkbox",
+  input = "input",
 }
 
 export enum CommandComposerCategory {

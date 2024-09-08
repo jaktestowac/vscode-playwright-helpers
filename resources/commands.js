@@ -30,15 +30,49 @@
   //     }, 1500);
   //   });
   // }
+
+  const additionalInputs = document.querySelectorAll(".param-input");
+  for (const input of additionalInputs) {
+    input.addEventListener("blur", () => {
+      // @ts-ignore
+      if (input.value.trim() === "") {
+        // @ts-ignore
+        input.value = input.getAttribute("defaultValue");
+      }
+    });
+  }
+
+  function gatherAdditionalParams(attributeKey) {
+    const additionalParams = [];
+    const additionalInput = document.querySelector(`.param-input[parent="${attributeKey}"]`);
+    if (additionalInput) {
+      const key = additionalInput.getAttribute("key");
+      // @ts-ignore
+      const value = additionalInput.value.trim();
+      additionalParams.push({ key, value });
+    }
+    return additionalParams;
+  }
+
   const runIcons = document.querySelectorAll(".run-icon");
   for (const runIcon of runIcons) {
     runIcon.addEventListener("click", () => {
       if (runIcon.classList.contains("loading")) {
         return;
       }
-
       const attributeKey = runIcon.getAttribute("key");
-      vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: true });
+      const additionalParams = gatherAdditionalParams(attributeKey);
+
+      if (additionalParams.length > 0) {
+        vscode.postMessage({
+          type: "invokeCommandWithAdditionalParams",
+          key: attributeKey,
+          instantExecute: true,
+          additionalParams,
+        });
+      } else {
+        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: true });
+      }
 
       // Disable the button and show a loading indicator
       // for a second to let the user know the command is running
@@ -61,8 +95,19 @@
         return;
       }
       const attributeKey = runIcon.getAttribute("key");
-      vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: false });
 
+      const additionalParams = gatherAdditionalParams(attributeKey);
+
+      if (additionalParams.length > 0) {
+        vscode.postMessage({
+          type: "invokeCommandWithAdditionalParams",
+          key: attributeKey,
+          instantExecute: false,
+          additionalParams,
+        });
+      } else {
+        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute: false });
+      }
       // Disable the button and show a loading indicator
       // for a second to let the user know the command is running
       const label = document.querySelector(`[itemKey="${attributeKey}"]`);
