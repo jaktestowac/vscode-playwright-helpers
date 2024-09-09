@@ -1,5 +1,12 @@
 import * as vscode from "vscode";
-import { CommandParameters, Map, PlaywrightCommandsCategory, PlaywrightCommandType, PwCommand } from "../helpers/types";
+import {
+  CommandParameters,
+  Map,
+  PlaywrightCommandsCategory,
+  PlaywrightCommandType,
+  PwCommand,
+  TerminalType,
+} from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers";
 import { showErrorMessage } from "../helpers/window-messages.helpers";
@@ -448,6 +455,13 @@ export function getCommandList(): PwCommand[] {
       params: {
         key: "openVSCodeSettingsFile",
         command: `%APPDATA%\\Code\\User\\settings.json`,
+        terminalCommandPair: [
+          { key: TerminalType.CMD, value: "%APPDATA%\\Code\\User\\settings.json" },
+          { key: TerminalType.POWERSHELL, value: "ii $env:APPDATA\\Code\\User\\settings.json" },
+          { key: TerminalType.BASH, value: `start '' "%APPDATA%\Code\User\settings.json"` },
+          { key: TerminalType.FISH, value: `start '' "%APPDATA%\Code\User\settings.json"` },
+          { key: TerminalType.UNKNOWN, value: `start '' "%APPDATA%\Code\User\settings.json"` },
+        ],
         terminalName: vscode.l10n.t("Open VS Code Settings File"),
       },
     },
@@ -496,6 +510,7 @@ async function executeScript(params: CommandParameters) {
     command: params.command,
     execute,
     terminalName: params.terminalName,
+    terminalCommandPair: params.terminalCommandPair,
   });
 }
 
@@ -513,6 +528,7 @@ async function initNewProject(params: CommandParameters) {
     command: params.command,
     execute: execute,
     terminalName: params.terminalName,
+    terminalCommandPair: params.terminalCommandPair,
   });
 }
 
@@ -531,6 +547,7 @@ async function initNewProjectQuick(params: CommandParameters) {
     command: params.command,
     execute: execute,
     terminalName: params.terminalName,
+    terminalCommandPair: params.terminalCommandPair,
   });
 }
 

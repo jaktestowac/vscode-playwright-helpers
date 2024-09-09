@@ -2,11 +2,13 @@ export interface ExecuteInTerminalParameters {
   command: string;
   execute?: boolean;
   terminalName?: string | undefined;
+  terminalCommandPair?: KeyValuePair[];
 }
 
 export interface CommandParameters {
   key: string;
   command: string;
+  terminalCommandPair?: KeyValuePair[];
   instantExecute?: boolean;
   terminalName?: string;
 }
@@ -28,6 +30,11 @@ export interface PwCommand {
 export interface PwCommandAdditionalParams {
   key: string;
   defaultValue: string;
+}
+
+export interface KeyValuePair {
+  key: string;
+  value: string;
 }
 
 export interface AdditionalParams {

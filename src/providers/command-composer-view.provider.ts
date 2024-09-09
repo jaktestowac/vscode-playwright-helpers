@@ -114,7 +114,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
             selectClass += " composer-select-100";
           }
 
-          additionalControl = `<select class='${selectClass} ${additionalControlClasses}' id="${key}" key="${key}" child="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}">`;
+          additionalControl = `<select class='${selectClass} ${additionalControlClasses}' id="${key}" key="${key}" child="${parentId}" title="${key}" aria-label="${option}">`;
 
           if (optionType === "string") {
             const values = defaultValue ? (defaultValue as string[]) : [];

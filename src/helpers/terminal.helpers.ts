@@ -85,6 +85,14 @@ export function decorateCommand(
   terminal: vscode.Terminal,
   params: ExecuteInTerminalParameters
 ): ExecuteInTerminalParameters {
+  if (params.terminalCommandPair !== undefined) {
+    const terminalType = getTerminalType(terminal);
+    const terminalCommands = params.terminalCommandPair.find((command) => command.key === terminalType);
+    if (terminalCommands !== undefined) {
+      params.command = terminalCommands.value;
+    }
+  }
+
   const verboseApiLogs = MyExtensionContext.instance.getWorkspaceValue("verboseApiLogs");
   if (verboseApiLogs) {
     const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
@@ -110,5 +118,6 @@ export function decorateCommand(
       params.command = concatCommands(cmdToSetEnvVar, params.command);
     }
   }
+
   return params;
 }
