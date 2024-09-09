@@ -125,17 +125,13 @@ export interface CheckResult {
   message: string;
 }
 
-export enum PlaywrightCommandsCategory {
+export enum TabViewCategory {
   playwright = "Playwright",
   browsers = "Browsers",
   project = "Project",
   testing = "Testing",
   mics = "Misc",
-}
-
-export enum PlaywrightSettingsCategory {
   general = "General",
-  mics = "Misc",
 }
 
 export enum PlaywrightCommandType {
@@ -146,10 +142,6 @@ export enum PlaywrightCommandType {
 export enum PlaywrightSettingsType {
   checkbox = "checkbox",
   input = "input",
-}
-
-export enum CommandComposerCategory {
-  general = "General",
 }
 
 export enum TerminalType {

@@ -1,19 +1,19 @@
 import * as vscode from "vscode";
-import { PlaywrightCommandsCategory, PlaywrightSettingsCategory } from "./types";
+import { TabViewCategory } from "./types";
 
 export function getHeaderName(key: string): string {
   switch (key) {
-    case PlaywrightCommandsCategory.playwright:
+    case TabViewCategory.playwright:
       return vscode.l10n.t("Playwright");
-    case PlaywrightCommandsCategory.browsers:
+    case TabViewCategory.browsers:
       return vscode.l10n.t("Browsers");
-    case PlaywrightCommandsCategory.project:
+    case TabViewCategory.project:
       return vscode.l10n.t("Project");
-    case PlaywrightCommandsCategory.testing:
+    case TabViewCategory.testing:
       return vscode.l10n.t("Testing");
-    case PlaywrightCommandsCategory.mics:
+    case TabViewCategory.mics:
       return vscode.l10n.t("Misc");
-    case PlaywrightSettingsCategory.general:
+    case TabViewCategory.general:
       return vscode.l10n.t("General");
     default:
       return vscode.l10n.t("Unknown");

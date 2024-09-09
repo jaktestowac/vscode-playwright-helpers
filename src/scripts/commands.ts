@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import {
   CommandParameters,
   Map,
-  PlaywrightCommandsCategory,
+  TabViewCategory,
   PlaywrightCommandType,
   PwCommand,
   TerminalType,
@@ -19,7 +19,7 @@ export function getCommandList(): PwCommand[] {
       key: "checkPlaywrightVersion",
       func: executeScript,
       prettyName: vscode.l10n.t("Check Version - Playwright"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       params: {
         key: "checkPlaywrightVersion",
         command: "npx playwright --version",
@@ -30,7 +30,7 @@ export function getCommandList(): PwCommand[] {
       key: "checkPlaywrightTestVersion",
       func: executeScript,
       prettyName: vscode.l10n.t("Check Version - @playwright/test"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       params: {
         key: "checkPlaywrightTestVersion",
         command: "npx @playwright/test --version",
@@ -41,7 +41,7 @@ export function getCommandList(): PwCommand[] {
       key: "checkForPlaywrightTestUpdates",
       func: executeScript,
       prettyName: vscode.l10n.t("Check Updates - @playwright/test"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       params: {
         key: "checkForPlaywrightTestUpdates",
         command: "npm outdated @playwright/test",
@@ -52,7 +52,7 @@ export function getCommandList(): PwCommand[] {
       key: "installPlaywrightTest",
       func: executeScript,
       prettyName: vscode.l10n.t("Install @playwright/test"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       type: PlaywrightCommandType.commandWithParameter,
       params: {
         key: "installLatestPlaywrightTest",
@@ -70,7 +70,7 @@ export function getCommandList(): PwCommand[] {
       key: "installLatestPlaywrightTest",
       func: executeScript,
       prettyName: vscode.l10n.t("Install/Update Latest @playwright/test"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       params: {
         key: "installLatestPlaywrightTest",
         command: "npm i @playwright/test@latest",
@@ -81,7 +81,7 @@ export function getCommandList(): PwCommand[] {
       key: "installAllPlaywrightBrowsers",
       func: executeScript,
       prettyName: vscode.l10n.t("Install All Playwright Browsers"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       params: {
         key: "installAllPlaywrightBrowsers",
         command: "npx playwright install",
@@ -92,7 +92,7 @@ export function getCommandList(): PwCommand[] {
       key: "installChromiumPlaywrightBrowser",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Chromium Playwright Browser"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       params: {
         key: "installChromiumPlaywrightBrowser",
         command: "npx playwright install chromium",
@@ -103,7 +103,7 @@ export function getCommandList(): PwCommand[] {
       key: "installWebkitPlaywrightBrowser",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Webkit Playwright Browser"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       params: {
         key: "installWebkitPlaywrightBrowser",
         command: "npx playwright install webkit",
@@ -114,7 +114,7 @@ export function getCommandList(): PwCommand[] {
       key: "installFirefoxPlaywrightBrowser",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Firefox Playwright Browser"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       params: {
         key: "installFirefoxPlaywrightBrowser",
         command: "npx playwright install firefox",
@@ -125,7 +125,7 @@ export function getCommandList(): PwCommand[] {
       key: "uninstallAllPlaywrightBrowsers",
       func: executeScript,
       prettyName: vscode.l10n.t("Uninstall All Playwright Browsers"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       params: {
         key: "uninstallAllPlaywrightBrowsers",
         command: "npx playwright uninstall --all",
@@ -136,7 +136,7 @@ export function getCommandList(): PwCommand[] {
       key: "uninstallPlaywrightBrowsers",
       func: executeScript,
       prettyName: vscode.l10n.t("Uninstall Playwright Browsers"),
-      category: PlaywrightCommandsCategory.browsers,
+      category: TabViewCategory.browsers,
       askForExecute: true,
       params: {
         key: "uninstallPlaywrightBrowsers",
@@ -148,7 +148,7 @@ export function getCommandList(): PwCommand[] {
       key: "installNextPlaywrightTest",
       func: executeScript,
       prettyName: vscode.l10n.t("Install/Update Next @playwright/test"),
-      category: PlaywrightCommandsCategory.playwright,
+      category: TabViewCategory.playwright,
       askForExecute: true,
       onlyPaste: true,
       params: {
@@ -161,7 +161,7 @@ export function getCommandList(): PwCommand[] {
       key: "initNewProject",
       func: initNewProject,
       prettyName: vscode.l10n.t("Init New Project"),
-      category: PlaywrightCommandsCategory.project,
+      category: TabViewCategory.project,
       askForExecute: true,
       params: {
         key: "initNewProject",
@@ -173,7 +173,7 @@ export function getCommandList(): PwCommand[] {
       key: "initNewProjectQuick",
       func: initNewProjectQuick,
       prettyName: vscode.l10n.t("Init New Project Quick"),
-      category: PlaywrightCommandsCategory.project,
+      category: TabViewCategory.project,
       askForExecute: true,
       params: {
         key: "initNewProjectQuick",
@@ -185,7 +185,7 @@ export function getCommandList(): PwCommand[] {
       key: "openUiMode",
       func: executeScript,
       prettyName: vscode.l10n.t("Open UI Mode"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "openUiMode",
@@ -197,7 +197,7 @@ export function getCommandList(): PwCommand[] {
       key: "runCodegen",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Codegen"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runCodegen",
@@ -209,7 +209,7 @@ export function getCommandList(): PwCommand[] {
       key: "runCodegenWithSaveStorage",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Codegen with Save Storage"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runCodegenWithSaveStorage",
@@ -221,7 +221,7 @@ export function getCommandList(): PwCommand[] {
       key: "runCodegenWithLoadStorage",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Codegen with Load Storage"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runCodegenWithLoadStorage",
@@ -233,7 +233,7 @@ export function getCommandList(): PwCommand[] {
       key: "runShowReport",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Show Report"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runShowReport",
@@ -245,7 +245,7 @@ export function getCommandList(): PwCommand[] {
       key: "runDefaultTests",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runDefaultTests",
@@ -257,7 +257,7 @@ export function getCommandList(): PwCommand[] {
       key: "runDefaultTestsMultipleTimes",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests Multiple Times"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runDefaultTestsMultipleTimes",
@@ -269,7 +269,7 @@ export function getCommandList(): PwCommand[] {
       key: "runTestsFiles",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Test File"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runTestsFiles",
@@ -281,7 +281,7 @@ export function getCommandList(): PwCommand[] {
       key: "runTestsWithDebug",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Debug"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runTestsWithDebug",
@@ -293,7 +293,7 @@ export function getCommandList(): PwCommand[] {
       key: "runTestsWithHeadedBrowser",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Headed Browser"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runTestsWithHeadedBrowser",
@@ -305,7 +305,7 @@ export function getCommandList(): PwCommand[] {
       key: "runTestsWithTitle",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Title"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       askForExecute: true,
       params: {
         key: "runTestsWithTitle",
@@ -317,14 +317,14 @@ export function getCommandList(): PwCommand[] {
       key: "closeAllTerminals",
       func: closeAllTerminals,
       prettyName: vscode.l10n.t("Close All PW Helpers Terminals"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       onlyPasteAndRun: true,
     },
     {
       key: "listInstalledPackages",
       func: executeScript,
       prettyName: vscode.l10n.t("List Installed Packages"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       params: {
         key: "listInstalledPackages",
         command: "npm list",
@@ -335,7 +335,7 @@ export function getCommandList(): PwCommand[] {
       key: "listInstalledGlobalPackages",
       func: executeScript,
       prettyName: vscode.l10n.t("List Installed Global Packages"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       params: {
         key: "listInstalledGlobalPackages",
         command: "npm list -g --depth=0",
@@ -346,7 +346,7 @@ export function getCommandList(): PwCommand[] {
       key: "listSystemInfo",
       func: executeScript,
       prettyName: vscode.l10n.t("List System Info (using envinfo)"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       params: {
         key: "listSystemInfo",
         command: "npx envinfo",
@@ -357,7 +357,7 @@ export function getCommandList(): PwCommand[] {
       key: "runOnlyChangedTests",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Only Changed Tests"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runOnlyChangedTests",
         command: `npx playwright test --only-changed`,
@@ -369,7 +369,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Specific Test Project"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runSpecificTestProject",
         command: `npx playwright test --project=chromium`,
@@ -381,7 +381,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Workers"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runTestsWithWorkers",
         command: "npx playwright test --workers=1",
@@ -392,7 +392,7 @@ export function getCommandList(): PwCommand[] {
       key: "runPrettierOnAllFiles",
       func: executeScript,
       prettyName: vscode.l10n.t("Run Prettier on All Files"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       params: {
         key: "runPrettierOnAllFiles",
         command: "npx prettier --write .",
@@ -404,7 +404,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Test with Update Snapshots"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runTestWithUpdateSnapshots",
         command: `npx playwright test --update-snapshots`,
@@ -416,7 +416,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Only Last Failed Tests"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runOnlyLastFailedTests",
         command: `npx playwright test --last-failed`,
@@ -428,7 +428,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Timeout"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runTestsWithTimeout",
         command: `npx playwright test --timeout=180000`,
@@ -440,7 +440,7 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Run Tests with Reporter"),
       askForExecute: true,
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "runTestsWithReporter",
         command: `npx playwright test --reporter=dot`,
@@ -451,7 +451,7 @@ export function getCommandList(): PwCommand[] {
       key: "openVSCodeSettingsFile",
       func: executeScript,
       prettyName: vscode.l10n.t("Open VS Code Settings File"),
-      category: PlaywrightCommandsCategory.mics,
+      category: TabViewCategory.mics,
       params: {
         key: "openVSCodeSettingsFile",
         command: `%APPDATA%\\Code\\User\\settings.json`,
@@ -469,7 +469,7 @@ export function getCommandList(): PwCommand[] {
       key: "showTrace",
       func: executeScript,
       prettyName: vscode.l10n.t("Show Trace"),
-      category: PlaywrightCommandsCategory.testing,
+      category: TabViewCategory.testing,
       params: {
         key: "showTrace",
         command: "npx playwright show-trace",
