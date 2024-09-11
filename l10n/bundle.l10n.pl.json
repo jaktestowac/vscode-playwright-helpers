@@ -135,5 +135,7 @@
   "No Playwright scripts found in package.json": "Nie znaleziono skryptów Playwright w package.json",
   "No workspace folder opened.": "Nie otwarto folderu obszaru roboczego.",
   "More than one workspace folder opened.": "Otwarto więcej niż jeden folder obszaru roboczego.",
-  "Workspace folder is not empty.": "Folder obszaru roboczego nie jest pusty."
+  "Workspace folder is not empty.": "Folder obszaru roboczego nie jest pusty.",
+  "Install Node Packages": "Zainstaluj pakiety Node",
+  "Install Node Packages (package-lock)": "Zainstaluj pakiety Node (package-lock)"
 }

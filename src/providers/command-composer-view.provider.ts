@@ -190,7 +190,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body class="commands-view">
+              <body class="commands-view" data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 ${searchInputHtml}
                  ${controlsHTMLList}
 

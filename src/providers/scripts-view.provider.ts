@@ -113,7 +113,7 @@ export class ScriptsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 <h4 aria-label="${vscode.l10n.t(
                   "Playwright Scripts from package.json:"
                 )}" class="nav-list__title">${vscode.l10n.t("Playwright Scripts from package.json:")}</h4>

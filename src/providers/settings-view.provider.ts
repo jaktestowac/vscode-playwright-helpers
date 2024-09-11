@@ -120,7 +120,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body class="settings-body">
+              <body class="settings-body" data-vscode-context='{"preventDefaultContextMenuItems": true}'>
   
                  ${controlsHTMLList}
 

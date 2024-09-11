@@ -159,7 +159,9 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           </div>`;
       }
       controlsHTMLList += "</div>";
-      controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t("No search results found.")}</h4></div>`;
+      controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t(
+        "No search results found."
+      )}</h4></div>`;
     }
 
     if (this._tracesList === undefined || this._tracesList.length === 0) {
@@ -188,7 +190,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 ${searchInputHtml}
 
                 <h4  aria-label="${vscode.l10n.t(

@@ -169,7 +169,7 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 ${searchInputHtml}
 
                 <h4 aria-label="${vscode.l10n.t(

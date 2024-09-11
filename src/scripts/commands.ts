@@ -170,6 +170,30 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "installPackages",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Node Packages"),
+      category: TabViewCategory.project,
+      askForExecute: true,
+      params: {
+        key: "installPackages",
+        command: "npm i",
+        terminalName: vscode.l10n.t("Install Node Packages"),
+      },
+    },
+    {
+      key: "installPackagesNpmCi",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Node Packages (package-lock)"),
+      category: TabViewCategory.project,
+      askForExecute: true,
+      params: {
+        key: "installPackagesNpmCi",
+        command: "npm ci",
+        terminalName: vscode.l10n.t("Install Node Packages (package-lock)"),
+      },
+    },
+    {
       key: "initNewProjectQuick",
       func: initNewProjectQuick,
       prettyName: vscode.l10n.t("Init New Project Quick"),
