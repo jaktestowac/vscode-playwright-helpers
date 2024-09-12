@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { TabViewCategory, PlaywrightSettingsType, PwSettings } from "../helpers/types";
+import { TabViewCategory, ControlType, PwSettings } from "../helpers/types";
 
 export function getSettingsList(): PwSettings[] {
   const commandsList: PwSettings[] = [
@@ -8,21 +8,21 @@ export function getSettingsList(): PwSettings[] {
       func: reuseTerminal,
       prettyName: vscode.l10n.t("Reuse Existing Terminal"),
       category: TabViewCategory.general,
-      type: PlaywrightSettingsType.checkbox,
+      type: ControlType.checkbox,
     },
     {
       key: "verboseApiLogs",
       func: verboseApiLogs,
       prettyName: vscode.l10n.t("Playwright Verbose API logs"),
       category: TabViewCategory.general,
-      type: PlaywrightSettingsType.checkbox,
+      type: ControlType.checkbox,
     },
     {
       key: "neverOpenHtmlReport",
       func: neverOpenHtmlReport,
       prettyName: vscode.l10n.t("Never Open HTML Report"),
       category: TabViewCategory.general,
-      type: PlaywrightSettingsType.checkbox,
+      type: ControlType.checkbox,
     },
     // {
     //   key: "instantExecute",
@@ -30,7 +30,7 @@ export function getSettingsList(): PwSettings[] {
     //   prettyName: `Instantly Execute Commands marked &nbsp; ${svgWaitContinueIcon}`,
     //   prettyNameAriaLabel: `Instantly Execute Commands marked with Play Icon`,
     //   category: TabViewCategory.general,
-    //   type: PlaywrightSettingsType.checkbox,
+    //   type: ControlType.checkbox,
     // },
   ];
 

@@ -6,12 +6,15 @@ import {
   PlaywrightCommandType,
   PwCommand,
   TerminalType,
+  ControlType,
 } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers";
 import { showErrorMessage } from "../helpers/window-messages.helpers";
 import { BASE_TERMINAL_NAME } from "../helpers/consts";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
+import { version } from "os";
+import { allPlaywrightVersions } from "./playwright-versions";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
@@ -63,6 +66,8 @@ export function getCommandList(): PwCommand[] {
         {
           key: "version",
           defaultValue: "latest",
+          type: ControlType.datalist,
+          source: getPlaywrightVersions,
         },
       ],
     },
@@ -592,4 +597,10 @@ export async function runTestWithParameters(params: Map = {}) {
     execute: false,
     terminalName: `Run Tests`,
   });
+}
+
+function getPlaywrightVersions(): string[] {
+  const versions = ["latest", "next"];
+  versions.push(...allPlaywrightVersions);
+  return versions;
 }

@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import {
   AdditionalParams,
+  ControlType,
   PlaywrightCommandType,
   PwCommand,
   PwCommandAdditionalParams,
@@ -137,7 +138,25 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         if (type === PlaywrightCommandType.commandWithParameter) {
           if (additionalParams !== undefined) {
             for (const param of additionalParams) {
-              additionalParamsControls += `<input type="text" class="param-input" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />`;
+              if (param.type === ControlType.datalist) {
+                additionalParamsControls += `<input class="param-input" list="${param.key}-list"
+                  placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}"
+                  value="${param.defaultValue}" />`;
+                additionalParamsControls += `<datalist id="${param.key}-list">`;
+                const sourceData = [];
+                if (param.source !== undefined) {
+                  for (const sourceItem of param.source()) {
+                    sourceData.push(sourceItem);
+                  }
+                }
+
+                for (const sourceItem of sourceData) {
+                  additionalParamsControls += `<option class="datalist-option" value="${sourceItem}"></option>`;
+                }
+                additionalParamsControls += `</datalist>`;
+              } else {
+                additionalParamsControls += `<input type="text" class="param-input" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />`;
+              }
             }
             additionalParamsControls = "&nbsp; " + additionalParamsControls;
           }

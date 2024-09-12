@@ -30,6 +30,8 @@ export interface PwCommand {
 export interface PwCommandAdditionalParams {
   key: string;
   defaultValue: string;
+  type?: string;
+  source?: (...args: any[]) => any;
 }
 
 export interface KeyValuePair {
@@ -139,9 +141,10 @@ export enum PlaywrightCommandType {
   commandWithParameter = "commandWithParameter",
 }
 
-export enum PlaywrightSettingsType {
+export enum ControlType {
   checkbox = "checkbox",
   input = "input",
+  datalist = "datalist",
 }
 
 export enum TerminalType {
