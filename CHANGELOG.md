@@ -2,8 +2,49 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [1.0.8] - 2024-09-XX
 
-## [Unreleased]
+- feat: datalist for update version in commands
+- remove: default context menus
+
+## [1.0.7] - 2024-09-09
+
+- feat: different commands for different terminal types
+- refactor: code cleanup
+
+## [1.0.6] - 2024-09-08
+
+- feat: localization support
+- add: new commands: runCodegenWithSaveStorage, runCodegenWithLoadStorage
+
+## [1.0.5] - 2024-09-08
+
+- fix: double click on commands
+
+## [1.0.4] - 2024-09-08
+
+- feat: double click on commands
+- feat: custom context menu for commands
+
+## [1.0.3] - 2024-09-08
+
+- feat: env variable PLAYWRIGHT_HTML_OPEN in setting
+
+## [1.0.2] - 2024-09-07
+
+- feat: parameters in commands (in installPlaywrightTest)
+- fix: instant execute in commands
+- remove: instant update to Playwright Canary
+
+## [1.0.1] - 2024-09-06
+
+- feat: tsconfig option from Playwright 1.47
+- add: sorting scripts and commands
+
+## [1.0.0] - 2024-09-06
+
+- Stable release
+
+## [0.0.1] - 2024-08-10
 
 - Initial release
