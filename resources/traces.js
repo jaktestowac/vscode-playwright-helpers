@@ -80,6 +80,13 @@
 
   const searchInput = document.getElementById("searchInput");
   searchInput?.addEventListener("keyup", () => {
+    updateSearch(searchInput);
+  });
+  searchInput?.addEventListener("input", () => {
+    updateSearch(searchInput);
+  });
+
+  function updateSearch(searchInput) {
     // @ts-ignore
     const searchText = searchInput.value;
     const allItems = Array.from(document.querySelectorAll(".nav-list__item.searchable"));
@@ -113,5 +120,5 @@
         noResultsHeader.classList.toggle("hidden-by-default", true);
       }
     }
-  });
+  }
 })();

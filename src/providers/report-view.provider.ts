@@ -150,7 +150,7 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
     }
 
     const searchInputHtml = `
-      <input type="text" id="searchInput" class="search" placeholder="${vscode.l10n.t("Search reports...")}" />
+      <input type="search" id="searchInput" class="search" placeholder="${vscode.l10n.t("Search reports...")}" />
     `;
 
     const nonce = getNonce();
@@ -159,9 +159,9 @@ export class ReportViewProvider implements vscode.WebviewViewProvider {
               <html lang="en">
               <head>
                   <meta charset="UTF-8">
-                  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
-                    webview.cspSource
-                  }; script-src 'nonce-${nonce}';">
+                  <meta http-equiv="Content-Security-Policy" content="default-src 'none';worker-src blob:; 
+      child-src blob: gap:;
+      img-src 'self' blob: data:; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
   
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   

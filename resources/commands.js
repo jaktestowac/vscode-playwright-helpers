@@ -229,6 +229,13 @@
   hideEmptyCollapsible();
   const searchInput = document.getElementById("searchInput");
   searchInput?.addEventListener("keyup", () => {
+    updateSearch(searchInput);
+  });
+  searchInput?.addEventListener("input", () => {
+    updateSearch(searchInput);
+  });
+
+  function updateSearch(searchInput) {
     for (let i = 0; i < collapsible.length; i++) {
       if (!collapsible[i].classList.contains("active")) {
         collapsible[i].classList.add("active");
@@ -282,7 +289,7 @@
     } else {
       hideEmptyCollapsible();
     }
-  });
+  }
 
   function hideEmptyCollapsible() {
     const collapsible = document.getElementsByClassName("collapsible");

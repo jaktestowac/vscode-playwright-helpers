@@ -2,10 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.0.8] - 2024-09-XX
+## [1.0.8] - 2024-09-13
 
-- feat: datalist for update version in commands
+- feat: clear button in searches
 - remove: default context menus
+- experimental: datalist for versions (disabled for now - https://github.com/microsoft/vscode/issues/129999)
 
 ## [1.0.7] - 2024-09-09
 

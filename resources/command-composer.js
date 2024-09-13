@@ -71,6 +71,14 @@
 
   const searchInput = document.getElementById("searchInput");
   searchInput?.addEventListener("keyup", () => {
+    updateSearch(searchInput);
+  });
+
+  searchInput?.addEventListener("input", () => {
+    updateSearch(searchInput);
+  });
+
+  function updateSearch(searchInput) {
     // @ts-ignore
     const searchText = searchInput.value;
     const allItems = Array.from(document.querySelectorAll(".composer-control"));
@@ -104,7 +112,7 @@
       }
     }
     hideEmptySections();
-  });
+  }
 
   function getChildElementValue(parentKey) {
     const childElement = document.querySelector(`[child="${parentKey}"]`);
