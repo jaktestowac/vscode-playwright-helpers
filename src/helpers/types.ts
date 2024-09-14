@@ -113,6 +113,10 @@ export interface KeyValuePairs {
   [key: string]: string;
 }
 
+export interface KeyValuesPairs {
+  [key: string]: string[];
+}
+
 export interface NameValuePair {
   name: string;
   value: string;

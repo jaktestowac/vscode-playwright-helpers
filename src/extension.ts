@@ -12,7 +12,7 @@ import { CommandComposerViewProvider } from "./providers/command-composer-view.p
 import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
-import { openPlaywrightReport, openPlaywrightTrace } from "./helpers/context-menu.helpers";
+import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -130,6 +130,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   registerCommand(context, `${EXTENSION_NAME}.showReportContextMenu`, (params) => {
     openPlaywrightReport(params);
+  });
+
+  registerCommand(context, `${EXTENSION_NAME}.runSpecFileContextMenu`, (params) => {
+    runSpecFile(params);
   });
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {

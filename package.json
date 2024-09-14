@@ -118,6 +118,11 @@
           "command": "playwright-helpers.showReportContextMenu",
           "group": "navigation@1001",
           "when": "resourceFilename == index.html && resourceDirname =~ /report/"
+        },
+        {
+          "command": "playwright-helpers.runSpecFileContextMenu",
+          "group": "navigation@1002",
+          "when": "resourceFilename =~ /.spec.ts/ || resourceFilename =~ /.test.ts/"
         }
       ]
     },
@@ -129,6 +134,10 @@
       {
         "command": "playwright-helpers.showReportContextMenu",
         "title": "%playwright-helpers.showReportContextMenu.title%"
+      },
+      {
+        "command": "playwright-helpers.runSpecFileContextMenu",
+        "title": "%playwright-helpers.runSpecFileContextMenu.title%"
       },
       {
         "command": "playwright-helpers.refreshPlaywrightScripts",

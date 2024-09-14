@@ -14,6 +14,7 @@
   "Install @playwright/test": "Install @playwright/test",
   "Install/Update Latest @playwright/test": "Install/Update Latest @playwright/test",
   "Install Latest": "Install Latest",
+  "Uninstall @playwright/test": "Uninstall @playwright/test",
   "Install All Playwright Browsers": "Install All Playwright Browsers",
   "Install All Browsers": "Install All Browsers",
   "Install Chromium Playwright Browser": "Install Chromium Playwright Browser",
@@ -140,6 +141,9 @@
   "Unable to open Playwright report file: {0}": "Unable to open Playwright report file: {0}",
   "Please select a valid Playwright Trace file": "Please select a valid Playwright Trace file",
   "Unable to open Playwright trace file: {0}": "Unable to open Playwright trace file: {0}",
+  "Please select a valid Playwright spec file": "Please select a valid Playwright spec file",
+  "Unable to determine workspace folder for spec file": "Unable to determine workspace folder for spec file",
+  "Unable to run Playwright spec file: {0}": "Unable to run Playwright spec file: {0}",
   "No workspace folder opened.": "No workspace folder opened.",
   "More than one workspace folder opened.": "More than one workspace folder opened.",
   "Workspace folder is not empty.": "Workspace folder is not empty."

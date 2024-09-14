@@ -2,6 +2,8 @@ import * as vscode from "vscode";
 import {
   AdditionalParams,
   ControlType,
+  KeyValuePairs,
+  KeyValuesPairs,
   PlaywrightCommandType,
   PwCommand,
   PwCommandAdditionalParams,
@@ -92,6 +94,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "commands.js"));
+    const helpersScriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "helpers.js"));
     const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
     const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
@@ -110,6 +113,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     )}</h4>`;
     buttonHTMLList += `<div class="collapsible-content" aria-label="favorites-content" id="id-favorites-content"></div>`;
 
+    const sourceData: KeyValuesPairs = {};
     for (const [category, commands] of Object.entries(tempList)) {
       // buttonHTMLList += `<button class="collapsible">${category}</button>`;
       buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title"><span>${getHeaderName(
@@ -123,6 +127,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       let idx = 0;
 
       const sortedCommands = commands.sort((a, b) => a.prettyName.localeCompare(b.prettyName));
+
       for (const { key, prettyName, params, onlyPasteAndRun, onlyPaste, type, additionalParams } of sortedCommands) {
         let toolTipText = prettyName;
 
@@ -156,7 +161,17 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               //   // }
               //   // additionalParamsControls += `</datalist>`;
               // } else {
-              additionalParamsControls += `<input type="text" class="param-input" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />`;
+
+              sourceData[param.key] = [];
+              if (param.source !== undefined) {
+                for (const sourceItem of param.source()) {
+                  sourceData[param.key].push(sourceItem);
+                }
+              }
+
+              additionalParamsControls += `<div class="autocomplete">
+                  <input type="text" class="param-input" id="${param.key}-id" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />
+                </div>`;
               // }
             }
             additionalParamsControls = "&nbsp; " + additionalParamsControls;
@@ -227,7 +242,14 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
                 ${searchInputHtml}
                  ${buttonHTMLList}
 
+                  <script nonce="${nonce}" src="${helpersScriptUri}"></script>
                   <script nonce="${nonce}" src="${scriptUri}"></script>
+                  <script nonce="${nonce}">
+                  const versionInput = document.getElementById("version-id")
+                  if (versionInput) {
+                    autocomplete(versionInput, ${JSON.stringify(sourceData["version"])});
+                  }
+                  </script>
               </body>
               </html>`;
   }

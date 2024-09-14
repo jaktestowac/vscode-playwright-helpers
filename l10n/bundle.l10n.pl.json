@@ -141,5 +141,9 @@
   "Please select a valid Playwright Report file": "Wybierz prawidłowy plik raportu Playwright",
   "Unable to open Playwright report file: {0}": "Nie można otworzyć pliku raportu Playwright: {0}",
   "Please select a valid Playwright Trace file": "Wybierz prawidłowy plik trace Playwright",
-  "Unable to open Playwright trace file: {0}": "Nie można otworzyć pliku trace Playwright: {0}"
+  "Unable to open Playwright trace file: {0}": "Nie można otworzyć pliku trace Playwright: {0}",
+  "Please select a valid Playwright spec file": "Wybierz prawidłowy plik testów",
+  "Unable to determine workspace folder for spec file": "Nie można określić folderu obszaru roboczego dla pliku testów",
+  "Unable to run Playwright spec file: {0}": "Nie można uruchomić pliku testów: {0}",
+  "Uninstall @playwright/test": "Odinstaluj @playwright/test"
 }

@@ -13,7 +13,6 @@ import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers
 import { showErrorMessage } from "../helpers/window-messages.helpers";
 import { BASE_TERMINAL_NAME } from "../helpers/consts";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
-import { version } from "os";
 import { allPlaywrightVersions } from "./playwright-versions";
 
 export function getCommandList(): PwCommand[] {
@@ -80,6 +79,18 @@ export function getCommandList(): PwCommand[] {
         key: "installLatestPlaywrightTest",
         command: "npm i @playwright/test@latest",
         terminalName: vscode.l10n.t("Install Latest"),
+      },
+    },
+    {
+      key: "uninstallPlaywrightTest",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Uninstall @playwright/test"),
+      category: TabViewCategory.playwright,
+      onlyPaste: true,
+      params: {
+        key: "uninstallPlaywrightTest",
+        command: "npm uninstall @playwright/test",
+        terminalName: vscode.l10n.t("Uninstall @playwright/test"),
       },
     },
     {

@@ -35,5 +35,6 @@
   "playwright-helpers.showTrace.title": "Show Trace",
   "playwright-helpers.toggleHideShowCommands.title": "Toggle Hide/Show Commands",
   "playwright-helpers.showTraceContextMenu.title": "Show Trace",
-  "playwright-helpers.showReportContextMenu.title": "Show Report"
+  "playwright-helpers.showReportContextMenu.title": "Show Report",
+  "playwright-helpers.runSpecFileContextMenu.title": "Run Tests from This File"
 }
