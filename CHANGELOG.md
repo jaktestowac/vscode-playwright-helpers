@@ -2,7 +2,7 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.0.10] - 2024-09-XX
+## [1.1.0] - 2024-09-14
 
 - feat: show trace from context menu
 - feat: show reports from context menu
