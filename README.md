@@ -134,6 +134,22 @@ The extension provides an easy way to run Playwright scripts from package.json. 
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-4-scripts.gif?raw=true" alt="Preview of Playwright Scripts Runner">
 </p>
 
+## Context Menu Commands
+
+The extension provides additional context menu commands for the following items:
+
+- Trace files (`trace.zip`) - you can quickly view the trace in the Trace Viewer via clicking on file in the Explorer and selecting `Show Trace` from the context menu.
+
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-show-trace-from-context.gif?raw=true" alt="Preview of Show Trace from Context Menu">
+</p>
+
+- Reports (`playwright-report/index.html`) - you can quickly view the report via clicking on `index.html` file in the Explorer and selecting `Show Report` from the context menu.
+
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-show-report-from-context.gif?raw=true" alt="Preview of Show Report from Context Menu">
+</p>
+
 # Contributing
 
 This project is open source and we welcome contributions from the community. If you would like to contribute, please follow these steps:

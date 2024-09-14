@@ -137,5 +137,9 @@
   "More than one workspace folder opened.": "Otwarto więcej niż jeden folder obszaru roboczego.",
   "Workspace folder is not empty.": "Folder obszaru roboczego nie jest pusty.",
   "Install Node Packages": "Zainstaluj pakiety Node",
-  "Install Node Packages (package-lock)": "Zainstaluj pakiety Node (package-lock)"
+  "Install Node Packages (package-lock)": "Zainstaluj pakiety Node (package-lock)",
+  "Please select a valid Playwright Report file": "Wybierz prawidłowy plik raportu Playwright",
+  "Unable to open Playwright report file: {0}": "Nie można otworzyć pliku raportu Playwright: {0}",
+  "Please select a valid Playwright Trace file": "Wybierz prawidłowy plik trace Playwright",
+  "Unable to open Playwright trace file: {0}": "Nie można otworzyć pliku trace Playwright: {0}"
 }

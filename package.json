@@ -107,9 +107,29 @@
           "command": "playwright-helpers.pasteSelectedCommand",
           "when": "webviewId == playwright-helpers.commands"
         }
+      ],
+      "explorer/context": [
+        {
+          "command": "playwright-helpers.showTraceContextMenu",
+          "group": "navigation@1000",
+          "when": "resourceExtname == .zip"
+        },
+        {
+          "command": "playwright-helpers.showReportContextMenu",
+          "group": "navigation@1001",
+          "when": "resourceFilename == index.html && resourceDirname =~ /report/"
+        }
       ]
     },
     "commands": [
+      {
+        "command": "playwright-helpers.showTraceContextMenu",
+        "title": "%playwright-helpers.showTraceContextMenu.title%"
+      },
+      {
+        "command": "playwright-helpers.showReportContextMenu",
+        "title": "%playwright-helpers.showReportContextMenu.title%"
+      },
       {
         "command": "playwright-helpers.refreshPlaywrightScripts",
         "category": "PW Helpers",

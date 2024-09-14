@@ -29,6 +29,8 @@
   "Install/Update Next @playwright/test": "Install/Update Next @playwright/test",
   "Install Next": "Install Next",
   "Init New Project": "Init New Project",
+  "Install Node Packages": "Install Node Packages",
+  "Install Node Packages (package-lock)": "Install Node Packages (package-lock)",
   "Init New Project Quick": "Init New Project Quick",
   "Open UI Mode": "Open UI Mode",
   "Run Codegen": "Run Codegen",
@@ -134,9 +136,11 @@
   "No traces directory found at: {0}": "No traces directory found at: {0}",
   "No package.json found in the workspace": "No package.json found in the workspace",
   "No Playwright scripts found in package.json": "No Playwright scripts found in package.json",
+  "Please select a valid Playwright Report file": "Please select a valid Playwright Report file",
+  "Unable to open Playwright report file: {0}": "Unable to open Playwright report file: {0}",
+  "Please select a valid Playwright Trace file": "Please select a valid Playwright Trace file",
+  "Unable to open Playwright trace file: {0}": "Unable to open Playwright trace file: {0}",
   "No workspace folder opened.": "No workspace folder opened.",
   "More than one workspace folder opened.": "More than one workspace folder opened.",
-  "Workspace folder is not empty.": "Workspace folder is not empty.",
-  "Install Node Packages": "Install Node Packages",
-  "Install Node Packages (package-lock)": "Install Node Packages (package-lock)"
+  "Workspace folder is not empty.": "Workspace folder is not empty."
 }

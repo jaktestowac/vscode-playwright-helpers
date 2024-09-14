@@ -12,6 +12,7 @@ import { CommandComposerViewProvider } from "./providers/command-composer-view.p
 import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
+import { openPlaywrightReport, openPlaywrightTrace } from "./helpers/context-menu.helpers";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -101,25 +102,35 @@ export function activate(context: vscode.ExtensionContext) {
     });
   });
 
-  registerCommand(context, `${EXTENSION_NAME}.runSelectedCommand`, (param) => {
-    if (param.key === undefined) {
+  registerCommand(context, `${EXTENSION_NAME}.runSelectedCommand`, (params) => {
+    if (params.key === undefined) {
       showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
-    commandsViewProvider.invokeCommand(param.key, true);
+    commandsViewProvider.invokeCommand(params.key, true);
   });
-  registerCommand(context, `${EXTENSION_NAME}.pasteSelectedCommand`, (param) => {
-    if (param.key === undefined) {
+
+  registerCommand(context, `${EXTENSION_NAME}.pasteSelectedCommand`, (params) => {
+    if (params.key === undefined) {
       showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
-    commandsViewProvider.invokeCommand(param.key, false);
+    commandsViewProvider.invokeCommand(params.key, false);
   });
+
   // registerCommand(context, `${EXTENSION_NAME}.addToFavSelectedCommand`, (param) => {
   //   console.log("Run Command", param);
   // });
 
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
+
+  registerCommand(context, `${EXTENSION_NAME}.showTraceContextMenu`, (params) => {
+    openPlaywrightTrace(params);
+  });
+
+  registerCommand(context, `${EXTENSION_NAME}.showReportContextMenu`, (params) => {
+    openPlaywrightReport(params);
+  });
 
   getPlaywrightScriptsFromPackageJson().then((scripts) => {
     scriptsViewProvider.refresh(scripts);

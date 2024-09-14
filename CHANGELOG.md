@@ -2,6 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.0.10] - 2024-09-XX
+
+- feat: show trace from context menu
+- feat: show reports from context menu
+
 ## [1.0.9] - 2024-09-13
 
 - feat: zh-tw localization support

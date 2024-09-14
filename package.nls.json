@@ -33,5 +33,7 @@
   "playwright-helpers.listSystemInfo.title": "List System Info (using envinfo)",
   "playwright-helpers.runPrettierOnAllFiles.title": "Run Prettier on All Files",
   "playwright-helpers.showTrace.title": "Show Trace",
-  "playwright-helpers.toggleHideShowCommands.title": "Toggle Hide/Show Commands"
+  "playwright-helpers.toggleHideShowCommands.title": "Toggle Hide/Show Commands",
+  "playwright-helpers.showTraceContextMenu.title": "Show Trace",
+  "playwright-helpers.showReportContextMenu.title": "Show Report"
 }
