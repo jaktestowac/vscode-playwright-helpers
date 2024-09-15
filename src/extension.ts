@@ -13,7 +13,9 @@ import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
-import { insertTestActionsText } from "./providers/lens-code-actions.provider";
+import { matchTestAnnotations } from "./providers/code-lens-actions.provider";
+import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
+import { MatchTypeChangeAnnotations } from "./helpers/types";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -161,15 +163,18 @@ export function activate(context: vscode.ExtensionContext) {
   //   "name": "Commands Tree View"
   // },
 
-  // TODO: Add CodeLensProvider
-  // const languages = ["typescript", "javascript"];
-  // languages.forEach((language) => {
-  //   context.subscriptions.push(
-  //     vscode.languages.registerCodeLensProvider(language, {
-  //       provideCodeLenses: insertTestActionsText,
-  //     })
-  //   );
-  // });
+  const languages = ["typescript", "javascript"];
+  languages.forEach((language) => {
+    context.subscriptions.push(
+      vscode.languages.registerCodeLensProvider(language, {
+        provideCodeLenses: matchTestAnnotations,
+      })
+    );
+  });
+
+  registerCommand(context, `${EXTENSION_NAME}.changeTestAnnotations`, (match: MatchTypeChangeAnnotations) => {
+    changeTestAnnotations(match);
+  });
 }
 
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {

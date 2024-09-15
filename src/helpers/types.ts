@@ -1,3 +1,5 @@
+import * as vscode from "vscode";
+
 export interface ExecuteInTerminalParameters {
   command: string;
   execute?: boolean;
@@ -176,4 +178,18 @@ export interface TerminalCommandSet {
 
 export interface TerminalCommand {
   (...args: string[]): string;
+}
+
+export interface BaseMatchType {
+  range: vscode.Range;
+  testName: string;
+  testFile: string;
+  title: string;
+  command?: number;
+  lineNumber?: number;
+}
+
+export interface MatchTypeChangeAnnotations extends BaseMatchType {
+  from: string;
+  to: string;
 }

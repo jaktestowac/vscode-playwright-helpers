@@ -6,6 +6,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - feat: run tests from context menu
 - feat: possible versions to install
+- feat: add test annotations (skip, only, fixme) via CodeLens
 
 ## [1.1.0] - 2024-09-14
 
