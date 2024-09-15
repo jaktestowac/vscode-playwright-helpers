@@ -6,6 +6,7 @@
   "Reuse Existing Terminal": "Reuse Existing Terminal",
   "Playwright Verbose API logs": "Playwright Verbose API logs",
   "Never Open HTML Report": "Never Open HTML Report",
+  "Test Annotations CodeLens": "Test Annotations CodeLens",
   "Check Version - Playwright": "Check Version - Playwright",
   "Check Playwright Version": "Check Playwright Version",
   "Check Version - @playwright/test": "Check Version - @playwright/test",

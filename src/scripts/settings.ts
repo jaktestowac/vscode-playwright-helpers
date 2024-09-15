@@ -24,6 +24,13 @@ export function getSettingsList(): PwSettings[] {
       category: TabViewCategory.general,
       type: ControlType.checkbox,
     },
+    {
+      key: "provideTestAnnotationsCodeLens",
+      func: provideTestAnnotationsCodeLens,
+      prettyName: vscode.l10n.t("Test Annotations CodeLens"),
+      category: TabViewCategory.general,
+      type: ControlType.checkbox,
+    },
     // {
     //   key: "instantExecute",
     //   func: instantExecute,
@@ -43,5 +50,7 @@ function reuseTerminal() {}
 function verboseApiLogs() {}
 
 function neverOpenHtmlReport() {}
+
+function provideTestAnnotationsCodeLens() {}
 
 // function instantExecute() {}

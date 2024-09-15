@@ -2,6 +2,7 @@ import path from "path";
 import * as vscode from "vscode";
 import { EXTENSION_NAME } from "../helpers/consts";
 import { MatchTypeChangeAnnotations } from "../helpers/types";
+import MyExtensionContext from "../helpers/my-extension.context";
 
 // const isTest = /^\s*(it|test)(?:\.(only|skip|fixme))?\s*\(\s*[\r\n]*\s*['"]/m;
 // const isSuite = /^\s*(describe|test\.describe)(?:\.(only|skip|fixme))?\s*\(\s*[\s\S]*?['"]/m;
@@ -18,6 +19,11 @@ function regexpIsSuite(annotations: string[]): RegExp {
 }
 
 export function matchTestAnnotations(document: vscode.TextDocument): vscode.CodeLens[] {
+  const testAnnotationsCodeLens = MyExtensionContext.instance.getWorkspaceValue("provideTestAnnotationsCodeLens");
+  if (!testAnnotationsCodeLens) {
+    return [];
+  }
+
   if (!vscode.window.activeTextEditor) {
     return [];
   }
