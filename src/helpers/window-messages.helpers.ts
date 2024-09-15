@@ -1,13 +1,14 @@
 import * as vscode from "vscode";
+import { SHORT_EXTENSION_NAME } from "./consts";
 
 export function showErrorMessage(message: string): void {
-  vscode.window.showErrorMessage(`PW Helper: ${message}`);
+  vscode.window.showErrorMessage(`${SHORT_EXTENSION_NAME}: ${message}`);
 }
 
 export function showInformationMessage(message: string): void {
-  vscode.window.showInformationMessage(`PW Helper: ${message}`);
+  vscode.window.showInformationMessage(`${SHORT_EXTENSION_NAME}: ${message}`);
 }
 
 export function showWarningMessage(message: string): void {
-  vscode.window.showWarningMessage(`PW Helper: ${message}`);
+  vscode.window.showWarningMessage(`${SHORT_EXTENSION_NAME}: ${message}`);
 }

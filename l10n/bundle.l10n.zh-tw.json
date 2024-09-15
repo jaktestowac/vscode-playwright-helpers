@@ -135,5 +135,15 @@
   "No Playwright scripts found in package.json": "在 package.json 中未找到 Playwright 腳本",
   "No workspace folder opened.": "未打開工作區資料夾。",
   "More than one workspace folder opened.": "打開了多個工作區資料夾。",
-  "Workspace folder is not empty.": "工作區資料夾不為空。"
+  "Workspace folder is not empty.": "工作區資料夾不為空。",
+  "Install Node Packages": "Install Node Packages",
+  "Install Node Packages (package-lock)": "Install Node Packages (package-lock)",
+  "Please select a valid Playwright Report file": "Please select a valid Playwright Report file",
+  "Unable to open Playwright report file: {0}": "Unable to open Playwright report file: {0}",
+  "Please select a valid Playwright Trace file": "Please select a valid Playwright Trace file",
+  "Unable to open Playwright trace file: {0}": "Unable to open Playwright trace file: {0}",
+  "Please select a valid Playwright spec file": "Please select a valid Playwright spec file",
+  "Unable to determine workspace folder for spec file": "Unable to determine workspace folder for spec file",
+  "Unable to run Playwright spec file: {0}": "Unable to run Playwright spec file: {0}",
+  "Uninstall @playwright/test": "Uninstall @playwright/test"
 }

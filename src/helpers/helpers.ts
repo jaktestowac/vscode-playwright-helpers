@@ -6,6 +6,7 @@ import { areWorkspaceFoldersSingle } from "./assertions.helpers";
 import { showErrorMessage, showWarningMessage } from "./window-messages.helpers";
 import path from "path";
 import { PwReports, PwScripts, PwTraces } from "./types";
+import { DEFAULT_REPORT_FILE_NAME, DEFAULT_TRACE_FILE_NAME } from "./config";
 
 export function getNonce() {
   let text = "";
@@ -101,7 +102,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
   }
 
   const files = fs.readdirSync(reportsPath, { recursive: true });
-  const reports = (files as string[]).filter((file) => file.endsWith("index.html"));
+  const reports = (files as string[]).filter((file) => file.endsWith(DEFAULT_REPORT_FILE_NAME));
 
   const pwReports: PwReports[] = reports
     .filter((reportPath) => !reportPath.includes("trace"))
@@ -125,7 +126,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
 export async function getPlaywrightTraces(testResultsDir?: string, verbose = false): Promise<PwTraces[]> {
   testResultsDir = testResultsDir ?? MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
   let tracesPath = testResultsDir;
-  const defaultFileName = "trace.zip";
+  const defaultFileName = DEFAULT_TRACE_FILE_NAME;
 
   if (!testResultsDir) {
     if (verbose) {
@@ -207,4 +208,12 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
   });
 
   return pwScripts;
+}
+
+export function checkIfStringEndsWithAny(aString: string, possibleEndings: string[]) {
+  return possibleEndings.some((ending) => aString.toLowerCase().endsWith(ending.toLowerCase()));
+}
+
+export function checkIfStringContainsAnySubstring(aString: string, substrings: string[]) {
+  return substrings.some((substring) => aString.toLowerCase().includes(substring.toLowerCase()));
 }
