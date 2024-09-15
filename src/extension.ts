@@ -13,6 +13,7 @@ import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
+import { insertTestActionsText } from "./providers/lens-code-actions.provider";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -159,6 +160,16 @@ export function activate(context: vscode.ExtensionContext) {
   //   "id": "playwright-helpers.commandsTreeView",
   //   "name": "Commands Tree View"
   // },
+
+  // TODO: Add CodeLensProvider
+  // const languages = ["typescript", "javascript"];
+  // languages.forEach((language) => {
+  //   context.subscriptions.push(
+  //     vscode.languages.registerCodeLensProvider(language, {
+  //       provideCodeLenses: insertTestActionsText,
+  //     })
+  //   );
+  // });
 }
 
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
