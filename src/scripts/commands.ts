@@ -356,7 +356,7 @@ export function getCommandList(): PwCommand[] {
     {
       key: "closeAllTerminals",
       func: closeAllTerminals,
-      prettyName: vscode.l10n.t(`Close All ${BASE_TERMINAL_NAME} Terminals`),
+      prettyName: vscode.l10n.t(`Close All {0} Terminals`, BASE_TERMINAL_NAME),
       category: TabViewCategory.mics,
       onlyPasteAndRun: true,
     },
