@@ -152,6 +152,12 @@ The extension provides additional context menu commands for the following items:
 
 - Run Tests (`.spec.ts`) - you can quickly run the tests via clicking on `.spec.ts` file in the Explorer and selecting `Run Tests` from the context menu.
 
+## CodeLenses
+
+The extension provides additional CodeLenses for the following items:
+
+- test annotations (`test`, `only`, `skip`) - you can quickly change the test annotations via clicking on the annotation above the test
+
 # Contributing
 
 This project is open source and we welcome contributions from the community. If you would like to contribute, please follow these steps:
