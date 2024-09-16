@@ -14,6 +14,7 @@ import { showErrorMessage } from "../helpers/window-messages.helpers";
 import { BASE_TERMINAL_NAME } from "../helpers/consts";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 import { allPlaywrightVersions } from "./playwright-versions";
+import { SettingsKeys } from "./settings";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
@@ -530,7 +531,7 @@ function isCommandExecutedWithoutAsking(key: string): boolean {
   const askForExecute = command?.askForExecute ?? false;
   if (askForExecute === true) {
     // Check if the user has set the instantExecute setting to true
-    const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue("instantExecute");
+    const instantExecute = MyExtensionContext.instance.getWorkspaceBoolValue(SettingsKeys.instantExecute);
     return instantExecute;
   }
   return false;

@@ -1,3 +1,4 @@
+import { SettingsKeys } from "../scripts/settings";
 import { terminalCommands } from "../scripts/terminal";
 import { BASE_TERMINAL_NAME } from "./consts";
 import MyExtensionContext from "./my-extension.context";
@@ -5,7 +6,7 @@ import { ExecuteInTerminalParameters, TerminalCommand, TerminalCommandSet, Termi
 import * as vscode from "vscode";
 
 export function executeCommandInTerminal(parameters: ExecuteInTerminalParameters) {
-  const reuseTerminal = MyExtensionContext.instance.getWorkspaceValue("reuseTerminal");
+  const reuseTerminal = MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.reuseTerminal);
   if (reuseTerminal) {
     executeCommandInExistingTerminal(parameters);
   } else {
@@ -93,7 +94,7 @@ export function decorateCommand(
     }
   }
 
-  const verboseApiLogs = MyExtensionContext.instance.getWorkspaceValue("verboseApiLogs");
+  const verboseApiLogs = MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.verboseApiLogs);
   if (verboseApiLogs) {
     const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
     const cmdToSetEnvVar = setVariable("DEBUG", "pw:api");
@@ -101,7 +102,7 @@ export function decorateCommand(
     params.command = concatCommands(cmdToSetEnvVar, params.command);
   }
 
-  const neverOpenHtmlReport = MyExtensionContext.instance.getWorkspaceValue("neverOpenHtmlReport");
+  const neverOpenHtmlReport = MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.neverOpenHtmlReport);
   if (neverOpenHtmlReport) {
     const setVariable = getMethodForShell(terminal, terminalCommands.setVariable);
     const cmdToSetEnvVar = setVariable("PLAYWRIGHT_HTML_OPEN", "never");
