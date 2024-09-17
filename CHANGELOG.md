@@ -8,6 +8,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 - feat: possible versions to install
 - feat: add test annotations (skip, only, fixme) via CodeLens
 - feat: settings for test annotations
+- feat: Codegen Composer
 
 ## [1.1.0] - 2024-09-14
 

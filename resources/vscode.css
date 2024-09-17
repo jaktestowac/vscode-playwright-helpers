@@ -321,6 +321,30 @@ a.nav-list__link {
   width: 100% !important;
 }
 
+.composer-select-75 {
+  width: 75% !important;
+}
+
+.option-description {
+  font-size: 0.8rem;
+  color: var(--vscode-descriptionForeground);
+}
+
+.flexed-elements {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.flexed-elements > :nth-child(2) {
+  max-width: 50px;
+}
+
+.codegen-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .not-checkbox {
   display: none;
   pointer-events: none;

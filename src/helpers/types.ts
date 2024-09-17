@@ -88,6 +88,17 @@ export interface PwCommandComposer {
   maxControlLengthClass?: number;
 }
 
+export interface PwCodegenComposer {
+  key: string;
+  option: string;
+  description: string;
+  prettyName: string;
+  category: string;
+  valueType?: "string" | "number" | "select";
+  possibleValues?: string[];
+  defaultValue?: string | number;
+}
+
 export interface PwPlaywrightProjects {
   key: string;
   testMatch: string;
@@ -97,6 +108,10 @@ export interface PwPlaywrightProjects {
 
 export interface Map {
   [key: string]: string | undefined | Map | PwCommand | PwCommand[];
+}
+
+export interface PwCodegenComposerMap {
+  [key: string]: PwCodegenComposer[];
 }
 
 export interface PwCommandMap {

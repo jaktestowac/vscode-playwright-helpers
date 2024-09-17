@@ -110,6 +110,10 @@ From graphical user interface you can select options described in documentation 
 Currently available commands to compose:
 https://playwright.dev/docs/test-cli#reference
 
+## Codegen Composer
+
+The Codegen Composer allows you to compose your own codegen command by selecting the desired options and parameters.
+
 ## Trace Viewer
 
 The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run `trace-viewer` to display selected trace.

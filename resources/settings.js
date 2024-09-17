@@ -5,6 +5,40 @@
 (function () {
   // @ts-ignore
   const vscode = acquireVsCodeApi();
+  const state = vscode.getState();
+  const settingsState = state?.settingsState ? state.settingsState : {};
+  const envVarsState = state?.envVarsState ? state.envVarsState : {};
+
+  function updateWholeSettingsState(settingsState, envVarsState) {
+    vscode.setState({ settingsState, envVarsState });
+  }
+
+  function updateSettingsState(key, value, settingsState, envVarsState) {
+    settingsState[key] = value;
+    updateWholeSettingsState(settingsState, envVarsState);
+  }
+
+  restoreSettingsState(settingsState);
+  restoreEnvVarsState(envVarsState);
+
+  function restoreSettingsState(settingsState) {
+    const checkboxes = document.querySelectorAll(".checkbox");
+    for (const checkbox of checkboxes) {
+      const attributeKey = checkbox.getAttribute("key");
+      // @ts-ignore
+      checkbox.checked = settingsState[attributeKey];
+    }
+  }
+
+  function restoreEnvVarsState(envVarsState) {
+    const envVarTable = document.getElementById("envVariablesTableBody");
+    if (envVarTable) {
+      for (const [name, value] of Object.entries(envVarsState)) {
+        const newRow = createRow(name, value);
+        envVarTable.appendChild(newRow);
+      }
+    }
+  }
 
   const checkboxes = document.querySelectorAll(".checkbox");
   for (const checkbox of checkboxes) {
@@ -16,6 +50,8 @@
         // @ts-ignore
         value: checkbox.checked,
       });
+      // @ts-ignore
+      updateSettingsState(attributeKey, checkbox.checked, settingsState, envVarsState);
     });
   }
 
@@ -46,7 +82,7 @@
     });
   }
 
-  function createRow() {
+  function createRow(name, value) {
     const newRow = document.createElement("tr");
     newRow.classList.add("envVarRow");
 
@@ -58,6 +94,9 @@
     nameInput.addEventListener("change", () => {
       inputWasChanged();
     });
+    if (name) {
+      nameInput.value = name;
+    }
 
     const nameCell = document.createElement("td");
     nameCell.appendChild(nameInput);
@@ -71,6 +110,9 @@
     valueInput.addEventListener("change", () => {
       inputWasChanged();
     });
+    if (value) {
+      valueInput.value = value;
+    }
 
     const valueCell = document.createElement("td");
     valueCell.appendChild(valueInput);
@@ -107,6 +149,11 @@
       // @ts-ignore
       envVars.push({ name: nameInput.value, value: valueInput.value });
     }
+    const newEnvVarsState = {};
+    for (const envVar of envVars) {
+      newEnvVarsState[envVar.name] = envVar.value;
+    }
+    updateWholeSettingsState(settingsState, newEnvVarsState);
     vscode.postMessage({
       type: "updateEnvVariables",
       key: "updateEnvVariables",

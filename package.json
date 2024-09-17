@@ -70,6 +70,11 @@
         },
         {
           "type": "webview",
+          "id": "playwright-helpers.codegen-composer",
+          "name": "%playwright-helpers.codegen-composer.name%"
+        },
+        {
+          "type": "webview",
           "id": "playwright-helpers.settings",
           "name": "%playwright-helpers.settings.name%"
         }

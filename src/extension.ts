@@ -16,6 +16,8 @@ import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helper
 import { matchTestAnnotations } from "./providers/code-lens-actions.provider";
 import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
 import { MatchTypeChangeAnnotations } from "./helpers/types";
+import { CodegenComposerViewProvider } from "./providers/codegen-composer-view.provider";
+import { getCodegenComposerData } from "./scripts/codegen-composer";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -42,6 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   const commandComposerData = getCommandComposerData();
+  const codegenComposerData = getCodegenComposerData();
 
   // Register the Sidebar Panel - Commands
   const commandsViewProvider = new CommandsViewProvider(context.extensionUri, commandsList);
@@ -65,13 +68,13 @@ export function activate(context: vscode.ExtensionContext) {
   const traceViewProvider = new TraceViewProvider(context.extensionUri);
   context.subscriptions.push(vscode.window.registerWebviewViewProvider(TraceViewProvider.viewType, traceViewProvider));
 
-  // Register the Sidebar Panel - Trace
+  // Register the Sidebar Panel - Report
   const reportViewProvider = new ReportViewProvider(context.extensionUri);
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(ReportViewProvider.viewType, reportViewProvider)
   );
 
-  // Register the Sidebar Panel - Scripts
+  // Register the Sidebar Panel - Command Composer
   const commandComposerViewProvider = new CommandComposerViewProvider(
     context.extensionUri,
     commandComposerData,
@@ -79,6 +82,16 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(CommandComposerViewProvider.viewType, commandComposerViewProvider)
+  );
+
+  // Register the Sidebar Panel - Codegen Composer
+  const codegenComposerViewProvider = new CodegenComposerViewProvider(
+    context.extensionUri,
+    codegenComposerData,
+    runTestWithParameters
+  );
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(CodegenComposerViewProvider.viewType, codegenComposerViewProvider)
   );
 
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {
