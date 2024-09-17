@@ -2,7 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.0] - 2024-09-XX
+## [1.0.9] - 2024-09-13
+
+- fix: labels
+
+## [1.2.0] - 2024-09-17
 
 - feat: run tests from context menu
 - feat: possible versions to install
