@@ -2,7 +2,7 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.1] - 2024-09-13
+## [1.2.1] - 2024-09-17
 
 - fix: labels
 
