@@ -36,5 +36,6 @@
   "playwright-helpers.toggleHideShowCommands.title": "Toggle Hide/Show Commands",
   "playwright-helpers.showTraceContextMenu.title": "Show Playwright Trace",
   "playwright-helpers.showReportContextMenu.title": "Show Playwright Report",
-  "playwright-helpers.runSpecFileContextMenu.title": "Run Playwright Tests from This File"
+  "playwright-helpers.runSpecFileContextMenu.title": "Run Playwright Tests from This File",
+  "playwright-helpers.codegen-composer.name": "Codegen Composer"
 }
