@@ -91,7 +91,11 @@
 
       let mergedParams = "";
       for (const [key, value] of Object.entries(params)) {
-        mergedParams += `${key}=${value} `;
+        if (value !== undefined) {
+          mergedParams += `${key}=${value} `;
+        } else {
+          mergedParams += `${key} `;
+        }
       }
       for (const value of endValues) {
         mergedParams += ` ${value} `;

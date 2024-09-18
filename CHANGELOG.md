@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.2] - 2024-09-19
+
+- fix: codegen composer and options without values eg. `--block-service-workers`
+
 ## [1.2.1] - 2024-09-17
 
 - fix: labels
