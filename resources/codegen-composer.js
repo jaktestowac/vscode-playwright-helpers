@@ -250,7 +250,7 @@
     if (envVarTableRows.length === 0) {
       const noOptionsRow = document.querySelector("#noOptionsRow");
       if (noOptionsRow) {
-        return;
+        noOptionsRow.remove();
       }
 
       const newEmptyRow = createRow();

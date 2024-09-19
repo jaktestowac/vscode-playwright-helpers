@@ -2,6 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.3] - 2024-09-19
+
+- fix: codegen composer warning message
+- change: playwright script detection for `package.json`
+
 ## [1.2.2] - 2024-09-19
 
 - fix: codegen composer and options without values eg. `--block-service-workers`

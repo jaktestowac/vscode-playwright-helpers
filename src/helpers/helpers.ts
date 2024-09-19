@@ -193,7 +193,13 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
   const packageJsonContent = await vscode.workspace.fs.readFile(vscode.Uri.file(packageJsonPath));
   const packageJson = JSON.parse(packageJsonContent.toString());
   const foundKeys = Object.keys(packageJson.scripts).filter(
-    (key) => key.includes("playwright") || packageJson.scripts[key].includes("playwright")
+    (key) =>
+      key.includes("playwright") ||
+      packageJson.scripts[key].includes("playwright") ||
+      key.includes("test") ||
+      packageJson.scripts[key].includes("test") ||
+      key.includes("e2e") ||
+      packageJson.scripts[key].includes("e2e")
   );
 
   if (!foundKeys || foundKeys.length === 0) {
