@@ -13,7 +13,14 @@ import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
-import { matchTestAnnotations } from "./providers/code-lens-actions.provider";
+import {
+  annotations,
+  expectOptions,
+  provideCodeLensesToggle,
+  regexpIsExpect,
+  regexpIsSuite,
+  regexpIsTest,
+} from "./providers/code-lens-actions.provider";
 import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
 import { MatchTypeChangeAnnotations } from "./helpers/types";
 import { CodegenComposerViewProvider } from "./providers/codegen-composer-view.provider";
@@ -177,10 +184,27 @@ export function activate(context: vscode.ExtensionContext) {
   // },
 
   const languages = ["typescript", "javascript"];
+
   languages.forEach((language) => {
     context.subscriptions.push(
       vscode.languages.registerCodeLensProvider(language, {
-        provideCodeLenses: matchTestAnnotations,
+        provideCodeLenses: (doc) => {
+          return provideCodeLensesToggle(doc, annotations, regexpIsTest);
+        },
+      })
+    );
+    context.subscriptions.push(
+      vscode.languages.registerCodeLensProvider(language, {
+        provideCodeLenses: (doc) => {
+          return provideCodeLensesToggle(doc, annotations, regexpIsSuite);
+        },
+      })
+    );
+    context.subscriptions.push(
+      vscode.languages.registerCodeLensProvider(language, {
+        provideCodeLenses: (doc) => {
+          return provideCodeLensesToggle(doc, expectOptions, regexpIsExpect);
+        },
       })
     );
   });
