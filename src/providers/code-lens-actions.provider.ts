@@ -22,7 +22,7 @@ export function regexpIsSuite(annotations: string[]): RegExp {
 }
 
 export function regexpIsExpect(actions: string[]): RegExp {
-  return new RegExp(`\\s*(expect)(?:\\.(?:${actions.join("|")}))?\\s*\\(\\s*[\\s\\S]*?['"]`, "m");
+  return new RegExp(`\\s*(expect)(?:\\.(?:${actions.join("|")}))?\\s*\\(`, "m");
 }
 
 export function provideCodeLensesToggle(
