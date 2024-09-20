@@ -190,8 +190,30 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
     return [];
   }
 
-  const packageJsonContent = await vscode.workspace.fs.readFile(vscode.Uri.file(packageJsonPath));
-  const packageJson = JSON.parse(packageJsonContent.toString());
+  let packageJsonContent = undefined;
+
+  try {
+    packageJsonContent = await vscode.workspace.fs.readFile(vscode.Uri.file(packageJsonPath));
+  } catch (error) {
+    if (verbose) {
+      showErrorMessage(vscode.l10n.t("Error reading package.json file"));
+    }
+    return [];
+  }
+  if (packageJsonContent === undefined) {
+    return [];
+  }
+
+  let packageJson = undefined;
+  try {
+    packageJson = JSON.parse(packageJsonContent.toString());
+  } catch (error) {
+    if (verbose) {
+      showErrorMessage(vscode.l10n.t("Error reading package.json file"));
+    }
+    return [];
+  }
+
   const foundKeys = Object.keys(packageJson.scripts).filter(
     (key) =>
       key.includes("playwright") ||

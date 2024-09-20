@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.4] - 2024-09-XX
+
+- fix: codelens expect soft
+
 ## [1.2.3] - 2024-09-19
 
 - fix: codegen composer warning message

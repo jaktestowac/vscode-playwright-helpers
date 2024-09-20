@@ -164,6 +164,29 @@ export function activate(context: vscode.ExtensionContext) {
     commandComposerViewProvider.refreshScripts(scripts);
   });
 
+  createFileWatcher(`**/trace.zip`, traceUpdate);
+  createFileWatcher(`**/index.html`, reportUpdate);
+  createFileWatcher(`**/package.json`, () => {
+    getPlaywrightScriptsFromPackageJson(true).then((scripts) => {
+      scriptsViewProvider.refresh(scripts);
+      commandComposerViewProvider.refreshScripts(scripts);
+    });
+  });
+
+  function traceUpdate(): void {
+    const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
+    getPlaywrightTraces(testResultsDir).then((traces) => {
+      traceViewProvider.refresh(traces);
+    });
+  }
+
+  function reportUpdate(): void {
+    const testReportsDir = MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
+    getPlaywrightReports(testReportsDir).then((reports) => {
+      reportViewProvider.refresh(reports);
+    });
+  }
+
   getPlaywrightTraces(MyExtensionContext.instance.getWorkspaceValue("testResultsDir")).then((traces) => {
     traceViewProvider.refresh(traces);
   });
@@ -217,6 +240,19 @@ export function activate(context: vscode.ExtensionContext) {
 function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
   let disposable = vscode.commands.registerCommand(id, callback, context);
   context.subscriptions.push(disposable);
+}
+
+function createFileWatcher(filePath: string, callback: () => void) {
+  const watcher = vscode.workspace.createFileSystemWatcher(filePath);
+  watcher.onDidCreate((uri) => {
+    callback();
+  });
+  watcher.onDidChange((uri) => {
+    callback();
+  });
+  watcher.onDidDelete((uri) => {
+    callback();
+  });
 }
 
 // This method is called when your extension is deactivated
