@@ -2,7 +2,7 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.4] - 2024-09-XX
+## [1.2.4] - 2024-09-22
 
 - feat: better descriptions in codegen composer
 - feat: automatic update of scripts, traces and reports
