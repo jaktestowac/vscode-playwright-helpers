@@ -4,7 +4,10 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 ## [1.2.4] - 2024-09-XX
 
-- fix: codelens expect soft
+- feat: better descriptions in codegen composer
+- feat: automatic update of scripts, traces and reports
+- feat: codelens expect soft
+- refactor: codelens and codegen composer
 
 ## [1.2.3] - 2024-09-19
 
