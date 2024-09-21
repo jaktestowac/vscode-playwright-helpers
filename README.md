@@ -8,8 +8,6 @@
 
 This Visual Studio Code extension adds predefined commands for **Node.js Playwright**.
 
-_Note:_ For now only Windows OS is fully supported.
-
 # Table of Contents
 
 - [Description](#description)
@@ -17,21 +15,34 @@ _Note:_ For now only Windows OS is fully supported.
   - [Command Palette](#command-palette)
   - [Side View](#side-view)
 - [Features](#features)
+
   - [Commands List](#commands-list)
   - [Command Composer](#command-composer)
+  - [Codegen Composer](#codegen-composer)
   - [Trace Viewer](#trace-viewer)
   - [Report Viewer](#report-viewer)
   - [Playwright Scripts Runner](#playwright-scripts-runner)
+  - [Context Menu Commands](#context-menu-commands)
+  - [CodeLenses](#codelenses)
+
 - [Contributing](#contributing)
 - [For more information](#for-more-information)
 
 # How to Use This Extension in VS Code
 
-Commands are available at:
+## Side View
+
+Extensions adds new view called **Playwright Helpers**. You can open it by clicking on the icon in the Activity Bar.
+
+<p align="center">
+  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-1.gif?raw=true" alt="Preview of Side View">
+</p>
+
+The Side View provides a convenient way to access all features from this extension.
 
 ## Command Palette
 
-The Command Palette is a feature in Visual Studio Code that provides a convenient way to access various commands and features within the editor.
+This extension provides a set of commands that can be executed from the Command Palette.
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-2.gif?raw=true" alt="Preview of Command Palette">
@@ -45,25 +56,18 @@ The Command Palette is a feature in Visual Studio Code that provides a convenien
 PW Helpers: Initiate New Playwright Project
 ```
 
-## Side View
-
-In addition to accessing the commands through the Command Palette, you can also find them in the Side View of Visual Studio Code.
-
-Under the **Playwright Helpers** section you will see a list of available commands categorized. Simply click on a command to execute it.
-
-<p align="center">
-  <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-1.gif?raw=true" alt="Preview of Side View">
-</p>
-
-The Side View provides a convenient way to access and execute commands without having to remember the command names or use the Command Palette.
-
 # Features
 
 This extension provides the following features:
 
-- Commands for Playwright
-- Running scripts from package.json
-- Command Composer - allows you to compose your own commands
+- **Commands** for Playwright
+- **Running scripts** from package.json
+- **Command Composer** - allows you to compose your own commands
+- **Codegen Composer** - allows you to compose your own codegen commands
+- **Trace Viewer** - allows you to view Playwright traces
+- **Report Viewer** - allows you to view Playwright reports
+- **Context Menu Commands** - additional commands in the context menu
+- **CodeLenses** - additional CodeLenses for test annotations and assertions
 
 ## Commands List
 
@@ -161,6 +165,7 @@ The extension provides additional context menu commands for the following items:
 The extension provides additional CodeLenses for the following items:
 
 - test annotations (`test`, `only`, `skip`) - you can quickly change the test annotations via clicking on the annotation above the test
+- assertions (`expect`) - you can quickly add **soft** or **hard** assertions via clicking on the annotation above the `expect`
 
 # Contributing
 
