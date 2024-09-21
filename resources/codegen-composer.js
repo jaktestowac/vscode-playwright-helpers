@@ -16,6 +16,7 @@
 
   restoreCodegenComposerState(codegenComposerState);
   onRowNumberChange();
+  onDropDownOptionChange(optionsDropdown);
 
   function updateCodegenComposerState(codegenComposerState) {
     vscode.setState({ codegenComposerState });
@@ -106,6 +107,7 @@
         type: "prepareCommand",
         params,
       });
+      onRowNumberChange();
     });
   }
 
@@ -143,6 +145,14 @@
   });
 
   optionsDropdown?.addEventListener("change", (e) => {
+    onDropDownOptionChange(optionsDropdown);
+  });
+
+  function onDropDownOptionChange(optionsDropdown) {
+    if (!optionsDropdown) {
+      optionsDropdown = document.querySelector("#optionsDropdown");
+    }
+
     const selectedOption = optionsDropdown.querySelector("option:checked");
     if (selectedOption === null) {
       return;
@@ -160,9 +170,9 @@
 
     const obj = JSON.parse(objRaw.replace(/\$\$/g, '"'));
     if (optionDescription) {
-      optionDescription.innerHTML = formatDescription(obj);
+      optionDescription.innerHTML = formatDescription(obj, true);
     }
-  });
+  }
 
   function createRow(key, value, values, description) {
     if (key === undefined && value === undefined && values === undefined) {
@@ -274,17 +284,31 @@
   }
 
   function formatDescription(obj, html = true) {
-    let fullDescription = `
-  ${obj.description}
-    `;
+    let fullDescription = `${obj.description}`.trim();
+
+    fullDescription = fullDescription.charAt(0).toUpperCase() + fullDescription.slice(1);
 
     if (obj.possibleValues) {
       if (html) {
-        fullDescription += `<br><br><b>Possible values:</b><br>`;
+        fullDescription += `<br><b>Possible values:</b><br>`;
       } else {
         fullDescription += "Possible values: ";
       }
-      fullDescription += obj.possibleValues.join(", ");
+
+      if (html) {
+        fullDescription += obj.possibleValues.map((val) => `<code>${val}</code>`).join(", ");
+      } else {
+        fullDescription += obj.possibleValues.join(", ");
+      }
+    }
+
+    if (html) {
+      fullDescription = `<i>${fullDescription}</i>`;
+    }
+
+    if (html) {
+      fullDescription = fullDescription.replace(/`([^`]+)`/g, "<code>$1</code>");
+      fullDescription = fullDescription.replace(/'([^']+)'/g, "<code>$1</code>");
     }
     return fullDescription;
   }
