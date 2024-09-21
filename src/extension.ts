@@ -13,18 +13,12 @@ import { getCommandComposerData } from "./scripts/command-composer";
 import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
-import {
-  annotations,
-  expectOptions,
-  provideCodeLensesToggle,
-  regexpIsExpect,
-  regexpIsSuite,
-  regexpIsTest,
-} from "./providers/code-lens-actions.provider";
 import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
 import { MatchTypeChangeAnnotations } from "./helpers/types";
 import { CodegenComposerViewProvider } from "./providers/codegen-composer-view.provider";
 import { getCodegenComposerData } from "./scripts/codegen-composer";
+import { createFileWatcher } from "./helpers/file-watcher.helpers";
+import { registerCodeLenses, registerCommand } from "./helpers/extension.helpers";
 
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
@@ -141,10 +135,6 @@ export function activate(context: vscode.ExtensionContext) {
     commandsViewProvider.invokeCommand(params.key, false);
   });
 
-  // registerCommand(context, `${EXTENSION_NAME}.addToFavSelectedCommand`, (param) => {
-  //   console.log("Run Command", param);
-  // });
-
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   registerCommand(context, `${EXTENSION_NAME}.showTraceContextMenu`, (params) => {
@@ -205,52 +195,10 @@ export function activate(context: vscode.ExtensionContext) {
   //   "name": "Commands Tree View"
   // },
 
-  const languages = ["typescript", "javascript"];
-
-  languages.forEach((language) => {
-    context.subscriptions.push(
-      vscode.languages.registerCodeLensProvider(language, {
-        provideCodeLenses: (doc) => {
-          return provideCodeLensesToggle(doc, annotations, regexpIsTest);
-        },
-      })
-    );
-    context.subscriptions.push(
-      vscode.languages.registerCodeLensProvider(language, {
-        provideCodeLenses: (doc) => {
-          return provideCodeLensesToggle(doc, annotations, regexpIsSuite);
-        },
-      })
-    );
-    context.subscriptions.push(
-      vscode.languages.registerCodeLensProvider(language, {
-        provideCodeLenses: (doc) => {
-          return provideCodeLensesToggle(doc, expectOptions, regexpIsExpect);
-        },
-      })
-    );
-  });
+  registerCodeLenses(context);
 
   registerCommand(context, `${EXTENSION_NAME}.changeTestAnnotations`, (match: MatchTypeChangeAnnotations) => {
     changeTestAnnotations(match);
-  });
-}
-
-function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
-  let disposable = vscode.commands.registerCommand(id, callback, context);
-  context.subscriptions.push(disposable);
-}
-
-function createFileWatcher(filePath: string, callback: () => void) {
-  const watcher = vscode.workspace.createFileSystemWatcher(filePath);
-  watcher.onDidCreate((uri) => {
-    callback();
-  });
-  watcher.onDidChange((uri) => {
-    callback();
-  });
-  watcher.onDidDelete((uri) => {
-    callback();
   });
 }
 

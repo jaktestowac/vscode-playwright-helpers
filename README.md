@@ -146,19 +146,19 @@ The extension provides an easy way to run Playwright scripts from package.json. 
 
 The extension provides additional context menu commands for the following items:
 
-- Show Trace files (`trace.zip`) - you can quickly view the trace in the Trace Viewer via clicking on file in the Explorer and selecting `Show Trace` from the context menu.
+- **Show Playwright Trace** (on `trace.zip`) - you can quickly view the trace in the Trace Viewer via clicking on file in the Explorer and selecting `Show Trace` from the context menu.
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-show-trace-from-context.gif?raw=true" alt="Preview of Show Trace from Context Menu">
 </p>
 
-- Show Reports (`playwright-report/index.html`) - you can quickly view the report via clicking on `index.html` file in the Explorer and selecting `Show Report` from the context menu.
+- **Show Playwright Reports** (on `index.html`) - you can quickly view the report via clicking on `index.html` file in the Explorer and selecting `Show Report` from the context menu.
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-show-report-from-context.gif?raw=true" alt="Preview of Show Report from Context Menu">
 </p>
 
-- Run Tests (`.spec.ts`) - you can quickly run the tests via clicking on `.spec.ts` file in the Explorer and selecting `Run Tests` from the context menu.
+- **Run Playwright Tests from This File** (on `*.spec.ts`) - you can quickly run the tests via clicking on `.spec.ts` file in the Explorer and selecting `Run Tests` from the context menu.
 
 ## CodeLenses
 

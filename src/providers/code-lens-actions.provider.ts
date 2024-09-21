@@ -7,23 +7,6 @@ import { SettingsKeys } from "../scripts/settings";
 
 // const isTest = /^\s*(it|test)(?:\.(only|skip|fixme))?\s*\(\s*[\r\n]*\s*['"]/m;
 // const isSuite = /^\s*(describe|test\.describe)(?:\.(only|skip|fixme))?\s*\(\s*[\s\S]*?['"]/m;
-export const annotations = ["only", "skip", "fixme"];
-export const expectOptions = ["soft"];
-
-export function regexpIsTest(annotations: string[]): RegExp {
-  return new RegExp(`^\\s*(it|test)(?:\\.(?:${annotations.join("|")}))?\\s*\\(\\s*[\\r\\n]*\\s*['"]`, "m");
-}
-
-export function regexpIsSuite(annotations: string[]): RegExp {
-  return new RegExp(
-    `^\\s*(describe|test\\.describe)(?:\\.(?:${annotations.join("|")}))?\\s*\\(\\s*[\\s\\S]*?['"]`,
-    "m"
-  );
-}
-
-export function regexpIsExpect(actions: string[]): RegExp {
-  return new RegExp(`\\s*(expect)(?:\\.(?:${actions.join("|")}))?\\s*\\(`, "m");
-}
 
 export function provideCodeLensesToggle(
   document: vscode.TextDocument,
