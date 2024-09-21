@@ -159,19 +159,18 @@ export function activate(context: vscode.ExtensionContext) {
     runSpecFile(params);
   });
 
-  getPlaywrightScriptsFromPackageJson().then((scripts) => {
-    scriptsViewProvider.refresh(scripts);
-    commandComposerViewProvider.refreshScripts(scripts);
-  });
+  playwrightScriptsFromPackageJsonUpdate();
 
   createFileWatcher(`**/trace.zip`, traceUpdate);
   createFileWatcher(`**/index.html`, reportUpdate);
-  createFileWatcher(`**/package.json`, () => {
+  createFileWatcher(`**/package.json`, playwrightScriptsFromPackageJsonUpdate);
+
+  function playwrightScriptsFromPackageJsonUpdate(): void {
     getPlaywrightScriptsFromPackageJson(true).then((scripts) => {
       scriptsViewProvider.refresh(scripts);
       commandComposerViewProvider.refreshScripts(scripts);
     });
-  });
+  }
 
   function traceUpdate(): void {
     const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
