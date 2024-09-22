@@ -1,5 +1,7 @@
 // https://api.github.com/repos/microsoft/playwright/git/refs/tags
 export const allPlaywrightVersions = [
+  "1.47.2",
+  "1.47.1",
   "1.47.0",
   "1.46.1",
   "1.46.0",

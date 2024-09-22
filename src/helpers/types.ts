@@ -96,6 +96,7 @@ export interface PwCodegenComposer {
   category: string;
   valueType?: "string" | "number" | "select";
   possibleValues?: string[];
+  sampleValues?: string[];
   defaultValue?: string | number;
 }
 

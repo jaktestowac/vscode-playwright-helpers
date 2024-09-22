@@ -292,13 +292,27 @@
       if (html) {
         fullDescription += `<br><b>Possible values:</b><br>`;
       } else {
-        fullDescription += "Possible values: ";
+        fullDescription += "\nPossible values:\n";
       }
 
       if (html) {
         fullDescription += obj.possibleValues.map((val) => `<code>${val}</code>`).join(", ");
       } else {
         fullDescription += obj.possibleValues.join(", ");
+      }
+    }
+
+    if (obj.sampleValues) {
+      if (html) {
+        fullDescription += `<br><b>Sample values:</b><br>`;
+      } else {
+        fullDescription += "\nSample values:\n";
+      }
+
+      if (html) {
+        fullDescription += obj.sampleValues.join("<br>");
+      } else {
+        fullDescription += obj.sampleValues.join("\n");
       }
     }
 

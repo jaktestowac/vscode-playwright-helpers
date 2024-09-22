@@ -156,7 +156,7 @@ export function activate(context: vscode.ExtensionContext) {
   createFileWatcher(`**/package.json`, playwrightScriptsFromPackageJsonUpdate);
 
   function playwrightScriptsFromPackageJsonUpdate(): void {
-    getPlaywrightScriptsFromPackageJson(true).then((scripts) => {
+    getPlaywrightScriptsFromPackageJson(false).then((scripts) => {
       scriptsViewProvider.refresh(scripts);
       commandComposerViewProvider.refreshScripts(scripts);
     });

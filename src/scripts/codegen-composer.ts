@@ -104,6 +104,13 @@ export function getCodegenComposerData() {
       prettyName: "Geolocation",
       category: TabViewCategory.general,
       valueType: "string",
+      sampleValues: [
+        "San Francisco: `37.819722,-122.478611`",
+        "New York: `40.689167,-74.044444`",
+        "London: `51.500611,-0.124611`",
+        "Tokyo: `35.658611,139.745556`",
+        "Sydney: `-33.857198,151.21514`",
+      ],
       description: "Specify geolocation coordinates, for example '37.819722,-122.478611'",
     },
     {
