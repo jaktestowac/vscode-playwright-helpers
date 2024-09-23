@@ -199,6 +199,18 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "checkOutdatedPackages",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Check Outdated Packages"),
+      category: TabViewCategory.project,
+      askForExecute: true,
+      params: {
+        key: "checkOutdatedPackages",
+        command: "npm outdated --depth=3",
+        terminalName: vscode.l10n.t("Check Outdated Packages"),
+      },
+    },
+    {
       key: "installPackagesNpmCi",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Node Packages (package-lock)"),
