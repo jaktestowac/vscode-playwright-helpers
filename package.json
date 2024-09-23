@@ -319,7 +319,8 @@
     "publish": "npm run test && npm run update && npm run publish:patch",
     "update": "node src/test/readme-generator.js",
     "test": "",
-    "export:localization": "npx @vscode/l10n-dev export -o ./l10n ./src"
+    "loc:export": "npx @vscode/l10n-dev export -o ./l10n ./src",
+    "loc:update": "node src/test/update-l10n.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",

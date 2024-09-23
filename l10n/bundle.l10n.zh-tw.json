@@ -50,7 +50,6 @@
   "Run Tests with Headed Browser": "使用有頭瀏覽器執行測試",
   "Run Tests with Title": "使用標題執行測試",
   "Run Tests with Title: Login": "使用標題執行測試：Login",
-  "Close All PW Helpers Terminals": "關閉所有 PW 助手終端",
   "List Installed Packages": "列出已安裝的套件",
   "List Installed Global Packages": "列出已安裝的全域套件",
   "List System Info (using envinfo)": "列出系統資訊（使用 envinfo）",
@@ -145,5 +144,13 @@
   "Unable to run Playwright spec file: {0}": "無法執行 Playwright spec 檔案：{0}",
   "No workspace folder opened.": "未打開工作區資料夾。",
   "More than one workspace folder opened.": "打開了多個工作區資料夾。",
-  "Workspace folder is not empty.": "工作區資料夾不為空。"
+  "Workspace folder is not empty.": "工作區資料夾不為空。",
+  "Test Annotations CodeLens": "Test Annotations CodeLens",
+  "Check Outdated Packages": "Check Outdated Packages",
+  "Close All {0} Terminals": "Close All {0} Terminals",
+  "Select option from list:": "Select option from list:",
+  "Add": "Add",
+  "Selected codegen options:": "Selected codegen options:",
+  "Error reading package.json file": "Error reading package.json file",
+  "Editor Does Not Exist": "Editor Does Not Exist"
 }

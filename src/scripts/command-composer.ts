@@ -8,7 +8,7 @@ export function getCommandComposerData() {
       option: "package.json script",
       valueType: "select",
       defaultValue: [],
-      prettyName: vscode.l10n.t(""),
+      prettyName: "",
       category: TabViewCategory.general,
       skipAsOption: true,
       overwriteBaseCommand: true,

@@ -2,6 +2,12 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.6] - 2024-09-xx
+
+- feat: scripts for localizations
+- feat: command to find outdated packages
+- chore: update localization files
+
 ## [1.2.5] - 2024-09-23
 
 - feat: better descriptions and sample values in codegen composer
