@@ -2,10 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.5] - 2024-09-xx
+## [1.2.5] - 2024-09-23
 
 - feat: better descriptions and sample values in codegen composer
 - fix: less verbose output in scripts
+- fix: codelense test detection
 
 ## [1.2.4] - 2024-09-22
 

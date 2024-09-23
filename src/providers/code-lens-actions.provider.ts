@@ -5,9 +5,6 @@ import { MatchTypeChangeAnnotations } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { SettingsKeys } from "../scripts/settings";
 
-// const isTest = /^\s*(it|test)(?:\.(only|skip|fixme))?\s*\(\s*[\r\n]*\s*['"]/m;
-// const isSuite = /^\s*(describe|test\.describe)(?:\.(only|skip|fixme))?\s*\(\s*[\s\S]*?['"]/m;
-
 export function provideCodeLensesToggle(
   document: vscode.TextDocument,
   actions: string[],
