@@ -2,7 +2,7 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.6] - 2024-09-xx
+## [1.2.6] - 2024-09-25
 
 - feat: scripts for localizations
 - feat: command to find outdated packages
