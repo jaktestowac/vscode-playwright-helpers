@@ -167,7 +167,6 @@ export function getCommandList(): PwCommand[] {
       prettyName: vscode.l10n.t("Install/Update Next @playwright/test"),
       category: TabViewCategory.playwright,
       askForExecute: true,
-      onlyPaste: true,
       params: {
         key: "installNextPlaywrightTest",
         command: "npm i @playwright/test@next",
@@ -208,6 +207,18 @@ export function getCommandList(): PwCommand[] {
         key: "checkOutdatedPackages",
         command: "npm outdated --depth=3",
         terminalName: vscode.l10n.t("Check Outdated Packages"),
+      },
+    },
+    {
+      key: "updateOutdatedPackages",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Update Outdated Packages"),
+      category: TabViewCategory.project,
+      askForExecute: true,
+      params: {
+        key: "checkOutdatedPackages",
+        command: "npm update",
+        terminalName: vscode.l10n.t("Update Outdated Packages"),
       },
     },
     {

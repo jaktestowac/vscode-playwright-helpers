@@ -55,13 +55,17 @@ export function getTerminalType(terminal: vscode.Terminal): TerminalType {
     shellPath = vscode.env.shell;
   }
 
-  if (name === "cmd" || shellPath.includes("cmd.exe")) {
+  if (name.toLowerCase() === "cmd" || shellPath.includes("cmd.exe")) {
     return TerminalType.CMD;
-  } else if (["powershell", "pwsh"].includes(name) || shellPath.includes("powershell.exe")) {
+  } else if (
+    ["powershell", "pwsh"].includes(name.toLowerCase()) ||
+    shellPath.includes("powershell.exe") ||
+    shellPath.includes("pwsh.exe")
+  ) {
     return TerminalType.POWERSHELL;
   } else if (name === "fish") {
     return TerminalType.FISH;
-  } else if (["bash", "sh", "zsh", "ksh"].includes(name)) {
+  } else if (["bash", "sh", "zsh", "ksh"].includes(name.toLowerCase())) {
     return TerminalType.BASH;
   }
   return TerminalType.UNKNOWN;
