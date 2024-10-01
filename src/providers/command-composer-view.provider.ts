@@ -41,7 +41,9 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
   }
 
   public refreshScripts(scripts: PwScripts[]) {
-    scripts.unshift({
+    const newScripts = [...scripts];
+
+    newScripts.unshift({
       key: "npx playwright test",
       script: "npx playwright test",
       prettyName: "npx playwright test",
@@ -49,7 +51,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
     const element = this._commandComposerList.find((item) => item.key === "package.json script");
     if (element) {
-      element.defaultValue = scripts;
+      element.defaultValue = newScripts;
     }
 
     if (this._view !== undefined) {

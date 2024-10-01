@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.8] - 2024-10-01
+
+- fix: invalid script
+
 ## [1.2.7] - 2024-09-30
 
 - fix: shell type detection
