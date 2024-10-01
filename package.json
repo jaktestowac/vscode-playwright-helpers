@@ -1,7 +1,7 @@
 {
   "name": "playwright-helpers",
   "displayName": "Playwright Helpers",
-  "description": "Playwright Helpers for VS Code",
+  "description": "Boost your productivity - scripts to run tests, context menus to view trace and report, compose commands and many more",
   "author": "jaktestowac.pl",
   "publisher": "jaktestowac-pl",
   "version": "1.2.8",

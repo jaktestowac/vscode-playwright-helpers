@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.9] - 2024-10-01
+
+- chore: README.md update
+
 ## [1.2.8] - 2024-10-01
 
 - fix: invalid script
