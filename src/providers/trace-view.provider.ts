@@ -96,7 +96,7 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
       const script = traces?.find((trace) => trace.key === traceKey);
       if (script !== undefined) {
         executeCommandInTerminal({
-          command: `npx playwright show-trace ${script.path}`,
+          command: `npx playwright show-trace "${script.path}"`,
           terminalName: script.key,
           execute: true,
         });
