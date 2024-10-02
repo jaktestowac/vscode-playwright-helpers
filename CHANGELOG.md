@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
+## [1.2.10] - 2024-10-02
+
+- fix: trave view file path
+
 ## [1.2.9] - 2024-10-01
 
 - chore: README.md update
