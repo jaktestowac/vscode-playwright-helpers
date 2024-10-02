@@ -140,7 +140,11 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
     if (this._tracesList !== undefined && this._tracesList.length > 0) {
       controlsHTMLList += '<nav class="nav-list">';
       for (const script of this._tracesList) {
-        const displayName = script.prettyName ?? script.key;
+        let displayName = script.prettyName ?? script.key;
+
+        displayName = displayName !== "." ? displayName : script.path;
+
+        console.log("script", script);
         let playButtons = "";
         playButtons += `<span class="preview-icon action-icon" title="Preview" tooltip-text="Preview" key="${script.key}">${svgOpenPreview}</span>`;
         playButtons += `<span class="open-trace-dir-icon action-icon" title=${vscode.l10n.t(
