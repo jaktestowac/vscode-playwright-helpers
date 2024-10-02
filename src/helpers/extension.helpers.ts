@@ -1,11 +1,25 @@
 import * as vscode from "vscode";
 import { provideCodeLensesToggle } from "../providers/code-lens-actions.provider";
-import { annotations, expectOptions, regexpIsExpect, regexpIsSuite, regexpIsTest } from "./code-lenses.helpers";
+import {
+  annotations,
+  describeOptions,
+  expectOptions,
+  regexpIsExpect,
+  regexpIsSuite,
+  regexpIsTest,
+} from "./code-lenses.helpers";
 
 export function registerCodeLenses(context: vscode.ExtensionContext) {
   const languages = ["typescript", "javascript"];
 
   languages.forEach((language) => {
+    context.subscriptions.push(
+      vscode.languages.registerCodeLensProvider(language, {
+        provideCodeLenses: (doc) => {
+          return provideCodeLensesToggle(doc, describeOptions, regexpIsSuite);
+        },
+      })
+    );
     context.subscriptions.push(
       vscode.languages.registerCodeLensProvider(language, {
         provideCodeLenses: (doc) => {
