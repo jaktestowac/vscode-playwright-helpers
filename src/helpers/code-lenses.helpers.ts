@@ -7,10 +7,14 @@ export function regexpIsTest(annotations: string[]): RegExp {
 }
 
 export function regexpIsSuite(annotations: string[]): RegExp {
+  // return new RegExp(
+  //   `^\\s*(describe|test\\.describe|describe\\.serial|test\\.describe\\.serial)(?:\\.(?:${annotations.join(
+  //     "|"
+  //   )}))?\\s*\\(\\s*[\\s\\S]*?['"\`]`,
+  //   "m"
+  // );
   return new RegExp(
-    `^\\s*(describe|test\\.describe|describe\\.serial|test\\.describe\\.serial)(?:\\.(?:${annotations.join(
-      "|"
-    )}))?\\s*\\(\\s*[\\s\\S]*?['"\`]`,
+    `^\\s*(describe|test\\.describe|describe\\.serial|test\\.describe\\.serial)(?:\\.(?:${annotations.join("|")}))?`,
     "m"
   );
 }
