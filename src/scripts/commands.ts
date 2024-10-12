@@ -583,7 +583,7 @@ async function initNewProject(params: CommandParameters) {
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 
-  if (!checkResult.success) {
+  if (!checkResult.success && execute !== false) {
     showErrorMessage(checkResult.message);
     return;
   }
@@ -599,10 +599,9 @@ async function initNewProject(params: CommandParameters) {
 async function initNewProjectQuick(params: CommandParameters) {
   const execute = params.instantExecute ?? isCommandExecutedWithoutAsking(params.key) ?? false;
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
-
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 
-  if (!checkResult.success) {
+  if (!checkResult.success && execute !== false) {
     showErrorMessage(checkResult.message);
     return;
   }

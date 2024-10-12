@@ -5,7 +5,9 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 ## [1.2.11] - 2024-10-XX
 
 - feat: code lense for serial mode
+- feat: copy command via context menu
 - fix: display name of trace.zip in trace view
+- fix: only paste init new project command
 
 ## [1.2.10] - 2024-10-02
 
