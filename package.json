@@ -111,6 +111,10 @@
         {
           "command": "playwright-helpers.pasteSelectedCommand",
           "when": "webviewId == playwright-helpers.commands"
+        },
+        {
+          "command": "playwright-helpers.copySelectedCommand",
+          "when": "webviewId == playwright-helpers.commands"
         }
       ],
       "explorer/context": [
@@ -157,6 +161,11 @@
         "command": "playwright-helpers.runSelectedCommand",
         "category": "PW Helpers",
         "title": "%playwright-helpers.runSelectedCommand.title%"
+      },
+      {
+        "command": "playwright-helpers.copySelectedCommand",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.copySelectedCommand.title%"
       },
       {
         "command": "playwright-helpers.pasteSelectedCommand",

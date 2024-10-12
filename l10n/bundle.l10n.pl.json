@@ -152,5 +152,7 @@
   "Check Outdated Packages": "Sprawdź przestarzałe moduły",
   "Error reading package.json file": "Błąd odczytu pliku package.json",
   "Test Annotations CodeLens": "CodeLens z adnotacjami testów",
-  "Dir:": "Dir:"
+  "Dir:": "Dir:",
+  "Update Outdated Packages": "Zaktualizuj przestarzałe moduły",
+  "This command cannot be copied.": "To polecenie nie może być skopiowane."
 }

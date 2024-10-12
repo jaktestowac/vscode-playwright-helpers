@@ -152,5 +152,7 @@
   "Add": "Add",
   "Selected codegen options:": "Selected codegen options:",
   "Error reading package.json file": "Error reading package.json file",
-  "Editor Does Not Exist": "Editor Does Not Exist"
+  "Editor Does Not Exist": "Editor Does Not Exist",
+  "Update Outdated Packages": "Update Outdated Packages",
+  "This command cannot be copied.": "This command cannot be copied."
 }

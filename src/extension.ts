@@ -135,6 +135,14 @@ export function activate(context: vscode.ExtensionContext) {
     commandsViewProvider.invokeCommand(params.key, false);
   });
 
+  registerCommand(context, `${EXTENSION_NAME}.copySelectedCommand`, (params) => {
+    if (params.key === undefined) {
+      showInformationMessage(vscode.l10n.t("Click on the command"));
+      return;
+    }
+    commandsViewProvider.copyCommand(params.key);
+  });
+
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   registerCommand(context, `${EXTENSION_NAME}.showTraceContextMenu`, (params) => {

@@ -1,17 +1,15 @@
 import * as vscode from "vscode";
 import {
   AdditionalParams,
-  ControlType,
-  KeyValuePairs,
   KeyValuesPairs,
   PlaywrightCommandType,
   PwCommand,
-  PwCommandAdditionalParams,
   PwCommandMap,
 } from "../helpers/types";
 import { getNonce } from "../helpers/helpers";
 import { svgPlayIcon, svgStarEmptyIcon, svgWaitContinueIcon } from "../helpers/icons";
 import { getHeaderName } from "../helpers/l10n.helpers";
+import { showInformationMessage } from "../helpers/window-messages.helpers";
 
 export class CommandsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.commands";
@@ -47,6 +45,18 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         }
       }
     });
+  }
+
+  public copyCommand(commandName: string) {
+    const command = this._commandList.find((command) => command.key === commandName);
+    if (command === undefined) {
+      return;
+    }
+    if (command.params?.command === undefined) {
+      showInformationMessage(vscode.l10n.t("This command cannot be copied."));
+      return;
+    }
+    vscode.env.clipboard.writeText(command.params?.command ?? "");
   }
 
   public invokeCommand(key: string, instantExecute: boolean) {

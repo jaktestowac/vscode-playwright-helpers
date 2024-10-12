@@ -8,6 +8,7 @@
   "playwright-helpers.settings.name": "Settings",
   "playwright-helpers.runSelectedCommand.title": "Paste & Run",
   "playwright-helpers.pasteSelectedCommand.title": "Paste",
+  "playwright-helpers.copySelectedCommand.title": "Copy",
   "playwright-helpers.refreshTraces.title": "Refresh Playwright Traces",
   "playwright-helpers.refreshReports.title": "Refresh Playwright Reports",
   "playwright-helpers.initNewProject.title": "Initiate New Playwright Project",
