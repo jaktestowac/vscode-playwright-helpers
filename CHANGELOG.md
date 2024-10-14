@@ -2,7 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.11] - 2024-10-XX
+## [1.2.12] - 2024-10-XX
+
+- TBD
+
+## [1.2.11] - 2024-10-14
 
 - feat: code lense for serial mode
 - feat: copy command via context menu
