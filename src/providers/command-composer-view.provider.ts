@@ -91,9 +91,11 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         notCheckbox,
         optionType,
         maxControlLengthClass,
+        tags,
       } of sortedSettings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
-        const ariaLabel = prettyName;
+        const joinedTags = tags !== undefined && tags.length > 0 ? `[${tags.join(" ")}]` : "";
+        const ariaLabel = `${prettyName} ${key} ${joinedTags}`;
 
         const skipAsPwOption = skipAsOption ?? false;
         const overwriteBasePwCommand = overwriteBaseCommand ?? false;
@@ -146,9 +148,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         }
 
         controlsHTMLList += `
-          <div class="composer-control" aria-label="${
-            prettyName !== undefined && prettyName.length > 0 ? prettyName : key
-          }"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
+          <div class="composer-control" aria-label="${ariaLabel}"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
           isChecked ? "checked" : ""
         } />
           <label for="${key}" class="${checkboxLabelClass}" title="${option}">${prettyName}</label> ${additionalControl}</div>

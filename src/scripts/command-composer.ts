@@ -192,6 +192,7 @@ export function getCommandComposerData() {
       prettyName: vscode.l10n.t("Execute only selected shard"),
       category: TabViewCategory.general,
       maxControlLengthClass: 50,
+      tags: ["sharding", "shards"],
     },
     {
       key: "--trace",
