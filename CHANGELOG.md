@@ -2,9 +2,9 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.13] - 2024-10-XX
+## [1.2.13] - 2024-12-03
 
-- TBD
+- fix: quotes for value in grep in command composer
 
 ## [1.2.12] - 2024-10-16
 

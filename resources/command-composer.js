@@ -44,13 +44,18 @@
         const parentKey = checkbox.getAttribute("parent");
         const value = getChildElementValue(parentKey);
         const skipAsOption = checkbox.getAttribute("skipAsOption");
+        const formatInQuotes = checkbox.getAttribute("formatInQuotes");
         const overwriteBaseCommand = checkbox.getAttribute("overwriteBaseCommand");
         // @ts-ignore
         if (checkbox.checked) {
           // eslint-disable-next-line eqeqeq
           if (skipAsOption === "false") {
             if (value !== "") {
-              params[attributeKey] = `${attributeKey}=${value}`;
+              if (formatInQuotes === "true") {
+                params[attributeKey] = `${attributeKey}="${value}"`;
+              } else {
+                params[attributeKey] = `${attributeKey}=${value}`;
+              }
             } else {
               params[attributeKey] = `${attributeKey}`;
             }

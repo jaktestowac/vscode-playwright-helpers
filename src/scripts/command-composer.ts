@@ -75,9 +75,10 @@ export function getCommandComposerData() {
       key: "--grep",
       option: "--grep",
       valueType: "string",
-      defaultValue: '"Login"',
+      defaultValue: 'Login',
       prettyName: vscode.l10n.t("Grep"),
       category: TabViewCategory.general,
+      formatInQuotes: true,
     },
     {
       key: "--max-failures",

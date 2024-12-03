@@ -92,6 +92,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         optionType,
         maxControlLengthClass,
         tags,
+        formatInQuotes,
       } of sortedSettings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const joinedTags = tags !== undefined && tags.length > 0 ? `[${tags.join(" ")}]` : "";
@@ -148,10 +149,10 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         }
 
         controlsHTMLList += `
-          <div class="composer-control" aria-label="${ariaLabel}"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
+          <div class="composer-control" aria-label="${ariaLabel}"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" formatInQuotes="${formatInQuotes}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
           isChecked ? "checked" : ""
         } />
-          <label for="${key}" class="${checkboxLabelClass}" title="${option}">${prettyName}</label> ${additionalControl}</div>
+          <label for="${key}" class="${checkboxLabelClass}" title="${option}" >${prettyName}</label> ${additionalControl}</div>
           `;
       }
 

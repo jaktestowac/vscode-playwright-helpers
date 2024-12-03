@@ -87,6 +87,7 @@ export interface PwCommandComposer {
   notCheckbox?: boolean;
   maxControlLengthClass?: number;
   tags?: string[];
+  formatInQuotes?: boolean;
 }
 
 export interface PwCodegenComposer {
