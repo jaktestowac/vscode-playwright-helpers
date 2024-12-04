@@ -227,8 +227,13 @@
 
       for (const val of values) {
         const option = document.createElement("option");
-        option.value = val;
-        option.textContent = val;
+        if (typeof val === 'object' && 'value' in val) {
+          option.value = val.value;
+          option.textContent = val.display;
+        } else {
+          option.value = val;
+          option.textContent = val;
+        }
         valueSelect.appendChild(option);
       }
       valueSelect.addEventListener("change", () => {
@@ -285,7 +290,6 @@
 
   function formatDescription(obj, html = true) {
     let fullDescription = `${obj.description}`.trim();
-
     fullDescription = fullDescription.charAt(0).toUpperCase() + fullDescription.slice(1);
 
     if (obj.possibleValues) {
@@ -296,9 +300,13 @@
       }
 
       if (html) {
-        fullDescription += obj.possibleValues.map((val) => `<code>${val}</code>`).join(", ");
+        fullDescription += obj.possibleValues.map((val) => 
+          typeof val === 'object' ? `<code>${val.display}</code>` : `<code>${val}</code>`
+        ).join(", ");
       } else {
-        fullDescription += obj.possibleValues.join(", ");
+        fullDescription += obj.possibleValues.map(val => 
+          typeof val === 'object' ? val.display : val
+        ).join(", ");
       }
     }
 

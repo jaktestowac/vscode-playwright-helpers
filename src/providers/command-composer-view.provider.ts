@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { PwCommandComposer, PwCommandComposerMap, PwScripts } from "../helpers/types";
+import { PwCommandComposer, PwCommandComposerMap, PwScripts, GeolocationOption } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
@@ -93,6 +93,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         maxControlLengthClass,
         tags,
         formatInQuotes,
+        possibleValues,
       } of sortedSettings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const joinedTags = tags !== undefined && tags.length > 0 ? `[${tags.join(" ")}]` : "";
@@ -121,19 +122,17 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
           additionalControl = `<select class='${selectClass} ${additionalControlClasses}' id="${key}" key="${key}" child="${parentId}" title="${key}" aria-label="${option}">`;
 
-          if (optionType === "string") {
-            const values = defaultValue ? (defaultValue as string[]) : [];
-            for (const value of values) {
-              additionalControl += `<option value="${value}" key="${value}" ${
-                values.indexOf(value) === 0 ? "selected" : ""
-              }>${value}</option>`;
-            }
-          } else if (optionType === "PwScripts") {
-            const values = defaultValue ? (defaultValue as PwScripts[]) : [];
-            for (const value of values) {
-              additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
-                values.indexOf(value) === 0 ? "selected" : ""
-              }>${value.key}</option>`;
+          if (possibleValues) {
+            // Check if the possibleValues contains objects with display and value properties
+            if (typeof possibleValues[0] === 'object' && 'display' in possibleValues[0]) {
+              for (const item of possibleValues as GeolocationOption[]) {
+                additionalControl += `<option value="${item.value}">${item.display}</option>`;
+              }
+            } else {
+              // Handle regular string array case
+              for (const value of possibleValues as string[]) {
+                additionalControl += `<option value="${value}">${value}</option>`;
+              }
             }
           }
 
