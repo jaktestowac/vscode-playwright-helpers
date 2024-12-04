@@ -70,6 +70,12 @@
         const key = row.querySelector("#name")?.value;
         // @ts-ignore
         const value = row.querySelector("#value")?.value;
+
+        if (key === "url" && (!value || value.trim() === "")) {
+          emptyErrors.push("url");
+          continue;
+        }
+
         if (key.startsWith("--")) {
           params[key] = value;
           if (value === "") {
