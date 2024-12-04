@@ -288,7 +288,7 @@ export function getCodegenComposerData() {
         { display: "Yerevan", value: "40.179186,44.499103" },
         { display: "Zagreb", value: "45.815399,15.966568" },
       ],
-      description: "Specify geolocation coordinates, for example '37.819722,-122.478611'",
+      description: "Choose value from the list or specify geolocation coordinates in terminal, for example '37.819722,-122.478611'",
     },
     {
       key: "--ignore-https-errors",
