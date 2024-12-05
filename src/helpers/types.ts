@@ -88,10 +88,10 @@ export interface PwCommandComposer {
   maxControlLengthClass?: number;
   tags?: string[];
   formatInQuotes?: boolean;
-  possibleValues?: string[] | GeolocationOption[];
+  possibleValues?: string[] | DisplayValueOption[];
 }
 
-export interface GeolocationOption {
+export interface DisplayValueOption {
   display: string;
   value: string;
 }
@@ -103,7 +103,7 @@ export interface PwCodegenComposer {
   prettyName: string;
   category: string;
   valueType?: "string" | "number" | "select";
-  possibleValues?: string[] | GeolocationOption[];
+  possibleValues?: string[] | DisplayValueOption[];
   defaultValue?: string | number;
 }
 

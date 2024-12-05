@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { PwCommandComposer, PwCommandComposerMap, PwScripts, GeolocationOption } from "../helpers/types";
+import { PwCommandComposer, PwCommandComposerMap, PwScripts, DisplayValueOption } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
@@ -125,7 +125,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
           if (possibleValues) {
             // Check if the possibleValues contains objects with display and value properties
             if (typeof possibleValues[0] === 'object' && 'display' in possibleValues[0]) {
-              for (const item of possibleValues as GeolocationOption[]) {
+              for (const item of possibleValues as DisplayValueOption[]) {
                 additionalControl += `<option value="${item.value}">${item.display}</option>`;
               }
             } else {
