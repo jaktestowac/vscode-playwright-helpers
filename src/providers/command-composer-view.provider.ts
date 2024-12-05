@@ -122,14 +122,27 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
           additionalControl = `<select class='${selectClass} ${additionalControlClasses}' id="${key}" key="${key}" child="${parentId}" title="${key}" aria-label="${option}">`;
 
-          if (possibleValues) {
-            // Check if the possibleValues contains objects with display and value properties
+          if (optionType === "string") {
+            const values = defaultValue ? (defaultValue as string[]) : [];
+            for (const value of values) {
+              additionalControl += `<option value="${value}" key="${value}" ${
+                values.indexOf(value) === 0 ? "selected" : ""
+              }>${value}</option>`;
+            }
+          } else if (optionType === "PwScripts") {
+            const values = defaultValue ? (defaultValue as PwScripts[]) : [];
+            for (const value of values) {
+              additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
+                values.indexOf(value) === 0 ? "selected" : ""
+              }>${value.key}</option>`;
+            }
+          } else if (possibleValues) {
+            // Handle regular possible values
             if (typeof possibleValues[0] === 'object' && 'display' in possibleValues[0]) {
               for (const item of possibleValues as DisplayValueOption[]) {
                 additionalControl += `<option value="${item.value}">${item.display}</option>`;
               }
             } else {
-              // Handle regular string array case
               for (const value of possibleValues as string[]) {
                 additionalControl += `<option value="${value}">${value}</option>`;
               }
