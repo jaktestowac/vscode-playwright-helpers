@@ -497,3 +497,15 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+.values-container .show-more-btn {
+  display: inline-block;
+  font-size: 0.8em;
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-secondaryBackground);
+}
+
+.values-container .show-more-btn:hover {
+  cursor: pointer;
+  background: #c0c0c0;
+}

@@ -14,6 +14,8 @@
   const optionsDropdown = document.querySelector("#optionsDropdown");
   const addOption = document.querySelector("#addOption");
 
+  const MAX_VISIBLE_VALUES = 10;
+
   restoreCodegenComposerState(codegenComposerState);
   onRowNumberChange();
   onDropDownOptionChange(optionsDropdown);
@@ -301,18 +303,32 @@
     if (obj.possibleValues) {
       if (html) {
         fullDescription += `<br><b>Possible values:</b><br>`;
+
+        const allValues = obj.possibleValues.map((val) => 
+          typeof val === 'object' ? `<code>${val.display}</code>` : `<code>${val}</code>`
+        );
+        
+        if (allValues.length > MAX_VISIBLE_VALUES) {
+          const initialValues = allValues.slice(0, MAX_VISIBLE_VALUES);
+          const remainingValues = allValues.slice(MAX_VISIBLE_VALUES);
+          fullDescription += `<div class="values-container">`;
+          fullDescription += initialValues.join(", ");
+          fullDescription += `<span class="hidden-by-default"> , ${remainingValues.join(", ")}</span>`;
+          fullDescription += `<button class="show-more-btn">Show more</button>`;
+          fullDescription += `</div>`;
+        } else {
+          fullDescription += allValues.join(", ");
+        }
       } else {
         fullDescription += "\nPossible values:\n";
-      }
-
-      if (html) {
-        fullDescription += obj.possibleValues.map((val) => 
-          typeof val === 'object' ? `<code>${val.display}</code>` : `<code>${val}</code>`
-        ).join(", ");
-      } else {
-        fullDescription += obj.possibleValues.map(val => 
+        
+        const values = obj.possibleValues.map(val => 
           typeof val === 'object' ? val.display : val
-        ).join(", ");
+        ).slice(0, MAX_VISIBLE_VALUES);
+        fullDescription += values.join(", ");
+        if (obj.possibleValues.length > MAX_VISIBLE_VALUES) {
+          fullDescription += "...";
+        }
       }
     }
 
@@ -340,4 +356,14 @@
     }
     return fullDescription;
   }
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target instanceof HTMLElement && e.target.classList.contains('show-more-btn')) {
+      const hiddenValues = /** @type {HTMLElement} */ (e.target.previousElementSibling);
+      if (hiddenValues) {
+        hiddenValues.style.display = 'inline';
+        e.target.style.display = 'none';
+      }
+    }
+  });
 })();
