@@ -28,21 +28,22 @@
     const codegenContainerTable = document.querySelector("#codegenContainerTable");
     if (codegenContainerTable) {
       for (const row of codegenComposerState) {
-        
         // Get the possible values from the dropdown
         const optionsDropdown = document.querySelector("#optionsDropdown");
         const selectedOption = optionsDropdown?.querySelector(`option[value="${row.key}"]`);
         const objRaw = selectedOption?.getAttribute("obj");
+        let formatInQuotes = false;
         let possibleValues;
-        
+
         if (objRaw) {
           const obj = JSON.parse(objRaw.replace(/\$\$/g, '"'));
           possibleValues = obj.possibleValues;
+          formatInQuotes = obj.formatInQuotes;
         }
-  
+
         // Create row with possible values to properly handle display/value pairs
-        const newRow = createRow(row.key, row.value, possibleValues, row.description);
-        
+        const newRow = createRow(row.key, row.value, possibleValues, row.description, formatInQuotes);
+
         // Set the initial selected value
         if (possibleValues && row.value) {
           const valueSelect = newRow.querySelector("#value");
@@ -51,10 +52,17 @@
             valueSelect.value = row.value;
           }
         }
-        
+
         codegenContainerTable.appendChild(newRow);
       }
     }
+  }
+
+  function formatValueWithQuotes(value, formatInQuotes) {
+    if (formatInQuotes === "true" && value !== "" && value !== undefined && value !== null) {
+      return `"${value}"`;
+    }
+    return value;
   }
 
   function saveCodegenComposerState() {
@@ -95,6 +103,8 @@
         const key = row.querySelector("#name")?.value;
         // @ts-ignore
         const value = row.querySelector("#value")?.value;
+        // @ts-ignore
+        const formatInQuotes = row.getAttribute("formatInQuotes");
 
         if (key === "url" && (!value || value.trim() === "")) {
           emptyErrors.push("url");
@@ -102,12 +112,12 @@
         }
 
         if (key.startsWith("--")) {
-          params[key] = value;
+          params[key] = formatValueWithQuotes(value, formatInQuotes);
           if (value === "") {
             emptyErrors.push(key);
           }
         } else {
-          endValues.push(value);
+          endValues.push(formatValueWithQuotes(value, formatInQuotes));
         }
       }
 
@@ -124,12 +134,7 @@
       let mergedParams = "";
       for (const [key, value] of Object.entries(params)) {
         if (value !== undefined) {
-          // Add quotes for specific options
-          if (key === '--timezone' || key === '--geolocation' || key === '--lang') {
-            mergedParams += `${key}="${value}" `;
-          } else {
-            mergedParams += `${key}=${value} `;
-          }
+          mergedParams += `${key}=${value} `;
         } else {
           mergedParams += `${key} `;
         }
@@ -175,7 +180,7 @@
       }
     }
 
-    const newRow = createRow(obj.key, value, obj.possibleValues, formatDescription(obj, false));
+    const newRow = createRow(obj.key, value, obj.possibleValues, formatDescription(obj, false), obj.formatInQuotes);
     codegenContainerTable?.appendChild(newRow);
     onRowNumberChange();
   });
@@ -210,10 +215,11 @@
     }
   }
 
-  function createRow(key, value, values, description) {
+  function createRow(key, value, values, description, formatInQuotes) {
     if (key === undefined && value === undefined && values === undefined) {
       const newRow = document.createElement("tr");
       newRow.setAttribute("id", "noOptionsRow");
+      newRow.setAttribute("formatInQuotes", `${formatInQuotes}`);
       const noOptionsDiv = document.createElement("div");
       noOptionsDiv.textContent = description || "- No options selected";
       const nameCell = document.createElement("td");
@@ -225,6 +231,7 @@
 
     const newRow = document.createElement("tr");
     newRow.classList.add("cgcRow");
+    newRow.setAttribute("formatInQuotes", `${formatInQuotes}`);
 
     const nameInput = document.createElement("input");
     nameInput.type = "text";
@@ -263,7 +270,7 @@
 
       for (const val of values) {
         const option = document.createElement("option");
-        if (typeof val === 'object' && 'value' in val) {
+        if (typeof val === "object" && "value" in val) {
           option.value = val.value;
           option.textContent = val.display;
         } else {
@@ -332,10 +339,10 @@
       if (html) {
         fullDescription += `<br><b>Possible values:</b><br>`;
 
-        const allValues = obj.possibleValues.map((val) => 
-          typeof val === 'object' ? `<code>${val.display}</code>` : `<code>${val}</code>`
+        const allValues = obj.possibleValues.map((val) =>
+          typeof val === "object" ? `<code>${val.display}</code>` : `<code>${val}</code>`
         );
-        
+
         if (allValues.length > MAX_VISIBLE_VALUES) {
           const initialValues = allValues.slice(0, MAX_VISIBLE_VALUES);
           const remainingValues = allValues.slice(MAX_VISIBLE_VALUES);
@@ -349,10 +356,10 @@
         }
       } else {
         fullDescription += "\nPossible values:\n";
-        
-        const values = obj.possibleValues.map(val => 
-          typeof val === 'object' ? val.display : val
-        ).slice(0, MAX_VISIBLE_VALUES);
+
+        const values = obj.possibleValues
+          .map((val) => (typeof val === "object" ? val.display : val))
+          .slice(0, MAX_VISIBLE_VALUES);
         fullDescription += values.join(", ");
         if (obj.possibleValues.length > MAX_VISIBLE_VALUES) {
           fullDescription += "...";
@@ -385,12 +392,12 @@
     return fullDescription;
   }
 
-  document.addEventListener('click', function(e) {
-    if (e.target && e.target instanceof HTMLElement && e.target.classList.contains('show-more-btn')) {
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target instanceof HTMLElement && e.target.classList.contains("show-more-btn")) {
       const hiddenValues = /** @type {HTMLElement} */ (e.target.previousElementSibling);
       if (hiddenValues) {
-        hiddenValues.style.display = 'inline';
-        e.target.style.display = 'none';
+        hiddenValues.style.display = "inline";
+        e.target.style.display = "none";
       }
     }
   });

@@ -2,9 +2,15 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.14] - 2024-XX-XX
+## [1.2.15] - 2024-xx-xx
 
 - TBD
+
+## [1.2.14] - 2024-12-06
+
+- feat: codegen geolocation defaults
+- chore: update package-lock.json
+- chore: update playwright versions
 
 ## [1.2.13] - 2024-12-03
 

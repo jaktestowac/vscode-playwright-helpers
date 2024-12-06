@@ -104,6 +104,7 @@ export function getCodegenComposerData() {
       prettyName: "Geolocation",
       category: TabViewCategory.general,
       valueType: "select",
+      formatInQuotes: true,
       possibleValues: [
         { display: "Abu Dhabi", value: "24.453884,54.377344" },
         { display: "Abuja", value: "9.076479,7.398574" },
@@ -288,7 +289,8 @@ export function getCodegenComposerData() {
         { display: "Yerevan", value: "40.179186,44.499103" },
         { display: "Zagreb", value: "45.815399,15.966568" },
       ],
-      description: "Choose value from the list or specify geolocation coordinates in terminal, for example '37.819722,-122.478611'",
+      description:
+        "Choose value from the list or specify geolocation coordinates in terminal, for example '37.819722,-122.478611'",
     },
     {
       key: "--ignore-https-errors",
@@ -312,6 +314,7 @@ export function getCodegenComposerData() {
       category: TabViewCategory.general,
       valueType: "string",
       description: "specify language / locale, for example 'en-GB'",
+      formatInQuotes: true,
     },
     {
       key: "--proxy-server",
@@ -360,6 +363,7 @@ export function getCodegenComposerData() {
       category: TabViewCategory.general,
       valueType: "string",
       description: "time zone to emulate, for example 'Europe/Rome'",
+      formatInQuotes: true,
     },
     {
       key: "--timeout",
@@ -383,7 +387,7 @@ export function getCodegenComposerData() {
       prettyName: "Viewport Size",
       category: TabViewCategory.general,
       valueType: "string",
-      description: "specify browser viewport size in pixels, for example '1280, 720'",
+      description: "specify browser viewport size in pixels, for example '1280,720' or '1920x1080'",
     },
   ];
 

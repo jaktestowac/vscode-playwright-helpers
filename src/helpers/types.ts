@@ -105,6 +105,7 @@ export interface PwCodegenComposer {
   valueType?: "string" | "number" | "select";
   possibleValues?: string[] | DisplayValueOption[];
   defaultValue?: string | number;
+  formatInQuotes?: boolean;
 }
 
 export interface PwPlaywrightProjects {
