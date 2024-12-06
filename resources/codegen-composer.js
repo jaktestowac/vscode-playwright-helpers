@@ -28,7 +28,30 @@
     const codegenContainerTable = document.querySelector("#codegenContainerTable");
     if (codegenContainerTable) {
       for (const row of codegenComposerState) {
-        const newRow = createRow(row.key, row.value, row.values, row.description);
+        
+        // Get the possible values from the dropdown
+        const optionsDropdown = document.querySelector("#optionsDropdown");
+        const selectedOption = optionsDropdown?.querySelector(`option[value="${row.key}"]`);
+        const objRaw = selectedOption?.getAttribute("obj");
+        let possibleValues;
+        
+        if (objRaw) {
+          const obj = JSON.parse(objRaw.replace(/\$\$/g, '"'));
+          possibleValues = obj.possibleValues;
+        }
+  
+        // Create row with possible values to properly handle display/value pairs
+        const newRow = createRow(row.key, row.value, possibleValues, row.description);
+        
+        // Set the initial selected value
+        if (possibleValues && row.value) {
+          const valueSelect = newRow.querySelector("#value");
+          if (valueSelect) {
+            // @ts-ignore
+            valueSelect.value = row.value;
+          }
+        }
+        
         codegenContainerTable.appendChild(newRow);
       }
     }
