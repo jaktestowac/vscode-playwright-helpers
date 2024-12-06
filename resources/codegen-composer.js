@@ -14,6 +14,8 @@
   const optionsDropdown = document.querySelector("#optionsDropdown");
   const addOption = document.querySelector("#addOption");
 
+  const MAX_VISIBLE_VALUES = 10;
+
   restoreCodegenComposerState(codegenComposerState);
   onRowNumberChange();
   onDropDownOptionChange(optionsDropdown);
@@ -26,7 +28,30 @@
     const codegenContainerTable = document.querySelector("#codegenContainerTable");
     if (codegenContainerTable) {
       for (const row of codegenComposerState) {
-        const newRow = createRow(row.key, row.value, row.values, row.description);
+        
+        // Get the possible values from the dropdown
+        const optionsDropdown = document.querySelector("#optionsDropdown");
+        const selectedOption = optionsDropdown?.querySelector(`option[value="${row.key}"]`);
+        const objRaw = selectedOption?.getAttribute("obj");
+        let possibleValues;
+        
+        if (objRaw) {
+          const obj = JSON.parse(objRaw.replace(/\$\$/g, '"'));
+          possibleValues = obj.possibleValues;
+        }
+  
+        // Create row with possible values to properly handle display/value pairs
+        const newRow = createRow(row.key, row.value, possibleValues, row.description);
+        
+        // Set the initial selected value
+        if (possibleValues && row.value) {
+          const valueSelect = newRow.querySelector("#value");
+          if (valueSelect) {
+            // @ts-ignore
+            valueSelect.value = row.value;
+          }
+        }
+        
         codegenContainerTable.appendChild(newRow);
       }
     }
@@ -70,6 +95,12 @@
         const key = row.querySelector("#name")?.value;
         // @ts-ignore
         const value = row.querySelector("#value")?.value;
+
+        if (key === "url" && (!value || value.trim() === "")) {
+          emptyErrors.push("url");
+          continue;
+        }
+
         if (key.startsWith("--")) {
           params[key] = value;
           if (value === "") {
@@ -93,7 +124,12 @@
       let mergedParams = "";
       for (const [key, value] of Object.entries(params)) {
         if (value !== undefined) {
-          mergedParams += `${key}=${value} `;
+          // Add quotes for specific options
+          if (key === '--timezone' || key === '--geolocation' || key === '--lang') {
+            mergedParams += `${key}="${value}" `;
+          } else {
+            mergedParams += `${key}=${value} `;
+          }
         } else {
           mergedParams += `${key} `;
         }
@@ -227,8 +263,13 @@
 
       for (const val of values) {
         const option = document.createElement("option");
-        option.value = val;
-        option.textContent = val;
+        if (typeof val === 'object' && 'value' in val) {
+          option.value = val.value;
+          option.textContent = val.display;
+        } else {
+          option.value = val;
+          option.textContent = val;
+        }
         valueSelect.appendChild(option);
       }
       valueSelect.addEventListener("change", () => {
@@ -285,20 +326,37 @@
 
   function formatDescription(obj, html = true) {
     let fullDescription = `${obj.description}`.trim();
-
     fullDescription = fullDescription.charAt(0).toUpperCase() + fullDescription.slice(1);
 
     if (obj.possibleValues) {
       if (html) {
         fullDescription += `<br><b>Possible values:</b><br>`;
+
+        const allValues = obj.possibleValues.map((val) => 
+          typeof val === 'object' ? `<code>${val.display}</code>` : `<code>${val}</code>`
+        );
+        
+        if (allValues.length > MAX_VISIBLE_VALUES) {
+          const initialValues = allValues.slice(0, MAX_VISIBLE_VALUES);
+          const remainingValues = allValues.slice(MAX_VISIBLE_VALUES);
+          fullDescription += `<div class="values-container">`;
+          fullDescription += initialValues.join(", ");
+          fullDescription += `<span class="hidden-by-default"> , ${remainingValues.join(", ")}</span>`;
+          fullDescription += `<button class="show-more-btn">Show more</button>`;
+          fullDescription += `</div>`;
+        } else {
+          fullDescription += allValues.join(", ");
+        }
       } else {
         fullDescription += "\nPossible values:\n";
-      }
-
-      if (html) {
-        fullDescription += obj.possibleValues.map((val) => `<code>${val}</code>`).join(", ");
-      } else {
-        fullDescription += obj.possibleValues.join(", ");
+        
+        const values = obj.possibleValues.map(val => 
+          typeof val === 'object' ? val.display : val
+        ).slice(0, MAX_VISIBLE_VALUES);
+        fullDescription += values.join(", ");
+        if (obj.possibleValues.length > MAX_VISIBLE_VALUES) {
+          fullDescription += "...";
+        }
       }
     }
 
@@ -326,4 +384,14 @@
     }
     return fullDescription;
   }
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target instanceof HTMLElement && e.target.classList.contains('show-more-btn')) {
+      const hiddenValues = /** @type {HTMLElement} */ (e.target.previousElementSibling);
+      if (hiddenValues) {
+        hiddenValues.style.display = 'inline';
+        e.target.style.display = 'none';
+      }
+    }
+  });
 })();

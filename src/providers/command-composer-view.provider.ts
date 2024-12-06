@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { PwCommandComposer, PwCommandComposerMap, PwScripts } from "../helpers/types";
+import { PwCommandComposer, PwCommandComposerMap, PwScripts, DisplayValueOption } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
@@ -93,6 +93,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
         maxControlLengthClass,
         tags,
         formatInQuotes,
+        possibleValues,
       } of sortedSettings) {
         let isChecked = MyExtensionContext.instance.getWorkspaceValue(key) ?? false;
         const joinedTags = tags !== undefined && tags.length > 0 ? `[${tags.join(" ")}]` : "";
@@ -134,6 +135,17 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
               additionalControl += `<option value="${value.script}" script="${value.script}" key="${value.key}" ${
                 values.indexOf(value) === 0 ? "selected" : ""
               }>${value.key}</option>`;
+            }
+          } else if (possibleValues) {
+            // Handle regular possible values
+            if (typeof possibleValues[0] === 'object' && 'display' in possibleValues[0]) {
+              for (const item of possibleValues as DisplayValueOption[]) {
+                additionalControl += `<option value="${item.value}">${item.display}</option>`;
+              }
+            } else {
+              for (const value of possibleValues as string[]) {
+                additionalControl += `<option value="${value}">${value}</option>`;
+              }
             }
           }
 
