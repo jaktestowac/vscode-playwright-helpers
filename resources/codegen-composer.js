@@ -124,7 +124,12 @@
       let mergedParams = "";
       for (const [key, value] of Object.entries(params)) {
         if (value !== undefined) {
-          mergedParams += `${key}=${value} `;
+          // Add quotes for specific options
+          if (key === '--timezone' || key === '--geolocation' || key === '--lang') {
+            mergedParams += `${key}="${value}" `;
+          } else {
+            mergedParams += `${key}=${value} `;
+          }
         } else {
           mergedParams += `${key} `;
         }
