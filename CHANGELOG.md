@@ -2,9 +2,13 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.15] - 2024-xx-xx
+## [1.2.16] - 2024-xx-xx
 
 - TBD
+
+## [1.2.15] - 2024-12-13
+
+- feat: codegen lang and timezone
 
 ## [1.2.14] - 2024-12-06
 

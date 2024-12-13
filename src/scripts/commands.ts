@@ -13,8 +13,8 @@ import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers
 import { showErrorMessage } from "../helpers/window-messages.helpers";
 import { BASE_TERMINAL_NAME } from "../helpers/consts";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
-import { allPlaywrightVersions } from "./playwright-versions";
 import { SettingsKeys } from "./settings";
+import { allPlaywrightVersions } from "./data/playwright-versions.data";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
