@@ -9,6 +9,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 ## [1.2.15] - 2024-12-13
 
 - feat: codegen lang and timezone
+- feat: Open VS Code Settings File (Mac OS)
 
 ## [1.2.14] - 2024-12-06
 

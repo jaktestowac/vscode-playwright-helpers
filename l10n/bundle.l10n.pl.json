@@ -65,6 +65,7 @@
   "Run Tests with Reporter": "Uruchom testy z raportem",
   "Run Tests with Reporter: dot": "Uruchom testy z raportem: dot",
   "Open VS Code Settings File": "Otwórz plik ustawień VS Code",
+  "Open VS Code Settings File (Mac OS)": "Otwórz plik ustawień VS Code (Mac OS)",
   "Show Trace": "Pokaż ślad",
   "Config file": "Plik konfiguracyjny",
   "Config file - tsconfig": "Plik konfiguracyjny - tsconfig",
