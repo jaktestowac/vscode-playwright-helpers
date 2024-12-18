@@ -2,6 +2,8 @@ import { PwCodegenComposer, TabViewCategory } from "../helpers/types";
 import { geolocationData } from "./data/geolocation.data";
 import { langData } from "./data/lang.data";
 import { timezoneData } from "./data/timezone.data";
+import { deviceData } from "./data/device.data";
+import { channelData } from "./data/channel.data";
 
 export function getCodegenComposerData() {
   const commandsList: PwCodegenComposer[] = [
@@ -82,7 +84,8 @@ export function getCodegenComposerData() {
       category: TabViewCategory.general,
       valueType: "string",
       description: "Chromium distribution channel, e.g. 'chrome', 'chrome-beta', 'msedge-dev', etc",
-      defaultValue: "chrome",
+      formatInQuotes: false,
+      possibleValues: channelData,
     },
     {
       key: "--color-scheme",
@@ -100,6 +103,8 @@ export function getCodegenComposerData() {
       category: TabViewCategory.general,
       valueType: "string",
       description: "Emulate device, for example 'iPhone 11'",
+      formatInQuotes: true,
+      possibleValues: deviceData,
     },
     {
       key: "--geolocation",
