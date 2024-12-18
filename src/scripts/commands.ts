@@ -540,23 +540,23 @@ export function getCommandList(): PwCommand[] {
         terminalCommandPair: [
           {
             key: TerminalType.CMD,
-            value: 'open -a "Visual Studio Code" ~/Library/Application Support/Code/User/settings.json',
+            value: 'open -a "Visual Studio Code" "~/Library/Application Support/Code/User/settings.json"',
           },
           {
             key: TerminalType.POWERSHELL,
-            value: 'open -a "Visual Studio Code" ~/Library/Application Support/Code/User/settings.json',
+            value: 'open -a "Visual Studio Code" "~/Library/Application Support/Code/User/settings.json"',
           },
           {
             key: TerminalType.BASH,
-            value: 'open -a "Visual Studio Code" ~/Library/Application Support/Code/User/settings.json',
+            value: 'open -a "Visual Studio Code" "~/Library/Application Support/Code/User/settings.json"',
           },
           {
             key: TerminalType.FISH,
-            value: 'open -a "Visual Studio Code" ~/Library/Application Support/Code/User/settings.json',
+            value: 'open -a "Visual Studio Code" "~/Library/Application Support/Code/User/settings.json"',
           },
           {
             key: TerminalType.UNKNOWN,
-            value: 'open -a "Visual Studio Code" ~/Library/Application Support/Code/User/settings.json',
+            value: 'open -a "Visual Studio Code" "~/Library/Application Support/Code/User/settings.json"',
           },
         ],
         terminalName: vscode.l10n.t("Open VS Code Settings File"),
