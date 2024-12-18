@@ -2,9 +2,15 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.16] - 2024-xx-xx
+## [1.2.17] - 2024-xx-xx
 
 - TBD
+
+## [1.2.16] - 2024-12-18
+
+- feat: enhance Codegen Composer with default channel configuration
+- feat: enhance Codegen Composer with default device configuration
+- fix: Open VS Code Settings File (Mac OS)
 
 ## [1.2.15] - 2024-12-13
 
