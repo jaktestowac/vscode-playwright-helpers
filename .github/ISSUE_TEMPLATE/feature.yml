@@ -10,16 +10,30 @@ body:
     id: description
     attributes:
       label: "🚀 Feature Request"
-      description: A clear and concise description of the feature you are proposing.
+      description: |
+        A clear and concise description of the feature you are proposing.
+        Include any relevant context or examples to support your proposal.
+        E.g. "As a user, I want to be able to..."
+        E.g. "I want to use command X to achieve Y..." 
+
+        > [!IMPORTANT]
+        > If you are suggesting a change to an existing feature, please provide a clear and concise description of the problem you are trying to solve. 
+
+        > [!IMPORTANT]
+        > If you are suggesting new commands, please provide a command and a clear and concise description of the use case.
+        > E.g. "When I run command `npm run xyz`, I want to see..."
     validations:
       required: true
   - type: textarea
     id: example
     attributes:
       label: Example
-      description: Describe a use case for the feature you are proposing.
+      description: |
+        Describe a use case for the feature you are proposing.
+         E.g. "When I click on the button, I want to see..."
+         E.g. "When I run this command, I want to see..."
     validations:
-      required: false
+      required: true
   - type: textarea
     id: motivation
     attributes:
