@@ -10,7 +10,7 @@ body:
     attributes:
       value: |
         ## Troubleshoot
-        - [ ] I have checked the [Playwright documentation](https://playwright.dev/docs/intro) and [Playwright Helpers documentation](https://playwright.dev/docs/intro) for help.
+        - [ ] I have checked the [Playwright documentation](https://playwright.dev/docs/intro) and [Playwright Helpers documentation](https://github.com/jaktestowac/vscode-playwright-helpers) for help.
         - [ ] I have searched the issues of this repository and believe that this is not a duplicate.
         - [ ] I have checked the Playwright Helpers changelog for breaking changes.
   - type: markdown
@@ -24,7 +24,7 @@ body:
     attributes:
       value: |
         > [!IMPORTANT]
-        > Bug reports without a minimal reproduction will be rejected.
+        > Bug reports without a minimal reproduction will be closed. 
 
         ---
   - type: input
@@ -64,6 +64,9 @@ body:
       description: |
         A clear and concise description of the unexpected behavior.
         Please include any relevant output here, especially any error messages, screenshots, or stack traces.
+
+        > [!IMPORTANT]
+        > Bug reports without logs/stack traces/screenshots/clear description will be closed.
       placeholder: I see Z or W instead of X or Y
     validations:
       required: true
