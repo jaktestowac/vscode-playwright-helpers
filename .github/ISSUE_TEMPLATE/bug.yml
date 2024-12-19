@@ -1,0 +1,76 @@
+name: Bug Report 🐛
+description: Create a bug report to help us improve
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Please follow these steps first:
+  - type: markdown
+    attributes:
+      value: |
+        ## Troubleshoot
+        - [ ] I have checked the [Playwright documentation](https://playwright.dev/docs/intro) and [Playwright Helpers documentation](https://playwright.dev/docs/intro) for help.
+        - [ ] I have searched the issues of this repository and believe that this is not a duplicate.
+        - [ ] I have checked the Playwright Helpers changelog for breaking changes.
+  - type: markdown
+    attributes:
+      value: |
+        ## Make a minimal reproduction
+        To file the report, you will need to provide simple/clear steps on how to reproduce the bug.
+        This is important because it helps us to understand the problem and fix it.
+        If you are unable to provide a minimal reproduction, the issue will be closed.
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Bug reports without a minimal reproduction will be rejected.
+
+        ---
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: |
+        The version of `Playwright Helpers` you are using.
+      placeholder: ex. 1.2.16
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Please provide a minimal reproduction of the issue here.
+      placeholder: |
+        Example steps (replace with your own):
+        1. Open Playwright Helpers
+        2. Go to codegen
+        3. Click on the button for generating code
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: A description of what you expect to happen.
+      placeholder: I expect to see X or Y
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Actual behavior
+      description: |
+        A clear and concise description of the unexpected behavior.
+        Please include any relevant output here, especially any error messages, screenshots, or stack traces.
+      placeholder: I see Z or W instead of X or Y
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else that might be relevant to the issue.
+    validations:
+      required: false
