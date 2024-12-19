@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
-import { getNonce, getPlaywrightTraces, openDirectory } from "../helpers/helpers";
+import { getNonce, getPlaywrightTraces, openDirectory, removeFile } from "../helpers/helpers";
 import { PwTraces } from "../helpers/types";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
-import { svgOpenedDir, svgClearAll, svgOpenPreview } from "../helpers/icons";
-import { showErrorMessage } from "../helpers/window-messages.helpers";
+import { svgOpenedDir, svgClearAll, svgOpenPreview, svgRemoveAll } from "../helpers/icons";
+import { showErrorMessage, showInformationMessage } from "../helpers/window-messages.helpers";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { DEFAULT_TEST_RESULTS_DIR } from "../helpers/consts";
 
@@ -55,7 +55,38 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
           this.openSingleTraceDir(data.key);
           break;
         }
+        case "removeAllTraces": {
+          this.removeAllTraces();
+          break;
+        }
       }
+    });
+  }
+
+  private removeAllTraces() {
+    MyExtensionContext.instance.setWorkspaceValue("testResultsDir", DEFAULT_TEST_RESULTS_DIR);
+
+    getPlaywrightTraces(DEFAULT_TEST_RESULTS_DIR).then((traces) => {
+      if (traces === undefined || traces.length === 0) {
+        showInformationMessage(vscode.l10n.t("No traces found in test-results dir."));
+        return;
+      }
+
+      // display confirmation dialog
+      vscode.window
+        .showInformationMessage(
+          vscode.l10n.t("Do you really want to remove all traces?"),
+          { modal: true },
+          vscode.l10n.t("Yes")
+        )
+        .then((value) => {
+          if (value === vscode.l10n.t("Yes")) {
+            for (const trace of traces) {
+              removeFile(trace.path);
+            }
+            this.refresh([]);
+          }
+        });
     });
   }
 
@@ -129,12 +160,19 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
       <div class="nav-list__item nav-list__item_wide list__item_not_clickable">
         <input class="nav-list__input " tooltip-text="Test results dir" id="test-results-dir" type="text" value="${defaultTestResultsDir}" /> 
         </div>
-      <span class="clear-icon  action-icon" tooltip-text="${vscode.l10n.t("Reset dir")}" aria-label="${vscode.l10n.t(
+      <span class="clear-icon  action-icon" tooltip-text="${vscode.l10n.t("Reset dir")}" title="${vscode.l10n.t(
       "Reset dir"
-    )}"  id="reset-test-results-dir">${svgClearAll}</span>
-      <span class="open-dir-icon  action-icon" tooltip-text=${vscode.l10n.t(
+    )}" aria-label="${vscode.l10n.t("Reset dir")}"  id="reset-test-results-dir">${svgClearAll}</span>
+      <span class="open-dir-icon  action-icon" tooltip-text="${vscode.l10n.t(
         "Open directory"
-      )} aria-label=${vscode.l10n.t("Open directory")}  id="open-test-results-dir">${svgOpenedDir}</span>
+      )}" aria-label="${vscode.l10n.t("Open directory")}" title="${vscode.l10n.t(
+      "Open directory"
+    )}" id="open-test-results-dir">${svgOpenedDir}</span>
+      <span class="remove-traces-icon  action-icon" tooltip-text="${vscode.l10n.t(
+        "Remove all traces"
+      )}" aria-label="${vscode.l10n.t("Remove all traces")}" title="${vscode.l10n.t(
+      "Remove all traces"
+    )}" id="remove-all-traces">${svgRemoveAll}</span>
     </div>`;
 
     if (this._tracesList !== undefined && this._tracesList.length > 0) {
@@ -144,7 +182,6 @@ export class TraceViewProvider implements vscode.WebviewViewProvider {
 
         displayName = displayName !== "." ? displayName : script.path;
 
-        console.log("script", script);
         let playButtons = "";
         playButtons += `<span class="preview-icon action-icon" title="Preview" tooltip-text="Preview" key="${script.key}">${svgOpenPreview}</span>`;
         playButtons += `<span class="open-trace-dir-icon action-icon" title=${vscode.l10n.t(

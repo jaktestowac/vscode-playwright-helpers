@@ -154,5 +154,9 @@
   "Error reading package.json file": "Error reading package.json file",
   "Editor Does Not Exist": "Editor Does Not Exist",
   "Update Outdated Packages": "Update Outdated Packages",
-  "This command cannot be copied.": "This command cannot be copied."
+  "This command cannot be copied.": "This command cannot be copied.",
+  "Open VS Code Settings File (Mac OS)": "Open VS Code Settings File (Mac OS)",
+  "Do you really want to remove all traces?": "Do you really want to remove all traces?",
+  "Yes": "Yes",
+  "Remove all traces": "Remove all traces"
 }

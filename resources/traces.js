@@ -23,6 +23,13 @@
     });
   }
 
+  const removeAllTracesButton = document.getElementById("remove-all-traces");
+  if (removeAllTracesButton) {
+    removeAllTracesButton.addEventListener("click", () => {
+      vscode.postMessage({ type: "removeAllTraces" });
+    });
+  }
+
   const openTestResultsDirButton = document.getElementById("open-test-results-dir");
   if (openTestResultsDirButton) {
     openTestResultsDirButton.addEventListener("click", () => {

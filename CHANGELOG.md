@@ -2,9 +2,14 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.17] - 2024-xx-xx
+## [1.2.18] - 2024-xx-xx
 
-- TBD
+- TBD 
+
+## [1.2.17] - 2024-12-19
+
+- feat: possibility to remove all traces
+- fix: better trace detection (files with `trace` in name)
 
 ## [1.2.16] - 2024-12-18
 

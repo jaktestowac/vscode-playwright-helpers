@@ -6,7 +6,7 @@ import { areWorkspaceFoldersSingle } from "./assertions.helpers";
 import { showErrorMessage, showWarningMessage } from "./window-messages.helpers";
 import path from "path";
 import { PwReports, PwScripts, PwTraces } from "./types";
-import { DEFAULT_REPORT_FILE_NAME, DEFAULT_TRACE_FILE_NAME } from "./config";
+import { DEFAULT_REPORT_FILE_NAME, DEFAULT_TRACE_FILE_NAME, DEFAULT_TRACE_FILE_PARTS } from "./config";
 
 export function getNonce() {
   let text = "";
@@ -126,7 +126,7 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
 export async function getPlaywrightTraces(testResultsDir?: string, verbose = false): Promise<PwTraces[]> {
   testResultsDir = testResultsDir ?? MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
   let tracesPath = testResultsDir;
-  const defaultFileName = DEFAULT_TRACE_FILE_NAME;
+  const defaultFileNameParts = DEFAULT_TRACE_FILE_PARTS;
 
   if (!testResultsDir) {
     if (verbose) {
@@ -156,16 +156,19 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
   }
 
   const files = fs.readdirSync(tracesPath, { recursive: true });
-  const traces = (files as string[]).filter((file) => file.endsWith(defaultFileName));
+  const traces = (files as string[]).filter(
+    (file) => file.endsWith(DEFAULT_TRACE_FILE_NAME) || defaultFileNameParts.every((part) => file.includes(part))
+  );
 
   const pwTraces: PwTraces[] = traces.map((tracePath) => {
     const parentDirname = path.dirname(tracePath);
     const parentDirnameParts = parentDirname.split(path.sep);
     const parentDirnameLastPart = parentDirnameParts[parentDirnameParts.length - 1];
     const fullPath = path.join(testResultsDir, tracePath);
-    const onlyPath = fullPath.replace(defaultFileName, "");
+    const onlyPath = fullPath.split(path.sep).slice(0, -1).join(path.sep);
     return { key: tracePath, path: fullPath, onlyPath, prettyName: parentDirnameLastPart };
   });
+
   return pwTraces;
 }
 
@@ -244,4 +247,19 @@ export function checkIfStringEndsWithAny(aString: string, possibleEndings: strin
 
 export function checkIfStringContainsAnySubstring(aString: string, substrings: string[]) {
   return substrings.some((substring) => aString.toLowerCase().includes(substring.toLowerCase()));
+}
+
+export function removeFile(filePath: string): boolean {
+  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+
+  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const fileFullPath = path.join(workspacePath, filePath);
+
+  if (!fs.existsSync(fileFullPath)) {
+    console.log(`File not found: ${fileFullPath}`);
+    return false;
+  }
+
+  fs.unlinkSync(fileFullPath);
+  return false;
 }
