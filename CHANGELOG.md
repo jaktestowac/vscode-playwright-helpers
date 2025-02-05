@@ -6,7 +6,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
-## [1.2.18] - 2025-02-xx
+## [1.2.18] - 2025-02-05
 
 - feat: offset for timezone in codegen composer 
 
