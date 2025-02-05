@@ -214,7 +214,8 @@ export function getCodegenComposerData() {
       prettyName: "Viewport Size",
       category: TabViewCategory.general,
       valueType: "string",
-      description: "specify browser viewport size in pixels, for example '1280,720' or '1920x1080'",
+      description: "specify browser viewport size in pixels, for example '1280,720' or '1920,1080'",
+      formatInQuotes: true,
     },
   ];
 
