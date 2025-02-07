@@ -602,7 +602,7 @@ function closeAllTerminals() {
 }
 
 async function executeScript(params: CommandParameters) {
-  const execute = params.instantExecute ?? isCommandExecutedWithoutAsking(params.key) ?? false;
+  const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   executeCommandInTerminal({
     command: params.command,
     execute,
@@ -612,7 +612,7 @@ async function executeScript(params: CommandParameters) {
 }
 
 async function initNewProject(params: CommandParameters) {
-  const execute = params.instantExecute ?? isCommandExecutedWithoutAsking(params.key) ?? false;
+  const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 
@@ -630,7 +630,7 @@ async function initNewProject(params: CommandParameters) {
 }
 
 async function initNewProjectQuick(params: CommandParameters) {
-  const execute = params.instantExecute ?? isCommandExecutedWithoutAsking(params.key) ?? false;
+  const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
 

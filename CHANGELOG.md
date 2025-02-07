@@ -2,9 +2,13 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.19] - 2025-xx-xx
+## [1.2.20] - 2025-xx-xx
 
 - TBD
+
+## [1.2.19] - 2025-02-07
+
+- fix: command palette
 
 ## [1.2.18] - 2025-02-05
 

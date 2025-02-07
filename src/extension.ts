@@ -34,15 +34,21 @@ export function activate(context: vscode.ExtensionContext) {
 
   const commandsList = getCommandList();
 
-  for (const { key, func } of commandsList) {
-    registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
+  for (const { key, func, params } of commandsList) {
+    registerCommand(context, `${EXTENSION_NAME}.${key}`, () => {
+      const commandParams: CommandParameters = {
+        ...params,
+        instantExecute: true,
+      };
+      func(commandParams);
+    });
   }
 
   const settingsList = getSettingsList();
 
-  for (const { key, func } of settingsList) {
-    registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
-  }
+  // for (const { key, func } of settingsList) {
+  //   registerCommand(context, `${EXTENSION_NAME}.${key}`, func);
+  // }
 
   const commandComposerData = getCommandComposerData();
   const codegenComposerData = getCodegenComposerData();

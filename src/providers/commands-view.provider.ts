@@ -1,11 +1,5 @@
 import * as vscode from "vscode";
-import {
-  AdditionalParams,
-  KeyValuesPairs,
-  PlaywrightCommandType,
-  PwCommand,
-  PwCommandMap,
-} from "../helpers/types";
+import { AdditionalParams, KeyValuesPairs, PlaywrightCommandType, PwCommand, PwCommandMap } from "../helpers/types";
 import { getNonce } from "../helpers/helpers";
 import { svgPlayIcon, svgStarEmptyIcon, svgWaitContinueIcon } from "../helpers/icons";
 import { getHeaderName } from "../helpers/l10n.helpers";
@@ -64,6 +58,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _invokeCommand(commandName: string, instantExecute: boolean, additionalParams?: AdditionalParams[]) {
+
     const command = this._commandList.find((command) => command.key === commandName);
     if (command === undefined) {
       return;
