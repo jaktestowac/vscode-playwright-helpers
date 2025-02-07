@@ -37,7 +37,9 @@ export function activate(context: vscode.ExtensionContext) {
   for (const { key, func, params } of commandsList) {
     registerCommand(context, `${EXTENSION_NAME}.${key}`, () => {
       const commandParams: CommandParameters = {
-        ...params,
+        command: params?.command,
+        key: key,
+        terminalCommandPair: params?.terminalCommandPair,
         instantExecute: true,
       };
       func(commandParams);
