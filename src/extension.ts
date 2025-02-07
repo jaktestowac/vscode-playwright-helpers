@@ -14,7 +14,7 @@ import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
 import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
-import { MatchTypeChangeAnnotations } from "./helpers/types";
+import { CommandParameters, MatchTypeChangeAnnotations } from "./helpers/types";
 import { CodegenComposerViewProvider } from "./providers/codegen-composer-view.provider";
 import { getCodegenComposerData } from "./scripts/codegen-composer";
 import { createFileWatcher } from "./helpers/file-watcher.helpers";
