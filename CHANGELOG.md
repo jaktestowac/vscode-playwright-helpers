@@ -2,9 +2,13 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.21] - 2025-xx-xx
+## [1.2.22] - 2025-xx-xx
 
-- TBD
+- feat: TBD
+
+## [1.2.21] - 2025-03-31
+
+- feat: auto focus on commands search and tab navigation
 
 ## [1.2.20] - 2025-02-07
 
