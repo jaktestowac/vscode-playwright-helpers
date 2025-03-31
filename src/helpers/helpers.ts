@@ -54,7 +54,13 @@ export function isDirectoryEmpty(directory: string): boolean {
 export async function openWorkSpaceDirectory(dir: string) {
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    console.log("No workspace path found");
+    return;
+  }
+
   const fullPath = path.join(workspacePath, dir);
   const folderUri = vscode.Uri.file(fullPath);
   await vscode.commands.executeCommand("vscode.openFolder", folderUri, true);
@@ -63,7 +69,13 @@ export async function openWorkSpaceDirectory(dir: string) {
 export async function openDirectory(dir: string) {
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    console.log("No workspace path found");
+    return;
+  }
+
   const fullPath = path.join(workspacePath, dir);
   const folderUri = vscode.Uri.file(fullPath);
 
@@ -91,7 +103,15 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
     return [];
   }
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    if (verbose) {
+      showWarningMessage(vscode.l10n.t("No workspace path found"));
+    }
+    return [];
+  }
+
   reportsPath = path.join(workspacePath, testReportsDir);
 
   if (!fs.existsSync(reportsPath)) {
@@ -145,7 +165,15 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
     return [];
   }
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    if (verbose) {
+      showWarningMessage(vscode.l10n.t("No workspace path found"));
+    }
+    return [];
+  }
+
   tracesPath = path.join(workspacePath, testResultsDir);
 
   if (!fs.existsSync(tracesPath)) {
@@ -183,7 +211,17 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
     return [];
   }
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    if (verbose) {
+      showWarningMessage(vscode.l10n.t("No workspace path found"));
+    }
+    return [];
+  }
+
+  console.log(`Workspace path: ${workspacePath}`);
+
   const packageJsonPath = path.join(workspacePath, "package.json");
 
   if (!fs.existsSync(packageJsonPath)) {
@@ -252,7 +290,13 @@ export function checkIfStringContainsAnySubstring(aString: string, substrings: s
 export function removeFile(filePath: string): boolean {
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const workspacePath = workspaceFolders[0]?.uri?.fsPath;
+
+  if (!workspacePath) {
+    console.log("No workspace path found");
+    return false;
+  }
+
   const fileFullPath = path.join(workspacePath, filePath);
 
   if (!fs.existsSync(fileFullPath)) {
