@@ -58,7 +58,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _invokeCommand(commandName: string, instantExecute: boolean, additionalParams?: AdditionalParams[]) {
-
     const command = this._commandList.find((command) => command.key === commandName);
     if (command === undefined) {
       return;
@@ -120,14 +119,12 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
     const sourceData: KeyValuesPairs = {};
     for (const [category, commands] of Object.entries(tempList)) {
-      // buttonHTMLList += `<button class="collapsible">${category}</button>`;
       buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title"><span>${getHeaderName(
         category
       )}</span></h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
 
-      // buttonHTMLList += `<h4 aria-label="${category}" class="nav-list__title">${category}</h4>`;
       buttonHTMLList += `<nav class="nav-list" category="${category}">`;
       let idx = 0;
 
@@ -135,10 +132,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
       for (const { key, prettyName, params, onlyPasteAndRun, onlyPaste, type, additionalParams } of sortedCommands) {
         let toolTipText = prettyName;
-
-        // if (params !== undefined) {
-        //   toolTipText += `: \`${params.command}\``;
-        // }
 
         if (params !== undefined) {
           toolTipText = `${vscode.l10n.t("Command:")} \`${params.command}\``;
@@ -148,25 +141,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         if (type === PlaywrightCommandType.commandWithParameter) {
           if (additionalParams !== undefined) {
             for (const param of additionalParams) {
-              // if (param.type === ControlType.datalist) {
-              //   // // issue with datalist: https://github.com/microsoft/vscode/issues/129999
-              //   // additionalParamsControls += `<input class="param-input" list="${param.key}-list"
-              //   //   placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}"
-              //   //   value="${param.defaultValue}" />`;
-              //   // additionalParamsControls += `<datalist id="${param.key}-list">`;
-              //   // const sourceData = [];
-              //   // if (param.source !== undefined) {
-              //   //   for (const sourceItem of param.source()) {
-              //   //     sourceData.push(sourceItem);
-              //   //   }
-              //   // }
-
-              //   // for (const sourceItem of sourceData) {
-              //   //   additionalParamsControls += `<option class="datalist-option" value="${sourceItem}"></option>`;
-              //   // }
-              //   // additionalParamsControls += `</datalist>`;
-              // } else {
-
               sourceData[param.key] = [];
               if (param.source !== undefined) {
                 for (const sourceItem of param.source()) {
@@ -177,7 +151,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
               additionalParamsControls += `<div class="autocomplete">
                   <input type="text" class="param-input" id="${param.key}-id" placeholder="${param.defaultValue}" parent="${key}" key="${param.key}" defaultValue="${param.defaultValue}" value="${param.defaultValue}" />
                 </div>`;
-              // }
             }
             additionalParamsControls = "&nbsp; " + additionalParamsControls;
           }
@@ -205,7 +178,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         buttonHTMLList += `
           <div class="nav-list__item list__item_not_clickable" category="${category}" index="${idx}" key="${key}" >
             <div class="nav-list__link search-result" onlyPaste="${onlyPaste}" aria-label="${prettyName}" key="${key}" title="${toolTipText}" tooltip-text="${prettyName}" title="${prettyName}"
-              data-vscode-context='{"key": "${key}", "preventDefaultContextMenuItems": true}'>
+              data-vscode-context='{"key": "${key}", "preventDefaultContextMenuItems": true}' tabindex="0">
 
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
@@ -224,7 +197,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
     const searchCommandsLocalized = vscode.l10n.t("Search commands...");
     const searchInputHtml = `
-      <input type="search" id="searchInput" class="search" placeholder="${searchCommandsLocalized}" />
+      <input type="search" id="searchInput" class="search" placeholder="${searchCommandsLocalized}" tabindex="0" />
     `;
 
     const nonce = getNonce();
@@ -241,7 +214,6 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
   
                   <link href="${styleVSCodeUri}" rel="stylesheet">
                   <link href="${styleMainUri}" rel="stylesheet">
-  
               </head>
               <body class="commands-view" data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                 ${searchInputHtml}
@@ -254,6 +226,11 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
                   if (versionInput) {
                     autocomplete(versionInput, ${JSON.stringify(sourceData["version"])});
                   }
+                  
+                  // Focus the search input after the view is loaded
+                  window.addEventListener('load', () => {
+                    document.getElementById('searchInput')?.focus();
+                  });
                   </script>
               </body>
               </html>`;

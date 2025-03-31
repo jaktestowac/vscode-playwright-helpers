@@ -55,39 +55,48 @@
   }
 
   const commandLables = document.querySelectorAll(".nav-list__link");
-  for (const label of commandLables) {
-    label.addEventListener("dblclick", () => {
-      let instantExecute = true;
-      const attributeKey = label.getAttribute("key");
-      const attributeOnlyPaste = label.getAttribute("onlyPaste");
 
-      if (attributeOnlyPaste === "true") {
-        instantExecute = false;
-      }
+  function actionOnClick(label) {
+    let instantExecute = true;
+    const attributeKey = label.getAttribute("key");
+    const attributeOnlyPaste = label.getAttribute("onlyPaste");
 
-      const additionalParams = gatherAdditionalParams(attributeKey);
+    if (attributeOnlyPaste === "true") {
+      instantExecute = false;
+    }
 
-      if (additionalParams.length > 0) {
-        vscode.postMessage({
-          type: "invokeCommandWithAdditionalParams",
-          key: attributeKey,
-          instantExecute,
-          additionalParams,
-        });
-      } else {
-        vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute });
-      }
+    const additionalParams = gatherAdditionalParams(attributeKey);
 
-      // Disable the button and show a loading indicator
-      // for a second to let the user know the command is running
+    if (additionalParams.length > 0) {
+      vscode.postMessage({
+        type: "invokeCommandWithAdditionalParams",
+        key: attributeKey,
+        instantExecute,
+        additionalParams,
+      });
+    } else {
+      vscode.postMessage({ type: "invokeCommand", key: attributeKey, instantExecute });
+    }
+
+    // Disable the button and show a loading indicator
+    // for a second to let the user know the command is running
+    // @ts-ignore
+    label.disabled = true;
+    label.classList.add("loading");
+    setTimeout(() => {
       // @ts-ignore
-      label.disabled = true;
-      label.classList.add("loading");
-      setTimeout(() => {
-        // @ts-ignore
-        label.disabled = false;
-        label.classList.remove("loading");
-      }, 1500);
+      label.disabled = false;
+      label.classList.remove("loading");
+    }, 1500);
+  }
+
+  for (const label of commandLables) {
+    label.addEventListener("dblclick", () => actionOnClick(label));
+    label.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        actionOnClick(label);
+      }
     });
   }
 
