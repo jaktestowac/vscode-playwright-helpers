@@ -128,6 +128,7 @@
   "Browsers": "Przeglądarki",
   "Testing": "Testowanie",
   "Misc": "Różne",
+  "MCP": "MCP",
   "General": "Ogólne",
   "Unknown": "Nieznane",
   "No testReportsDir provided": "Nie podano katalogu testReportsDir",
@@ -158,5 +159,9 @@
   "This command cannot be copied.": "To polecenie nie może być skopiowane.",
   "Do you really want to remove all traces?": "Czy na pewno chcesz usunąć wszystkie pliki trace?",
   "Yes": "Tak",
-  "Remove all traces": "Usuń wszystkie pliki trace.zip"
+  "Remove all traces": "Usuń wszystkie pliki trace.zip",
+  "Add Playwright MCP": "Dodaj Playwright MCP",
+  "List MCP Servers": "Lista serwerów MCP",
+  "Add MCP Servers": "Dodaj serwery MCP",
+  "No workspace path found": "Nie znaleziono ścieżki roboczej"
 }

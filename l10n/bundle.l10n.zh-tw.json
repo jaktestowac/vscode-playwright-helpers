@@ -158,5 +158,10 @@
   "Open VS Code Settings File (Mac OS)": "Open VS Code Settings File (Mac OS)",
   "Do you really want to remove all traces?": "Do you really want to remove all traces?",
   "Yes": "Yes",
-  "Remove all traces": "Remove all traces"
+  "Remove all traces": "Remove all traces",
+  "MCP": "MCP",
+  "Add Playwright MCP": "Add Playwright MCP",
+  "List MCP Servers": "List MCP Servers",
+  "Add MCP Servers": "Add MCP Servers",
+  "No workspace path found": "No workspace path found"
 }

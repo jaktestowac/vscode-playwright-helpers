@@ -329,7 +329,8 @@
     "update": "node src/test/readme-generator.js",
     "test": "",
     "loc:export": "npx @vscode/l10n-dev export -o ./l10n ./src",
-    "loc:update": "node src/test/update-l10n.js"
+    "loc:update": "node src/test/update-l10n.js",
+    "loc:full": "node src/test/update-l10n-full.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.60.0",
