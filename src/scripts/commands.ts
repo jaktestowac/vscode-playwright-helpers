@@ -590,6 +590,7 @@ export function getCommandList(): PwCommand[] {
       prettyName: vscode.l10n.t("List MCP Servers"),
       category: TabViewCategory.mcp,
       params: {
+        key: "listMcpServer",
         command: "workbench.mcp.listServer",
         terminalName: vscode.l10n.t("List MCP Servers"),
       },
@@ -600,6 +601,7 @@ export function getCommandList(): PwCommand[] {
       prettyName: vscode.l10n.t("Add MCP Servers"),
       category: TabViewCategory.mcp,
       params: {
+        key: "addMcpServer",
         command: "workbench.mcp.addConfiguration",
         terminalName: vscode.l10n.t("Add MCP Servers"),
       },
