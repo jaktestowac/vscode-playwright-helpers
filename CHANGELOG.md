@@ -2,9 +2,15 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.22] - 2025-xx-xx
+## [1.2.23] - 2025-xx-xx
 
 - feat: TBD
+
+## [1.2.22] - 2025-04-16
+
+- feat: command to integrate Playwright MCP
+- feat: MCP basic commands
+- feat: localization support
 
 ## [1.2.21] - 2025-03-31
 
@@ -20,7 +26,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 ## [1.2.18] - 2025-02-05
 
-- feat: offset for timezone in codegen composer 
+- feat: offset for timezone in codegen composer
 
 ## [1.2.17] - 2024-12-19
 
