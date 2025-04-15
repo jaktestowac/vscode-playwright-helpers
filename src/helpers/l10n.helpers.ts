@@ -15,6 +15,8 @@ export function getHeaderName(key: string): string {
       return vscode.l10n.t("Misc");
     case TabViewCategory.general:
       return vscode.l10n.t("General");
+    case TabViewCategory.mcp:
+      return vscode.l10n.t("MCP");
     default:
       return vscode.l10n.t("Unknown");
   }

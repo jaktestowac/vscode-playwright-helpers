@@ -164,6 +164,7 @@ export enum TabViewCategory {
   testing = "Testing",
   mics = "Misc",
   general = "General",
+  mcp = "MCP",
 }
 
 export enum PlaywrightCommandType {

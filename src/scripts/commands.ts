@@ -573,9 +573,45 @@ export function getCommandList(): PwCommand[] {
         terminalName: vscode.l10n.t("Show Trace"),
       },
     },
+    {
+      key: "addPlaywrightMcp",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Add Playwright MCP"),
+      category: TabViewCategory.mcp,
+      params: {
+        key: "addPlaywrightMcp",
+        command: `code --add-mcp '{\\"name\\":\\"playwright\\",\\"command\\":\\"npx\\",\\"args\\":[\\"@playwright/mcp@latest\\"]}'`,
+        terminalName: vscode.l10n.t("Add Playwright MCP"),
+      },
+    },
+    {
+      key: "listMcpServer",
+      func: runCommandPaletteCommand,
+      prettyName: vscode.l10n.t("List MCP Servers"),
+      category: TabViewCategory.mcp,
+      params: {
+        command: "workbench.mcp.listServer",
+        terminalName: vscode.l10n.t("List MCP Servers"),
+      },
+    },
+    {
+      key: "addMcpServer",
+      func: runCommandPaletteCommand,
+      prettyName: vscode.l10n.t("Add MCP Servers"),
+      category: TabViewCategory.mcp,
+      params: {
+        command: "workbench.mcp.addConfiguration",
+        terminalName: vscode.l10n.t("Add MCP Servers"),
+      },
+    },
   ];
 
   return commandsList;
+}
+
+async function runCommandPaletteCommand(params: CommandParameters): Promise<void> {
+  const command = params.command;
+  await vscode.commands.executeCommand(command);
 }
 
 function findCommandByKey(key: string): PwCommand | undefined {
