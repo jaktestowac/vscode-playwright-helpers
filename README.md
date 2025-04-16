@@ -71,39 +71,93 @@ This extension provides the following features:
 
 ## Commands List
 
-| Command                                               | Description                                               |
-| ----------------------------------------------------- | --------------------------------------------------------- |
-| `playwright-helpers.refreshPlaywrightScripts`         | Refresh Playwright Scripts View                           |
-| `playwright-helpers.refreshTraces`                    | Refresh Playwright Traces                                 |
-| `playwright-helpers.refreshReports`                   | Refresh Playwright Reports                                |
-| `playwright-helpers.initNewProject`                   | Initiate New Playwright Project                           |
-| `playwright-helpers.initNewProjectQuick`              | Initiate New Playwright Project (with defaults)           |
-| `playwright-helpers.checkPlaywrightVersion`           | Check Playwright Version                                  |
-| `playwright-helpers.listInstalledPackages`            | List Installed Packages                                   |
-| `playwright-helpers.listInstalledGlobalPackages`      | List Installed Global Packages                            |
-| `playwright-helpers.runCodegen`                       | Run Playwright Codegen                                    |
-| `playwright-helpers.runShowReport`                    | Run Playwright Show Report                                |
-| `playwright-helpers.openUiMode`                       | Open Playwright UI Mode                                   |
-| `playwright-helpers.checkPlaywrightTestVersion`       | Check Playwright Test Version                             |
-| `playwright-helpers.installLatestPlaywrightTest`      | Install/Update Latest Playwright Test                     |
-| `playwright-helpers.installNextPlaywrightTest`        | Install/Update Next Playwright Test                       |
-| `playwright-helpers.checkForPlaywrightTestUpdates`    | Check Playwright Test Updates                             |
-| `playwright-helpers.listInstalledPlaywrightPackages`  | List Installed Playwright Packages                        |
-| `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (only from current project) |
-| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser                       |
-| `playwright-helpers.installWebkitPlaywrightBrowser`   | Install Webkit Playwright Browser                         |
-| `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                        |
-| `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
-| `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
-| `playwright-helpers.closeAllTerminals`                | Close All Terminals                                       |
-| `playwright-helpers.listSystemInfo`                   | List System Info (using envinfo)                          |
-| `playwright-helpers.runPrettierOnAllFiles`            | Run Prettier on All Files                                 |
-| `playwright-helpers.showTrace`                        | Show Trace                                                |
-| `playwright-helpers.toggleHideShowCommands`           | Toggle Hide/Show Commands                                 |
+The extension provides the following commands, organized by category:
+
+### Playwright
+
+| Command                                            | Description                                 |
+| -------------------------------------------------- | ------------------------------------------- |
+| `playwright-helpers.checkPlaywrightVersion`        | Check Version - Playwright                  |
+| `playwright-helpers.checkPlaywrightTestVersion`    | Check Version - @playwright/test            |
+| `playwright-helpers.checkForPlaywrightTestUpdates` | Check Updates - @playwright/test            |
+| `playwright-helpers.installPlaywrightTest`         | Install @playwright/test (specific version) |
+| `playwright-helpers.installLatestPlaywrightTest`   | Install/Update Latest @playwright/test      |
+| `playwright-helpers.uninstallPlaywrightTest`       | Uninstall @playwright/test                  |
+| `playwright-helpers.installNextPlaywrightTest`     | Install/Update Next @playwright/test        |
+
+### Browsers
+
+| Command                                               | Description                                          |
+| ----------------------------------------------------- | ---------------------------------------------------- |
+| `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                      |
+| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser                  |
+| `playwright-helpers.installWebkitPlaywrightBrowser`   | Install Webkit Playwright Browser                    |
+| `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                   |
+| `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                    |
+| `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (current project only) |
+
+### Project
+
+| Command                                     | Description                            |
+| ------------------------------------------- | -------------------------------------- |
+| `playwright-helpers.initNewProject`         | Init New Project                       |
+| `playwright-helpers.initNewProjectQuick`    | Init New Project Quick (with defaults) |
+| `playwright-helpers.installPackages`        | Install Node Packages                  |
+| `playwright-helpers.checkOutdatedPackages`  | Check Outdated Packages                |
+| `playwright-helpers.updateOutdatedPackages` | Update Outdated Packages               |
+| `playwright-helpers.installPackagesNpmCi`   | Install Node Packages (package-lock)   |
+
+### Testing
+
+| Command                                           | Description                    |
+| ------------------------------------------------- | ------------------------------ |
+| `playwright-helpers.openUiMode`                   | Open UI Mode                   |
+| `playwright-helpers.runCodegen`                   | Run Codegen                    |
+| `playwright-helpers.runCodegenWithSaveStorage`    | Run Codegen with Save Storage  |
+| `playwright-helpers.runCodegenWithLoadStorage`    | Run Codegen with Load Storage  |
+| `playwright-helpers.runShowReport`                | Run Show Report                |
+| `playwright-helpers.runDefaultTests`              | Run Tests                      |
+| `playwright-helpers.runDefaultTestsMultipleTimes` | Run Tests Multiple Times       |
+| `playwright-helpers.runTestsFiles`                | Run Test File                  |
+| `playwright-helpers.runTestsWithDebug`            | Run Tests with Debug           |
+| `playwright-helpers.runTestsWithHeadedBrowser`    | Run Tests with Headed Browser  |
+| `playwright-helpers.runTestsWithTitle`            | Run Tests with Title           |
+| `playwright-helpers.runOnlyChangedTests`          | Run Only Changed Tests         |
+| `playwright-helpers.runSpecificTestProject`       | Run Specific Test Project      |
+| `playwright-helpers.runTestsWithWorkers`          | Run Tests with Workers         |
+| `playwright-helpers.runTestWithUpdateSnapshots`   | Run Test with Update Snapshots |
+| `playwright-helpers.runOnlyLastFailedTests`       | Run Only Last Failed Tests     |
+| `playwright-helpers.runTestsWithTimeout`          | Run Tests with Timeout         |
+| `playwright-helpers.runTestsWithReporter`         | Run Tests with Reporter        |
+| `playwright-helpers.showTrace`                    | Show Trace                     |
+
+### MCP (Model Context Protocol)
+
+| Command                               | Description        |
+| ------------------------------------- | ------------------ |
+| `playwright-helpers.addPlaywrightMcp` | Add Playwright MCP |
+| `playwright-helpers.listMcpServer`    | List MCP Servers   |
+| `playwright-helpers.addMcpServer`     | Add MCP Servers    |
+
+### Miscellaneous
+
+| Command                                          | Description                         |
+| ------------------------------------------------ | ----------------------------------- |
+| `playwright-helpers.closeAllTerminals`           | Close All Terminals                 |
+| `playwright-helpers.listInstalledPackages`       | List Installed Packages             |
+| `playwright-helpers.listInstalledGlobalPackages` | List Installed Global Packages      |
+| `playwright-helpers.listSystemInfo`              | List System Info (using envinfo)    |
+| `playwright-helpers.runPrettierOnAllFiles`       | Run Prettier on All Files           |
+| `playwright-helpers.openVSCodeSettingsFile`      | Open VS Code Settings File          |
+| `playwright-helpers.openVSCodeSettingsFileMacOs` | Open VS Code Settings File (Mac OS) |
+| `playwright-helpers.refreshPlaywrightScripts`    | Refresh Playwright Scripts View     |
+| `playwright-helpers.refreshTraces`               | Refresh Playwright Traces           |
+| `playwright-helpers.refreshReports`              | Refresh Playwright Reports          |
+| `playwright-helpers.toggleHideShowCommands`      | Toggle Hide/Show Commands           |
 
 ## Command Composer
 
-The Command Composer allows you to compose your own commands by selecting the desired options and parameters.
+The Command Composer allows you to create custom Playwright commands with various options and parameters.
 
 From graphical user interface you can select options described in documentation and then execute the command:
 
@@ -111,16 +165,52 @@ From graphical user interface you can select options described in documentation 
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-3.gif?raw=true" alt="Preview of Command Composer">
 </p>
 
-Currently available commands to compose:
-https://playwright.dev/docs/test-cli#reference
+You can configure the following settings:
+
+- **Config file path** - Specify a custom configuration file (default: playwright.config.ts)
+- **TypeScript config** - Use a custom tsconfig (default: tsconfig.test.json)
+- **Workers** - Set the number of parallel workers (default: 1)
+- **Debug mode** - Run tests in debug mode
+- **Headed mode** - Run tests in headed browser mode
+- **Test filtering** - Run only changed files, tests with specific title, etc.
+- **Timeout** - Set custom timeout in milliseconds (default: 60000)
+- **Retries** - Configure test retry count
+- **Reporters** - Choose from multiple reporter options: dot, line, list, json, junit, blob, verbose, github
+- **Projects** - Run tests for specific project configuration
+- **Snapshots** - Update or ignore snapshots
+- **Tracing** - Configure when trace files should be created
+- **Sharding** - Run a specific shard of tests for distributed execution
 
 ## Codegen Composer
 
-The Codegen Composer allows you to compose your own codegen command by selecting the desired options and parameters.
+The Codegen Composer allows you to compose your own codegen command by selecting the desired options and parameters:
+
+- **Output** - Save the generated script to a file
+- **Target language** - Choose from multiple languages and frameworks:
+  - JavaScript
+  - Playwright Test
+  - Python (sync, async, pytest)
+  - C# (plain, MSTest, NUnit)
+  - Java (plain, JUnit)
+- **Browser** - Select which browser to use (chromium, firefox, webkit)
+- **Device emulation** - Emulate specific devices (iPhone, iPad, etc.)
+- **Geolocation** - Set geolocation for testing location-aware applications
+- **Language/Locale** - Test with specific language settings
+- **Viewport size** - Configure custom viewport dimensions
+- **Color scheme** - Test with light or dark mode
+- **Storage** - Save and load browser storage state
+- **Network** - Configure proxy settings, save HAR files
+- **Timezone** - Test with specific timezone settings
+- **User agent** - Set custom user agent string
 
 ## Trace Viewer
 
-The extension provides an easy way to view Playwright traces in a graphical user interface. You can view the traces in a tree view, search for specific tests, and quickly run `trace-viewer` to display selected trace.
+The Trace Viewer provides a convenient way to view and analyze Playwright traces. Features include:
+
+- Trace file browser in the side panel (tree view)
+- Quick access to open traces in the Playwright Trace Viewer
+- Quick access to run the trace viewer on selected files
+- Context menu integration for `.zip` trace files
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-5-trace.gif?raw=true" alt="Preview of Trace Viewer">
@@ -128,7 +218,11 @@ The extension provides an easy way to view Playwright traces in a graphical user
 
 ## Report Viewer
 
-The extension provides an easy way to view Playwright reports in a graphical user interface. You can view the reports in a tree view and quickly run `view-report` to display selected report.
+The Report Viewer makes it easy to view and analyze Playwright HTML reports:
+
+- Report file browser in the side panel
+- Quick access to open reports in your browser
+- Context menu integration for report `index.html` files
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-6-reports.gif?raw=true" alt="Preview of Report Viewer">
@@ -136,17 +230,32 @@ The extension provides an easy way to view Playwright reports in a graphical use
 
 ## Playwright Scripts Runner
 
-The extension provides an easy way to run Playwright scripts from package.json. You can run scripts from the package.json file by selecting the script from the list.
+Run your Playwright scripts defined in package.json directly from the VS Code interface:
+
+- View all available npm scripts related to Playwright
+- Run scripts with a single click
+- See script execution status
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-4-scripts.gif?raw=true" alt="Preview of Playwright Scripts Runner">
 </p>
 
+## Settings
+
+The extension provides several settings to customize your experience:
+
+- **Reuse Terminal** - Control whether to reuse the existing terminal or create a new one
+- **Playwright Verbose API logs** - Enable detailed API logging
+- **Never Open HTML Report** - Disable automatic opening of HTML reports
+- **Test Annotations CodeLens** - Enable or disable CodeLens for test annotations
+
 ## Context Menu Commands
 
-The extension provides additional context menu commands for the following items:
+Additional commands available in the Explorer context menu:
 
-- **Show Playwright Trace** (on `trace.zip`) - you can quickly view the trace in the Trace Viewer via clicking on file in the Explorer and selecting `Show Trace` from the context menu.
+- **Show Playwright Trace** - View trace files directly from the Explorer
+- **Show Playwright Reports** - Open HTML reports from the Explorer
+- **Run Playwright Tests from This File** - Execute tests in a specific file
 
 <p align="center">
   <img src="https://github.com/jaktestowac/vscode-playwright-helpers/blob/main/media/preview-show-trace-from-context.gif?raw=true" alt="Preview of Show Trace from Context Menu">
