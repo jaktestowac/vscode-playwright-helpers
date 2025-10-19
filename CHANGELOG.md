@@ -4,7 +4,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 ## [1.2.24] - 2025-xx-xx
 
-- feat: TBD
+- feat: package manager support (npm, yarn, pnpm, bun, etc.)
 
 ## [1.2.23] - 2025-04-16
 

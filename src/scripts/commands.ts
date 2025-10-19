@@ -639,10 +639,88 @@ function closeAllTerminals() {
   });
 }
 
+// NEW: determine current package manager (default: npm)
+function getPackageManager(): string {
+  const pm = (MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.packageManager) as string) || "npm";
+  return (pm || "npm").toString().trim().toLowerCase();
+}
+
+// NEW: adapt a command to the selected package manager
+export function adaptCommandToPackageManager(command: string): string {
+  const pm = getPackageManager();
+  if (!command || pm === "npm") {
+    return command;
+  }
+
+  // Validate PM
+  const validPMs = ["npm", "yarn", "pnpm", "bun"];
+  if (!validPMs.includes(pm)) {
+    console.warn(`Unsupported package manager: ${pm}. Falling back to npm.`);
+    return command;
+  }
+
+  // Define mappings: each entry has a pattern and replacements per PM
+  // Order matters: process in array order (e.g., npx before npm init)
+  const commandMappings = [
+    {
+      pattern: /^npx\b/,
+      replacements: { yarn: "yarn dlx", pnpm: "pnpm dlx", bun: "bunx", npm: "npx" },
+    },
+    {
+      pattern: /^npm\s+init\s+playwright(@latest)?\b/,
+      replacements: {
+        yarn: "yarn create playwright",
+        pnpm: "pnpm create playwright",
+        bun: "bunx create-playwright@latest",
+        npm: "npm init playwright@latest",
+      },
+    },
+    {
+      pattern: /^npm\s+(i|install)\b/,
+      replacements: { yarn: "yarn add", pnpm: "pnpm add", bun: "bun add", npm: "npm i" },
+    },
+    {
+      pattern: /^npm\s+uninstall\b/,
+      replacements: { yarn: "yarn remove", pnpm: "pnpm remove", bun: "bun remove", npm: "npm uninstall" },
+    },
+    {
+      pattern: /^npm\s+outdated\b/,
+      replacements: { yarn: "yarn outdated", pnpm: "pnpm outdated", bun: "bun outdated", npm: "npm outdated" },
+    },
+    {
+      pattern: /^npm\s+update\b/,
+      replacements: { yarn: "yarn upgrade", pnpm: "pnpm update", bun: "bun update", npm: "npm update" },
+    },
+    {
+      pattern: /^npm\s+ci\b/,
+      replacements: {
+        yarn: "yarn install --frozen-lockfile",
+        pnpm: "pnpm install --frozen-lockfile",
+        bun: "bun install",
+        npm: "npm ci",
+      },
+    },
+    {
+      pattern: /^npm\s+i\b/,
+      replacements: { yarn: "yarn", pnpm: "pnpm install", bun: "bun install", npm: "npm i" },
+    },
+    // Add more patterns here as needed, e.g.:
+    // { pattern: /^npm\s+run\b/, replacements: { yarn: "yarn run", ... } },
+  ];
+
+  let adaptedCommand = command;
+  for (const mapping of commandMappings) {
+    adaptedCommand = adaptedCommand.replace(mapping.pattern, mapping.replacements[pm] || mapping.replacements.npm);
+  }
+
+  return adaptedCommand;
+}
+
 async function executeScript(params: CommandParameters) {
   const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
+  const command = adaptCommandToPackageManager(params.command);
   executeCommandInTerminal({
-    command: params.command,
+    command,
     execute,
     terminalName: params.terminalName,
     terminalCommandPair: params.terminalCommandPair,
@@ -659,8 +737,9 @@ async function initNewProject(params: CommandParameters) {
     return;
   }
 
+  const command = adaptCommandToPackageManager(params.command);
   executeCommandInTerminal({
-    command: params.command,
+    command: command,
     execute: execute,
     terminalName: params.terminalName,
     terminalCommandPair: params.terminalCommandPair,
@@ -677,8 +756,9 @@ async function initNewProjectQuick(params: CommandParameters) {
     return;
   }
 
+  const command = adaptCommandToPackageManager(params.command);
   executeCommandInTerminal({
-    command: params.command,
+    command: command,
     execute: execute,
     terminalName: params.terminalName,
     terminalCommandPair: params.terminalCommandPair,
@@ -697,8 +777,10 @@ export async function runTestWithParameters(params: Map = {}) {
     .map(([key, value]) => `${value}`)
     .join(" ");
 
+  const command = adaptCommandToPackageManager(`${baseCommand} ${paramsConcat}`);
+
   executeCommandInTerminal({
-    command: `${baseCommand} ${paramsConcat}`,
+    command,
     execute: false,
     terminalName: `Run Tests`,
   });

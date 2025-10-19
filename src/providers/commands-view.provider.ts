@@ -4,6 +4,7 @@ import { getNonce } from "../helpers/helpers";
 import { svgPlayIcon, svgStarEmptyIcon, svgWaitContinueIcon } from "../helpers/icons";
 import { getHeaderName } from "../helpers/l10n.helpers";
 import { showInformationMessage } from "../helpers/window-messages.helpers";
+import { adaptCommandToPackageManager } from "../scripts/commands";
 
 export class CommandsViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.commands";
@@ -37,6 +38,13 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
           this._invokeCommand(data.key, data.instantExecute, data.additionalParams);
           break;
         }
+      }
+    });
+
+    // Listen for package manager changes and refresh the view
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration("playwright-helpers.packageManager")) {
+        this._view!.webview.html = this._getHtmlForWebview(this._view!.webview);
       }
     });
   }
@@ -134,7 +142,8 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
         let toolTipText = prettyName;
 
         if (params !== undefined) {
-          toolTipText = `${vscode.l10n.t("Command:")} \`${params.command}\``;
+          const adaptedCommand = adaptCommandToPackageManager(params.command);
+          toolTipText = `${vscode.l10n.t("Command:")} \`${adaptedCommand}\``;
         }
 
         let additionalParamsControls = "";

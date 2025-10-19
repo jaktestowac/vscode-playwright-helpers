@@ -7,6 +7,7 @@ export enum SettingsKeys {
   neverOpenHtmlReport = "neverOpenHtmlReport",
   provideTestAnnotationsCodeLens = "provideTestAnnotationsCodeLens",
   instantExecute = "instantExecute",
+  packageManager = "packageManager",
 }
 
 export function getSettingsList(): PwSettings[] {
