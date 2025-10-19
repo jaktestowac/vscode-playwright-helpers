@@ -8,6 +8,7 @@ export enum SettingsKeys {
   provideTestAnnotationsCodeLens = "provideTestAnnotationsCodeLens",
   instantExecute = "instantExecute",
   packageManager = "packageManager",
+  workingDirectory = "workingDirectory",
 }
 
 export function getSettingsList(): PwSettings[] {

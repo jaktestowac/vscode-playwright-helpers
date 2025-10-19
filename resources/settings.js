@@ -23,6 +23,8 @@
 
   // Add: create a Package Manager input and wire up persistence
   createPackageManagerControl(settingsState);
+  // NEW: Working directory control (with optional browse)
+  createWorkingDirectoryControl(settingsState);
 
   function restoreSettingsState(settingsState) {
     const checkboxes = document.querySelectorAll(".checkbox");
@@ -37,6 +39,13 @@
     if (pmInput) {
       // @ts-ignore
       pmInput.value = settingsState["packageManager"] ?? "npm";
+    }
+
+    // NEW: Restore working directory input
+    const wdInput = document.getElementById("workingDirectory-id");
+    if (wdInput) {
+      // @ts-ignore
+      wdInput.value = settingsState["workingDirectory"] ?? "";
     }
   }
 
@@ -216,6 +225,115 @@
     const suggestions = ["npm", "yarn", "pnpm", "bun"];
     autocomplete(input, suggestions);
   }
+
+  // Working Directory control with optional browse and clear button
+  function createWorkingDirectoryControl(settingsState) {
+    const container = document.getElementById("workingDirectoryContainer") || document.body;
+
+    const wrap = document.createElement("div");
+    wrap.style.margin = "8px 0";
+    wrap.style.display = "flex";
+    wrap.style.alignItems = "center";
+    wrap.style.gap = "8px";
+
+    const label = document.createElement("label");
+    label.setAttribute("for", "workingDirectory-id");
+    label.textContent = "Commands Working Directory";
+
+    const inputWrap = document.createElement("div");
+    inputWrap.style.position = "relative";
+    inputWrap.style.display = "flex";
+    inputWrap.style.width = "100%";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.setAttribute("id", "workingDirectory-id");
+    input.setAttribute("placeholder", "e.g. e2e (default: root)");
+    input.style.width = "100%";
+    input.style.marginRight = "24px"; // Space for clear button
+    input.value = settingsState["workingDirectory"] ?? "";
+
+    input.addEventListener("change", () => {
+      const value = (input.value || "").trim();
+      updateSettingsState("workingDirectory", value, settingsState, envVarsState);
+      vscode.postMessage({
+        type: "updateSetting",
+        key: "workingDirectory",
+        value,
+      });
+    });
+
+    const browseBtn = document.createElement("button");
+    browseBtn.textContent = "Browse…";
+    browseBtn.addEventListener("click", () => {
+      vscode.postMessage({
+        type: "openWorkingDirectoryPicker",
+        key: "workingDirectory",
+        current: input.value || "",
+      });
+    });
+
+    // Small 'x' clear button to reset to default (root)
+    const clearBtn = document.createElement("button");
+    clearBtn.setAttribute("type", "button");
+    clearBtn.textContent = "x";
+    clearBtn.title = "Reset to default (root)";
+    clearBtn.setAttribute("aria-label", "Reset working directory to default");
+
+    // Position the clear button on the right side of the input
+    clearBtn.style.position = "absolute";
+    clearBtn.style.top = "50%";
+    clearBtn.style.right = "0px";
+    clearBtn.style.transform = "translateY(-50%)";
+    clearBtn.style.width = "20px";
+    clearBtn.style.height = "20px";
+    clearBtn.style.border = "none";
+    clearBtn.style.background = "transparent";
+    clearBtn.style.cursor = "pointer";
+    clearBtn.style.padding = "0";
+    clearBtn.style.fontSize = "14px";
+    clearBtn.style.lineHeight = "1";
+    clearBtn.style.color = "var(--vscode-errorForeground, #f14c4c)";
+
+    clearBtn.addEventListener("click", () => {
+      input.value = "";
+      input.dispatchEvent(new Event("change"));
+    });
+
+    inputWrap.appendChild(input);
+    inputWrap.appendChild(clearBtn);
+
+    // wrap.appendChild(label);
+    // wrap.appendChild(inputWrap);
+    // wrap.appendChild(browseBtn);
+    // container.prepend(wrap);
+    container.prepend(browseBtn);
+    container.prepend(inputWrap);
+    container.prepend(label);
+  }
+
+  // Handle selection result from the extension host for the browse button
+  window.addEventListener("message", (event) => {
+    const msg = event.data || {};
+    // Support multiple possible message types/fields from the host
+    if (
+      msg.type === "selectedWorkingDirectory" ||
+      msg.type === "workingDirectorySelected" ||
+      msg.type === "openWorkingDirectoryPickerResult" ||
+      msg.type === "directorySelected"
+    ) {
+      const input = document.getElementById("workingDirectory-id");
+      if (input) {
+        // Prefer msg.value, fall back to msg.path or empty
+        const selected = (msg.value ?? msg.path ?? "").trim();
+        // @ts-ignore
+        input.value = selected;
+        // Reuse the same change handler to update state and notify host
+        // @ts-ignore
+        input.dispatchEvent(new Event("change"));
+      }
+    }
+  });
 
   // Custom autocomplete function (copied from helpers.js to avoid loading it separately)
   function autocomplete(inp, arr) {

@@ -7,6 +7,7 @@ import {
   PwCommand,
   TerminalType,
   ControlType,
+  KeyValuePair,
 } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { areWorkspaceFoldersSingleAndEmpty } from "../helpers/assertions.helpers";
@@ -710,20 +711,99 @@ export function adaptCommandToPackageManager(command: string): string {
 
   let adaptedCommand = command;
   for (const mapping of commandMappings) {
-    adaptedCommand = adaptedCommand.replace(mapping.pattern, mapping.replacements[pm] || mapping.replacements.npm);
+    adaptedCommand = adaptedCommand.replace(
+      mapping.pattern,
+      mapping.replacements[pm as keyof typeof mapping.replacements] || mapping.replacements.npm
+    );
   }
 
   return adaptedCommand;
 }
 
+function getWorkingDirectorySetting(): string | undefined {
+  const wd = (MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.workingDirectory) as string) || "";
+  const value = (wd || "").toString().trim();
+  return value.length ? value : undefined;
+}
+
+function normalizePathForShell(path: string, shell: TerminalType): string {
+  // Prefer relative paths; absolute Windows paths will be passed-through as-is.
+  if (!path) {
+    return path;
+  }
+
+  switch (shell) {
+    case TerminalType.CMD:
+    case TerminalType.POWERSHELL:
+      // Use backslashes
+      return path.replace(/\//g, "\\");
+    case TerminalType.BASH:
+    case TerminalType.FISH:
+    case TerminalType.UNKNOWN:
+    default:
+      // Use forward slashes
+      return path.replace(/\\/g, "/");
+  }
+}
+
+function prefixWithCd(command: string, shell: TerminalType): string {
+  const wd = getWorkingDirectorySetting();
+  if (!wd) {
+    return command;
+  }
+
+  const p = normalizePathForShell(wd, shell);
+  switch (shell) {
+    case TerminalType.CMD:
+      // /d switches drive as well and quotes to handle spaces
+      return `cd /d "${p}" && ${command}`;
+    case TerminalType.POWERSHELL:
+      // -LiteralPath avoids wildcard expansion
+      return `Set-Location -LiteralPath "${p}"; ${command}`;
+    case TerminalType.BASH:
+    case TerminalType.FISH:
+    case TerminalType.UNKNOWN:
+    default:
+      return `cd "${p}" && ${command}`;
+  }
+}
+
+function buildCommandWithWorkingDir(
+  baseCommand: string,
+  existingPair?: KeyValuePair[] | undefined
+): { command: string; terminalCommandPair: KeyValuePair[] } {
+  const pairMap = new Map<string, string>();
+  if (existingPair) {
+    existingPair.forEach((p) => pairMap.set(p.key, p.value));
+  }
+
+  // map enum TerminalType to array of strings
+  const shells = Array.from(pairMap.keys());
+
+  const terminalCommandPair: KeyValuePair[] = shells.map((sh) => {
+    const cmdForShell = pairMap.has(sh) ? pairMap.get(sh)! : baseCommand;
+    // Adapt first (so ^ anchors match), then prefix with cd
+    const adapted = adaptCommandToPackageManager(cmdForShell);
+    const withCwd = prefixWithCd(adapted, sh as TerminalType);
+    return { key: sh, value: withCwd };
+  });
+
+  // Default command (used when no per-shell override is chosen by terminal helper)
+  const defaultAdapted = adaptCommandToPackageManager(baseCommand);
+  const command = prefixWithCd(defaultAdapted, TerminalType.UNKNOWN);
+
+  return { command, terminalCommandPair };
+}
+
 async function executeScript(params: CommandParameters) {
   const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
-  const command = adaptCommandToPackageManager(params.command);
+  // Adapt to PM first, then wrap with working directory for each shell
+  const { command, terminalCommandPair } = buildCommandWithWorkingDir(params.command, params.terminalCommandPair);
   executeCommandInTerminal({
     command,
     execute,
     terminalName: params.terminalName,
-    terminalCommandPair: params.terminalCommandPair,
+    terminalCommandPair,
   });
 }
 
@@ -737,12 +817,12 @@ async function initNewProject(params: CommandParameters) {
     return;
   }
 
-  const command = adaptCommandToPackageManager(params.command);
+  const { command, terminalCommandPair } = buildCommandWithWorkingDir(params.command, params.terminalCommandPair);
   executeCommandInTerminal({
     command: command,
     execute: execute,
     terminalName: params.terminalName,
-    terminalCommandPair: params.terminalCommandPair,
+    terminalCommandPair,
   });
 }
 
@@ -756,12 +836,12 @@ async function initNewProjectQuick(params: CommandParameters) {
     return;
   }
 
-  const command = adaptCommandToPackageManager(params.command);
+  const { command, terminalCommandPair } = buildCommandWithWorkingDir(params.command, params.terminalCommandPair);
   executeCommandInTerminal({
     command: command,
     execute: execute,
     terminalName: params.terminalName,
-    terminalCommandPair: params.terminalCommandPair,
+    terminalCommandPair,
   });
 }
 
@@ -777,12 +857,14 @@ export async function runTestWithParameters(params: Map = {}) {
     .map(([key, value]) => `${value}`)
     .join(" ");
 
-  const command = adaptCommandToPackageManager(`${baseCommand} ${paramsConcat}`);
+  // Build the full command then apply PM adaptation + working directory per shell
+  const { command, terminalCommandPair } = buildCommandWithWorkingDir(`${baseCommand} ${paramsConcat}`);
 
   executeCommandInTerminal({
     command,
     execute: false,
     terminalName: `Run Tests`,
+    terminalCommandPair,
   });
 }
 

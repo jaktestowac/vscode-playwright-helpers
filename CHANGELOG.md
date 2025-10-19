@@ -2,9 +2,16 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.24] - 2025-xx-xx
+## [1.2.xx] - 2025-xx-xx
+
+- TBD
+
+## [1.2.24] - 2025-10-19
 
 - feat: package manager support (npm, yarn, pnpm, bun, etc.)
+- feat: commands working directory setting (run all commands in a subdirectory, e.g. "e2e")
+- fix: cross-shell cd handling (cmd, PowerShell, bash/fish) when executing commands in subfolders
+- chore: update playwright versions
 
 ## [1.2.23] - 2025-04-16
 

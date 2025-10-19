@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import * as path from "path";
 import MyExtensionContext from "../helpers/my-extension.context";
 import { getNonce } from "../helpers/helpers";
 import { KeyValuePairs, NameValuePair, PwSettings, PwSettingsMap } from "../helpers/types";
@@ -37,6 +38,11 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
           this.updateEnvVariables(data.vars);
           break;
         }
+        case "openWorkingDirectoryPicker": {
+          // Start where input points to; if empty, start at project root
+          this.selectDirectory(data.key, data.current);
+          break;
+        }
       }
     });
   }
@@ -51,8 +57,56 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
     MyExtensionContext.instance.setWorkspaceValue("environmentVariables", vars);
   }
 
-  private invokeToggle(key: string, value: boolean) {
+  // Generic settings updater
+  private updateSetting(key: string, value: unknown) {
     MyExtensionContext.instance.setWorkspaceValue(key, value);
+  }
+
+  private invokeToggle(key: string, value: boolean) {
+    this.updateSetting(key, value);
+  }
+
+  // Folder picker used by the webview "Browse…" button
+  private async selectDirectory(key: string, currentPath?: string): Promise<void> {
+    // Determine starting location
+    let defaultUri: vscode.Uri | undefined;
+    const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri;
+
+    if (currentPath && currentPath.trim().length > 0) {
+      const raw = currentPath.trim();
+      const abs = path.isAbsolute(raw) ? raw : workspaceRoot ? path.join(workspaceRoot.fsPath, raw) : undefined;
+      if (abs) {
+        defaultUri = vscode.Uri.file(abs);
+      }
+    } else if (workspaceRoot) {
+      defaultUri = workspaceRoot;
+    }
+
+    const options: vscode.OpenDialogOptions = {
+      canSelectFiles: false,
+      canSelectFolders: true,
+      canSelectMany: false,
+      openLabel: "Select Directory",
+      defaultUri,
+    };
+
+    const fileUri = await vscode.window.showOpenDialog(options);
+
+    if (fileUri && fileUri[0]) {
+      const selectedPath = fileUri[0].fsPath;
+
+      // Update the setting value
+      this.updateSetting(key, selectedPath);
+
+      // Notify the webview about the selected directory
+      if (this._view) {
+        this._view.webview.postMessage({
+          type: "directorySelected",
+          key,
+          path: selectedPath,
+        });
+      }
+    }
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
