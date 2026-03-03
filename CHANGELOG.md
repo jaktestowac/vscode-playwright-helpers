@@ -6,6 +6,12 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
+## [1.2.25] - 2026-03-03
+
+- feat: support for Playwright CLI in commands
+- fix: add MCP command
+- chore: update README.md
+
 ## [1.2.24] - 2025-10-19
 
 - feat: package manager support (npm, yarn, pnpm, bun, etc.)

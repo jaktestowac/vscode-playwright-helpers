@@ -163,5 +163,10 @@
   "Add Playwright MCP": "Add Playwright MCP",
   "List MCP Servers": "List MCP Servers",
   "Add MCP Servers": "Add MCP Servers",
-  "No workspace path found": "No workspace path found"
+  "No workspace path found": "No workspace path found",
+  "Install Playwright CLI": "Install Playwright CLI",
+  "Install Playwright CLI Globally": "Install Playwright CLI Globally",
+  "Install Playwright CLI Browsers": "Install Playwright CLI Browsers",
+  "Install Playwright CLI Skills": "Install Playwright CLI Skills",
+  "Show Playwright CLI Help": "Show Playwright CLI Help"
 }

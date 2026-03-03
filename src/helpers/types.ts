@@ -161,6 +161,7 @@ export enum TabViewCategory {
   playwright = "Playwright",
   browsers = "Browsers",
   project = "Project",
+  playwrightCli = "Playwright CLI",
   testing = "Testing",
   mics = "Misc",
   general = "General",

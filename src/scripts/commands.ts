@@ -187,6 +187,66 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "installPlaywrightCLI",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Playwright CLI"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "installPlaywrightCLI",
+        command: "npm install @playwright/cli@latest",
+        terminalName: vscode.l10n.t("Install Playwright CLI"),
+      },
+    },
+    {
+      key: "installPlaywrightCLIGlobally",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Playwright CLI Globally"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "installPlaywrightCLIGlobally",
+        command: "npm install -g @playwright/cli@latest",
+        terminalName: vscode.l10n.t("Install Playwright CLI Globally"),
+      },
+    },
+    {
+      key: "installPlaywrightCLIBrowsers",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Playwright CLI Browsers"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "installPlaywrightCLIBrowsers",
+        command: "playwright-cli install-browser",
+        terminalName: vscode.l10n.t("Install Playwright CLI Browsers"),
+      },
+    },
+    {
+      key: "installPlaywrightCLISkills",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Install Playwright CLI Skills"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "installPlaywrightCLISkills",
+        command: "playwright-cli install --skills",
+        terminalName: vscode.l10n.t("Install Playwright CLI Skills"),
+      },
+    },
+    {
+      key: "showPlaywrightCLIHelp",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Show Playwright CLI Help"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "showPlaywrightCLIHelp",
+        command: "playwright-cli --help",
+        terminalName: vscode.l10n.t("Show Playwright CLI Help"),
+      },
+    },
+    {
       key: "installPackages",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Node Packages"),
@@ -579,11 +639,17 @@ export function getCommandList(): PwCommand[] {
       func: executeScript,
       prettyName: vscode.l10n.t("Add Playwright MCP"),
       category: TabViewCategory.mcp,
-      params: {
-        key: "addPlaywrightMcp",
-        command: `code --add-mcp '{\\"name\\":\\"playwright\\",\\"command\\":\\"npx\\",\\"args\\":[\\"@playwright/mcp@latest\\"]}'`,
-        terminalName: vscode.l10n.t("Add Playwright MCP"),
-      },
+      params: ((): CommandParameters => {
+        const json = '{"name":"playwright","command":"npx","args":["@playwright/mcp@latest"]}';
+        const defaultCmd = `code --add-mcp '${json}'`;
+        const cmdQuotedForCmd = `code --add-mcp "${json.replace(/"/g, '\\"')}"`;
+        return {
+          key: "addPlaywrightMcp",
+          command: defaultCmd,
+          terminalCommandPair: [{ key: TerminalType.CMD, value: cmdQuotedForCmd }],
+          terminalName: vscode.l10n.t("Add Playwright MCP"),
+        };
+      })(),
     },
     {
       key: "listMcpServer",
@@ -713,7 +779,7 @@ export function adaptCommandToPackageManager(command: string): string {
   for (const mapping of commandMappings) {
     adaptedCommand = adaptedCommand.replace(
       mapping.pattern,
-      mapping.replacements[pm as keyof typeof mapping.replacements] || mapping.replacements.npm
+      mapping.replacements[pm as keyof typeof mapping.replacements] || mapping.replacements.npm,
     );
   }
 
@@ -770,7 +836,7 @@ function prefixWithCd(command: string, shell: TerminalType): string {
 
 function buildCommandWithWorkingDir(
   baseCommand: string,
-  existingPair?: KeyValuePair[] | undefined
+  existingPair?: KeyValuePair[] | undefined,
 ): { command: string; terminalCommandPair: KeyValuePair[] } {
   const pairMap = new Map<string, string>();
   if (existingPair) {
