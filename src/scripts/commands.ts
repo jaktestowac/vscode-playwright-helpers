@@ -211,15 +211,15 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
-      key: "installPlaywrightCLIBrowsers",
+      key: "initializePlaywrightCLIWorkspace",
       func: executeScript,
-      prettyName: vscode.l10n.t("Install Playwright CLI Browsers"),
+      prettyName: vscode.l10n.t("Initialize Playwright CLI Workspace"),
       category: TabViewCategory.playwrightCli,
       askForExecute: true,
       params: {
-        key: "installPlaywrightCLIBrowsers",
+        key: "initializePlaywrightCLIWorkspace",
         command: "playwright-cli install",
-        terminalName: vscode.l10n.t("Install Playwright CLI Browsers"),
+        terminalName: vscode.l10n.t("Initialize Playwright CLI Workspace"),
       },
     },
     {

@@ -166,12 +166,12 @@
   "No workspace path found": "No workspace path found",
   "Install Playwright CLI": "Install Playwright CLI",
   "Install Playwright CLI Globally": "Install Playwright CLI Globally",
-  "Install Playwright CLI Browsers": "Install Playwright CLI Browsers",
   "Install Playwright CLI Skills": "Install Playwright CLI Skills",
   "Show Playwright CLI Help": "Show Playwright CLI Help",
   "Show Playwright CLI Browser Sessions": "Show Playwright CLI Browser Sessions",
   "Playwright CLI": "Playwright CLI",
   "List Playwright CLI Browser Sessions": "List Playwright CLI Browser Sessions",
   "Close All Playwright CLI Browser Sessions": "Close All Playwright CLI Browser Sessions",
-  "Kill All Playwright CLI Browser Sessions": "Kill All Playwright CLI Browser Sessions"
+  "Kill All Playwright CLI Browser Sessions": "Kill All Playwright CLI Browser Sessions",
+  "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace"
 }

@@ -6,6 +6,11 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
+## [1.2.27] - 2026-03-03
+
+- feat: new commands for Playwright CLI
+- fix: Playwright CLI command for initializing workspace
+
 ## [1.2.26] - 2026-03-03
 
 - feat: new commands for Playwright CLI browser sessions

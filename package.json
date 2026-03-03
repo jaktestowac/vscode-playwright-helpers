@@ -206,9 +206,29 @@
         "title": "%playwright-helpers.installPlaywrightCLIGlobally.title%"
       },
       {
-        "command": "playwright-helpers.installPlaywrightCLIBrowsers",
+        "command": "playwright-helpers.initializePlaywrightCLIWorkspace",
         "category": "PW Helpers",
-        "title": "%playwright-helpers.installPlaywrightCLIBrowsers.title%"
+        "title": "%playwright-helpers.initializePlaywrightCLIWorkspace.title%"
+      },
+      { 
+        "command": "playwright-helpers.showPlaywrightCLIBrowserSessions",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.showPlaywrightCLIBrowserSessions.title%"
+      },
+      {
+        "command": "playwright-helpers.listPlaywrightCLIBrowserSessions",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIBrowserSessions.title%"
+      },
+      {
+        "command": "playwright-helpers.closeAllPlaywrightCLIBrowserSessions",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.closeAllPlaywrightCLIBrowserSessions.title%"
+      },
+       {
+        "command": "playwright-helpers.killAllPlaywrightCLIBrowserSessions",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.killAllPlaywrightCLIBrowserSessions.title%"
       },
       {
         "command": "playwright-helpers.installPlaywrightCLISkills",

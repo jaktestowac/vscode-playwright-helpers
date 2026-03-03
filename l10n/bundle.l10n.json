@@ -33,7 +33,7 @@
   "Init New Project": "Init New Project",
   "Install Playwright CLI": "Install Playwright CLI",
   "Install Playwright CLI Globally": "Install Playwright CLI Globally",
-  "Install Playwright CLI Browsers": "Install Playwright CLI Browsers",
+  "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace",
   "Show Playwright CLI Browser Sessions": "Show Playwright CLI Browser Sessions",
   "List Playwright CLI Browser Sessions": "List Playwright CLI Browser Sessions",
   "Close All Playwright CLI Browser Sessions": "Close All Playwright CLI Browser Sessions",
