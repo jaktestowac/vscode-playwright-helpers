@@ -2,9 +2,13 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.xx] - 2025-xx-xx
+## [1.2.xx] - 2026-xx-xx
 
 - TBD
+
+## [1.2.26] - 2026-xx-xx
+
+- fix: Playwright CLI header localization
 
 ## [1.2.25] - 2026-03-03
 
