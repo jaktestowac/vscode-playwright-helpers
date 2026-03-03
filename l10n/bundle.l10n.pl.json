@@ -168,5 +168,10 @@
   "Install Playwright CLI Globally": "Zainstaluj Playwright CLI globalnie",
   "Install Playwright CLI Browsers": "Zainstaluj przeglądarki Playwright CLI",
   "Install Playwright CLI Skills": "Zainstaluj umiejętności Playwright CLI",
-  "Show Playwright CLI Help": "Pokaż pomoc Playwright CLI"
+  "Show Playwright CLI Help": "Pokaż pomoc Playwright CLI",
+  "Show Playwright CLI Browser Sessions": "Pokaż sesje przeglądarek Playwright CLI",
+  "Playwright CLI": "Playwright CLI",
+  "List Playwright CLI Browser Sessions": "Wyświetl sesje przeglądarek Playwright CLI",
+  "Close All Playwright CLI Browser Sessions": "Zamknij wszystkie sesje przeglądarek Playwright CLI",
+  "Kill All Playwright CLI Browser Sessions": "Zabij wszystkie sesje przeglądarek Playwright CLI"
 }

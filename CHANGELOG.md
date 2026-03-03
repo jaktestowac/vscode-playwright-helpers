@@ -6,8 +6,9 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
-## [1.2.26] - 2026-xx-xx
+## [1.2.26] - 2026-03-03
 
+- feat: new commands for Playwright CLI browser sessions
 - fix: Playwright CLI header localization
 
 ## [1.2.25] - 2026-03-03

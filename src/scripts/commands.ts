@@ -218,8 +218,56 @@ export function getCommandList(): PwCommand[] {
       askForExecute: true,
       params: {
         key: "installPlaywrightCLIBrowsers",
-        command: "playwright-cli install-browser",
+        command: "playwright-cli install",
         terminalName: vscode.l10n.t("Install Playwright CLI Browsers"),
+      },
+    },
+    {
+      key: "showPlaywrightCLIBrowserSessions",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Show Playwright CLI Browser Sessions"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "showPlaywrightCLIBrowserSessions",
+        command: "playwright-cli show",
+        terminalName: vscode.l10n.t("Show Playwright CLI Browser Sessions"),
+      },
+    },
+    {
+      key: "listPlaywrightCLIBrowserSessions",
+      func: executeScript,
+      prettyName: vscode.l10n.t("List Playwright CLI Browser Sessions"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "listPlaywrightCLIBrowserSessions",
+        command: "playwright-cli list",
+        terminalName: vscode.l10n.t("List Playwright CLI Browser Sessions"),
+      },
+    },
+    {
+      key: "closeAllPlaywrightCLIBrowserSessions",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Close All Playwright CLI Browser Sessions"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "closeAllPlaywrightCLIBrowserSessions",
+        command: "playwright-cli close-all",
+        terminalName: vscode.l10n.t("Close All Playwright CLI Browser Sessions"),
+      },
+    },
+    {
+      key: "killAllPlaywrightCLIBrowserSessions",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Kill All Playwright CLI Browser Sessions"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "killAllPlaywrightCLIBrowserSessions",
+        command: "playwright-cli kill-all",
+        terminalName: vscode.l10n.t("Kill All Playwright CLI Browser Sessions"),
       },
     },
     {

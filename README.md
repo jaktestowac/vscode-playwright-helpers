@@ -143,6 +143,10 @@ _(see the full list of commands exposed via the sidebar and command composer; th
 | `playwright-helpers.installPlaywrightCLISkills` | Install Playwright CLI Skills |
 | `playwright-helpers.showPlaywrightCLIHelp` | Show Playwright CLI Help |
 | `playwright-helpers.installPlaywrightCLI` | Install Playwright CLI |
+| `playwright-helpers.showPlaywrightCLIBrowserSessions` | Show Playwright CLI Browser Sessions |
+| `playwright-helpers.listPlaywrightCLIBrowserSessions` | List Playwright CLI Browser Sessions |
+| `playwright-helpers.closeAllPlaywrightCLIBrowserSessions` | Close All Playwright CLI Browser Sessions |
+| `playwright-helpers.killAllPlaywrightCLIBrowserSessions` | Kill All Playwright CLI Browser Sessions |
 
 ### MCP (Model Context Protocol)
 
