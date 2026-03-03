@@ -17,6 +17,8 @@ export function getHeaderName(key: string): string {
       return vscode.l10n.t("General");
     case TabViewCategory.mcp:
       return vscode.l10n.t("MCP");
+    case TabViewCategory.playwrightCli:
+      return vscode.l10n.t("Playwright CLI");
     default:
       return vscode.l10n.t("Unknown");
   }
