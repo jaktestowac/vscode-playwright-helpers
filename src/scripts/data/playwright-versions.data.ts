@@ -1,5 +1,10 @@
 // https://api.github.com/repos/microsoft/playwright/git/refs/tags
+
 export const allPlaywrightVersions = [
+  "1.58.2",
+  "1.58.1",
+  "1.58.0",
+  "1.57.0",
   "1.56.1",
   "1.56.0",
   "1.55.1",
