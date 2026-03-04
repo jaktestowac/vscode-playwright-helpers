@@ -155,6 +155,8 @@ _(see the full list of commands exposed via the sidebar and command composer; th
 | `playwright-helpers.playwrightCLICaptureVideo` | %playwright-helpers.playwrightCLICaptureVideo.title% |
 | `playwright-helpers.playwrightCLIStopVideo` | %playwright-helpers.playwrightCLIStopVideo.title% |
 | `playwright-helpers.playwrightCLIListActiveRoutes` | %playwright-helpers.playwrightCLIListActiveRoutes.title% |
+| `playwright-helpers.listPlaywrightCLIPackageVersion` | %playwright-helpers.listPlaywrightCLIPackageVersion.title% |
+| `playwright-helpers.listPlaywrightCLIVersion` | %playwright-helpers.listPlaywrightCLIVersion.title% |
 | `playwright-helpers.installPlaywrightCLI` | Install Playwright CLI |
 | `playwright-helpers.listPlaywrightCLIBrowserSessionStorage` | List Playwright CLI Browser Session Storage |
 

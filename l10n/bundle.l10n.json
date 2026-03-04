@@ -32,6 +32,8 @@
   "Install Next": "Install Next",
   "Init New Project": "Init New Project",
   "Install Playwright CLI": "Install Playwright CLI",
+  "List Playwright CLI Package Version": "List Playwright CLI Package Version",
+  "List Playwright CLI Version": "List Playwright CLI Version",
   "Install Playwright CLI Globally": "Install Playwright CLI Globally",
   "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace",
   "Show Playwright CLI Browser Sessions": "Show Playwright CLI Browser Sessions",

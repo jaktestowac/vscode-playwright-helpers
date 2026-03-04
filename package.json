@@ -291,6 +291,16 @@
         "title": "%playwright-helpers.playwrightCLIListActiveRoutes.title%"
       },
       {
+        "command": "playwright-helpers.listPlaywrightCLIPackageVersion",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIPackageVersion.title%"
+      },
+      {
+        "command": "playwright-helpers.listPlaywrightCLIVersion",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIVersion.title%"
+      },
+      {
         "command": "playwright-helpers.checkPlaywrightVersion",
         "category": "PW Helpers",
         "title": "%playwright-helpers.checkPlaywrightVersion.title%"

@@ -184,5 +184,7 @@
   "Start Video Recording in Playwright CLI": "Rozpocznij nagrywanie wideo w Playwright CLI",
   "Stop Video Recording in Playwright CLI": "Zatrzymaj nagrywanie wideo w Playwright CLI",
   "List active routes in Playwright CLI": "Wyświetl aktywne trasy w Playwright CLI",
-  "List Playwright CLI Browser Session Storage": "Wyświetl pamięć sesji przeglądarki Playwright CLI"
+  "List Playwright CLI Browser Session Storage": "Wyświetl pamięć sesji przeglądarki Playwright CLI",
+  "List Playwright CLI Package Version": "Wyświetl wersję pakietu Playwright CLI",
+  "List Playwright CLI Version": "Wyświetl wersję Playwright CLI"
 }

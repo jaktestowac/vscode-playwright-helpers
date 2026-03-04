@@ -199,6 +199,30 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "listPlaywrightCLIPackageVersion",
+      func: executeScript,
+      prettyName: vscode.l10n.t("List Playwright CLI Package Version"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "listPlaywrightCLIPackageVersion",
+        command: "npm list --depth=0 @playwright/cli",
+        terminalName: vscode.l10n.t("List Playwright CLI Package Version"),
+      },
+    },
+    {
+      key: "listPlaywrightCLIVersion",
+      func: executeScript,
+      prettyName: vscode.l10n.t("List Playwright CLI Version"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "listPlaywrightCLIVersion",
+        command: "playwright-cli --version",
+        terminalName: vscode.l10n.t("List Playwright CLI Version"),
+      },
+    },
+    {
       key: "installPlaywrightCLIGlobally",
       func: executeScript,
       prettyName: vscode.l10n.t("Install Playwright CLI Globally"),
