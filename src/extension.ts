@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
 import { CommandsViewProvider } from "./providers/commands-view.provider";
+import { PlaywrightCliCommandsViewProvider } from "./providers/playwright-cli-commands-view.provider";
 import { SettingsViewProvider } from "./providers/settings-view.provider";
-import { getCommandList, runTestWithParameters } from "./scripts/commands";
+import { getCommandList, getPlaywrightCLICommandList, runTestWithParameters } from "./scripts/commands";
 import { getSettingsList } from "./scripts/settings";
 import MyExtensionContext from "./helpers/my-extension.context";
 import { ScriptsViewProvider } from "./providers/scripts-view.provider";
@@ -33,8 +34,9 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   const commandsList = getCommandList();
+  const playwrightCLICommandList = getPlaywrightCLICommandList();
 
-  for (const { key, func, params } of commandsList) {
+  for (const { key, func, params } of [...commandsList, ...playwrightCLICommandList]) {
     registerCommand(context, `${EXTENSION_NAME}.${key}`, () => {
       let commandParams;
 
@@ -63,19 +65,31 @@ export function activate(context: vscode.ExtensionContext) {
   // Register the Sidebar Panel - Commands
   const commandsViewProvider = new CommandsViewProvider(context.extensionUri, commandsList);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewType, commandsViewProvider)
+    vscode.window.registerWebviewViewProvider(CommandsViewProvider.viewType, commandsViewProvider),
+  );
+
+  // Register the Sidebar Panel - Playwright CLI Commands
+  const playwrightCliCommandsViewProvider = new PlaywrightCliCommandsViewProvider(
+    context.extensionUri,
+    playwrightCLICommandList,
+  );
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      PlaywrightCliCommandsViewProvider.viewType,
+      playwrightCliCommandsViewProvider,
+    ),
   );
 
   // Register the Sidebar Panel - Settings
   const settingsViewProvider = new SettingsViewProvider(context.extensionUri, settingsList);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(SettingsViewProvider.viewType, settingsViewProvider)
+    vscode.window.registerWebviewViewProvider(SettingsViewProvider.viewType, settingsViewProvider),
   );
 
   // Register the Sidebar Panel - Scripts
   const scriptsViewProvider = new ScriptsViewProvider(context.extensionUri);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(ScriptsViewProvider.viewType, scriptsViewProvider)
+    vscode.window.registerWebviewViewProvider(ScriptsViewProvider.viewType, scriptsViewProvider),
   );
 
   // Register the Sidebar Panel - Trace
@@ -85,27 +99,27 @@ export function activate(context: vscode.ExtensionContext) {
   // Register the Sidebar Panel - Report
   const reportViewProvider = new ReportViewProvider(context.extensionUri);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(ReportViewProvider.viewType, reportViewProvider)
+    vscode.window.registerWebviewViewProvider(ReportViewProvider.viewType, reportViewProvider),
   );
 
   // Register the Sidebar Panel - Command Composer
   const commandComposerViewProvider = new CommandComposerViewProvider(
     context.extensionUri,
     commandComposerData,
-    runTestWithParameters
+    runTestWithParameters,
   );
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(CommandComposerViewProvider.viewType, commandComposerViewProvider)
+    vscode.window.registerWebviewViewProvider(CommandComposerViewProvider.viewType, commandComposerViewProvider),
   );
 
   // Register the Sidebar Panel - Codegen Composer
   const codegenComposerViewProvider = new CodegenComposerViewProvider(
     context.extensionUri,
     codegenComposerData,
-    runTestWithParameters
+    runTestWithParameters,
   );
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(CodegenComposerViewProvider.viewType, codegenComposerViewProvider)
+    vscode.window.registerWebviewViewProvider(CodegenComposerViewProvider.viewType, codegenComposerViewProvider),
   );
 
   registerCommand(context, `${EXTENSION_NAME}.refreshPlaywrightScripts`, () => {

@@ -168,6 +168,22 @@ export enum TabViewCategory {
   mcp = "MCP",
 }
 
+export enum PlaywrightCLITabViewCategory {
+  installation = "Installation",
+  core = "Core",
+  navigation = "Navigation",
+  keyboard = "Keyboard",
+  mouse = "Mouse",
+  saveAs = "Save as",
+  tabs = "Tabs",
+  storage = "Storage",
+  network = "Network",
+  devTools = "DevTools",
+  openParameters = "Open parameters",
+  sessions = "Sessions",
+  monitoring = "Monitoring",
+}
+
 export enum PlaywrightCommandType {
   command = "command",
   commandWithParameter = "commandWithParameter",

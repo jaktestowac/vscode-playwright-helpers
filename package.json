@@ -50,6 +50,11 @@
         },
         {
           "type": "webview",
+          "id": "playwright-helpers.playwright-cli-commands",
+          "name": "%playwright-helpers.playwright-cli-commands.name%"
+        },
+        {
+          "type": "webview",
           "id": "playwright-helpers.scripts",
           "name": "%playwright-helpers.scripts.name%"
         },
@@ -299,6 +304,351 @@
         "command": "playwright-helpers.listPlaywrightCLIVersion",
         "category": "PW Helpers",
         "title": "%playwright-helpers.listPlaywrightCLIVersion.title%"
+      },
+      {
+        "command": "playwright-helpers.installPlaywrightCLI",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.installPlaywrightCLI.title%"
+      },
+      {
+        "command": "playwright-helpers.listGlobalPlaywrightCLIPackageVersion",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listGlobalPlaywrightCLIPackageVersion.title%"
+      },
+      {
+        "command": "playwright-helpers.listLocalPlaywrightCLIPackageVersion",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listLocalPlaywrightCLIPackageVersion.title%"
+      },
+      {
+        "command": "playwright-helpers.listPlaywrightCLIBrowserSessionStorage",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIBrowserSessionStorage.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICheck",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICheck.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIClick",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIClick.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICloseNamedSession",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICloseNamedSession.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIClosePage",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIClosePage.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIConsole",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIConsole.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICookieClear",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICookieClear.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICookieDelete",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICookieDelete.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICookieGet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICookieGet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICookieList",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICookieList.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICookieSet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICookieSet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDeleteData",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDeleteData.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDeleteNamedSessionData",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDeleteNamedSessionData.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDialogAccept",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDialogAccept.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDialogDismiss",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDialogDismiss.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDoubleClick",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDoubleClick.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIDrag",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIDrag.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIEval",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIEval.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIFill",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIFill.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIGoBack",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIGoBack.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIGoForward",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIGoForward.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIGotoUrl",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIGotoUrl.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIHover",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIHover.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIKeyDown",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIKeyDown.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIKeyUp",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIKeyUp.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLILocalStorageClear",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLILocalStorageClear.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLILocalStorageDelete",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLILocalStorageDelete.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLILocalStorageGet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLILocalStorageGet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLILocalStorageSet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLILocalStorageSet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIMouseDown",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIMouseDown.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIMouseMove",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIMouseMove.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIMouseUp",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIMouseUp.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIMouseWheel",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIMouseWheel.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenBrowser",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenBrowser.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenBrowserAtUrl",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenBrowserAtUrl.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenPersistent",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenPersistent.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenWithBrowser",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenWithBrowser.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenWithConfig",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenWithConfig.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenWithExtension",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenWithExtension.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIOpenWithProfilePath",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIOpenWithProfilePath.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIPDF",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIPDF.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIPDFToFile",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIPDFToFile.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIPressKey",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIPressKey.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIReload",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIReload.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIResizeWindow",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIResizeWindow.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIRoute",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIRoute.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIRunCode",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIRunCode.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIScreenshot",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIScreenshot.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIScreenshotElement",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIScreenshotElement.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIScreenshotToFile",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIScreenshotToFile.title%"
+      },
+      {
+        "command": "playwright-helpers.snapshotPlaywrightCLIBrowserToFile",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.snapshotPlaywrightCLIBrowserToFile.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLISelect",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLISelect.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLISessionStorageClear",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLISessionStorageClear.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLISessionStorageDelete",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLISessionStorageDelete.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLISessionStorageGet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLISessionStorageGet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLISessionStorageSet",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLISessionStorageSet.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIStateLoad",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIStateLoad.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIStateSave",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIStateSave.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLITabClose",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLITabClose.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLITabList",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLITabList.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLITabNew",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLITabNew.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLITabSelect",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLITabSelect.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLITypeText",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLITypeText.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIUncheck",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIUncheck.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIUnroute",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIUnroute.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIUpload",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIUpload.title%"
       },
       {
         "command": "playwright-helpers.checkPlaywrightVersion",

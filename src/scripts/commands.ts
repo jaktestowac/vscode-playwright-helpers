@@ -16,6 +16,7 @@ import { BASE_TERMINAL_NAME } from "../helpers/consts";
 import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 import { SettingsKeys } from "./settings";
 import { allPlaywrightVersions } from "./data/playwright-versions.data";
+import { getPlaywrightCLICommandList as _getPlaywrightCLICommandList } from "./playwright-cli.commands";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
@@ -186,260 +187,7 @@ export function getCommandList(): PwCommand[] {
         terminalName: vscode.l10n.t("Init New Project"),
       },
     },
-    {
-      key: "installPlaywrightCLI",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Install Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "installPlaywrightCLI",
-        command: "npm install @playwright/cli@latest",
-        terminalName: vscode.l10n.t("Install Playwright CLI"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIPackageVersion",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Package Version"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIPackageVersion",
-        command: "npm list --depth=0 @playwright/cli",
-        terminalName: vscode.l10n.t("List Playwright CLI Package Version"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIVersion",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Version"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIVersion",
-        command: "playwright-cli --version",
-        terminalName: vscode.l10n.t("List Playwright CLI Version"),
-      },
-    },
-    {
-      key: "installPlaywrightCLIGlobally",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Install Playwright CLI Globally"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "installPlaywrightCLIGlobally",
-        command: "npm install -g @playwright/cli@latest",
-        terminalName: vscode.l10n.t("Install Playwright CLI Globally"),
-      },
-    },
-    {
-      key: "initializePlaywrightCLIWorkspace",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Initialize Playwright CLI Workspace"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "initializePlaywrightCLIWorkspace",
-        command: "playwright-cli install",
-        terminalName: vscode.l10n.t("Initialize Playwright CLI Workspace"),
-      },
-    },
-    {
-      key: "showPlaywrightCLIBrowserSessions",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Show Playwright CLI Browser Sessions"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "showPlaywrightCLIBrowserSessions",
-        command: "playwright-cli show",
-        terminalName: vscode.l10n.t("Show Playwright CLI Browser Sessions"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIBrowserSessions",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Browser Sessions"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIBrowserSessions",
-        command: "playwright-cli list",
-        terminalName: vscode.l10n.t("List Playwright CLI Browser Sessions"),
-      },
-    },
-    {
-      key: "snapshotPlaywrightCLIBrowser",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Snapshot Playwright CLI Browser"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "snapshotPlaywrightCLIBrowser",
-        command: "playwright-cli snapshot",
-        terminalName: vscode.l10n.t("Snapshot Playwright CLI Browser"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIBrowserLocalStorage",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Browser Local Storage"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIBrowserLocalStorage",
-        command: "playwright-cli localstorage-list",
-        terminalName: vscode.l10n.t("List Playwright CLI Browser Local Storage"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIBrowserNetworkRequests",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Browser Network Requests"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIBrowserNetworkRequests",
-        command: "playwright-cli network",
-        terminalName: vscode.l10n.t("List Playwright CLI Browser Network Requests"),
-      },
-    },
-    {
-      key: "playwrightCLIRunCommandInNamedSession",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Run Command in Named Session in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      onlyPaste: true,
-      params: {
-        key: "playwrightCLIRunCommandInNamedSession",
-        command: "playwright-cli -s=name <cmd>",
-        terminalName: vscode.l10n.t("Run command in named session in Playwright CLI"),
-      },
-    },
-    {
-      key: "playwrightCLICaptureTrace",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Start Trace Recording in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "playwrightCLICaptureTrace",
-        command: "playwright-cli tracing-start",
-        terminalName: vscode.l10n.t("Start Trace Recording in Playwright CLI"),
-      },
-    },
-    {
-      key: "playwrightCLIStopTrace",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Stop Trace Recording in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "playwrightCLIStopTrace",
-        command: "playwright-cli tracing-stop",
-        terminalName: vscode.l10n.t("Stop Trace Recording in Playwright CLI"),
-      },
-    },
-    {
-      key: "playwrightCLICaptureVideo",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Start Video Recording in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "playwrightCLICaptureVideo",
-        command: "playwright-cli video-start",
-        terminalName: vscode.l10n.t("Start Video Recording in Playwright CLI"),
-      },
-    },
-    {
-      key: "playwrightCLIStopVideo",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Stop Video Recording in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      onlyPaste: true,
-      params: {
-        key: "playwrightCLIStopVideo",
-        command: "playwright-cli video-stop [filename]",
-        terminalName: vscode.l10n.t("Stop Video Recording in Playwright CLI"),
-      },
-    },
-    {
-      key: "playwrightCLIListActiveRoutes",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List active routes in Playwright CLI"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "playwrightCLIListActiveRoutes",
-        command: "playwright-cli route-list",
-        terminalName: vscode.l10n.t("List active routes in Playwright CLI"),
-      },
-    },
-    {
-      key: "listPlaywrightCLIBrowserSessionStorage",
-      func: executeScript,
-      prettyName: vscode.l10n.t("List Playwright CLI Browser Session Storage"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "listPlaywrightCLIBrowserSessionStorage",
-        command: "playwright-cli sessionstorage-list",
-        terminalName: vscode.l10n.t("List Playwright CLI Browser Session Storage"),
-      },
-    },
-    {
-      key: "closeAllPlaywrightCLIBrowserSessions",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Close All Playwright CLI Browser Sessions"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "closeAllPlaywrightCLIBrowserSessions",
-        command: "playwright-cli close-all",
-        terminalName: vscode.l10n.t("Close All Playwright CLI Browser Sessions"),
-      },
-    },
-    {
-      key: "killAllPlaywrightCLIBrowserSessions",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Kill All Playwright CLI Browser Sessions"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "killAllPlaywrightCLIBrowserSessions",
-        command: "playwright-cli kill-all",
-        terminalName: vscode.l10n.t("Kill All Playwright CLI Browser Sessions"),
-      },
-    },
-    {
-      key: "installPlaywrightCLISkills",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Install Playwright CLI Skills"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "installPlaywrightCLISkills",
-        command: "playwright-cli install --skills",
-        terminalName: vscode.l10n.t("Install Playwright CLI Skills"),
-      },
-    },
-    {
-      key: "showPlaywrightCLIHelp",
-      func: executeScript,
-      prettyName: vscode.l10n.t("Show Playwright CLI Help"),
-      category: TabViewCategory.playwrightCli,
-      askForExecute: true,
-      params: {
-        key: "showPlaywrightCLIHelp",
-        command: "playwright-cli --help",
-        terminalName: vscode.l10n.t("Show Playwright CLI Help"),
-      },
-    },
+
     {
       key: "installPackages",
       func: executeScript,
@@ -869,16 +617,20 @@ export function getCommandList(): PwCommand[] {
     },
   ];
 
-  return commandsList;
+  return [...commandsList];
+}
+
+export function getPlaywrightCLICommandList(): PwCommand[] {
+  return _getPlaywrightCLICommandList(executeScript);
+}
+
+function findCommandByKey(key: string): PwCommand | undefined {
+  return getCommandList().find((command) => command.key === key);
 }
 
 async function runCommandPaletteCommand(params: CommandParameters): Promise<void> {
   const command = params.command;
   await vscode.commands.executeCommand(command);
-}
-
-function findCommandByKey(key: string): PwCommand | undefined {
-  return getCommandList().find((command) => command.key === key);
 }
 
 function isCommandExecutedWithoutAsking(key: string): boolean {
@@ -1105,6 +857,12 @@ async function initNewProjectQuick(params: CommandParameters) {
   });
 }
 
+function getPlaywrightVersions(): string[] {
+  const versions = ["latest", "next"];
+  versions.push(...allPlaywrightVersions);
+  return versions;
+}
+
 export async function runTestWithParameters(params: Map = {}) {
   let baseCommand = "npx playwright test";
 
@@ -1126,10 +884,4 @@ export async function runTestWithParameters(params: Map = {}) {
     terminalName: `Run Tests`,
     terminalCommandPair,
   });
-}
-
-function getPlaywrightVersions(): string[] {
-  const versions = ["latest", "next"];
-  versions.push(...allPlaywrightVersions);
-  return versions;
 }

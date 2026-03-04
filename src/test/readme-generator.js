@@ -41,6 +41,8 @@ function humanizeCategory(cat) {
 // parse commands.ts to map keys to tab categories and pretty names
 const commandsTsPath = path.resolve(__dirname, "../scripts/commands.ts");
 const commandsTs = fs.readFileSync(commandsTsPath, "utf8");
+const playwrightCliCommandsTsPath = path.resolve(__dirname, "../scripts/playwright-cli.commands.ts");
+const playwrightCliCommandsTs = fs.readFileSync(playwrightCliCommandsTsPath, "utf8");
 const keyToCategory = {};
 const keyToPretty = {};
 {
@@ -61,6 +63,26 @@ const keyToPretty = {};
     if (catMatch && currentKey) {
       keyToCategory[currentKey] = catMatch[1];
       // don't reset currentKey yet; there might be additional props we care about later
+    }
+  }
+}
+
+// parse playwright-cli.commands.ts to include CLI commands and pretty names
+// they use a different category enum, but for README we group all under Playwright CLI
+{
+  const lines = playwrightCliCommandsTs.split(/\r?\n/);
+  let currentKey = null;
+  for (const line of lines) {
+    const keyMatch = line.match(/key:\s*["']([^"']+)["']/);
+    if (keyMatch) {
+      currentKey = keyMatch[1];
+      keyToCategory[currentKey] = "playwrightCli";
+      continue;
+    }
+    const prettyMatch = line.match(/prettyName:\s*vscode\.l10n\.t\(["']([^"']+)["']\)/);
+    if (prettyMatch && currentKey) {
+      keyToPretty[currentKey] = prettyMatch[1];
+      continue;
     }
   }
 }

@@ -6,7 +6,7 @@
 
 # Description
 
-This Visual Studio Code extension adds predefined commands for **Node.js Playwright**.
+This Visual Studio Code extension adds predefined commands for **Node.js Playwright** and **Playwright CLI**.
 
 # Table of Contents
 
@@ -23,8 +23,8 @@ This Visual Studio Code extension adds predefined commands for **Node.js Playwri
   - [Playwright Scripts Runner](#playwright-scripts-runner)
   - [Context Menu Commands](#context-menu-commands)
   - [CodeLenses](#codelenses)
-
 - [Contributing](#contributing)
+- [Our resources](#our-resources)
 - [For more information](#for-more-information)
 
 # How to Use This Extension in VS Code
@@ -60,6 +60,7 @@ PW Helpers: Initiate New Playwright Project
 This extension provides the following features:
 
 - **Commands** for Playwright (over 50 built‑in commands including browser/install helpers and test runners)
+- **Playwright CLI Commands** - over 50 commands to control Playwright CLI browser sessions, routes, storage, network and more - [CLI for common Playwright actions](https://github.com/microsoft/playwright-cli)
 - **Running scripts** from package.json with a dedicated side‑panel and quick‑launch buttons
 - **Command Composer** - allows you to compose your own playwright test commands with filters, reporters etc.
 - **Codegen Composer** - allows you to compose your own codegen commands and export them in a variety of languages/frameworks
@@ -78,119 +79,185 @@ _(see the full list of commands exposed via the sidebar and command composer; th
 
 ### Playwright
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.checkPlaywrightVersion` | Check Playwright Version |
-| `playwright-helpers.checkPlaywrightTestVersion` | Check Playwright Test Version |
-| `playwright-helpers.installLatestPlaywrightTest` | Install/Update Latest Playwright Test |
-| `playwright-helpers.installNextPlaywrightTest` | Install/Update Next Playwright Test |
-| `playwright-helpers.checkForPlaywrightTestUpdates` | Check Playwright Test Updates |
-| `playwright-helpers.installPlaywrightTest` | Install @playwright/test |
-| `playwright-helpers.uninstallPlaywrightTest` | Uninstall @playwright/test |
+| Command                                            | Description                           |
+| -------------------------------------------------- | ------------------------------------- |
+| `playwright-helpers.checkPlaywrightVersion`        | Check Playwright Version              |
+| `playwright-helpers.checkPlaywrightTestVersion`    | Check Playwright Test Version         |
+| `playwright-helpers.installLatestPlaywrightTest`   | Install/Update Latest Playwright Test |
+| `playwright-helpers.installNextPlaywrightTest`     | Install/Update Next Playwright Test   |
+| `playwright-helpers.checkForPlaywrightTestUpdates` | Check Playwright Test Updates         |
+| `playwright-helpers.installPlaywrightTest`         | Install @playwright/test              |
+| `playwright-helpers.uninstallPlaywrightTest`       | Uninstall @playwright/test            |
 
 ### Browsers
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.uninstallPlaywrightBrowsers` | Uninstall Playwright Browsers (only from current project) |
-| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser |
-| `playwright-helpers.installWebkitPlaywrightBrowser` | Install Webkit Playwright Browser |
-| `playwright-helpers.installFirefoxPlaywrightBrowser` | Install Firefox Playwright Browser |
-| `playwright-helpers.installAllPlaywrightBrowsers` | Install All Playwright Browsers |
-| `playwright-helpers.uninstallAllPlaywrightBrowsers` | Uninstall All Playwright Browsers |
+| Command                                               | Description                                               |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| `playwright-helpers.uninstallPlaywrightBrowsers`      | Uninstall Playwright Browsers (only from current project) |
+| `playwright-helpers.installChromiumPlaywrightBrowser` | Install Chromium Playwright Browser                       |
+| `playwright-helpers.installWebkitPlaywrightBrowser`   | Install Webkit Playwright Browser                         |
+| `playwright-helpers.installFirefoxPlaywrightBrowser`  | Install Firefox Playwright Browser                        |
+| `playwright-helpers.installAllPlaywrightBrowsers`     | Install All Playwright Browsers                           |
+| `playwright-helpers.uninstallAllPlaywrightBrowsers`   | Uninstall All Playwright Browsers                         |
 
 ### Project
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.initNewProject` | Initiate New Playwright Project |
-| `playwright-helpers.initNewProjectQuick` | Initiate New Playwright Project (with defaults) |
-| `playwright-helpers.installPackages` | Install Node Packages |
-| `playwright-helpers.checkOutdatedPackages` | Check Outdated Packages |
-| `playwright-helpers.updateOutdatedPackages` | Update Outdated Packages |
-| `playwright-helpers.installPackagesNpmCi` | Install Node Packages (package-lock) |
+| Command                                     | Description                                     |
+| ------------------------------------------- | ----------------------------------------------- |
+| `playwright-helpers.initNewProject`         | Initiate New Playwright Project                 |
+| `playwright-helpers.initNewProjectQuick`    | Initiate New Playwright Project (with defaults) |
+| `playwright-helpers.installPackages`        | Install Node Packages                           |
+| `playwright-helpers.checkOutdatedPackages`  | Check Outdated Packages                         |
+| `playwright-helpers.updateOutdatedPackages` | Update Outdated Packages                        |
+| `playwright-helpers.installPackagesNpmCi`   | Install Node Packages (package-lock)            |
 
 ### Testing
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.runCodegen` | Run Playwright Codegen |
-| `playwright-helpers.runShowReport` | Run Playwright Show Report |
-| `playwright-helpers.openUiMode` | Open Playwright UI Mode |
-| `playwright-helpers.showTrace` | Show Trace |
-| `playwright-helpers.runCodegenWithSaveStorage` | Run Codegen with Save Storage |
-| `playwright-helpers.runCodegenWithLoadStorage` | Run Codegen with Load Storage |
-| `playwright-helpers.runDefaultTests` | Run Tests |
-| `playwright-helpers.runDefaultTestsMultipleTimes` | Run Tests Multiple Times |
-| `playwright-helpers.runTestsFiles` | Run Test File |
-| `playwright-helpers.runTestsWithDebug` | Run Tests with Debug |
-| `playwright-helpers.runTestsWithHeadedBrowser` | Run Tests with Headed Browser |
-| `playwright-helpers.runTestsWithTitle` | Run Tests with Title |
-| `playwright-helpers.runOnlyChangedTests` | Run Only Changed Tests |
-| `playwright-helpers.runSpecificTestProject` | Run Specific Test Project |
-| `playwright-helpers.runTestsWithWorkers` | Run Tests with Workers |
-| `playwright-helpers.runTestWithUpdateSnapshots` | Run Test with Update Snapshots |
-| `playwright-helpers.runOnlyLastFailedTests` | Run Only Last Failed Tests |
-| `playwright-helpers.runTestsWithTimeout` | Run Tests with Timeout |
-| `playwright-helpers.runTestsWithReporter` | Run Tests with Reporter |
+| Command                                           | Description                    |
+| ------------------------------------------------- | ------------------------------ |
+| `playwright-helpers.runCodegen`                   | Run Playwright Codegen         |
+| `playwright-helpers.runShowReport`                | Run Playwright Show Report     |
+| `playwright-helpers.openUiMode`                   | Open Playwright UI Mode        |
+| `playwright-helpers.showTrace`                    | Show Trace                     |
+| `playwright-helpers.runCodegenWithSaveStorage`    | Run Codegen with Save Storage  |
+| `playwright-helpers.runCodegenWithLoadStorage`    | Run Codegen with Load Storage  |
+| `playwright-helpers.runDefaultTests`              | Run Tests                      |
+| `playwright-helpers.runDefaultTestsMultipleTimes` | Run Tests Multiple Times       |
+| `playwright-helpers.runTestsFiles`                | Run Test File                  |
+| `playwright-helpers.runTestsWithDebug`            | Run Tests with Debug           |
+| `playwright-helpers.runTestsWithHeadedBrowser`    | Run Tests with Headed Browser  |
+| `playwright-helpers.runTestsWithTitle`            | Run Tests with Title           |
+| `playwright-helpers.runOnlyChangedTests`          | Run Only Changed Tests         |
+| `playwright-helpers.runSpecificTestProject`       | Run Specific Test Project      |
+| `playwright-helpers.runTestsWithWorkers`          | Run Tests with Workers         |
+| `playwright-helpers.runTestWithUpdateSnapshots`   | Run Test with Update Snapshots |
+| `playwright-helpers.runOnlyLastFailedTests`       | Run Only Last Failed Tests     |
+| `playwright-helpers.runTestsWithTimeout`          | Run Tests with Timeout         |
+| `playwright-helpers.runTestsWithReporter`         | Run Tests with Reporter        |
 
 ### Playwright CLI
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.installPlaywrightCLIGlobally` | Install Playwright CLI Globally |
-| `playwright-helpers.initializePlaywrightCLIWorkspace` | Initialize Playwright CLI Workspace |
-| `playwright-helpers.showPlaywrightCLIBrowserSessions` | Show Playwright CLI Browser Sessions |
-| `playwright-helpers.listPlaywrightCLIBrowserSessions` | List Playwright CLI Browser Sessions |
-| `playwright-helpers.closeAllPlaywrightCLIBrowserSessions` | Close All Playwright CLI Browser Sessions |
-| `playwright-helpers.killAllPlaywrightCLIBrowserSessions` | Kill All Playwright CLI Browser Sessions |
-| `playwright-helpers.snapshotPlaywrightCLIBrowser` | Snapshot Playwright CLI Browser |
-| `playwright-helpers.installPlaywrightCLISkills` | Install Playwright CLI Skills |
-| `playwright-helpers.showPlaywrightCLIHelp` | Show Playwright CLI Help |
-| `playwright-helpers.listPlaywrightCLIBrowserLocalStorage` | %playwright-helpers.listPlaywrightCLIBrowserLocalStorage.title% |
-| `playwright-helpers.listPlaywrightCLIBrowserNetworkRequests` | %playwright-helpers.listPlaywrightCLIBrowserNetworkRequests.title% |
-| `playwright-helpers.playwrightCLIRunCommandInNamedSession` | %playwright-helpers.playwrightCLIRunCommandInNamedSession.title% |
-| `playwright-helpers.playwrightCLICaptureTrace` | %playwright-helpers.playwrightCLICaptureTrace.title% |
-| `playwright-helpers.playwrightCLIStopTrace` | %playwright-helpers.playwrightCLIStopTrace.title% |
-| `playwright-helpers.playwrightCLICaptureVideo` | %playwright-helpers.playwrightCLICaptureVideo.title% |
-| `playwright-helpers.playwrightCLIStopVideo` | %playwright-helpers.playwrightCLIStopVideo.title% |
-| `playwright-helpers.playwrightCLIListActiveRoutes` | %playwright-helpers.playwrightCLIListActiveRoutes.title% |
-| `playwright-helpers.listPlaywrightCLIPackageVersion` | %playwright-helpers.listPlaywrightCLIPackageVersion.title% |
-| `playwright-helpers.listPlaywrightCLIVersion` | %playwright-helpers.listPlaywrightCLIVersion.title% |
-| `playwright-helpers.installPlaywrightCLI` | Install Playwright CLI |
-| `playwright-helpers.listPlaywrightCLIBrowserSessionStorage` | List Playwright CLI Browser Session Storage |
+| Command                                                      | Description                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------ |
+| `playwright-helpers.installPlaywrightCLIGlobally`            | Install Playwright CLI Globally                        |
+| `playwright-helpers.initializePlaywrightCLIWorkspace`        | Initialize Playwright CLI Workspace                    |
+| `playwright-helpers.showPlaywrightCLIBrowserSessions`        | Show Playwright CLI Browser Sessions                   |
+| `playwright-helpers.listPlaywrightCLIBrowserSessions`        | List Playwright CLI Browser Sessions                   |
+| `playwright-helpers.closeAllPlaywrightCLIBrowserSessions`    | Close All Playwright CLI Browser Sessions              |
+| `playwright-helpers.killAllPlaywrightCLIBrowserSessions`     | Kill All Playwright CLI Browser Sessions               |
+| `playwright-helpers.snapshotPlaywrightCLIBrowser`            | Snapshot Playwright CLI Browser                        |
+| `playwright-helpers.installPlaywrightCLISkills`              | Install Playwright CLI Skills                          |
+| `playwright-helpers.showPlaywrightCLIHelp`                   | Show Playwright CLI Help                               |
+| `playwright-helpers.listPlaywrightCLIBrowserLocalStorage`    | List Playwright CLI Browser Local Storage              |
+| `playwright-helpers.listPlaywrightCLIBrowserNetworkRequests` | List Playwright CLI Browser Network Requests           |
+| `playwright-helpers.playwrightCLIRunCommandInNamedSession`   | Run Command in Named Session in Playwright CLI         |
+| `playwright-helpers.playwrightCLICaptureTrace`               | Start Trace Recording in Playwright CLI                |
+| `playwright-helpers.playwrightCLIStopTrace`                  | Stop Trace Recording in Playwright CLI                 |
+| `playwright-helpers.playwrightCLICaptureVideo`               | Start Video Recording in Playwright CLI                |
+| `playwright-helpers.playwrightCLIStopVideo`                  | Stop Video Recording in Playwright CLI                 |
+| `playwright-helpers.playwrightCLIListActiveRoutes`           | List Active Routes in Playwright CLI                   |
+| `playwright-helpers.listPlaywrightCLIVersion`                | List Playwright CLI Version                            |
+| `playwright-helpers.installPlaywrightCLI`                    | Install Playwright CLI                                 |
+| `playwright-helpers.listGlobalPlaywrightCLIPackageVersion`   | List Global Playwright CLI Package Version             |
+| `playwright-helpers.listLocalPlaywrightCLIPackageVersion`    | List Local Playwright CLI Package Version              |
+| `playwright-helpers.listPlaywrightCLIBrowserSessionStorage`  | List Playwright CLI Browser Session Storage            |
+| `playwright-helpers.playwrightCLICheck`                      | Check Element in Playwright CLI                        |
+| `playwright-helpers.playwrightCLIClick`                      | Click Element in Playwright CLI                        |
+| `playwright-helpers.playwrightCLICloseNamedSession`          | Close Named Session in Playwright CLI                  |
+| `playwright-helpers.playwrightCLIClosePage`                  | Close Page in Playwright CLI                           |
+| `playwright-helpers.playwrightCLIConsole`                    | List Console Messages in Playwright CLI                |
+| `playwright-helpers.playwrightCLICookieClear`                | Clear Cookies in Playwright CLI                        |
+| `playwright-helpers.playwrightCLICookieDelete`               | Delete Cookie in Playwright CLI                        |
+| `playwright-helpers.playwrightCLICookieGet`                  | Get Cookie in Playwright CLI                           |
+| `playwright-helpers.playwrightCLICookieList`                 | List Cookies in Playwright CLI                         |
+| `playwright-helpers.playwrightCLICookieSet`                  | Set Cookie in Playwright CLI                           |
+| `playwright-helpers.playwrightCLIDeleteData`                 | Delete Session Data in Playwright CLI                  |
+| `playwright-helpers.playwrightCLIDeleteNamedSessionData`     | Delete Named Session Data in Playwright CLI            |
+| `playwright-helpers.playwrightCLIDialogAccept`               | Accept Dialog in Playwright CLI                        |
+| `playwright-helpers.playwrightCLIDialogDismiss`              | Dismiss Dialog in Playwright CLI                       |
+| `playwright-helpers.playwrightCLIDoubleClick`                | Double Click Element in Playwright CLI                 |
+| `playwright-helpers.playwrightCLIDrag`                       | Drag and Drop in Playwright CLI                        |
+| `playwright-helpers.playwrightCLIEval`                       | Evaluate JavaScript in Playwright CLI                  |
+| `playwright-helpers.playwrightCLIFill`                       | Fill Element in Playwright CLI                         |
+| `playwright-helpers.playwrightCLIGoBack`                     | Go Back in Playwright CLI                              |
+| `playwright-helpers.playwrightCLIGoForward`                  | Go Forward in Playwright CLI                           |
+| `playwright-helpers.playwrightCLIGotoUrl`                    | Go to URL in Playwright CLI                            |
+| `playwright-helpers.playwrightCLIHover`                      | Hover Element in Playwright CLI                        |
+| `playwright-helpers.playwrightCLIKeyDown`                    | Key Down in Playwright CLI                             |
+| `playwright-helpers.playwrightCLIKeyUp`                      | Key Up in Playwright CLI                               |
+| `playwright-helpers.playwrightCLILocalStorageClear`          | Clear Local Storage in Playwright CLI                  |
+| `playwright-helpers.playwrightCLILocalStorageDelete`         | Delete Local Storage Value in Playwright CLI           |
+| `playwright-helpers.playwrightCLILocalStorageGet`            | Get Local Storage Value in Playwright CLI              |
+| `playwright-helpers.playwrightCLILocalStorageSet`            | Set Local Storage Value in Playwright CLI              |
+| `playwright-helpers.playwrightCLIMouseDown`                  | Mouse Down in Playwright CLI                           |
+| `playwright-helpers.playwrightCLIMouseMove`                  | Move Mouse in Playwright CLI                           |
+| `playwright-helpers.playwrightCLIMouseUp`                    | Mouse Up in Playwright CLI                             |
+| `playwright-helpers.playwrightCLIMouseWheel`                 | Mouse Wheel in Playwright CLI                          |
+| `playwright-helpers.playwrightCLIOpenBrowser`                | Open Browser in Playwright CLI                         |
+| `playwright-helpers.playwrightCLIOpenBrowserAtUrl`           | Open Browser at URL in Playwright CLI                  |
+| `playwright-helpers.playwrightCLIOpenPersistent`             | Open Browser with Persistent Profile in Playwright CLI |
+| `playwright-helpers.playwrightCLIOpenWithBrowser`            | Open Browser with Specific Engine in Playwright CLI    |
+| `playwright-helpers.playwrightCLIOpenWithConfig`             | Open Browser with Config File in Playwright CLI        |
+| `playwright-helpers.playwrightCLIOpenWithExtension`          | Open Browser Using Extension in Playwright CLI         |
+| `playwright-helpers.playwrightCLIOpenWithProfilePath`        | Open Browser with Profile Path in Playwright CLI       |
+| `playwright-helpers.playwrightCLIPDF`                        | Save PDF in Playwright CLI                             |
+| `playwright-helpers.playwrightCLIPDFToFile`                  | Save PDF to File in Playwright CLI                     |
+| `playwright-helpers.playwrightCLIPressKey`                   | Press Key in Playwright CLI                            |
+| `playwright-helpers.playwrightCLIReload`                     | Reload Page in Playwright CLI                          |
+| `playwright-helpers.playwrightCLIResizeWindow`               | Resize Browser Window in Playwright CLI                |
+| `playwright-helpers.playwrightCLIRoute`                      | Create Network Route in Playwright CLI                 |
+| `playwright-helpers.playwrightCLIRunCode`                    | Run Playwright Code Snippet in Playwright CLI          |
+| `playwright-helpers.playwrightCLIScreenshot`                 | Take Screenshot in Playwright CLI                      |
+| `playwright-helpers.playwrightCLIScreenshotElement`          | Take Element Screenshot in Playwright CLI              |
+| `playwright-helpers.playwrightCLIScreenshotToFile`           | Save Screenshot to File in Playwright CLI              |
+| `playwright-helpers.snapshotPlaywrightCLIBrowserToFile`      | Save Playwright CLI Snapshot to File                   |
+| `playwright-helpers.playwrightCLISelect`                     | Select Dropdown Option in Playwright CLI               |
+| `playwright-helpers.playwrightCLISessionStorageClear`        | Clear Session Storage in Playwright CLI                |
+| `playwright-helpers.playwrightCLISessionStorageDelete`       | Delete Session Storage Value in Playwright CLI         |
+| `playwright-helpers.playwrightCLISessionStorageGet`          | Get Session Storage Value in Playwright CLI            |
+| `playwright-helpers.playwrightCLISessionStorageSet`          | Set Session Storage Value in Playwright CLI            |
+| `playwright-helpers.playwrightCLIStateLoad`                  | Load Storage State in Playwright CLI                   |
+| `playwright-helpers.playwrightCLIStateSave`                  | Save Storage State in Playwright CLI                   |
+| `playwright-helpers.playwrightCLITabClose`                   | Close Tab in Playwright CLI                            |
+| `playwright-helpers.playwrightCLITabList`                    | List Tabs in Playwright CLI                            |
+| `playwright-helpers.playwrightCLITabNew`                     | Open New Tab in Playwright CLI                         |
+| `playwright-helpers.playwrightCLITabSelect`                  | Select Tab in Playwright CLI                           |
+| `playwright-helpers.playwrightCLITypeText`                   | Type Text in Playwright CLI                            |
+| `playwright-helpers.playwrightCLIUncheck`                    | Uncheck Element in Playwright CLI                      |
+| `playwright-helpers.playwrightCLIUnroute`                    | Remove Route in Playwright CLI                         |
+| `playwright-helpers.playwrightCLIUpload`                     | Upload File in Playwright CLI                          |
 
 ### MCP (Model Context Protocol)
 
-| Command | Description |
-| ------- | ----------- |
+| Command                               | Description        |
+| ------------------------------------- | ------------------ |
 | `playwright-helpers.addPlaywrightMcp` | Add Playwright MCP |
-| `playwright-helpers.listMcpServer` | List MCP Servers |
-| `playwright-helpers.addMcpServer` | Add MCP Servers |
+| `playwright-helpers.listMcpServer`    | List MCP Servers   |
+| `playwright-helpers.addMcpServer`     | Add MCP Servers    |
 
 ### Miscellaneous
 
-| Command | Description |
-| ------- | ----------- |
-| `playwright-helpers.showTraceContextMenu` | Show Playwright Trace |
-| `playwright-helpers.showReportContextMenu` | Show Playwright Report |
-| `playwright-helpers.runSpecFileContextMenu` | Run Playwright Tests from This File |
-| `playwright-helpers.refreshPlaywrightScripts` | Refresh Playwright Scripts View |
-| `playwright-helpers.runSelectedCommand` | Paste & Run |
-| `playwright-helpers.copySelectedCommand` | Copy |
-| `playwright-helpers.pasteSelectedCommand` | Paste |
-| `playwright-helpers.refreshTraces` | Refresh Playwright Traces |
-| `playwright-helpers.refreshReports` | Refresh Playwright Reports |
-| `playwright-helpers.listInstalledPackages` | List Installed Packages |
-| `playwright-helpers.listInstalledGlobalPackages` | List Installed Global Packages |
-| `playwright-helpers.listInstalledPlaywrightPackages` | List Installed Playwright Packages |
-| `playwright-helpers.closeAllTerminals` | Close All Terminals |
-| `playwright-helpers.listSystemInfo` | List System Info (using envinfo) |
-| `playwright-helpers.runPrettierOnAllFiles` | Run Prettier on All Files |
-| `playwright-helpers.toggleHideShowCommands` | Toggle Hide/Show Commands |
-| `playwright-helpers.openVSCodeSettingsFile` | Open VS Code Settings File |
-| `playwright-helpers.openVSCodeSettingsFileMacOs` | Open VS Code Settings File (Mac OS) |
-
+| Command                                              | Description                         |
+| ---------------------------------------------------- | ----------------------------------- |
+| `playwright-helpers.showTraceContextMenu`            | Show Playwright Trace               |
+| `playwright-helpers.showReportContextMenu`           | Show Playwright Report              |
+| `playwright-helpers.runSpecFileContextMenu`          | Run Playwright Tests from This File |
+| `playwright-helpers.refreshPlaywrightScripts`        | Refresh Playwright Scripts View     |
+| `playwright-helpers.runSelectedCommand`              | Paste & Run                         |
+| `playwright-helpers.copySelectedCommand`             | Copy                                |
+| `playwright-helpers.pasteSelectedCommand`            | Paste                               |
+| `playwright-helpers.refreshTraces`                   | Refresh Playwright Traces           |
+| `playwright-helpers.refreshReports`                  | Refresh Playwright Reports          |
+| `playwright-helpers.listPlaywrightCLIPackageVersion` | List Playwright CLI Package Version |
+| `playwright-helpers.listInstalledPackages`           | List Installed Packages             |
+| `playwright-helpers.listInstalledGlobalPackages`     | List Installed Global Packages      |
+| `playwright-helpers.listInstalledPlaywrightPackages` | List Installed Playwright Packages  |
+| `playwright-helpers.closeAllTerminals`               | Close All Terminals                 |
+| `playwright-helpers.listSystemInfo`                  | List System Info (using envinfo)    |
+| `playwright-helpers.runPrettierOnAllFiles`           | Run Prettier on All Files           |
+| `playwright-helpers.toggleHideShowCommands`          | Toggle Hide/Show Commands           |
+| `playwright-helpers.openVSCodeSettingsFile`          | Open VS Code Settings File          |
+| `playwright-helpers.openVSCodeSettingsFileMacOs`     | Open VS Code Settings File (Mac OS) |
 
 ## Command Composer
 
@@ -332,9 +399,14 @@ This project is open source and we welcome contributions from the community. If 
 
 Please ensure that your code follows our coding guidelines and includes appropriate tests. We appreciate your contributions and look forward to reviewing your pull requests!
 
-# For more information
+# Our resources
 
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+- [GitHub Repository](https://github.com/jaktestowac)
+- [LinkedIn jaktestowac.pl](https://www.linkedin.com/company/jaktestowac)
+- [LinkedIn AI_Testers](https://www.linkedin.com/company/aitesters)
+- [YouTube jaktestowac.pl](https://www.youtube.com/c/jaktestowac)
+- [YouTube AI_Testers](https://www.youtube.com/@AITesterspl)
 
 **Enjoy!**
+
+From jaktestowac.pl with ❤️ for Playwright and and automation
