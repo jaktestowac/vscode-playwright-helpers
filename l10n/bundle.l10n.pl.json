@@ -174,5 +174,15 @@
   "Close All Playwright CLI Browser Sessions": "Zamknij wszystkie sesje przeglądarek Playwright CLI",
   "Kill All Playwright CLI Browser Sessions": "Zabij wszystkie sesje przeglądarek Playwright CLI",
   "Initialize Playwright CLI Workspace": "Zainicjuj Playwright CLI Workspace",
-  "Snapshot Playwright CLI Browser": "Zrób migawkę strony z Playwright CLI"
+  "Snapshot Playwright CLI Browser": "Zrób migawkę strony z Playwright CLI",
+  "List Playwright CLI Browser Local Storage": "Wyświetl lokalną pamięć przeglądarki Playwright CLI",
+  "List Playwright CLI Browser Network Requests": "Wyświetl żądania sieciowe przeglądarki Playwright CLI",
+  "Run Command in Named Session in Playwright CLI": "Uruchom polecenie w nazwanej sesji w Playwright CLI",
+  "Run command in named session in Playwright CLI": "Uruchom polecenie w nazwanej sesji w Playwright CLI",
+  "Start Trace Recording in Playwright CLI": "Rozpocznij nagrywanie trace w Playwright CLI",
+  "Stop Trace Recording in Playwright CLI": "Zatrzymaj nagrywanie trace w Playwright CLI",
+  "Start Video Recording in Playwright CLI": "Rozpocznij nagrywanie wideo w Playwright CLI",
+  "Stop Video Recording in Playwright CLI": "Zatrzymaj nagrywanie wideo w Playwright CLI",
+  "List active routes in Playwright CLI": "Wyświetl aktywne trasy w Playwright CLI",
+  "List Playwright CLI Browser Session Storage": "Wyświetl pamięć sesji przeglądarki Playwright CLI"
 }

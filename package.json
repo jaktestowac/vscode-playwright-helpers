@@ -246,6 +246,51 @@
         "title": "%playwright-helpers.showPlaywrightCLIHelp.title%"
       },
       {
+        "command": "playwright-helpers.listPlaywrightCLIBrowserLocalStorage",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIBrowserLocalStorage.title%"
+      },
+      {
+        "command": "playwright-helpers.closeAllPlaywrightCLIBrowserSessions",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.closeAllPlaywrightCLIBrowserSessions.title%"
+      },
+      {
+        "command": "playwright-helpers.listPlaywrightCLIBrowserNetworkRequests",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.listPlaywrightCLIBrowserNetworkRequests.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIRunCommandInNamedSession",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIRunCommandInNamedSession.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICaptureTrace",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICaptureTrace.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIStopTrace",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIStopTrace.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLICaptureVideo",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLICaptureVideo.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIStopVideo",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIStopVideo.title%"
+      },
+      {
+        "command": "playwright-helpers.playwrightCLIListActiveRoutes",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.playwrightCLIListActiveRoutes.title%"
+      },
+      {
         "command": "playwright-helpers.checkPlaywrightVersion",
         "category": "PW Helpers",
         "title": "%playwright-helpers.checkPlaywrightVersion.title%"

@@ -147,7 +147,16 @@ _(see the full list of commands exposed via the sidebar and command composer; th
 | `playwright-helpers.snapshotPlaywrightCLIBrowser` | Snapshot Playwright CLI Browser |
 | `playwright-helpers.installPlaywrightCLISkills` | Install Playwright CLI Skills |
 | `playwright-helpers.showPlaywrightCLIHelp` | Show Playwright CLI Help |
+| `playwright-helpers.listPlaywrightCLIBrowserLocalStorage` | %playwright-helpers.listPlaywrightCLIBrowserLocalStorage.title% |
+| `playwright-helpers.listPlaywrightCLIBrowserNetworkRequests` | %playwright-helpers.listPlaywrightCLIBrowserNetworkRequests.title% |
+| `playwright-helpers.playwrightCLIRunCommandInNamedSession` | %playwright-helpers.playwrightCLIRunCommandInNamedSession.title% |
+| `playwright-helpers.playwrightCLICaptureTrace` | %playwright-helpers.playwrightCLICaptureTrace.title% |
+| `playwright-helpers.playwrightCLIStopTrace` | %playwright-helpers.playwrightCLIStopTrace.title% |
+| `playwright-helpers.playwrightCLICaptureVideo` | %playwright-helpers.playwrightCLICaptureVideo.title% |
+| `playwright-helpers.playwrightCLIStopVideo` | %playwright-helpers.playwrightCLIStopVideo.title% |
+| `playwright-helpers.playwrightCLIListActiveRoutes` | %playwright-helpers.playwrightCLIListActiveRoutes.title% |
 | `playwright-helpers.installPlaywrightCLI` | Install Playwright CLI |
+| `playwright-helpers.listPlaywrightCLIBrowserSessionStorage` | List Playwright CLI Browser Session Storage |
 
 ### MCP (Model Context Protocol)
 
