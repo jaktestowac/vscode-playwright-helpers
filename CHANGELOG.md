@@ -6,6 +6,10 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
+## [1.2.28] - 2026-03-04
+
+- feat: new snapshot Playwright CLI command
+
 ## [1.2.27] - 2026-03-03
 
 - feat: new commands for Playwright CLI

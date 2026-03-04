@@ -247,6 +247,18 @@ export function getCommandList(): PwCommand[] {
       },
     },
     {
+      key: "snapshotPlaywrightCLIBrowser",
+      func: executeScript,
+      prettyName: vscode.l10n.t("Snapshot Playwright CLI Browser"),
+      category: TabViewCategory.playwrightCli,
+      askForExecute: true,
+      params: {
+        key: "snapshotPlaywrightCLIBrowser",
+        command: "playwright-cli snapshot",
+        terminalName: vscode.l10n.t("Snapshot Playwright CLI Browser"),
+      },
+    },
+    {
       key: "closeAllPlaywrightCLIBrowserSessions",
       func: executeScript,
       prettyName: vscode.l10n.t("Close All Playwright CLI Browser Sessions"),

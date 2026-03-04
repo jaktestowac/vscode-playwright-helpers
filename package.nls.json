@@ -19,6 +19,7 @@
   "playwright-helpers.listPlaywrightCLIBrowserSessions.title": "List Playwright CLI Browser Sessions",
   "playwright-helpers.closeAllPlaywrightCLIBrowserSessions.title": "Close All Playwright CLI Browser Sessions",
   "playwright-helpers.killAllPlaywrightCLIBrowserSessions.title": "Kill All Playwright CLI Browser Sessions",
+  "playwright-helpers.snapshotPlaywrightCLIBrowser.title": "Snapshot Playwright CLI Browser",
   "playwright-helpers.installPlaywrightCLISkills.title": "Install Playwright CLI Skills",
   "playwright-helpers.showPlaywrightCLIHelp.title": "Show Playwright CLI Help",
   "playwright-helpers.checkPlaywrightVersion.title": "Check Playwright Version",

@@ -231,6 +231,11 @@
         "title": "%playwright-helpers.killAllPlaywrightCLIBrowserSessions.title%"
       },
       {
+        "command": "playwright-helpers.snapshotPlaywrightCLIBrowser",
+        "category": "PW Helpers",
+        "title": "%playwright-helpers.snapshotPlaywrightCLIBrowser.title%"
+      },
+      {
         "command": "playwright-helpers.installPlaywrightCLISkills",
         "category": "PW Helpers",
         "title": "%playwright-helpers.installPlaywrightCLISkills.title%"

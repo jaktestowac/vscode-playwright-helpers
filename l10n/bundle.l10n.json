@@ -36,6 +36,7 @@
   "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace",
   "Show Playwright CLI Browser Sessions": "Show Playwright CLI Browser Sessions",
   "List Playwright CLI Browser Sessions": "List Playwright CLI Browser Sessions",
+  "Snapshot Playwright CLI Browser": "Snapshot Playwright CLI Browser",
   "Close All Playwright CLI Browser Sessions": "Close All Playwright CLI Browser Sessions",
   "Kill All Playwright CLI Browser Sessions": "Kill All Playwright CLI Browser Sessions",
   "Install Playwright CLI Skills": "Install Playwright CLI Skills",

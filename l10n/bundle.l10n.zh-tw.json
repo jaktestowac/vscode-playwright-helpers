@@ -173,5 +173,6 @@
   "List Playwright CLI Browser Sessions": "List Playwright CLI Browser Sessions",
   "Close All Playwright CLI Browser Sessions": "Close All Playwright CLI Browser Sessions",
   "Kill All Playwright CLI Browser Sessions": "Kill All Playwright CLI Browser Sessions",
-  "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace"
+  "Initialize Playwright CLI Workspace": "Initialize Playwright CLI Workspace",
+  "Snapshot Playwright CLI Browser": "Snapshot Playwright CLI Browser"
 }
