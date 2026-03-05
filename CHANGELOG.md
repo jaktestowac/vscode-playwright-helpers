@@ -2,11 +2,11 @@
 
 All notable changes to the "playwright-helpers" extension will be documented in this file.
 
-## [1.2.xx] - 2026-xx-xx
+## [1.3.xx] - 2026-xx-xx
 
 - TBD
 
-## [1.2.28] - 2026-03-05
+## [1.3.00] - 2026-03-05
 
 - feat: all Playwright CLI commands in new category "Playwright CLI"
 - fix: Playwright CLI command for listing package version
