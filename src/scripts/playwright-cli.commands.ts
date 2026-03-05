@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { PlaywrightCLITabViewCategory, PwCommand, CommandParameters } from "../helpers/types";
 
-export function getPlaywrightCLICommandList(executeScript: (params: CommandParameters) => Promise<void>): PwCommand[] {
+export function getPlaywrightCLICommandList(executeScript: (params?: CommandParameters) => Promise<void>): PwCommand[] {
   const commandsList: PwCommand[] = [
     {
       key: "installPlaywrightCLI",

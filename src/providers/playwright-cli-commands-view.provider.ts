@@ -103,7 +103,7 @@ export class PlaywrightCliCommandsViewProvider implements vscode.WebviewViewProv
       commandParams.instantExecute = instantExecute;
       commandFunc(commandParams);
     } else {
-      commandFunc({ instantExecute: instantExecute });
+      commandFunc();
     }
   }
 

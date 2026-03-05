@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce } from "../helpers/helpers";
-import { PwCodegenComposer, PwCodegenComposerMap } from "../helpers/types";
+import { PwCodegenComposer, Map } from "../helpers/types";
 
 export class CodegenComposerViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "playwright-helpers.codegen-composer";
@@ -10,13 +10,13 @@ export class CodegenComposerViewProvider implements vscode.WebviewViewProvider {
   constructor(
     private readonly _extensionUri: vscode.Uri,
     private _codegenComposerList: PwCodegenComposer[],
-    private defaultCallback: (params: any) => {}
+    private defaultCallback: (params: Map) => void | Promise<void>,
   ) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     context: vscode.WebviewViewResolveContext,
-    _token: vscode.CancellationToken
+    _token: vscode.CancellationToken,
   ) {
     this._view = webviewView;
 
@@ -53,7 +53,7 @@ export class CodegenComposerViewProvider implements vscode.WebviewViewProvider {
     let controlsHTMLList = "";
 
     controlsHTMLList += `<div id="messages"><h4 class="nav-list__title" id="codegenOptions">${vscode.l10n.t(
-      "Select option from list:"
+      "Select option from list:",
     )}</h4></div>`;
     // Create a dropdown with list of settings
     let select = `
@@ -76,7 +76,7 @@ export class CodegenComposerViewProvider implements vscode.WebviewViewProvider {
         </div>`;
 
     controlsHTMLList += `<div id="messages"><h4 class="nav-list__title" id="codegenOptions">${vscode.l10n.t(
-      "Selected codegen options:"
+      "Selected codegen options:",
     )}</h4></div>`;
 
     controlsHTMLList += `<table id="codegenContainerTable">
@@ -90,7 +90,7 @@ export class CodegenComposerViewProvider implements vscode.WebviewViewProvider {
         </table>`;
 
     controlsHTMLList += `<button id="prepareCommandButton" title="${vscode.l10n.t("Prepare Command")}">${vscode.l10n.t(
-      "Prepare Command"
+      "Prepare Command",
     )}</button>
         `;
 

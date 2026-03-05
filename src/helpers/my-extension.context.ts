@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { WorkspaceStateSchema } from "./types";
 
 export default class MyExtensionContext {
   private static _instance: MyExtensionContext;
@@ -17,15 +18,20 @@ export default class MyExtensionContext {
     return this.context.workspaceState;
   }
 
-  setWorkspaceValue(key: string, value: any): Thenable<void> {
+  setWorkspaceValue<K extends keyof WorkspaceStateSchema>(key: K, value: WorkspaceStateSchema[K]): Thenable<void>;
+  setWorkspaceValue<T>(key: string, value: T): Thenable<void>;
+  setWorkspaceValue(key: string, value: unknown): Thenable<void> {
     return this.context.workspaceState.update(key, value);
   }
 
-  getWorkspaceValue(key: string): any {
+  getWorkspaceValue<K extends keyof WorkspaceStateSchema>(key: K): WorkspaceStateSchema[K] | undefined;
+  getWorkspaceValue<T = unknown>(key: string): T | undefined;
+  getWorkspaceValue(key: string): unknown {
     return this.context.workspaceState.get(key);
   }
 
-  getWorkspaceBoolValue(key: string): boolean {
-    return this.context.workspaceState.get(key) ?? false;
+  getWorkspaceBoolValue(key: keyof WorkspaceStateSchema | string): boolean {
+    const value = this.getWorkspaceValue(key);
+    return typeof value === "boolean" ? value : false;
   }
 }

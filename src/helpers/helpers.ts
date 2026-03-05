@@ -52,7 +52,8 @@ export function isDirectoryEmpty(directory: string): boolean {
 }
 
 export async function openWorkSpaceDirectory(dir: string) {
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const workspacePath = workspaceFolders[0]?.uri?.fsPath;
 
@@ -67,7 +68,8 @@ export async function openWorkSpaceDirectory(dir: string) {
 }
 
 export async function openDirectory(dir: string) {
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const workspacePath = workspaceFolders[0]?.uri?.fsPath;
 
@@ -93,7 +95,8 @@ export async function getPlaywrightReports(testReportsDir?: string, verbose = fa
     return [];
   }
 
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
@@ -155,7 +158,8 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
     return [];
   }
 
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
@@ -185,7 +189,7 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
 
   const files = fs.readdirSync(tracesPath, { recursive: true });
   const traces = (files as string[]).filter(
-    (file) => file.endsWith(DEFAULT_TRACE_FILE_NAME) || defaultFileNameParts.every((part) => file.includes(part))
+    (file) => file.endsWith(DEFAULT_TRACE_FILE_NAME) || defaultFileNameParts.every((part) => file.includes(part)),
   );
 
   const pwTraces: PwTraces[] = traces.map((tracePath) => {
@@ -201,7 +205,8 @@ export async function getPlaywrightTraces(testResultsDir?: string, verbose = fal
 }
 
 export async function getPlaywrightScriptsFromPackageJson(verbose = false): Promise<PwScripts[]> {
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const checkResult = areWorkspaceFoldersSingle(workspaceFolders);
   if (!checkResult.success) {
@@ -262,7 +267,7 @@ export async function getPlaywrightScriptsFromPackageJson(verbose = false): Prom
       key.includes("test") ||
       packageJson.scripts[key].includes("test") ||
       key.includes("e2e") ||
-      packageJson.scripts[key].includes("e2e")
+      packageJson.scripts[key].includes("e2e"),
   );
 
   if (!foundKeys || foundKeys.length === 0) {
@@ -288,7 +293,8 @@ export function checkIfStringContainsAnySubstring(aString: string, substrings: s
 }
 
 export function removeFile(filePath: string): boolean {
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
 
   const workspacePath = workspaceFolders[0]?.uri?.fsPath;
 

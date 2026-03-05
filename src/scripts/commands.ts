@@ -17,6 +17,7 @@ import { executeCommandInTerminal } from "../helpers/terminal.helpers";
 import { SettingsKeys } from "./settings";
 import { allPlaywrightVersions } from "./data/playwright-versions.data";
 import { getPlaywrightCLICommandList as _getPlaywrightCLICommandList } from "./playwright-cli.commands";
+import { adaptCommandToPackageManagerBy, buildCommandWithWorkingDirBy } from "./command-adapter";
 
 export function getCommandList(): PwCommand[] {
   const commandsList: PwCommand[] = [
@@ -628,7 +629,10 @@ function findCommandByKey(key: string): PwCommand | undefined {
   return getCommandList().find((command) => command.key === key);
 }
 
-async function runCommandPaletteCommand(params: CommandParameters): Promise<void> {
+async function runCommandPaletteCommand(params?: CommandParameters): Promise<void> {
+  if (params === undefined) {
+    return;
+  }
   const command = params.command;
   await vscode.commands.executeCommand(command);
 }
@@ -653,83 +657,14 @@ function closeAllTerminals() {
 }
 
 // NEW: determine current package manager (default: npm)
-function getPackageManager(): string {
+export function getPackageManager(): string {
   const pm = (MyExtensionContext.instance.getWorkspaceValue(SettingsKeys.packageManager) as string) || "npm";
   return (pm || "npm").toString().trim().toLowerCase();
 }
 
 // NEW: adapt a command to the selected package manager
 export function adaptCommandToPackageManager(command: string): string {
-  const pm = getPackageManager();
-  if (!command || pm === "npm") {
-    return command;
-  }
-
-  // Validate PM
-  const validPMs = ["npm", "yarn", "pnpm", "bun"];
-  if (!validPMs.includes(pm)) {
-    console.warn(`Unsupported package manager: ${pm}. Falling back to npm.`);
-    return command;
-  }
-
-  // Define mappings: each entry has a pattern and replacements per PM
-  // Order matters: process in array order (e.g., npx before npm init)
-  const commandMappings = [
-    {
-      pattern: /^npx\b/,
-      replacements: { yarn: "yarn dlx", pnpm: "pnpm dlx", bun: "bunx", npm: "npx" },
-    },
-    {
-      pattern: /^npm\s+init\s+playwright(@latest)?\b/,
-      replacements: {
-        yarn: "yarn create playwright",
-        pnpm: "pnpm create playwright",
-        bun: "bunx create-playwright@latest",
-        npm: "npm init playwright@latest",
-      },
-    },
-    {
-      pattern: /^npm\s+(i|install)\b/,
-      replacements: { yarn: "yarn add", pnpm: "pnpm add", bun: "bun add", npm: "npm i" },
-    },
-    {
-      pattern: /^npm\s+uninstall\b/,
-      replacements: { yarn: "yarn remove", pnpm: "pnpm remove", bun: "bun remove", npm: "npm uninstall" },
-    },
-    {
-      pattern: /^npm\s+outdated\b/,
-      replacements: { yarn: "yarn outdated", pnpm: "pnpm outdated", bun: "bun outdated", npm: "npm outdated" },
-    },
-    {
-      pattern: /^npm\s+update\b/,
-      replacements: { yarn: "yarn upgrade", pnpm: "pnpm update", bun: "bun update", npm: "npm update" },
-    },
-    {
-      pattern: /^npm\s+ci\b/,
-      replacements: {
-        yarn: "yarn install --frozen-lockfile",
-        pnpm: "pnpm install --frozen-lockfile",
-        bun: "bun install",
-        npm: "npm ci",
-      },
-    },
-    {
-      pattern: /^npm\s+i\b/,
-      replacements: { yarn: "yarn", pnpm: "pnpm install", bun: "bun install", npm: "npm i" },
-    },
-    // Add more patterns here as needed, e.g.:
-    // { pattern: /^npm\s+run\b/, replacements: { yarn: "yarn run", ... } },
-  ];
-
-  let adaptedCommand = command;
-  for (const mapping of commandMappings) {
-    adaptedCommand = adaptedCommand.replace(
-      mapping.pattern,
-      mapping.replacements[pm as keyof typeof mapping.replacements] || mapping.replacements.npm,
-    );
-  }
-
-  return adaptedCommand;
+  return adaptCommandToPackageManagerBy(command, getPackageManager());
 }
 
 function getWorkingDirectorySetting(): string | undefined {
@@ -738,76 +673,17 @@ function getWorkingDirectorySetting(): string | undefined {
   return value.length ? value : undefined;
 }
 
-function normalizePathForShell(path: string, shell: TerminalType): string {
-  // Prefer relative paths; absolute Windows paths will be passed-through as-is.
-  if (!path) {
-    return path;
-  }
-
-  switch (shell) {
-    case TerminalType.CMD:
-    case TerminalType.POWERSHELL:
-      // Use backslashes
-      return path.replace(/\//g, "\\");
-    case TerminalType.BASH:
-    case TerminalType.FISH:
-    case TerminalType.UNKNOWN:
-    default:
-      // Use forward slashes
-      return path.replace(/\\/g, "/");
-  }
-}
-
-function prefixWithCd(command: string, shell: TerminalType): string {
-  const wd = getWorkingDirectorySetting();
-  if (!wd) {
-    return command;
-  }
-
-  const p = normalizePathForShell(wd, shell);
-  switch (shell) {
-    case TerminalType.CMD:
-      // /d switches drive as well and quotes to handle spaces
-      return `cd /d "${p}" && ${command}`;
-    case TerminalType.POWERSHELL:
-      // -LiteralPath avoids wildcard expansion
-      return `Set-Location -LiteralPath "${p}"; ${command}`;
-    case TerminalType.BASH:
-    case TerminalType.FISH:
-    case TerminalType.UNKNOWN:
-    default:
-      return `cd "${p}" && ${command}`;
-  }
-}
-
-function buildCommandWithWorkingDir(
+export function buildCommandWithWorkingDir(
   baseCommand: string,
   existingPair?: KeyValuePair[] | undefined,
 ): { command: string; terminalCommandPair: KeyValuePair[] } {
-  const pairMap = new Map<string, string>();
-  if (existingPair) {
-    existingPair.forEach((p) => pairMap.set(p.key, p.value));
-  }
-
-  // map enum TerminalType to array of strings
-  const shells = Array.from(pairMap.keys());
-
-  const terminalCommandPair: KeyValuePair[] = shells.map((sh) => {
-    const cmdForShell = pairMap.has(sh) ? pairMap.get(sh)! : baseCommand;
-    // Adapt first (so ^ anchors match), then prefix with cd
-    const adapted = adaptCommandToPackageManager(cmdForShell);
-    const withCwd = prefixWithCd(adapted, sh as TerminalType);
-    return { key: sh, value: withCwd };
-  });
-
-  // Default command (used when no per-shell override is chosen by terminal helper)
-  const defaultAdapted = adaptCommandToPackageManager(baseCommand);
-  const command = prefixWithCd(defaultAdapted, TerminalType.UNKNOWN);
-
-  return { command, terminalCommandPair };
+  return buildCommandWithWorkingDirBy(baseCommand, getPackageManager(), getWorkingDirectorySetting(), existingPair);
 }
 
-async function executeScript(params: CommandParameters) {
+async function executeScript(params?: CommandParameters) {
+  if (params === undefined) {
+    return;
+  }
   const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   // Adapt to PM first, then wrap with working directory for each shell
   const { command, terminalCommandPair } = buildCommandWithWorkingDir(params.command, params.terminalCommandPair);
@@ -819,7 +695,10 @@ async function executeScript(params: CommandParameters) {
   });
 }
 
-async function initNewProject(params: CommandParameters) {
+async function initNewProject(params?: CommandParameters) {
+  if (params === undefined) {
+    return;
+  }
   const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
@@ -838,7 +717,10 @@ async function initNewProject(params: CommandParameters) {
   });
 }
 
-async function initNewProjectQuick(params: CommandParameters) {
+async function initNewProjectQuick(params?: CommandParameters) {
+  if (params === undefined) {
+    return;
+  }
   const execute = params?.instantExecute ?? isCommandExecutedWithoutAsking(params?.key) ?? false;
   const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
   const checkResult = areWorkspaceFoldersSingleAndEmpty(workspaceFolders);
@@ -857,7 +739,7 @@ async function initNewProjectQuick(params: CommandParameters) {
   });
 }
 
-function getPlaywrightVersions(): string[] {
+export function getPlaywrightVersions(): string[] {
   const versions = ["latest", "next"];
   versions.push(...allPlaywrightVersions);
   return versions;

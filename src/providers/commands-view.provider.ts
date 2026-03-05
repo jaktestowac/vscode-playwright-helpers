@@ -11,12 +11,15 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
   private _view?: vscode.WebviewView;
 
-  constructor(private readonly _extensionUri: vscode.Uri, private _commandList: PwCommand[]) {}
+  constructor(
+    private readonly _extensionUri: vscode.Uri,
+    private _commandList: PwCommand[],
+  ) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     context: vscode.WebviewViewResolveContext,
-    _token: vscode.CancellationToken
+    _token: vscode.CancellationToken,
   ) {
     this._view = webviewView;
 
@@ -100,7 +103,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
       commandParams.instantExecute = instantExecute;
       commandFunc(commandParams);
     } else {
-      commandFunc({ instantExecute: instantExecute });
+      commandFunc();
     }
   }
 
@@ -121,14 +124,14 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
     }
 
     buttonHTMLList += `<h4 aria-label="favorites" id="id-favorites" class="collapsible nav-list__title">${vscode.l10n.t(
-      "Favorites"
+      "Favorites",
     )}</h4>`;
     buttonHTMLList += `<div class="collapsible-content" aria-label="favorites-content" id="id-favorites-content"></div>`;
 
     const sourceData: KeyValuesPairs = {};
     for (const [category, commands] of Object.entries(tempList)) {
       buttonHTMLList += `<h4 aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title"><span>${getHeaderName(
-        category
+        category,
       )}</span></h4>`;
 
       buttonHTMLList += `<div class="collapsible-content">`;
@@ -170,18 +173,18 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
           // do nothing
         } else {
           playButtons = `<span class="run-icon" title="${vscode.l10n.t("Paste & run")}" tooltip-text="${vscode.l10n.t(
-            "Paste & run"
+            "Paste & run",
           )}" key="${key}">${svgPlayIcon}</span>`;
         }
         if (onlyPasteAndRun === true) {
           // do nothing
         } else {
           playButtons += `<span class="pause-run-icon" title="${vscode.l10n.t("Paste")}" tooltip-text="${vscode.l10n.t(
-            "Paste"
+            "Paste",
           )}" key="${key}">${svgWaitContinueIcon}</span>`;
         }
         playButtons += `<span class="star-icon" title="${vscode.l10n.t(
-          "Add to favorites"
+          "Add to favorites",
         )}" key="${key}">${svgStarEmptyIcon}</span>`;
 
         buttonHTMLList += `
@@ -201,7 +204,7 @@ export class CommandsViewProvider implements vscode.WebviewViewProvider {
 
       buttonHTMLList += "</div>";
       buttonHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t(
-        "No search results found."
+        "No search results found.",
       )}</h4></div>`;
     }
     const searchCommandsLocalized = vscode.l10n.t("Search commands...");

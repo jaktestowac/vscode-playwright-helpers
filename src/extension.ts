@@ -15,7 +15,7 @@ import { TraceViewProvider } from "./providers/trace-view.provider";
 import { ReportViewProvider } from "./providers/report-view.provider";
 import { openPlaywrightReport, openPlaywrightTrace, runSpecFile } from "./helpers/context-menu.helpers";
 import { changeTestAnnotations } from "./helpers/code-lens-actions.helper";
-import { CommandParameters, MatchTypeChangeAnnotations } from "./helpers/types";
+import { CommandExecutionPayload, CommandParameters, MatchTypeChangeAnnotations } from "./helpers/types";
 import { CodegenComposerViewProvider } from "./providers/codegen-composer-view.provider";
 import { getCodegenComposerData } from "./scripts/codegen-composer";
 import { createFileWatcher } from "./helpers/file-watcher.helpers";
@@ -24,7 +24,7 @@ import { registerCodeLenses, registerCommand } from "./helpers/extension.helpers
 export function activate(context: vscode.ExtensionContext) {
   MyExtensionContext.init(context);
   MyExtensionContext.instance.setWorkspaceValue("workspaceFolders", vscode.workspace.workspaceFolders);
-  MyExtensionContext.instance.setWorkspaceValue("environmentVariables", []);
+  MyExtensionContext.instance.setWorkspaceValue("environmentVariables", {});
 
   if (MyExtensionContext.instance.getWorkspaceValue("testResultsDir") === undefined) {
     MyExtensionContext.instance.setWorkspaceValue("testResultsDir", DEFAULT_TEST_RESULTS_DIR);
@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   for (const { key, func, params } of [...commandsList, ...playwrightCLICommandList]) {
     registerCommand(context, `${EXTENSION_NAME}.${key}`, () => {
-      let commandParams;
+      let commandParams: CommandParameters | undefined;
 
       if (params !== undefined) {
         commandParams = {
@@ -134,7 +134,7 @@ export function activate(context: vscode.ExtensionContext) {
     const testResultsDir = MyExtensionContext.instance.getWorkspaceValue("testResultsDir");
     getPlaywrightTraces(testResultsDir, true).then((traces) => {
       traceViewProvider.refresh(traces);
-      showInformationMessage(vscode.l10n.t("Playwright traces refreshed (from {0})", testResultsDir));
+      showInformationMessage(vscode.l10n.t("Playwright traces refreshed (from {0})", testResultsDir ?? ""));
     });
   });
 
@@ -142,46 +142,49 @@ export function activate(context: vscode.ExtensionContext) {
     const testReportsDir = MyExtensionContext.instance.getWorkspaceValue("testReportsDir");
     getPlaywrightReports(testReportsDir, true).then((reports) => {
       reportViewProvider.refresh(reports);
-      showInformationMessage(vscode.l10n.t("Playwright reports refreshed (from {0})", testReportsDir));
+      showInformationMessage(vscode.l10n.t("Playwright reports refreshed (from {0})", testReportsDir ?? ""));
     });
   });
 
   registerCommand(context, `${EXTENSION_NAME}.runSelectedCommand`, (params) => {
-    if (params.key === undefined) {
+    const payload = params as CommandExecutionPayload;
+    if (payload.key === undefined) {
       showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
-    commandsViewProvider.invokeCommand(params.key, true);
+    commandsViewProvider.invokeCommand(payload.key, true);
   });
 
   registerCommand(context, `${EXTENSION_NAME}.pasteSelectedCommand`, (params) => {
-    if (params.key === undefined) {
+    const payload = params as CommandExecutionPayload;
+    if (payload.key === undefined) {
       showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
-    commandsViewProvider.invokeCommand(params.key, false);
+    commandsViewProvider.invokeCommand(payload.key, false);
   });
 
   registerCommand(context, `${EXTENSION_NAME}.copySelectedCommand`, (params) => {
-    if (params.key === undefined) {
+    const payload = params as CommandExecutionPayload;
+    if (payload.key === undefined) {
       showInformationMessage(vscode.l10n.t("Click on the command"));
       return;
     }
-    commandsViewProvider.copyCommand(params.key);
+    commandsViewProvider.copyCommand(payload.key);
   });
 
   registerCommand(context, `${EXTENSION_NAME}.toggleHideShowCommands`, () => {});
 
   registerCommand(context, `${EXTENSION_NAME}.showTraceContextMenu`, (params) => {
-    openPlaywrightTrace(params);
+    openPlaywrightTrace(params as { fsPath: string });
   });
 
   registerCommand(context, `${EXTENSION_NAME}.showReportContextMenu`, (params) => {
-    openPlaywrightReport(params);
+    openPlaywrightReport(params as { fsPath: string });
   });
 
   registerCommand(context, `${EXTENSION_NAME}.runSpecFileContextMenu`, (params) => {
-    runSpecFile(params);
+    runSpecFile(params as { fsPath: string });
   });
 
   playwrightScriptsFromPackageJsonUpdate();

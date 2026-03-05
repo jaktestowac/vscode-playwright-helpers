@@ -777,7 +777,7 @@
     "publish:major": "vsce publish major",
     "publish": "npm run test && npm run update && npm run publish:patch",
     "update": "node src/test/readme-generator.js",
-    "test": "",
+    "test": "vitest run src/test/happy-path.test.ts",
     "loc:export": "npx @vscode/l10n-dev export -o ./l10n ./src",
     "loc:update": "node src/test/update-l10n.js",
     "loc:full": "node src/test/update-l10n-full.js"
@@ -790,6 +790,7 @@
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
+    "@vscode/test-electron": "^2.4.0",
+    "vitest": "^2.1.8"
   }
 }

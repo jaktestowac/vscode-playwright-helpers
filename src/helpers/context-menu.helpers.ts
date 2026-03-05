@@ -58,8 +58,9 @@ export function runSpecFile(params: { fsPath: string }): void {
     return;
   }
 
-  const workspaceFolders = MyExtensionContext.instance.getWorkspaceValue("workspaceFolders");
-  const workspaceFolder = workspaceFolders.find((dir: any) => specFullPath.startsWith(dir.uri.fsPath));
+  const workspaceFolders = (MyExtensionContext.instance.getWorkspaceValue("workspaceFolders") ??
+    []) as readonly vscode.WorkspaceFolder[];
+  const workspaceFolder = (workspaceFolders ?? []).find((dir) => specFullPath.startsWith(dir.uri.fsPath));
 
   if (!workspaceFolder) {
     showErrorMessage(vscode.l10n.t("Unable to determine workspace folder for spec file"));

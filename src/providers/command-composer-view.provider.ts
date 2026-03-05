@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce, getRandomString } from "../helpers/helpers";
-import { PwCommandComposer, PwCommandComposerMap, PwScripts, DisplayValueOption } from "../helpers/types";
+import { PwCommandComposer, PwCommandComposerMap, PwScripts, DisplayValueOption, Map } from "../helpers/types";
 import MyExtensionContext from "../helpers/my-extension.context";
 
 export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
@@ -11,13 +11,13 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
   constructor(
     private readonly _extensionUri: vscode.Uri,
     private _commandComposerList: PwCommandComposer[],
-    private defaultCallback: (params: any) => {}
+    private defaultCallback: (params: Map) => void | Promise<void>,
   ) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     context: vscode.WebviewViewResolveContext,
-    _token: vscode.CancellationToken
+    _token: vscode.CancellationToken,
   ) {
     this._view = webviewView;
 
@@ -138,7 +138,7 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
             }
           } else if (possibleValues) {
             // Handle regular possible values
-            if (typeof possibleValues[0] === 'object' && 'display' in possibleValues[0]) {
+            if (typeof possibleValues[0] === "object" && "display" in possibleValues[0]) {
               for (const item of possibleValues as DisplayValueOption[]) {
                 additionalControl += `<option value="${item.value}">${item.display}</option>`;
               }
@@ -162,15 +162,15 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
 
         controlsHTMLList += `
           <div class="composer-control" aria-label="${ariaLabel}"><input class="${checkboxClass}" type="checkbox" skipAsOption="${skipAsPwOption}" formatInQuotes="${formatInQuotes}" overwriteBaseCommand="${overwriteBasePwCommand}" id="${key}" key="${key}" parent="${parentId}" title="${ariaLabel}" aria-label="${ariaLabel}" ${
-          isChecked ? "checked" : ""
-        } />
+            isChecked ? "checked" : ""
+          } />
           <label for="${key}" class="${checkboxLabelClass}" title="${option}" >${prettyName}</label> ${additionalControl}</div>
           `;
       }
 
       controlsHTMLList += `</nav>`;
       controlsHTMLList += `<div id="messages"><h4 id="noResultsHeader" class="hidden-by-default">${vscode.l10n.t(
-        "No search results found."
+        "No search results found.",
       )}</h4></div>`;
     }
 
@@ -178,13 +178,13 @@ export class CommandComposerViewProvider implements vscode.WebviewViewProvider {
     controlsHTMLList =
       `
           <button id="prepareCommandButton" title="${vscode.l10n.t("Prepare Command")}">${vscode.l10n.t(
-        "Prepare Command"
-      )}</button>
+            "Prepare Command",
+          )}</button>
         ` + controlsHTMLList;
     controlsHTMLList += `
           <button id="prepareCommandButton" title="${vscode.l10n.t("Prepare Command")}">${vscode.l10n.t(
-      "Prepare Command"
-    )}</button>
+            "Prepare Command",
+          )}</button>
         `;
 
     const searchInputHtml = `

@@ -18,33 +18,37 @@ export function registerCodeLenses(context: vscode.ExtensionContext) {
         provideCodeLenses: (doc) => {
           return provideCodeLensesToggle(doc, describeOptions, regexpIsSuite);
         },
-      })
+      }),
     );
     context.subscriptions.push(
       vscode.languages.registerCodeLensProvider(language, {
         provideCodeLenses: (doc) => {
           return provideCodeLensesToggle(doc, annotations, regexpIsTest);
         },
-      })
+      }),
     );
     context.subscriptions.push(
       vscode.languages.registerCodeLensProvider(language, {
         provideCodeLenses: (doc) => {
           return provideCodeLensesToggle(doc, annotations, regexpIsSuite);
         },
-      })
+      }),
     );
     context.subscriptions.push(
       vscode.languages.registerCodeLensProvider(language, {
         provideCodeLenses: (doc) => {
           return provideCodeLensesToggle(doc, expectOptions, regexpIsExpect);
         },
-      })
+      }),
     );
   });
 }
 
-export function registerCommand(context: vscode.ExtensionContext, id: string, callback: (...args: any[]) => any) {
+export function registerCommand<T extends unknown[]>(
+  context: vscode.ExtensionContext,
+  id: string,
+  callback: (...args: T) => unknown,
+) {
   let disposable = vscode.commands.registerCommand(id, callback, context);
   context.subscriptions.push(disposable);
 }

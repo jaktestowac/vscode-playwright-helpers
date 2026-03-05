@@ -15,9 +15,29 @@ export interface CommandParameters {
   terminalName?: string;
 }
 
+export type CommandHandler = (params?: CommandParameters) => unknown | Promise<unknown>;
+
+export interface CommandExecutionPayload {
+  key?: string;
+}
+
+export interface WorkspaceStateSchema {
+  workspaceFolders?: readonly vscode.WorkspaceFolder[];
+  environmentVariables?: KeyValuePairs;
+  testResultsDir?: string;
+  testReportsDir?: string;
+  reuseTerminal?: boolean;
+  verboseApiLogs?: boolean;
+  neverOpenHtmlReport?: boolean;
+  provideTestAnnotationsCodeLens?: boolean;
+  instantExecute?: boolean;
+  packageManager?: string;
+  workingDirectory?: string;
+}
+
 export interface PwCommand {
   key: string;
-  func: (...args: any[]) => any;
+  func: CommandHandler;
   prettyName: string;
   category: string;
   askForExecute?: boolean;
@@ -33,7 +53,7 @@ export interface PwCommandAdditionalParams {
   key: string;
   defaultValue: string;
   type?: string;
-  source?: (...args: any[]) => any;
+  source?: () => string[];
 }
 
 export interface KeyValuePair {
@@ -48,7 +68,7 @@ export interface AdditionalParams {
 
 export interface PwSettings {
   key: string;
-  func: (...args: any[]) => any;
+  func: () => void;
   prettyName?: string;
   prettyNameAriaLabel?: string;
   category: string;
@@ -111,12 +131,12 @@ export interface PwCodegenComposer {
 export interface PwPlaywrightProjects {
   key: string;
   testMatch: string;
-  wholeProject: any;
+  wholeProject: unknown;
   prettyName?: string;
 }
 
 export interface Map {
-  [key: string]: string | undefined | Map | PwCommand | PwCommand[];
+  [key: string]: string | number | boolean | undefined | Map | PwCommand | PwCommand[];
 }
 
 export interface PwCodegenComposerMap {
