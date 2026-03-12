@@ -9,6 +9,7 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 ## [1.3.2] - 2026-xx-xx
 
 - chore: update packages
+- chore: configuration for latest eslint version
 
 ## [1.3.1] - 2026-03-05
 
