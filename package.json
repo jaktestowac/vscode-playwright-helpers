@@ -783,14 +783,14 @@
     "loc:full": "node src/test/update-l10n-full.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.60.0",
-    "@types/node": "20.x",
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.11.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
-    "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0",
-    "vitest": "^2.1.8"
+    "@types/node": "25.x",
+    "@types/vscode": "^1.110.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^10.0.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   }
 }

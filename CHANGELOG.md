@@ -6,6 +6,10 @@ All notable changes to the "playwright-helpers" extension will be documented in 
 
 - TBD
 
+## [1.3.2] - 2026-xx-xx
+
+- chore: update packages
+
 ## [1.3.1] - 2026-03-05
 
 - fix: Playwright CLI commands ordering in command palette
